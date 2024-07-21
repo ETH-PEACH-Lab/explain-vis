@@ -1,0 +1,299 @@
+.step-by-step-explanation {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  flex-direction: column;
+}
+
+.explanation-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.left-column1 {
+  flex: 1.4;
+  display: flex;
+  flex-direction: column;
+  margin-right: 150px;
+}
+
+.right-column1 {
+  flex: 1;
+  margin-right: 0px;
+}
+
+.purple-text {
+  color: #714288;
+}
+.step-label {
+  display: inline-block;
+  background-color: #714288; /* Purple background color */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  /* margin-top: 20px; Ensure there's space between the step text and the label */
+  /* margin-bottom: 10px; Ensure there's space between the label and the table */
+}
+.container {
+  margin-top: 20px;
+  background-color: #fffdff; /* Light purple background color */
+  padding: 20px;
+  border-radius: 20px; /* Rounded corners for the outer container */
+}
+.chart{
+  width: 500px; /* 设置图表容器的宽度 */
+  height: 250px; /* 设置图表容器的高度 */
+}
+.highlight-row {
+  background-color: #f3e5f5; /* Ensure the highlight row has the same background color */
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.highlight1 {
+  background-color: yellow;
+  color: black;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.highlight2 {
+  background-color: yellowgreen;
+  color: black;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+.highlight-row-container{
+margin-bottom: 10px;
+}
+.table-container {
+  margin-top: 10px; /* Ensure there's space between the text and table */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #eeeeee;
+}
+
+td {
+  border-bottom: 1px solid #dddddd;
+}
+
+.step-by-step-explanation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.explanation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  background-color: white;
+}
+
+.step-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* .left-column1 {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.right-column1 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} */
+
+.step-label {
+  background-color: #a78cc8;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.vql-card {
+  margin-top: 10px;
+}
+
+.table-container {
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+.table-section{
+  margin-bottom: 0px;
+}
+
+.join-tables {
+  display: flex;
+  align-items: center;
+}
+
+.join-line {
+  width: 50px;
+  height: 2px;
+  background-color: green;
+  margin: 0 10px;
+}
+
+.joined-table {
+  margin-top: 20px;
+}
+
+.vql-title {
+  color: #714288;
+  /* margin-top: 50px; */
+}
+
+.highlight-table-name {
+  background-color: #a78cc8;
+  color: black;
+  /* padding: 2px 5px;
+  border-radius: 5px; */
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: bold;
+  margin-right: 2px;
+}
+
+.table-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0px;
+}
+
+.table-column {
+  flex: 1;
+  margin-right: 10px;
+  margin-bottom: 0px;
+}
+.highlight-cell {
+  background-color: #d4edda; /* 绿色背景 */
+  color: #155724; /* 深绿色文本 */
+  font-weight: bold;
+}
+
+.highlight-join-column {
+  background-color: #d4edda; /* 绿色背景 */
+  color: #155724; /* 深绿色文本 */
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+.highlight-chart-type{
+  background-color: #f3f1bb; /* 绿色背景 */
+  color: #96930a; /* 深绿色文本 */
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.arrow {
+  flex-shrink: 0;
+  width: 50px;
+  text-align: center;
+  margin: 150px 0;
+}
+
+.arrow::before {
+  content: '↔';
+  font-size: 35px;
+  color: #155724;
+}
+
+.arrow-down {
+  text-align: center;
+  width: 100%;
+  flex-shrink: 0;
+  /* margin: 10px 0; */
+}
+
+.arrow-down::before {
+  content: '↓';
+  font-size: 30px;
+  color: #155724;
+}
+/* 调整箭头上方空白的CSS */
+.arrow {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 0; /* 移除默认高度 */
+  margin-top: 80px; /* 调整顶部空白 */
+}
+
+.arrow-down {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 0; /* 移除默认高度 */
+  margin-top: -7px; /* 调整顶部空白 */
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* 使表格对齐到顶部 */
+  margin: 10px 0;
+}
+
+.table-column {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.highlight-cell {
+  background-color: yellow; /* 或其他你喜欢的高亮颜色 */
+}
+
+.selected-column {
+  border: 2px solid blue; /* 或其他你喜欢的边框颜色 */
+}
+
+.border-column {
+  border: 2px solid green; /* 或其他你喜欢的边框颜色 */
+}
+
+.full-highlight-column {
+  background-color: lightgreen; /* 或其他你喜欢的高亮颜色 */
+}
+
+.highlight-cell {
+  background-color: #d4edda; /* 绿色背景 */
+  color: #155724; /* 深绿色文本 */
+  font-weight: bold;
+}
+
+.selected-column {
+  border-right: 2px solid #155724; /* 深绿色边框 */
+}
+
+.full-highlight-column {
+  background-color: #d4edda; /* 整个列高亮颜色 */
+}
+

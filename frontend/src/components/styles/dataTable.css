@@ -1,0 +1,26 @@
+.data-table-section {
+  margin-top: 20px;
+}
+
+.MuiTabs-root {
+  background-color: #f5f5f5;
+}
+
+.MuiTab-textColorPrimary.Mui-selected {
+  color: #714288;
+}
+
+.MuiTabs-indicator {
+  background-color: #714288;
+}
+
+.import-btn {
+  background-color: #f4f3f4; 
+  color: #714288;
+  margin-left: 20px;
+  border-radius: 20px;
+}
+
+.data-table-container {
+  margin-top: 10px;
+}

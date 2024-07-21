@@ -1,0 +1,49 @@
+.app-container {
+  margin: 20px;
+}
+
+.section {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.tall-section {
+  height: 300px; 
+}
+
+.section h4 {
+  margin-bottom: 20px;
+}
+
+.table {
+  margin-bottom: 20px;
+}
+
+/* button { */
+  /* margin-top: 10px; */
+/* } */
+
+/* .visualization-breakdown .btn { */
+  /* margin-left: 10px; */
+/* } */
+
+.visualization-breakdown .input-group {
+  display: flex;
+  align-items: center;
+}
+
+.visualization-breakdown .input-group .form-control {
+  flex-grow: 1;
+}
+
+.visualization-breakdown .input-group .btn {
+  margin-left: 10px;
+}
+
+.chart-container {
+  width: 100%;
+  height: 100%;
+}

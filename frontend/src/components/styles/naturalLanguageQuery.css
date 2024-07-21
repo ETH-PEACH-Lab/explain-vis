@@ -1,0 +1,31 @@
+.nl {
+  margin-top: 5px;
+}
+
+.nl-query-card {
+  margin-top: 10px;
+}
+
+.nl-query-title {
+  color: #714288;
+}
+
+.nl-query-input {
+  background-color: #f3e5f5;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none; /* 移除边框 */
+  outline: none; /* 移除输入框聚焦时的外边框 */
+}
+
+.nl-query-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+.nl-query-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

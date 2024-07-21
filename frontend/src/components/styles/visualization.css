@@ -1,0 +1,68 @@
+.visualize {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: center; */
+  /* margin-top: 5px; */
+}
+
+.visualize-title {
+  color: #714288;
+  margin-bottom: 20px;
+}
+
+.vql-title {
+  color: #714288;
+  /* margin-top: 50px; */
+}
+
+pre {
+  white-space: pre-wrap; /* Allow long lines to wrap */
+  word-wrap: break-word; /* Prevent overflow */
+}.visualize {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.vql-card {
+  width: 100%;
+  margin-top: 10px;
+  background-color: white;
+  border-top: 1px solid #ddd;
+}
+
+
+.visualization-card {
+  background-color: #f3e5f5;
+  margin-top: 10px;
+}
+
+
+.chart-container {
+  padding: 20px;
+}
+
+.chart {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.vql-content {
+  white-space: pre-wrap; /* 保证换行符生效 */
+  word-wrap: break-word; /* 防止长单词溢出 */
+}
+
+.vql-line {
+  margin: 0; /* 每行之间没有额外的间距 */
+}
+
+.uppercase-char {
+  color: purple; /* 大写字母颜色 */
+}
+
+.number-char {
+  color: green; /* 数字颜色 */
+}
