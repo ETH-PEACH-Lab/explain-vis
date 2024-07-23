@@ -11,7 +11,7 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
   const handleGenerate = async () => {
     try {
       const data = tableData;
-      const apiUrl = 'http://backend:8000/api/generate-vegalite';
+      const apiUrl = 'http://localhost:8000/api/generate-vegalite';
       console.log('Incoming Data:', JSON.stringify({ query, data }));
       console.log('API URL:', apiUrl);
       const response = await fetch(apiUrl, {
@@ -26,7 +26,7 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
         const result = await response.json();
         const { VQL, vegaLiteSpec } = result;
       
-        const explanationApiUrl = 'http://backend:8000/api/explain-vql';
+        const explanationApiUrl = 'http://localhost:8000/api/explain-vql';
         console.log('API URL:', explanationApiUrl);
         console.log('VQL',JSON.stringify({ VQL }))
         

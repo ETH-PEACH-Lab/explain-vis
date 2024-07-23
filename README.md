@@ -1,7 +1,7 @@
 # README
 
 ## Run Docker Locally
-1. Create `./backend/.env` for the OPENAI API
+1. Create `./.env` for the OPENAI API
 
 ```
 # .env
