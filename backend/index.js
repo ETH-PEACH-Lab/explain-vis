@@ -1,12 +1,17 @@
 const express = require("express");
 const axios = require("axios");
+const cors = require('cors');
 const { constant } = require("vega");
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT; 
 
-app.use(express.json());
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
+app.use(express.json())
 
 const openaiApiKey = process.env.OPENAI_API_KEY;
 

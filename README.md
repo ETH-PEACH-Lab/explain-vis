@@ -6,7 +6,14 @@
 ```
 # .env
 OPENAI_API_KEY=YOUR_API_KEY
+PORT=8000
+```
 
+2. Create `./frontend/.env` for the backend API
+
+```
+# .env
+OPENAI_API_KEY=YOUR_API_KEY
 ```
 3. Build docker
 ```
@@ -23,6 +30,7 @@ docker-compose -f docker-compose.yml build
 ```
 touch ./backend/.env
 export OPENAI_API_KEY=DONTSHAREWITHOTHERS
+export PORT=8000
 ```
 
 2. Run frontend at port `3000`:
