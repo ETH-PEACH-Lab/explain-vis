@@ -29,24 +29,24 @@ app.post('/api/generate-vegalite', async (req, res) => {
   data: ${JSON.stringify(data)}
   query: Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.
   
-  VQL: VISUALIZE bar\\nSELECT date, price FROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price)\\nDESC BIN BY quarter
+  VQL: VISUALIZE bar\\nSELECT date, price FROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY price\\nDESC BIN BY quarter
   
   Vega-Lite: {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {
       "values": [
-        {"quarter":"2022-Q4","avg_price":2000},
-        {"quarter":"2010-Q4","avg_price":1000}
+        {"quarter":"2022-Q4","price":2000},
+        {"quarter":"2010-Q4","price":1000}
       ]
     },
     "mark": "bar",
     "encoding": {
       "x": {"field": "quarter", "type": "ordinal", "title": "Quarter"},
-      "y": {"field": "avg_price", "type": "quantitative", "title": "Average Price"},
+      "y": {"field": "price", "type": "quantitative", "title": "Price"},
       "color": {"field": "quarter", "type": "nominal", "title": "Quarter"},
       "tooltip": [
         {"field": "quarter", "type": "ordinal", "title": "Quarter"},
-        {"field": "avg_price", "type": "quantitative", "title": "Average Price"}
+        {"field": "price", "type": "quantitative", "title": "Price"}
       ]
     },
     "config": {
@@ -123,7 +123,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
 
 app.post('/api/explain-vql', async (req, res) => {
   const { VQL } = req.body;
-  const VQL_exp = 'VISUALIZE bar\nSELECT date, price FROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price)\nDESC BIN BY quarter'
+  const VQL_exp = 'VISUALIZE bar\nSELECT date, price FROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY price\nDESC BIN BY quarter'
 
   const explanation_exp={
     "explanation": [
@@ -157,27 +157,27 @@ app.post('/api/explain-vql', async (req, res) => {
       },
       {
         "step": 4,
+        "operation": "SELECT",
+        "description": "Select the date and price columns.",
+        "clause": "SELECT date, price"
+      },
+      {
+        "step": 5,
         "operation": "GROUP BY",
         "description": "Group data by date and calculate the average price for each date.",
         "clause": "GROUP BY date"
       },
       {
-        "step": 5,
-        "operation": "ORDER BY",
-        "description": "Order the results by average price in descending order.",
-        "clause": "ORDER BY avg(price) DESC"
-      },
-      {
         "step": 6,
-        "operation": "BIN BY",
-        "description": "Bin the data by quarter.",
-        "clause": "BIN BY quarter"
+        "operation": "ORDER BY",
+        "description": "Order the results by price in descending order.",
+        "clause": "ORDER BY price DESC"
       },
       {
         "step": 7,
-        "operation": "SELECT",
-        "description": "Select the date and price columns.",
-        "clause": "SELECT date, price"
+        "operation": "BIN BY",
+        "description": "Bin the data by quarter.",
+        "clause": "BIN BY quarter"
       },
       {
         "step": 8,
