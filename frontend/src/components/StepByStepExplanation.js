@@ -1,4 +1,5 @@
 import React from 'react';
+import Pagination from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -13,11 +14,12 @@ import { Scatter, Bar,Line,Pie } from 'react-chartjs-2';
 import './styles/stepByStepExplanation.css';
 import 'chartjs-adapter-date-fns'; 
 
-function StepByStepExplanation({ explanation, tableData, showVQL }) {
+function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, onPrevPage, onNextPage }) {
+  
   if (!tableData || !tableData.tables) {
     return <Typography variant="body2" color="error">No table data available</Typography>;
   }
-
+  
   const dataTables = Object.keys(tableData.tables).reduce((acc, key) => {
     acc[key] = tableData.tables[key].map((row) => {
       const date = new Date(row.date);
@@ -363,356 +365,64 @@ function StepByStepExplanation({ explanation, tableData, showVQL }) {
 
   return updatedData;
 };
+const renderChart = (data, selectedColumns) => {
+  if (!data || !selectedColumns || selectedColumns.length < 2) {
+    return <Typography variant="body2" color="error">Insufficient data for chart</Typography>;
+  }
+  const isDate = value => {
+    const date = new Date(value);
+    return !isNaN(date.getTime());
+  };
+  const firstValue = data[0][selectedColumns[0]];
+  const xAxisType = isDate(firstValue) ? 'time' : 'category';
 
-  let currentTable = [];
-  let currentColumns = [];
-  let selectedColumns = [];
-  let scatterData = {  };
-  
-  
-  let firstValue = '';
-  let xAxisType = '';
-
-   explanation.forEach(step => {
-    if (step.operation === 'SELECT') {
-      selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
-    }
-  });
-  
-  const renderStepContent = (step) => {
-    const tableNames = Object.keys(dataTables);
-    
-    console.log('select',selectedColumns)
-    switch (step.operation) {
-      case 'FROM': {
-        const tableName = step.clause.split(' ')[1]; // 从 FROM 子句中提取表名
-        const tableData = dataTables[tableName];
-        if (!tableData) {
-          return <Typography variant="body2" color="error">Table not found: {tableName}</Typography>;
-        }
-        const columns = tableData ? Object.keys(tableData[0]) : [];
-        currentTable = tableData;
-        currentColumns = columns;
-        scatterData = {
-          datasets: [
-            {
-              label: 'Scatter Plot',
-              data: currentTable.map(row => {
-                if (row[selectedColumns[0]] === undefined || row[selectedColumns[1]] === undefined) {
-                  console.error('Data contains undefined values for selected columns', row);
-                  return { x: null, y: null };
-                }
-                return {
-                  x: row[selectedColumns[0]],
-                  y: row[selectedColumns[1]],
-                };
-              }).filter(point => point.x !== null && point.y !== null),
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+  return (
+    <Scatter
+      data={{
+        datasets: [
+          {
+            label: 'Scatter Plot',
+            data: data.map(row => {
+              if (row[selectedColumns[0]] === undefined || row[selectedColumns[1]] === undefined) {
+                console.error('Data contains undefined values for selected columns', row);
+                return { x: null, y: null };
+              }
+              return {
+                x: row[selectedColumns[0]],
+                y: row[selectedColumns[1]],
+              };
+            }).filter(point => point.x !== null && point.y !== null),
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+          },
+        ],
+      }}
+      options={{
+        scales: {
+          x: {
+            type: xAxisType,
+            position: 'bottom',
+            ...(xAxisType === 'time' && {
+              time: {
+                unit: 'month',
+              },
+            }),
+            title: {
+              display: true,
+              text: selectedColumns[0],
             },
-          ],
-        };
-        const isDate = value => {
-          const date = new Date(value);
-          return !isNaN(date.getTime());
-        };
-        
-        firstValue = currentTable[0][selectedColumns[0]];
-        xAxisType = isDate(firstValue) ? 'time' : 'linear';
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: `}
-                    {highlightTableNamesAndColumns(`${step.description}`, tableNames)}
-                  </Typography>
-                </div>
-                <div className="step-label">{`data::step${step.step}`}</div>
-                {renderTable(tableData, columns, tableName)}
-              </Paper>
-            </div>
-            <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-            {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
-              <div className="chart">
-                <Scatter
-                  data={scatterData}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType,
-                        position: 'bottom',
-                        ...(xAxisType === 'time' && {
-                          time: {
-                            unit: 'month', 
-                          },
-                        }),
-                       
-                        title: {
-                          display: true,
-                          text: selectedColumns[0],
-                        },
-                      },
-                      y:{
-                        title: {
-                          display: true,
-                          text: selectedColumns[1],
-                        },
-                      }
-                    },
-                  }}
-                />
-              </div>
-              {showVQL && (
-                // <><Typography variant="h6" className="vql-title">/ VQL</Typography>
-                <Card className="vql-card">
-                  <CardContent>
-                    <Typography variant="body2" className="vql-line">
-                      {formatVQLLine(step.clause)}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-          </div>
-        );
-      }
-      case 'JOIN': {
-        const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
-        if (!joinClauseParts) {
-          return <Typography variant="body2" color="error">Invalid JOIN clause: {step.clause}</Typography>;
-        }
-        const tableName1 = joinClauseParts[2];
-        const tableName2 = joinClauseParts[1];
-        const joinColumn1 = joinClauseParts[3];
-        const joinColumn2 = joinClauseParts[5];
-
-        const tableData1 = dataTables[tableName1];
-        const tableData2 = dataTables[tableName2];
-
-        if (!tableData1 || !tableData2) {
-          return (
-            <Typography variant="body2" color="error">
-              Table not found: {tableName1} or {tableName2}
-            </Typography>
-          );
-        }
-
-        const columns1 = tableData1 ? Object.keys(tableData1[0]) : [];
-        const columns2 = tableData2 ? Object.keys(tableData2[0]) : [];
-
-        const mergedData = tableData1.map(row1 => {
-          const matchedRow2 = tableData2.find(row2 => row1[joinColumn1] === row2[joinColumn2]);
-          return matchedRow2 ? { ...row1, ...matchedRow2 } : row1;
-        }).map(row => ({
-          ...row,
-          date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
-        }));
-
-        const mergedColumns = [...new Set([...columns1, ...columns2])];
-        currentTable = mergedData;
-        currentColumns = mergedColumns;
-
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                {/* <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {highlightTableNamesAndColumns(`Step ${step.step}.1 Let's combine the ${tableName1} spreadsheet with the ${tableName2} spreadsheet.`, tableNames)}
-                  </Typography>
-                </div>
-                <div className="table-row">
-                  <div className="table-column">
-                    <div className="step-label">{`Table: ${tableName1}`}</div>
-                    {renderTable(tableData1, columns1, tableName1)}
-                  </div>
-                  <div className="table-column">
-                    <div className="step-label">{`Table: ${tableName2}`}</div>
-                    {renderTable(tableData2, columns2, tableName2)}
-                  </div>
-                </div> */}
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row" 
-                  // style={{ marginTop: '20px' }}
-                  >
-                    {highlightTableNamesAndColumns(`Step ${step.step}. ${step.description}`, tableNames, joinColumn1, joinColumn2)}
-                  </Typography>
-                </div>
-                <div className="table-row">
-                  <div className="table-column">
-                    <div className="step-label">{`Table: ${tableName1}`}</div>
-                    {renderTable(tableData1, columns1, tableName1, [joinColumn1],null,[joinColumn1])}
-                  </div>
-                  <div className="arrow"></div>
-                  <div className="table-column">
-                    <div className="step-label">{`Table: ${tableName2}`}</div>
-                    {renderTable(tableData2, columns2, tableName2, joinColumn2,null,[joinColumn2])}
-                  </div>
-                </div>
-                <div className="arrow-down"></div>
-                <div className="table-row">
-                  <div className="table-column">
-                    <div className="step-label">{`data:: step2`}</div>
-                    {renderTable(mergedData, mergedColumns, 'Merged')}
-                  </div>
-                </div>
-              </Paper>
-            </div>
-            <div className="right-column1">
-            {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
-            <div className="step-label">{`viz::step${step.step}`}</div>
-              <div className="chart">
-                <Scatter
-                  data={scatterData}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType,
-                        position: 'bottom',
-                        ...(xAxisType === 'time' && {
-                          time: {
-                            unit: 'month', 
-                          },
-                        }),
-                        
-                        title: {
-                          display: true,
-                          text: selectedColumns[0],
-                        },
-                      },
-                      y:{
-                        title: {
-                          display: true,
-                          text: selectedColumns[1],
-                        },
-                      }
-                    },
-                  }}
-                />
-              </div>
-              {showVQL && (
-                // <><Typography variant="h6" className="vql-title">/ VQL</Typography>
-                <Card className="vql-card">
-                  <CardContent>
-                    <Typography variant="body2" className="vql-line">
-                      {formatVQLLine(step.clause)}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-          </div>
-        );
-      }
-      case 'WHERE': {
-      const basedata=currentTable
-      const basedcolumn=currentColumns
-      const combinedCondition = step.conditions.map((condition, index) => {
-        if (index === 0) {
-          return condition.condition;
-        }
-        return condition.condition.replace(/^\s*\b(?:AND|OR)\b\s*/, '');
-      }).join(' || ');
-
-      const cleanedCondition = combinedCondition
-        .replace(/\bAND\b/g, '&&')
-        .replace(/\bOR\b/g, '||')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]');
-
-      console.log('Combined Condition:', cleanedCondition); 
-
-      const finalFilteredData = currentTable.filter(row => {
-        try {
-          const conditionFunction = new Function('row', `return ${cleanedCondition};`);
-          return conditionFunction(row);
-        } catch (error) {
-          console.error(`Error evaluating condition: ${cleanedCondition}`, error);
-          return false;
-        }
-      });
-      currentTable = finalFilteredData
-
-      const columnNames = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g)))];
-      const numbers = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b\d+\b/g)))];
-
-        
-      
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: `}
-                    {highlightTableNamesAndColumns(step.description, [], columnNames, numbers)}
-                  </Typography>
-                </div>
-                
-                {step.conditions.map((condition, index) => (
-                  <div key={index} style={{ marginTop: '20px' }}>
-                    <Typography variant="body2">{`Condition ${index + 1}: ${condition.condition}`}</Typography>
-                    {renderFilteredTable(basedata, basedcolumn, condition, index === 0)}
-                  </div>
-                ))}
-                  <div>
-                  <div className="step-label"style={{ marginTop: '20px' }}>{`data::step${step.step}`}</div>
-                  {renderTable(currentTable, currentColumns, 'Filtered')}
-                  </div>
-              </Paper>
-            </div>
-            <div className="right-column1">
-              {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
-              <div className="step-label">{`viz::step${step.step}`}</div>
-              <div className="chart">
-                <Scatter
-                  data={scatterData}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType,
-                        position: 'bottom',
-                        ...(xAxisType === 'time' && {
-                          time: {
-                            unit: 'month', 
-                          },
-                        }),
-                        title: {
-                          display: true,
-                          text: selectedColumns[0],
-                        },
-                      },
-                      y:{
-                        title: {
-                          display: true,
-                          text: selectedColumns[1],
-                        },
-                      }
-                    },
-                  }}
-                />
-              </div>
-              {showVQL && (
-                <>
-                  {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
-                  <Card className="vql-card">
-                    <CardContent>
-                      <Typography variant="body2" className="vql-line">
-                        {formatVQLLine(step.clause)}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </>
-              )}
-            </div>
-          </div>
-        );
-      }  
-      case 'GROUP BY': {
-        const groupByColumn = step.clause.split(' ')[2];
-        const groupedData = renderGroupedTable(currentTable, currentColumns, groupByColumn);
-        const renderGroupedChart = (data, groupByColumn) => {
+          },
+          y: {
+            title: {
+              display: true,
+              text: selectedColumns[1],
+            },
+          },
+        },
+      }}
+    />
+  );
+};
+const renderGroupedChart = (data, groupByColumn) => {
           const groupedData = data.reduce((acc, row) => {
             const key = row[groupByColumn];
             if (!acc[key]) {
@@ -775,161 +485,550 @@ function StepByStepExplanation({ explanation, tableData, showVQL }) {
         
           return <Scatter data={chartData} options={chartOptions} />;
         };
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: `}
-                    {highlightTableNamesAndColumns(step.description, [], [groupByColumn], [])}
-                  </Typography>
-                </div>
-                <div className="step-label">{`data::step${step.step}`}</div>
-                <div className="table-container">
-                  {groupedData}
-                </div>
-              </Paper>
-            </div>
-            <div className="right-column1">
-              {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
-              <div className="step-label">{`viz::step${step.step}`}</div>
-              <div className="chart">
-            {renderGroupedChart(currentTable, groupByColumn)}
-            </div>
-            {showVQL && (
-                <>
-                  {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
-                  <Card className="vql-card">
-                    <CardContent>
-                      <Typography variant="body2" className="vql-line">
-                        {formatVQLLine(step.clause)}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </>
-              )}
-            </div>
-          </div>
-        );
+let selectedColumns = [];
+
+// Find the selected columns for default viz in all steps
+explanation.forEach(step => {
+  if (step.operation === 'SELECT') {
+    selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
+  }
+});
+
+const renderStepContent = (step, steps) => {
+  if (!step) {
+    return <Typography variant="body2" color="error">No step data available</Typography>;
+  }
+  const tableNames = Object.keys(dataTables);
+
+  let currentTable = [];
+  let currentColumns = [];
+  let scatterData = {};
+  let scatterData_order = {};
+  let firstValue = '';
+  let xAxisType = '';
+
+  let tableData1, tableData2, joinColumn1, joinColumn2, tableName1, tableName2, columns1, columns2, groupByColumn;
+  let orderDirection, orderByColumn, orderByParts, binColumnName, binBy;
+  let ChartComponent, chartType;
+  // Process all steps up to the current step
+  steps.forEach(step => {
+    switch (step.operation) {
+      case 'FROM': {
+        const tableName = step.clause.split(' ')[1];
+        const tableData = dataTables[tableName];
+        if (tableData) {
+          currentTable = tableData;
+          currentColumns = Object.keys(tableData[0]);
+        }
+        break;
+      }
+      case 'JOIN': {
+        const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
+        if (joinClauseParts) {
+          tableName1 = joinClauseParts[2];
+          tableName2 = joinClauseParts[1];
+          joinColumn1 = joinClauseParts[3];
+          joinColumn2 = joinClauseParts[5];
+
+          tableData1 = dataTables[tableName1];
+          tableData2 = dataTables[tableName2];
+
+          if (tableData1 && tableData2) {
+            columns1 = Object.keys(tableData1[0]);
+            columns2 = Object.keys(tableData2[0]);
+
+            currentTable = tableData1.map(row1 => {
+              const matchedRow2 = tableData2.find(row2 => row1[joinColumn1] === row2[joinColumn2]);
+              return matchedRow2 ? { ...row1, ...matchedRow2 } : row1;
+            }).map(row => ({
+              ...row,
+              date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
+            }));
+
+            currentColumns = [...new Set([...columns1, ...columns2])];
+          }
+        }
+        break;
+      }
+      case 'WHERE': {
+        const basedata = currentTable;
+        const basedcolumn = currentColumns;
+        const combinedCondition = step.conditions.map((condition, index) => {
+          if (index === 0) {
+            return condition.condition;
+          }
+          return condition.condition.replace(/^\s*\b(?:AND|OR)\b\s*/, '');
+        }).join(' || ');
+
+        const cleanedCondition = combinedCondition
+          .replace(/\bAND\b/g, '&&')
+          .replace(/\bOR\b/g, '||')
+          .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]');
+
+        const finalFilteredData = currentTable.filter(row => {
+          try {
+            const conditionFunction = new Function('row', `return ${cleanedCondition};`);
+            return conditionFunction(row);
+          } catch (error) {
+            console.error(`Error evaluating condition: ${cleanedCondition}`, error);
+            return false;
+          }
+        });
+
+        currentTable = finalFilteredData;
+        currentColumns = basedcolumn;
+        break;
+      }
+      case 'GROUP BY': {
+        groupByColumn = step.clause.split(' ')[2];
+        break;
       }
       case 'ORDER BY': {
-        const orderByParts = step.clause.split(' ');
-        const orderByColumn = orderByParts[2];
-        const orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
-        const sortedData = sortData(currentTable, orderByColumn, orderDirection);
-        currentTable = sortedData
-        const shuffleArray = (array) => {
-          for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-          }
-          return array;
-        };
-        
-        const xData = currentTable.map(row => row[selectedColumns[0]]);
-        const shuffledXData = shuffleArray([...xData]);
-        const stringXData = shuffledXData.map(date => new Date(date).toISOString().split('T')[0]);
+          orderByParts = step.clause.split(' ');
+          orderByColumn = orderByParts[2];
+          orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
+          currentTable = sortData(currentTable, orderByColumn, orderDirection);
+          const shuffleArray = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+          };
 
-        const scatterData = currentTable.map((row, index) => ({
-          x: stringXData[index],
-          y: row[selectedColumns[1]],
-        }));
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: `}
-                    {highlightTableNamesAndColumns(step.description, [], [orderByColumn], [])}
-                  </Typography>
-                </div>
-                <div className="step-label">{`data::step${step.step}`}</div>
-                <div className="table-container">
-                  {renderTable(sortedData, currentColumns, `Sorted by: ${orderByColumn} ${orderDirection}`, [orderByColumn], [orderByColumn])}
-                </div>
-              </Paper>
-            </div>
-            <div className="right-column1">
-              {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
-              <div className="step-label">{`viz::step${step.step}`}</div>
-              <div className="chart">
-              <Scatter
-  data={{
-    datasets: [
-      {
-        label: `Scatter Chart`,
-        data: scatterData,
-        backgroundColor: '#f0eea3',
-      },
-    ],
-  }}
-  options={{
-    scales: {
-      x: {
-        type: 'category', 
-        position: 'bottom',
-        title: {
-          display: true,
-          text: selectedColumns[0],
-        },
+          const xData = currentTable.map(row => row[selectedColumns[0]]);
+          const shuffledXData = shuffleArray([...xData]);
+          const stringXData = shuffledXData.map(date => new Date(date).toISOString().split('T')[0]);
 
-      },
-      y: {
-        title: {
-          display: true,
-          text: selectedColumns[1],
-
-        },
-      
-      },
-    },
-  }}
-/>
-
-              </div>
-              {showVQL && (
-                <>
-                  {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
-                  <Card className="vql-card">
-                    <CardContent>
-                      <Typography variant="body2" className="vql-line">
-                        {formatVQLLine(step.clause)}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </>
-              )}
-            </div>
-          </div>
-        );
+          scatterData_order = currentTable.map((row, index) => ({
+            x: stringXData[index],
+            y: row[selectedColumns[1]],
+          }));
+          break;
       }
       case 'BIN BY': {
         const match = step.clause.split(' ')[2];
-        if (!match) {
-          return <Typography variant="body2" color="error">Invalid BIN BY clause: {step.clause}</Typography>;
-        }
-        
-        const binBy = match;
+        binBy = match;
         const columnName=selectedColumns[0];
         const updatedTable = binData(currentTable, binBy, columnName);
-        const binColumnName = `binBy_${binBy}`;
-        currentTable = updatedTable;
-        currentColumns = [...currentColumns, binColumnName];
-        const scatterData = {
-          datasets: [
-            {
-              label: 'Scatter Plot',
-              data: currentTable.map(row => ({
-                x: row[binColumnName],
-                y: row[selectedColumns[1]], 
-              })),
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-            },
-          ],
-        };
-  
+        binColumnName = `binBy_${binBy}`;
+        currentTable=updatedTable;
+        currentColumns=[...currentColumns, binColumnName];
+        selectedColumns=[binColumnName, selectedColumns[1]];
+      }
+      case 'VISUALIZE': {
+        chartType = step.clause.split(' ')[1]; // 从 VISUALIZE 子句中提取图表类型
+        
+        switch (chartType) {
+          case 'bar':
+            ChartComponent = Bar;
+            break;
+          case 'scatter':
+            ChartComponent = Scatter;
+            break;
+          case 'line':
+            ChartComponent = Line;
+            break;
+          case 'pie':
+            ChartComponent = Pie;
+            break;
+          default:
+            ChartComponent = Scatter;
+        }
+      }
+    }
+  });
+
+  if (currentTable.length === 0 || currentColumns.length === 0) {
+    return <Typography variant="body2" color="error">No data available to display</Typography>;
+  }
+
+  scatterData = {
+    datasets: [
+      {
+        label: 'Scatter Plot',
+        data: currentTable.map(row => {
+          if (row[selectedColumns[0]] === undefined || row[selectedColumns[1]] === undefined) {
+            console.error('Data contains undefined values for selected columns', row);
+            return { x: null, y: null };
+          }
+          return {
+            x: row[selectedColumns[0]],
+            y: row[selectedColumns[1]],
+          };
+        }).filter(point => point.x !== null && point.y !== null),
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+      },
+    ],
+  };
+
+  const isDate = value => {
+    const date = new Date(value);
+    return !isNaN(date.getTime());
+  };
+
+  firstValue = currentTable[0][selectedColumns[0]];
+  xAxisType = isDate(firstValue) ? 'time' : 'category';
+
+  // Now process the current step for rendering
+  switch (step.operation) {
+    case 'FROM': {
+      return (
+        <div className="step-container" key={step.step}>
+          <div className="left-column1">
+            <Paper className="container explanation">
+              <div className="highlight-row-container">
+                <Typography variant="body1" className="highlight-row">
+                  {`Step ${step.step}: `}
+                  {highlightTableNamesAndColumns(`${step.description}`, tableNames)}
+                </Typography>
+              </div>
+              <div className="step-label">{`data::step${step.step}`}</div>
+              {renderTable(currentTable, currentColumns)}
+            </Paper>
+          </div>
+          <div className="right-column1">
+            <div className="step-label">{`viz::step${step.step}`}</div>
+            <div className="chart">
+              <Scatter
+                data={scatterData}
+                options={{
+                  scales: {
+                    x: {
+                      type: xAxisType,
+                      position: 'bottom',
+                      ...(xAxisType === 'time' && {
+                        time: {
+                          unit: 'month',
+                        },
+                      }),
+                      title: {
+                        display: true,
+                        text: selectedColumns[0],
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: selectedColumns[1]},
+                    },
+                  },
+                }}
+              />
+            </div>
+            {showVQL && (
+              <Card className="vql-card">
+                <CardContent>
+                  <Typography variant="body2" className="vql-line">
+                    {formatVQLLine(step.clause)}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      );
+    }
+    case 'JOIN': {
+      return (
+        <div className="step-container" key={step.step}>
+          <div className="left-column1">
+            <Paper className="container explanation">
+              <div className="highlight-row-container">
+                <Typography variant="body1" className="highlight-row">
+                  {highlightTableNamesAndColumns(`Step ${step.step}. ${step.description}`, tableNames, joinColumn1, joinColumn2)}
+                </Typography>
+              </div>
+              <div className="table-row">
+                <div className="table-column">
+                  <div className="step-label">{`Table: ${tableName1}`}</div>
+                  {renderTable(tableData1, columns1, tableName1, [joinColumn1], null, [joinColumn1])}
+                </div>
+                <div className="arrow"></div>
+                <div className="table-column">
+                  <div className="step-label">{`Table: ${tableName2}`}</div>
+                  {renderTable(tableData2, columns2, tableName2, joinColumn2, null, [joinColumn2])}
+                </div>
+              </div>
+              <div className="arrow-down"></div>
+              <div className="table-row">
+                <div className="table-column">
+                  <div className="step-label">{`data:: step${step.step}`}</div>
+                  {renderTable(currentTable, currentColumns, 'Merged')}
+                </div>
+              </div>
+            </Paper>
+          </div>
+          <div className="right-column1">
+            <div className="step-label">{`viz::step${step.step}`}</div>
+            <div className="chart">
+              <Scatter
+                data={scatterData}
+                options={{
+                  scales: {
+                    x: {
+                      type: xAxisType,
+                      position: 'bottom',
+                      ...(xAxisType === 'time' && {
+                        time: {
+                          unit: 'month',
+                        },
+                      }),
+                      title: {
+                        display: true,
+                        text: selectedColumns[0],
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: selectedColumns[1]},
+                    },
+                  },
+                }}
+              />
+            </div>
+            {showVQL && (
+              <Card className="vql-card">
+                <CardContent>
+                  <Typography variant="body2" className="vql-line">
+                    {formatVQLLine(step.clause)}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      );
+    }
+    case 'WHERE': {
+      const columnNames = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g)))];
+      const numbers = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b\d+\b/g)))];
+
+      return (
+        <div className="step-container" key={step.step}>
+          <div className="left-column1">
+            <Paper className="container explanation">
+              <div className="highlight-row-container">
+                <Typography variant="body1" className="highlight-row">
+                  {`Step ${step.step}: `}
+                  {highlightTableNamesAndColumns(step.description, [], columnNames, numbers)}
+                </Typography>
+              </div>
+              
+              {step.conditions.map((condition, index) => (
+                <div key={index} style={{ marginTop: '20px' }}>
+                  <Typography variant="body2">{`Condition ${index + 1}: ${condition.condition}`}</Typography>
+                  {renderFilteredTable(currentTable, currentColumns, condition, index === 0)}
+                </div>
+              ))}
+              <div>
+                <div className="step-label" style={{ marginTop: '20px' }}>{`data::step${step.step}`}</div>
+                {renderTable(currentTable, currentColumns, 'Filtered')}
+              </div>
+            </Paper>
+          </div>
+          <div className="right-column1">
+            <div className="step-label">{`viz::step${step.step}`}</div>
+            <div className="chart">
+              <Scatter
+                  data={scatterData}
+                  options={{
+                    scales: {
+                      x: {
+                        type: xAxisType,
+                        position: 'bottom',
+                        ...(xAxisType === 'time' && {
+                          time: {
+                            unit: 'month', 
+                          },
+                        }),
+                        title: {
+                          display: true,
+                          text: selectedColumns[0],
+                        },
+                      },
+                      y:{
+                        title: {
+                          display: true,
+                          text: selectedColumns[1],
+                        },
+                      }
+                    },
+                  }}
+                />
+            </div>
+            {showVQL && (
+              <Card className="vql-card">
+                <CardContent>
+                  <Typography variant="body2" className="vql-line">
+                    {formatVQLLine(step.clause)}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      );
+    }
+    case 'SELECT':
+      return (
+        <div className="step-container" key={step.step}>
+          <div className="left-column1">
+            <Paper className="container explanation">
+              <div className="highlight-row-container">
+                <Typography variant="body1" className="highlight-row">
+                  {`Step ${step.step}: `}
+                  {highlightTableNamesAndColumns(step.description, tableNames, selectedColumns)}
+                </Typography>
+              </div>
+              <div className="step-label">{`data:: step${step.step}`}</div>
+              {renderTable(currentTable, currentColumns, `Selected: ${selectedColumns.join(', ')}`, selectedColumns, selectedColumns, selectedColumns)}
+            </Paper>
+          </div>
+          <div className="right-column1">
+            <div className="step-label">{`viz::step${step.step}`}</div>
+            <div className="chart">
+              <Scatter
+                data={scatterData}
+                options={{
+                  scales: {
+                    x: {
+                      type: xAxisType,
+                      position: 'bottom',
+                      ...(xAxisType === 'time' && {
+                        time: {
+                          unit: 'month',
+                        },
+                      }),
+                      title: {
+                        display: true,
+                        text: selectedColumns[0],
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: selectedColumns[1]},
+                    },
+                  },
+                }}
+              />
+            </div>
+            {showVQL && (
+              <Card className="vql-card">
+                <CardContent>
+                  <Typography variant="body2" className="vql-line">
+                    {formatVQLLine(step.clause)}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      );
+    case 'GROUP BY': {
+      return (
+        <div className="step-container" key={step.step}>
+          <div className="left-column1">
+            <Paper className="container explanation">
+              <div className="highlight-row-container">
+                <Typography variant="body1" className="highlight-row">
+                  {`Step ${step.step}: `}
+                  {highlightTableNamesAndColumns(step.description, [], [groupByColumn], [])}
+                </Typography>
+              </div>
+              <div className="step-label">{`data::step${step.step}`}</div>
+              <div className="table-container">
+                {renderGroupedTable(currentTable, currentColumns, groupByColumn)}
+              </div>
+            </Paper>
+          </div>
+          <div className="right-column1">
+            <div className="step-label">{`viz::step${step.step}`}</div>
+            <div className="chart">
+              {renderGroupedChart(currentTable, groupByColumn)}
+            </div>
+            {showVQL && (
+              <Card className="vql-card">
+                <CardContent>
+                  <Typography variant="body2" className="vql-line">
+                    {formatVQLLine(step.clause)}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      );
+    }
+    case 'ORDER BY': {
+      return (
+        <div className="step-container" key={step.step}>
+          <div className="left-column1">
+            <Paper className="container explanation">
+              <div className="highlight-row-container">
+                <Typography variant="body1" className="highlight-row">
+                  {`Step ${step.step}: `}
+                  {highlightTableNamesAndColumns(step.description, [], [orderByColumn], [])}
+                </Typography>
+              </div>
+              <div className="step-label">{`data::step${step.step}`}</div>
+              <div className="table-container">
+                {renderTable(currentTable, currentColumns, `Sorted by: ${orderByColumn} ${orderDirection}`, [orderByColumn], [orderByColumn])}
+              </div>
+            </Paper>
+          </div>
+          <div className="right-column1">
+            <div className="step-label">{`viz::step${step.step}`}</div>
+            <div className="chart">
+              <Scatter
+                data={{
+                  datasets: [
+                    {
+                      label: `Scatter Chart`,
+                      data: scatterData_order,
+                      backgroundColor: '#f0eea3',
+                    },
+                  ],
+                }}
+                options={{
+                  scales: {
+                    x: {
+                      type: 'category', 
+                      position: 'bottom',
+                      title: {
+                        display: true,
+                        text: selectedColumns[0],
+                      },
+
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: selectedColumns[1],
+
+                      },
+                    
+                    },
+                  },
+                }}
+              />
+            </div>
+            {showVQL && (
+              <Card className="vql-card">
+                <CardContent>
+                  <Typography variant="body2" className="vql-line">
+                    {formatVQLLine(step.clause)}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      );
+    }
+    case 'BIN BY': {
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -957,7 +1056,7 @@ function StepByStepExplanation({ explanation, tableData, showVQL }) {
                       position: 'bottom',
                       title: {
                         display: true,
-                        text: binColumnName,
+                        text: selectedColumns[0],
                       },
                     },
                     y: {
@@ -985,164 +1084,9 @@ function StepByStepExplanation({ explanation, tableData, showVQL }) {
             </div>
           </div>
         );
-      }
-  
-      case 'SELECT': {
-        selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
-      
-        if (currentTable.length === 0 || !currentTable[0].hasOwnProperty(selectedColumns[0]) || !currentTable[0].hasOwnProperty(selectedColumns[1])) {
-          return (
-            <div className="step-container" key={step.step}>
-              <div className="left-column1">
-                <Paper className="container explanation">
-                  <Typography variant="body2" color="error">Selected columns are not available in the data</Typography>
-                </Paper>
-              </div>
-            </div>
-          );
-        }
-      
-        const scatterData = {
-          datasets: [
-            {
-              label: 'Scatter Plot',
-              data: currentTable.map(row => {
-                if (row[selectedColumns[0]] === undefined || row[selectedColumns[1]] === undefined) {
-                  console.error('Data contains undefined values for selected columns', row);
-                  return { x: null, y: null };
-                }
-                return {
-                  x: row[selectedColumns[0]],
-                  y: row[selectedColumns[1]],
-                };
-              }).filter(point => point.x !== null && point.y !== null),
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-            },
-          ],
-        };
-        const isDate = value => {
-          const date = new Date(value);
-          return !isNaN(date.getTime());
-        };
-        
-        const firstValue = currentTable[0][selectedColumns[0]];
-        const xAxisType = isDate(firstValue) ? 'time' : 'linear';
-
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: `}
-                    {highlightTableNamesAndColumns(step.description, [], selectedColumns)}
-                  </Typography>
-                </div>
-                <div className="step-label">{`data:: step${step.step}`}</div>
-                {renderTable(currentTable, currentColumns, `Selected: ${selectedColumns.join(', ')}`, selectedColumns, selectedColumns, selectedColumns)}
-              </Paper>
-            </div>
-            <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-              {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
-              <div className="chart">
-                <Scatter
-                  data={scatterData}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType,
-                        position: 'bottom',
-                        ...(xAxisType === 'time' && {
-                          time: {
-                            unit: 'month', // 根据需要调整时间单位
-                          },
-                        }),
-                        title: {
-                          display: true,
-                          text: selectedColumns[0],
-                        },
-                      },
-                      y:{
-                        title: {
-                          display: true,
-                          text: selectedColumns[1],
-                        },
-                      }
-                    },
-                  }}
-                />
-              </div>
-              {showVQL && (
-                <>
-                  {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
-                  <Card className="vql-card">
-                    <CardContent>
-                      <Typography variant="body2" className="vql-line">
-                        {formatVQLLine(step.clause)}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </>
-              )}
-            </div>
-          </div>
-        );
-      }
-      
-      case 'VISUALIZE': {
-        const chartType = step.clause.split(' ')[1]; // 从 VISUALIZE 子句中提取图表类型
-        let ChartComponent;
-        switch (chartType) {
-          case 'bar':
-            ChartComponent = Bar;
-            break;
-          case 'scatter':
-            ChartComponent = Scatter;
-            break;
-          case 'line':
-            ChartComponent = Line;
-            break;
-          case 'pie':
-            ChartComponent = Pie;
-            break;
-          default:
-            ChartComponent = Scatter;
-        }
-      
-        const chartData = currentTable.map(row => {
-          if (row[selectedColumns[0]] === undefined || row[selectedColumns[1]] === undefined) {
-            console.error('Data contains undefined values for selected columns', row);
-            return { x: null, y: null };
-          }
-          return {
-            x: row[selectedColumns[0]],
-            y: row[selectedColumns[1]],
-          };
-        }).filter(point => point.x !== null && point.y !== null);
-      
-        if (chartData.length === 0) {
-          return (
-            <div className="step-container" key={step.step}>
-              <div className="left-column1">
-                <Paper className="container explanation">
-                  <Typography variant="body2" color="error">No valid data available for visualization</Typography>
-                </Paper>
-              </div>
-            </div>
-          );
-        }
-      
-        // 检查 selectedColumns[0] 是否为日期类型
-        const isDate = value => {
-          const date = new Date(value);
-          return !isNaN(date.getTime());
-        };
-      
-        const firstValue = chartData[0].x;
-        const xAxisType = isDate(firstValue) ? 'time' : 'linear';
-      
-        return (
+    }
+    case 'VISUALIZE': {
+    return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
               <Paper className="container explanation">
@@ -1152,20 +1096,21 @@ function StepByStepExplanation({ explanation, tableData, showVQL }) {
                     {highlightTableNamesAndColumns(step.description, [], [], [chartType])}
                   </Typography>
                 </div>
+                <div className="step-label">{`data::step${step.step}`}</div>
+                {renderTable(currentTable, currentColumns, `Visualized by: ${chartType}`,[],[],selectedColumns)}
               </Paper>
             </div>
             <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-              {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
+              <div className="step-label">{`viz::step${step.step}`}</div>
               <div className="chart">
                 <ChartComponent
                   data={{
                     datasets: [
                       {
                         label: `${chartType.charAt(0).toUpperCase() + chartType.slice(1)} Chart`,
-                        data: chartData.map(point => ({
-                          x: isDate(point.x) ? new Date(point.x).getTime() : point.x,
-                          y: point.y,
+                        data: currentTable.map(row => ({
+                          x: row[selectedColumns[0]],
+                          y: row[selectedColumns[1]], 
                         })),
                         backgroundColor: '#f0eea3',
                       },
@@ -1176,11 +1121,7 @@ function StepByStepExplanation({ explanation, tableData, showVQL }) {
                       x: {
                         type: xAxisType,
                         position: 'bottom',
-                        ...(xAxisType === 'time' && {
-                          time: {
-                            unit: 'month', 
-                          },
-                        }),
+                        
                         title: {
                           display: true,
                           text: selectedColumns[0],
@@ -1210,47 +1151,31 @@ function StepByStepExplanation({ explanation, tableData, showVQL }) {
               )}
             </div>
           </div>
-        );
-      }
-      
-      
-      // 其他操作的情况
-      default:
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: ${step.description}`}
-                  </Typography>
-                </div>
-              </Paper>
-            </div>
-            <div className="right-column1">
-              {showVQL && (
-                <><Typography variant="h6" className="vql-title">/ VQL</Typography><Card className="vql-card">
-                  <CardContent>
-                    <Typography variant="body2" className="vql-line">
-                      {formatVQLLine(step.clause)}
-                    </Typography>
-                  </CardContent>
-                </Card></>
-              )}
-            </div>
-          </div>
-        );
+      );
     }
-  };
+    default:
+      return <Typography variant="body2" color="error">Unsupported operation: {step.operation}</Typography>;
+  }
+};
 
-  return (
-    <div className="step-by-step-explanation">
-      <div className="explanation-container">
-        <Typography variant="h6" className="purple-text">/ Step-by-Step Explanations</Typography>
-        {explanation.map((step) => renderStepContent(step))}
+const currentSteps = explanation.slice(0, currentPage + 1);
+
+return (
+  <div className="step-by-step-explanation">
+    <div className="explanation-container">
+      <Typography variant="h6" className="purple-text">/ Step-by-Step Explanations</Typography>
+      {explanation && explanation.length > 0 ? renderStepContent(explanation[currentPage], currentSteps) : <Typography variant="body2">No explanations available</Typography>}
+      <div className="pagination">
+        <button onClick={onPrevPage} disabled={currentPage === 0}>← Previous</button>
+        <span>{currentPage + 1} / {explanation ? explanation.length : 0}</span>
+        <button onClick={onNextPage} disabled={currentPage === explanation.length - 1}>Next →</button>
       </div>
     </div>
-  );
+  </div>
+);
+
+
+
 }
 
 export default StepByStepExplanation;

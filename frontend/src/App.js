@@ -31,10 +31,19 @@ function App() {
   const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', vegaLiteSpec: null, explanation: [] });
   const [tableData, setTableData] = useState(defaultData);
   const [showVQL, setShowVQL] = useState(false);
-
+  const [currentPage, setCurrentPage] = useState(0);
+  
   const handleAddInterface = () => {
     const newInterface = { id: interfaces.length + 1 };
     setInterfaces([...interfaces, newInterface]);
+  };
+
+  const handlePageChange = (direction) => {
+    if (direction === 'next' && currentPage < generatedVQL.explanation.length - 1) {
+      setCurrentPage(currentPage + 1);
+    } else if (direction === 'prev' && currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
   };
 
   const handleGenerate = (generated) => {
@@ -80,14 +89,21 @@ function App() {
               </div>
               <hr />
               <div className="second-row">
-                {generatedVQL.explanation.length > 0 && (
-                  <StepByStepExplanation explanation={generatedVQL.explanation} tableData={tableData} showVQL={showVQL} />
+              {generatedVQL.explanation.length > 0 && (
+                  <StepByStepExplanation
+                    explanation={generatedVQL.explanation}
+                    tableData={tableData}
+                    showVQL={showVQL}
+                    currentPage={currentPage}
+                    onPrevPage={() => handlePageChange('prev')}
+                    onNextPage={() => handlePageChange('next')}
+                  />
                 )}
               </div>
             </div>
           ))}
         </div>
-        <div className="pagination">
+        {/* <div className="pagination">
           <span>← Previous</span>
           <span>1</span>
           <span>2</span>
@@ -96,7 +112,7 @@ function App() {
           <span>6</span>
           <span>7</span>
           <span>Next →</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );
