@@ -16,6 +16,7 @@ import SortIcon from '@mui/icons-material/Sort';
 import { Scatter, Bar,Line,Pie } from 'react-chartjs-2';
 import './styles/stepByStepExplanation.css';
 import 'chartjs-adapter-date-fns'; 
+import DraggableNumber from './DraggableNumber';
 
 function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, onPrevPage, onNextPage }) {
   const [editedCell, setEditedCell] = useState(null);
@@ -245,14 +246,23 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
       }
   
       if (numbersToHighlight.includes(cleanWord)) {
-        return (
-          <HighlightWithDropdown
-            key={index}
-            text={cleanWord}
-            options={optionsForType('number')}
-            onChange={(newVal) => onChange('number', cleanWord, newVal)}
-            className="highlight-number"
-          />
+        // return (
+          // <HighlightWithDropdown
+          //   key={index}
+          //   text={cleanWord}
+          //   options={optionsForType('number')}
+          //   onChange={(newVal) => onChange('number', cleanWord, newVal)}
+          //   className="highlight-number"
+          // />
+          return (
+            <DraggableNumber
+              key={index}
+              initialNumber={parseFloat(cleanWord)}
+              min={0}
+              max={100000}
+              step={1}
+              onChange={(newVal) => onChange('number', cleanWord, newVal)}
+            />
         );
       }
   
