@@ -29,7 +29,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
   data: ${JSON.stringify(data)}
   query: Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.
   
-  VQL: VISUALIZE bar\\nSELECT date, price FROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY price\\nDESC BIN BY quarter
+  VQL: VISUALIZE bar\\nSELECT date, price\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY price\\nDESC BIN BY quarter
   
   Vega-Lite: {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -59,7 +59,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
   Note that color encoding can sometimes cause errors and is not necessary for all charts. Generally, color is used when grouping is involved.
   Note that if you want to display dates, consider using the temporal type.
   Ensure that the columns in the SELECT clause are explicitly mentioned instead of using *.
-  You donnot have to follow the example provided. Some query dose not need the sub-vql like where, group, order, and bin. It just likes SQL. Please be simple!
+  You donnot have to follow the example provided. Some query do not need key words like where, group, order, and bin. It just likes SQL. Please be simple!
   Please use \\n to mark line breaks in the VQL.
 
   Generate the VQL and Vega-Lite specifications to answer the following query and return VQL and Vega-lite specifications.
@@ -123,7 +123,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
 
 app.post('/api/explain-vql', async (req, res) => {
   const { VQL } = req.body;
-  const VQL_exp = 'VISUALIZE bar\nSELECT date, price FROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY price\nDESC BIN BY quarter'
+  const VQL_exp = 'VISUALIZE bar\nSELECT date, price\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY price\nDESC BIN BY quarter'
 
   const explanation_exp={
     "explanation": [

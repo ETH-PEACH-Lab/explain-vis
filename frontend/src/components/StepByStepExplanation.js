@@ -1046,7 +1046,7 @@ const renderStepContent = (step, steps) => {
               <div className="highlight-row-container">
                 <Typography variant="body1" className="highlight-row">
                   {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(step.description, tableNames, selectedColumns,[],[],currentColumns,[],handleHighlightChange)}
+                  {highlightTableNamesAndColumns(step.description, [], selectedColumns,[],[],currentColumns,[],handleHighlightChange)}
                 </Typography>
               </div>
               <div className="step-label">{`data:: step${step.step}`}</div>
