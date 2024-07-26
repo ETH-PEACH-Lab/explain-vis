@@ -24,6 +24,8 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
   const [tableDataState, setTableDataState] = useState(tableData);
   const [hoveredColumn, setHoveredColumn] = useState(null);
+  const [editingText, setEditingText] = useState(null);
+  const [editedText, setEditedText] = useState('');
 
   if (!tableData || !tableData.tables) {
     return <Typography variant="body2" color="error">No table data available</Typography>;
@@ -562,7 +564,15 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
     />
   );
   };
+const handleEditClick = (text) => {
+    setEditingText(true);
+    setEditedText(text);
+  };
 
+  const handleBlur = () => {
+    setEditingText(false);
+    console.log('Edited text:', editedText);
+  };
   const handleEdit = (rowIndex, column) => {
     setEditedCell({ rowIndex, column });
   };
@@ -823,7 +833,28 @@ const renderStepContent = (step, steps) => {
   if (currentTable.length === 0 || currentColumns.length === 0) {
     return <Typography variant="body2" color="error">No data available to display</Typography>;
   }
-
+  const parseCondition = (condition) => {
+    const range = [0, 3000]; // default range, need to be limited by the selected column
+  
+    const match = condition.match(/(\d+)\s*-\s*(\d+)/);
+    if (match) {
+      range[0] = parseInt(match[1], 10);
+      range[1] = parseInt(match[2], 10);
+    } else {
+      const lowerMatch = condition.match(/>\s*(\d+)/);
+      const upperMatch = condition.match(/<\s*(\d+)/);
+  
+      if (lowerMatch) {
+        range[0] = parseInt(lowerMatch[1], 10);
+      }
+      if (upperMatch) {
+        range[1] = parseInt(upperMatch[1], 10);
+      }
+    }
+  
+    return range;
+  };
+  
   scatterData = {
     datasets: [
       {
@@ -899,12 +930,27 @@ const renderStepContent = (step, steps) => {
             </div>
             {showVQL && (
               <Card className="vql-card">
-                <CardContent>
-                  <Typography variant="body2" className="vql-line">
+              <CardContent>
+                {editingText ? (
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                  />
+                ) : (
+                  <Typography
+                    variant="body2"
+                    className="vql-line"
+                    onClick={() => handleEditClick(step.clause)}
+                  >
                     {formatVQLLine(step.clause)}
                   </Typography>
-                </CardContent>
-              </Card>
+                )}
+              </CardContent>
+            </Card>
             )}
           </div>
         </div>
@@ -971,12 +1017,27 @@ const renderStepContent = (step, steps) => {
             </div>
             {showVQL && (
               <Card className="vql-card">
-                <CardContent>
-                  <Typography variant="body2" className="vql-line">
+              <CardContent>
+                {editingText ? (
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                  />
+                ) : (
+                  <Typography
+                    variant="body2"
+                    className="vql-line"
+                    onClick={() => handleEditClick(step.clause)}
+                  >
                     {formatVQLLine(step.clause)}
                   </Typography>
-                </CardContent>
-              </Card>
+                )}
+              </CardContent>
+            </Card>
             )}
           </div>
         </div>
@@ -1001,7 +1062,7 @@ const renderStepContent = (step, steps) => {
                 <div key={index} style={{ marginTop: '20px' }}>
                   <Typography variant="body2">{`Condition ${index + 1}: ${condition.condition}`}</Typography>
                   <RangeSlider
-                  initialRange={[150, 2000]}
+                  initialRange={parseCondition(condition.condition)}
                   min={0}
                   max={2500}
                   step={1}
@@ -1049,12 +1110,27 @@ const renderStepContent = (step, steps) => {
             </div>
             {showVQL && (
               <Card className="vql-card">
-                <CardContent>
-                  <Typography variant="body2" className="vql-line">
+              <CardContent>
+                {editingText ? (
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                  />
+                ) : (
+                  <Typography
+                    variant="body2"
+                    className="vql-line"
+                    onClick={() => handleEditClick(step.clause)}
+                  >
                     {formatVQLLine(step.clause)}
                   </Typography>
-                </CardContent>
-              </Card>
+                )}
+              </CardContent>
+            </Card>
             )}
           </div>
         </div>
@@ -1106,12 +1182,27 @@ const renderStepContent = (step, steps) => {
             </div>
             {showVQL && (
               <Card className="vql-card">
-                <CardContent>
-                  <Typography variant="body2" className="vql-line">
+              <CardContent>
+                {editingText ? (
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                  />
+                ) : (
+                  <Typography
+                    variant="body2"
+                    className="vql-line"
+                    onClick={() => handleEditClick(step.clause)}
+                  >
                     {formatVQLLine(step.clause)}
                   </Typography>
-                </CardContent>
-              </Card>
+                )}
+              </CardContent>
+            </Card>
             )}
           </div>
         </div>
@@ -1140,12 +1231,27 @@ const renderStepContent = (step, steps) => {
             </div>
             {showVQL && (
               <Card className="vql-card">
-                <CardContent>
-                  <Typography variant="body2" className="vql-line">
+              <CardContent>
+                {editingText ? (
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                  />
+                ) : (
+                  <Typography
+                    variant="body2"
+                    className="vql-line"
+                    onClick={() => handleEditClick(step.clause)}
+                  >
                     {formatVQLLine(step.clause)}
                   </Typography>
-                </CardContent>
-              </Card>
+                )}
+              </CardContent>
+            </Card>
             )}
           </div>
         </div>
@@ -1206,12 +1312,27 @@ const renderStepContent = (step, steps) => {
             </div>
             {showVQL && (
               <Card className="vql-card">
-                <CardContent>
-                  <Typography variant="body2" className="vql-line">
+              <CardContent>
+                {editingText ? (
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                  />
+                ) : (
+                  <Typography
+                    variant="body2"
+                    className="vql-line"
+                    onClick={() => handleEditClick(step.clause)}
+                  >
                     {formatVQLLine(step.clause)}
                   </Typography>
-                </CardContent>
-              </Card>
+                )}
+              </CardContent>
+            </Card>
             )}
           </div>
         </div>
@@ -1262,12 +1383,27 @@ const renderStepContent = (step, steps) => {
                 <>
                   {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
                   <Card className="vql-card">
-                    <CardContent>
-                      <Typography variant="body2" className="vql-line">
-                        {formatVQLLine(step.clause)}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+              <CardContent>
+                {editingText ? (
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                  />
+                ) : (
+                  <Typography
+                    variant="body2"
+                    className="vql-line"
+                    onClick={() => handleEditClick(step.clause)}
+                  >
+                    {formatVQLLine(step.clause)}
+                  </Typography>
+                )}
+              </CardContent>
+            </Card>
                 </>
               )}
             </div>
@@ -1330,12 +1466,27 @@ const renderStepContent = (step, steps) => {
                 <>
                   {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
                   <Card className="vql-card">
-                    <CardContent>
-                      <Typography variant="body2" className="vql-line">
-                        {formatVQLLine(step.clause)}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+              <CardContent>
+                {editingText ? (
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                  />
+                ) : (
+                  <Typography
+                    variant="body2"
+                    className="vql-line"
+                    onClick={() => handleEditClick(step.clause)}
+                  >
+                    {formatVQLLine(step.clause)}
+                  </Typography>
+                )}
+              </CardContent>
+            </Card>
                 </>
               )}
             </div>
