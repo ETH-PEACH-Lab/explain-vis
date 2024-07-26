@@ -17,6 +17,7 @@ import { Scatter, Bar,Line,Pie } from 'react-chartjs-2';
 import './styles/stepByStepExplanation.css';
 import 'chartjs-adapter-date-fns'; 
 import DraggableNumber from './DraggableNumber';
+import RangeSlider from './RangeSlider';
 
 function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, onPrevPage, onNextPage }) {
   const [editedCell, setEditedCell] = useState(null);
@@ -599,6 +600,9 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
       return { ...prevState, tables: updatedTables };
     });
   };
+  const handleRangeChange = (newRange) => {
+    console.log(`Range changed to: ${newRange}`);
+  };
   const renderGroupedChart = (data, groupByColumn) => {
             const groupedData = data.reduce((acc, row) => {
               const key = row[groupByColumn];
@@ -996,7 +1000,15 @@ const renderStepContent = (step, steps) => {
               {step.conditions.map((condition, index) => (
                 <div key={index} style={{ marginTop: '20px' }}>
                   <Typography variant="body2">{`Condition ${index + 1}: ${condition.condition}`}</Typography>
+                  <RangeSlider
+                  initialRange={[150, 2000]}
+                  min={0}
+                  max={2500}
+                  step={1}
+                  onChange={handleRangeChange}
+                />
                   {renderFilteredTable(currentTable, currentColumns, condition, index === 0)}
+                  
                 </div>
               ))}
               <div>
