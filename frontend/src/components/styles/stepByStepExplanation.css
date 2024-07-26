@@ -204,13 +204,20 @@ td {
   border-radius: 3px;
 }
 .highlight-chart-type{
-  background-color: #f3f1bb; /* 绿色背景 */
-  color: #96930a; /* 深绿色文本 */
+  background-color: #f3f1bb; 
+  color: #96930a; 
   font-weight: bold;
   padding: 2px 4px;
   border-radius: 3px;
 }
 
+.highlight-bin-by{
+  background-color: #d4edda; /* 绿色背景 */
+  color: #155724; /* 深绿色文本 */
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
 .arrow {
   flex-shrink: 0;
   width: 50px;

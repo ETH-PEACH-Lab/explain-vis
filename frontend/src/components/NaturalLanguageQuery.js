@@ -89,7 +89,7 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
             {
               "step": 7,
               "operation": "BIN BY",
-              "description": "Bin the data by quarter.",
+              "description": "Bin the date by quarter.",
               "clause": "BIN BY quarter"
             },
             {

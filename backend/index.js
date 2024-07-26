@@ -57,9 +57,9 @@ app.post('/api/generate-vegalite', async (req, res) => {
     }
   }
   Note that color encoding can sometimes cause errors and is not necessary for all charts. Generally, color is used when grouping is involved.
-  Note that If you want to display dates, consider using the temporal type.
+  Note that if you want to display dates, consider using the temporal type.
   Ensure that the columns in the SELECT clause are explicitly mentioned instead of using *.
-  Do not only follow the example provided! Some query dose not need the sub-vql like group, order, and bin. It just likes SQL. Please be simple!
+  You donnot have to follow the example provided. Some query dose not need the sub-vql like group, order, and bin. It just likes SQL. Please be simple!
   Please use \\n to mark line breaks in the VQL.
 
   Generate the VQL and Vega-Lite specifications to answer the following query and return VQL and Vega-lite specifications.
@@ -176,7 +176,7 @@ app.post('/api/explain-vql', async (req, res) => {
       {
         "step": 7,
         "operation": "BIN BY",
-        "description": "Bin the data by quarter.",
+        "description": "Bin the date by quarter.",
         "clause": "BIN BY quarter"
       },
       {

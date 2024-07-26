@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import Pagination from '@mui/material';
+import HighlightWithDropdown from './HighlightWithDropdown';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -10,12 +11,18 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import IconButton from '@mui/material/IconButton';
+import SortIcon from '@mui/icons-material/Sort';
 import { Scatter, Bar,Line,Pie } from 'react-chartjs-2';
 import './styles/stepByStepExplanation.css';
 import 'chartjs-adapter-date-fns'; 
 
 function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, onPrevPage, onNextPage }) {
-  
+  const [editedCell, setEditedCell] = useState(null);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  const [tableDataState, setTableDataState] = useState(tableData);
+  const [hoveredColumn, setHoveredColumn] = useState(null);
+
   if (!tableData || !tableData.tables) {
     return <Typography variant="body2" color="error">No table data available</Typography>;
   }
@@ -43,10 +50,71 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
     });
   };
 
+  // const renderTable = (data, columns, tableName, selectedColumns = [], borderColumns = [], fullHighlightColumns = []) => {
+  //   selectedColumns = selectedColumns || [];
+  //   borderColumns = borderColumns || [];
+  //   fullHighlightColumns = fullHighlightColumns || [];
+
+  //   return (
+  //     <div className="table-section">
+  //       <TableContainer component={Paper} className="table-container">
+  //         <Table size="small" aria-label="simple table">
+  //           <TableHead>
+  //             <TableRow>
+  //               {columns.map((column) => (
+  //                 <TableCell
+  //                   key={column}
+  //                   className={`${fullHighlightColumns.includes(column) ? "full-highlight-column" : ""}`}
+  //                   style={{
+  //                     fontWeight: fullHighlightColumns.includes(column) ? "bold" : "normal",
+  //                     backgroundColor: selectedColumns.includes(column) ? "#d4edda" : "transparent",
+  //                     color: selectedColumns.includes(column) ? "#155724" : "inherit",
+  //                     borderTop: borderColumns.includes(column)  ? "2px solid #155724" : "",
+  //                     borderBottom: borderColumns.includes(column)  ? "" : "",
+  //                     borderLeft: borderColumns.includes(column)? "2px solid #155724" : "none",
+  //                     borderRight: borderColumns.includes(column) ? "2px solid #155724" : "none",
+  //                   }}
+  //                 >
+  //                   {column}
+  //                 </TableCell>
+  //               ))}
+  //             </TableRow>
+  //           </TableHead>
+  //           <TableBody>
+  //             {data.map((row, rowIndex) => (
+  //               <TableRow key={rowIndex}>
+  //                 {columns.map((column, colIndex) => (
+  //                   <TableCell
+  //                     key={`${rowIndex}-${column}`}
+  //                     className={`${fullHighlightColumns.includes(column) ? "full-highlight-column" : ""}`}
+  //                     style={{
+  //                       fontWeight: fullHighlightColumns.includes(column) ? "normal" : "normal",
+  //                       backgroundColor: selectedColumns.includes(column)&&! borderColumns.includes(column) ? "#d4edda" : "transparent",
+  //                       color: selectedColumns.includes(column) ? "#155724" : "inherit",
+  //                       borderTop: borderColumns.includes(column) ? "" : "",
+  //                       borderBottom: borderColumns.includes(column) &&rowIndex === data.length - 1 ? "2px solid #155724" : "",
+  //                       borderLeft: borderColumns.includes(column)  ? "2px solid #155724" : "none",
+  //                       borderRight: borderColumns.includes(column)  ? "2px solid #155724" : "none",
+  //                     }}
+  //                   >
+  //                     {/* {column === 'date' && row[column] ? new Date(row[column]).toISOString().split('T')[0] : row[column]} */}
+  //                     {row[column] }
+  //                   </TableCell>
+  //                 ))}
+  //               </TableRow>
+  //             ))}
+  //           </TableBody>
+  //         </Table>
+  //       </TableContainer>
+  //     </div>
+  //   );
+  // };
   const renderTable = (data, columns, tableName, selectedColumns = [], borderColumns = [], fullHighlightColumns = []) => {
     selectedColumns = selectedColumns || [];
     borderColumns = borderColumns || [];
     fullHighlightColumns = fullHighlightColumns || [];
+
+    const sortedData = sortData(data, sortConfig);
 
     return (
       <div className="table-section">
@@ -67,16 +135,21 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
                       borderLeft: borderColumns.includes(column)? "2px solid #155724" : "none",
                       borderRight: borderColumns.includes(column) ? "2px solid #155724" : "none",
                     }}
+                    onMouseEnter={() => setHoveredColumn(column)}
+                    onMouseLeave={() => setHoveredColumn(null)}
                   >
                     {column}
+                    <IconButton size="small" onClick={() => handleSort(column)}>
+                      <SortIcon />
+                    </IconButton>
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map((row, rowIndex) => (
+              {sortedData.map((row, rowIndex) => (
                 <TableRow key={rowIndex}>
-                  {columns.map((column, colIndex) => (
+                  {columns.map((column) => (
                     <TableCell
                       key={`${rowIndex}-${column}`}
                       className={`${fullHighlightColumns.includes(column) ? "full-highlight-column" : ""}`}
@@ -88,10 +161,29 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
                         borderBottom: borderColumns.includes(column) &&rowIndex === data.length - 1 ? "2px solid #155724" : "",
                         borderLeft: borderColumns.includes(column)  ? "2px solid #155724" : "none",
                         borderRight: borderColumns.includes(column)  ? "2px solid #155724" : "none",
+                        backgroundColor: hoveredColumn === column ? "#e0f7fa" : "transparent", // 添加高亮效果
                       }}
+                      onMouseEnter={() => handleEdit(rowIndex, column)}
                     >
-                      {/* {column === 'date' && row[column] ? new Date(row[column]).toISOString().split('T')[0] : row[column]} */}
-                      {row[column] }
+                      {editedCell && editedCell.rowIndex === rowIndex && editedCell.column === column ? (
+                        <input
+                          type="text"
+                          value={row[column]}
+                          onChange={(e) => {
+                            const newData = [...data];
+                            newData[rowIndex][column] = e.target.value;
+                            setTableDataState({
+                              ...tableDataState,
+                              tables: {
+                                ...tableDataState.tables,
+                                [tableName]: newData,
+                              },
+                            });
+                          }}
+                        />
+                      ) : (
+                        row[column]
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
@@ -103,54 +195,91 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
     );
   };
 
-  const highlightTableNamesAndColumns = (description, tableNames = [], columnsToHighlight = [], numbersToHighlight = [], charttype = []) => {
+  const highlightTableNamesAndColumns = (description, tableNames = [], columnsToHighlight = [], numbersToHighlight = [], chartTypes = [], binByOptions = [], currentTableColumns = [], onChange) => {
     if (typeof description !== 'string') {
       return description;
     }
-    return description.split(' ').map((word, index) => {
-      const cleanWord = word.replace(/[.,]/g, ''); 
   
-      // 检查是否为表名并高亮显示
+    const optionsForType = (type) => {
+      switch (type) {
+        case 'table':
+          return tableNames;
+        case 'column':
+          return currentTableColumns;
+        case 'number':
+          return numbersToHighlight;
+        case 'chartType':
+          return ['bar', 'line', 'pie', 'scatter'];
+        case 'binBy':
+          return ['year', 'month', 'week', 'day', 'weekday', 'quarter'];
+        default:
+          return [];
+      }
+    };
+  
+    return description.split(' ').map((word, index) => {
+      const cleanWord = word.replace(/[.,]/g, '');
+  
       if (tableNames.includes(cleanWord)) {
         return (
-          <React.Fragment key={index}>
-            <span className="highlight-table-name">{cleanWord}</span>
-            {word.replace(cleanWord, '')}
-            {' '}
-          </React.Fragment>
+          <HighlightWithDropdown
+            key={index}
+            text={cleanWord}
+            options={optionsForType('table')}
+            onChange={(newVal) => onChange('table', cleanWord, newVal)}
+            className="highlight-table-name"
+          />
         );
       }
-      // 检查是否为需要高亮的列名
+  
       if (columnsToHighlight.includes(cleanWord)) {
         return (
-          <React.Fragment key={index}>
-            <span className="highlight-join-column">{cleanWord}</span>
-            {word.replace(cleanWord, '')}
-            {' '}
-          </React.Fragment>
+          <HighlightWithDropdown
+            key={index}
+            text={cleanWord}
+            options={optionsForType('column')}
+            onChange={(newVal) => onChange('column', cleanWord, newVal)}
+            className="highlight-join-column"
+          />
         );
       }
-      // 检查是否为需要高亮的数字
+  
       if (numbersToHighlight.includes(cleanWord)) {
         return (
-          <React.Fragment key={index}>
-            <span className="highlight-number">{cleanWord}</span>
-            {word.replace(cleanWord, '')}
-            {' '}
-          </React.Fragment>
+          <HighlightWithDropdown
+            key={index}
+            text={cleanWord}
+            options={optionsForType('number')}
+            onChange={(newVal) => onChange('number', cleanWord, newVal)}
+            className="highlight-number"
+          />
         );
       }
-      // 检查是否为图表类型并用黄色高亮显示
-      if (charttype.includes(cleanWord)) {
+  
+      if (chartTypes.includes(cleanWord)) {
         return (
-          <React.Fragment key={index}>
-            <span className="highlight-chart-type">{cleanWord}</span>
-            {word.replace(cleanWord, '')}
-            {' '}
-          </React.Fragment>
+          <HighlightWithDropdown
+            key={index}
+            text={cleanWord}
+            options={optionsForType('chartType')}
+            onChange={(newVal) => onChange('chartType', cleanWord, newVal)}
+            className="highlight-chart-type"
+          />
         );
       }
-
+  
+      if (binByOptions.includes(cleanWord)) {
+        return (
+          <HighlightWithDropdown
+            key={index}
+            text={cleanWord}
+            options={optionsForType('binBy')}
+            onChange={(newVal) => onChange('binBy', cleanWord, newVal)}
+            className="highlight-bin-by"
+          />
+        );
+      }
+  
       return <span key={index}>{word} </span>;
     });
   };
@@ -365,7 +494,7 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
 
   return updatedData;
 };
-const renderChart = (data, selectedColumns) => {
+  const renderChart = (data, selectedColumns) => {
   if (!data || !selectedColumns || selectedColumns.length < 2) {
     return <Typography variant="body2" color="error">Insufficient data for chart</Typography>;
   }
@@ -421,71 +550,109 @@ const renderChart = (data, selectedColumns) => {
       }}
     />
   );
-};
-const renderGroupedChart = (data, groupByColumn) => {
-          const groupedData = data.reduce((acc, row) => {
-            const key = row[groupByColumn];
-            if (!acc[key]) {
-              acc[key] = [];
-            }
-            acc[key].push(row);
-            return acc;
-          }, {});
-        
-          const isDate = (value) => {
-            const date = new Date(value);
-            return !isNaN(date.getTime());
-          };
-        
-          const firstValue = data[0][groupByColumn];
-          const xAxisType = isDate(firstValue) ? 'time' : 'linear';
-        
-          const chartData = {
-            datasets: Object.keys(groupedData).map((key, index) => ({
-              label: key,
-              data: groupedData[key].map(row => ({ x: row[selectedColumns[0]],
-                y: row[selectedColumns[1]], })), 
-              backgroundColor: `hsla(${index * 360 / Object.keys(groupedData).length}, 100%, 75%, 0.5)`,
-              pointRadius: 5, 
-            })),
-          };
-        
-          const chartOptions = {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: 'top',
-              },
-              title: {
-                display: true,
-                // text: 'Grouped Data Scatter Chart',
-              },
-            },
-            scales: {
-              x: {
-                type: xAxisType,
+  };
+
+  const handleEdit = (rowIndex, column) => {
+    setEditedCell({ rowIndex, column });
+  };
+
+  const handleSort = (column) => {
+    let direction = 'asc';
+    if (sortConfig.key === column && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key: column, direction });
+  };
+  const handleHighlightChange = (type, oldValue, newValue) => {
+
+    console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
+
+    setTableDataState((prevState) => {
+      const updatedTables = { ...prevState.tables };
+
+      if (type === 'table') {
+        updatedTables[newValue] = updatedTables[oldValue];
+        delete updatedTables[oldValue];
+      }
+
+      if (type === 'column') {
+        Object.keys(updatedTables).forEach((table) => {
+          updatedTables[table] = updatedTables[table].map((row) => {
+            const newRow = { ...row };
+            newRow[newValue] = newRow[oldValue];
+            delete newRow[oldValue];
+            return newRow;
+          });
+        });
+      }
+
+      return { ...prevState, tables: updatedTables };
+    });
+  };
+  const renderGroupedChart = (data, groupByColumn) => {
+            const groupedData = data.reduce((acc, row) => {
+              const key = row[groupByColumn];
+              if (!acc[key]) {
+                acc[key] = [];
+              }
+              acc[key].push(row);
+              return acc;
+            }, {});
+          
+            const isDate = (value) => {
+              const date = new Date(value);
+              return !isNaN(date.getTime());
+            };
+          
+            const firstValue = data[0][groupByColumn];
+            const xAxisType = isDate(firstValue) ? 'time' : 'linear';
+          
+            const chartData = {
+              datasets: Object.keys(groupedData).map((key, index) => ({
+                label: key,
+                data: groupedData[key].map(row => ({ x: row[selectedColumns[0]],
+                  y: row[selectedColumns[1]], })), 
+                backgroundColor: `hsla(${index * 360 / Object.keys(groupedData).length}, 100%, 75%, 0.5)`,
+                pointRadius: 5, 
+              })),
+            };
+          
+            const chartOptions = {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'top',
+                },
                 title: {
                   display: true,
-                  text: selectedColumns[0],
+                  // text: 'Grouped Data Scatter Chart',
                 },
-                ...(xAxisType === 'time' && {
-                  time: {
-                    unit: 'month', 
+              },
+              scales: {
+                x: {
+                  type: xAxisType,
+                  title: {
+                    display: true,
+                    text: selectedColumns[0],
                   },
-                }),
-              },
-              y: {
-                title: {
-                  display: true,
-                  text: selectedColumns[1],
+                  ...(xAxisType === 'time' && {
+                    time: {
+                      unit: 'month', 
+                    },
+                  }),
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: selectedColumns[1],
+                  },
                 },
               },
-            },
+            };
+          
+            return <Scatter data={chartData} options={chartOptions} />;
           };
-        
-          return <Scatter data={chartData} options={chartOptions} />;
-        };
-let selectedColumns = [];
+  let selectedColumns = [];
 
 // Find the selected columns for default viz in all steps
 explanation.forEach(step => {
@@ -680,7 +847,7 @@ const renderStepContent = (step, steps) => {
               <div className="highlight-row-container">
                 <Typography variant="body1" className="highlight-row">
                   {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(`${step.description}`, tableNames)}
+                  {highlightTableNamesAndColumns(`${step.description}`, tableNames,[],[],[],[],[],handleHighlightChange)}
                 </Typography>
               </div>
               <div className="step-label">{`data::step${step.step}`}</div>
@@ -736,7 +903,7 @@ const renderStepContent = (step, steps) => {
             <Paper className="container explanation">
               <div className="highlight-row-container">
                 <Typography variant="body1" className="highlight-row">
-                  {highlightTableNamesAndColumns(`Step ${step.step}. ${step.description}`, tableNames, joinColumn1, joinColumn2)}
+                  {highlightTableNamesAndColumns(`Step ${step.step}. ${step.description}`, tableNames, [joinColumn1,joinColumn2],[],[],[],currentColumns,handleHighlightChange)}
                 </Typography>
               </div>
               <div className="table-row">
@@ -812,7 +979,7 @@ const renderStepContent = (step, steps) => {
               <div className="highlight-row-container">
                 <Typography variant="body1" className="highlight-row">
                   {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(step.description, [], columnNames, numbers)}
+                  {highlightTableNamesAndColumns(step.description, [], columnNames, numbers,[],currentColumns,[],handleHighlightChange)}
                 </Typography>
               </div>
               
@@ -879,7 +1046,7 @@ const renderStepContent = (step, steps) => {
               <div className="highlight-row-container">
                 <Typography variant="body1" className="highlight-row">
                   {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(step.description, tableNames, selectedColumns)}
+                  {highlightTableNamesAndColumns(step.description, tableNames, selectedColumns,[],[],currentColumns,[],handleHighlightChange)}
                 </Typography>
               </div>
               <div className="step-label">{`data:: step${step.step}`}</div>
@@ -935,7 +1102,7 @@ const renderStepContent = (step, steps) => {
               <div className="highlight-row-container">
                 <Typography variant="body1" className="highlight-row">
                   {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(step.description, [], [groupByColumn], [])}
+                  {highlightTableNamesAndColumns(step.description, [], [groupByColumn], [],[],currentColumns,[],handleHighlightChange)}
                 </Typography>
               </div>
               <div className="step-label">{`data::step${step.step}`}</div>
@@ -970,7 +1137,7 @@ const renderStepContent = (step, steps) => {
               <div className="highlight-row-container">
                 <Typography variant="body1" className="highlight-row">
                   {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(step.description, [], [orderByColumn], [])}
+                  {highlightTableNamesAndColumns(step.description, [], [orderByColumn], [],[],currentColumns,[],handleHighlightChange)}
                 </Typography>
               </div>
               <div className="step-label">{`data::step${step.step}`}</div>
@@ -1036,7 +1203,7 @@ const renderStepContent = (step, steps) => {
                 <div className="highlight-row-container">
                   <Typography variant="body1" className="highlight-row">
                     {`Step ${step.step}: `}
-                    {highlightTableNamesAndColumns(step.description, [], [binColumnName])}
+                    {highlightTableNamesAndColumns(step.description, [], [],[],[],[binBy],[],handleHighlightChange)}
                   </Typography>
                 </div>
                 <div className="step-label">{`data::step${step.step}`}</div>
@@ -1093,7 +1260,7 @@ const renderStepContent = (step, steps) => {
                 <div className="highlight-row-container">
                   <Typography variant="body1" className="highlight-row">
                     {`Step ${step.step}: `}
-                    {highlightTableNamesAndColumns(step.description, [], [], [chartType])}
+                    {highlightTableNamesAndColumns(step.description, [], [],[], [chartType],currentColumns,[],handleHighlightChange)}
                   </Typography>
                 </div>
                 <div className="step-label">{`data::step${step.step}`}</div>
@@ -1166,9 +1333,9 @@ return (
       <Typography variant="h6" className="purple-text">/ Step-by-Step Explanations</Typography>
       {explanation && explanation.length > 0 ? renderStepContent(explanation[currentPage], currentSteps) : <Typography variant="body2">No explanations available</Typography>}
       <div className="pagination">
-        <button onClick={onPrevPage} disabled={currentPage === 0}>← Previous</button>
+        <button onClick={onPrevPage} disabled={currentPage === 0}>← Previous step</button>
         <span>{currentPage + 1} / {explanation ? explanation.length : 0}</span>
-        <button onClick={onNextPage} disabled={currentPage === explanation.length - 1}>Next →</button>
+        <button onClick={onNextPage} disabled={currentPage === explanation.length - 1}>Next step →</button>
       </div>
     </div>
   </div>
