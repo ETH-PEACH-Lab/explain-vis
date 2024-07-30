@@ -8,13 +8,11 @@ docker login ghcr.io --username github-account
 ```
 2. Build the image for the server
 ```
-docker-compose -f docker-compose.deployment.yml build
+docker-compose -f docker-compose.prod.yml build
 ```
 
 2. Tag and push your Docker images
 ```
-docker tag explain-vis-frontend ghcr.io/eth-peach-lab/explain-vis/explain-vis-frontend-amd64:latest
-docker push ghcr.io/eth-peach-lab/explain-vis/explain-vis-frontend-amd64:latest
-docker tag explain-vis-backend ghcr.io/eth-peach-lab/explain-vis/explain-vis-backend-amd64:latest
-docker push ghcr.io/eth-peach-lab/explain-vis/explain-vis-backend-amd64:latest
+docker tag explain-vis-server ghcr.io/eth-peach-lab/explain-vis/explain-vis-server-amd64:latest
+docker push ghcr.io/eth-peach-lab/explain-vis/explain-vis-server-amd64:latest
 ```
