@@ -22,8 +22,14 @@ const defaultData = {
       { id: 'r3', name: 'banana' },
       { id: 'r4', name: 'orange' },
     ],
+    stock: [
+      { id: 'r1', quantity: 50 },
+      { id: 'r2', quantity: 30 },
+      { id: 'r3', quantity: 100 },
+      { id: 'r4', quantity: 25 },
+    ]
   },
-  tableNames: ['price', 'name']
+  tableNames: ['price', 'name', 'stock']
 };
 
 function App() {

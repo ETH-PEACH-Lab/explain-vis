@@ -26,6 +26,15 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
   const [hoveredColumn, setHoveredColumn] = useState(null);
   const [editingText, setEditingText] = useState(null);
   const [editedText, setEditedText] = useState('');
+  const [fromTable, setFromTable] = useState(null); 
+  const [joinfindTable1, setJoinfindTable1] = useState('price'); 
+  const [joinfindTable2, setJoinfindTable2] = useState('name'); 
+  const [joinfindColumn1, setJoinfindColumn1] = useState('id'); 
+  const [joinfindColumn2, setJoinfindColumn2] = useState('id'); 
+  const [wordReplacements, setWordReplacements] = useState({});
+  const [joinTableResults, setJoinTableResults] = useState(null);
+  const [joinColumnResults, setJoinColumnResults] = useState(null);
+  const [ErrorMessage, setErrorMessage] = useState(null);
 
   if (!tableData || !tableData.tables) {
     return <Typography variant="body2" color="error">No table data available</Typography>;
@@ -54,71 +63,10 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
     });
   };
 
-  // const renderTable = (data, columns, tableName, selectedColumns = [], borderColumns = [], fullHighlightColumns = []) => {
-  //   selectedColumns = selectedColumns || [];
-  //   borderColumns = borderColumns || [];
-  //   fullHighlightColumns = fullHighlightColumns || [];
-
-  //   return (
-  //     <div className="table-section">
-  //       <TableContainer component={Paper} className="table-container">
-  //         <Table size="small" aria-label="simple table">
-  //           <TableHead>
-  //             <TableRow>
-  //               {columns.map((column) => (
-  //                 <TableCell
-  //                   key={column}
-  //                   className={`${fullHighlightColumns.includes(column) ? "full-highlight-column" : ""}`}
-  //                   style={{
-  //                     fontWeight: fullHighlightColumns.includes(column) ? "bold" : "normal",
-  //                     backgroundColor: selectedColumns.includes(column) ? "#d4edda" : "transparent",
-  //                     color: selectedColumns.includes(column) ? "#155724" : "inherit",
-  //                     borderTop: borderColumns.includes(column)  ? "2px solid #155724" : "",
-  //                     borderBottom: borderColumns.includes(column)  ? "" : "",
-  //                     borderLeft: borderColumns.includes(column)? "2px solid #155724" : "none",
-  //                     borderRight: borderColumns.includes(column) ? "2px solid #155724" : "none",
-  //                   }}
-  //                 >
-  //                   {column}
-  //                 </TableCell>
-  //               ))}
-  //             </TableRow>
-  //           </TableHead>
-  //           <TableBody>
-  //             {data.map((row, rowIndex) => (
-  //               <TableRow key={rowIndex}>
-  //                 {columns.map((column, colIndex) => (
-  //                   <TableCell
-  //                     key={`${rowIndex}-${column}`}
-  //                     className={`${fullHighlightColumns.includes(column) ? "full-highlight-column" : ""}`}
-  //                     style={{
-  //                       fontWeight: fullHighlightColumns.includes(column) ? "normal" : "normal",
-  //                       backgroundColor: selectedColumns.includes(column)&&! borderColumns.includes(column) ? "#d4edda" : "transparent",
-  //                       color: selectedColumns.includes(column) ? "#155724" : "inherit",
-  //                       borderTop: borderColumns.includes(column) ? "" : "",
-  //                       borderBottom: borderColumns.includes(column) &&rowIndex === data.length - 1 ? "2px solid #155724" : "",
-  //                       borderLeft: borderColumns.includes(column)  ? "2px solid #155724" : "none",
-  //                       borderRight: borderColumns.includes(column)  ? "2px solid #155724" : "none",
-  //                     }}
-  //                   >
-  //                     {/* {column === 'date' && row[column] ? new Date(row[column]).toISOString().split('T')[0] : row[column]} */}
-  //                     {row[column] }
-  //                   </TableCell>
-  //                 ))}
-  //               </TableRow>
-  //             ))}
-  //           </TableBody>
-  //         </Table>
-  //       </TableContainer>
-  //     </div>
-  //   );
-  // };
   const renderTable = (data, columns, tableName, selectedColumns = [], borderColumns = [], fullHighlightColumns = []) => {
     selectedColumns = selectedColumns || [];
     borderColumns = borderColumns || [];
     fullHighlightColumns = fullHighlightColumns || [];
-
-    const sortedData = sortData(data, sortConfig);
 
     return (
       <div className="table-section">
@@ -139,21 +87,16 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
                       borderLeft: borderColumns.includes(column)? "2px solid #155724" : "none",
                       borderRight: borderColumns.includes(column) ? "2px solid #155724" : "none",
                     }}
-                    onMouseEnter={() => setHoveredColumn(column)}
-                    onMouseLeave={() => setHoveredColumn(null)}
                   >
                     {column}
-                    <IconButton size="small" onClick={() => handleSort(column)}>
-                      <SortIcon />
-                    </IconButton>
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {sortedData.map((row, rowIndex) => (
+              {data.map((row, rowIndex) => (
                 <TableRow key={rowIndex}>
-                  {columns.map((column) => (
+                  {columns.map((column, colIndex) => (
                     <TableCell
                       key={`${rowIndex}-${column}`}
                       className={`${fullHighlightColumns.includes(column) ? "full-highlight-column" : ""}`}
@@ -165,29 +108,10 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
                         borderBottom: borderColumns.includes(column) &&rowIndex === data.length - 1 ? "2px solid #155724" : "",
                         borderLeft: borderColumns.includes(column)  ? "2px solid #155724" : "none",
                         borderRight: borderColumns.includes(column)  ? "2px solid #155724" : "none",
-                        backgroundColor: hoveredColumn === column ? "#e0f7fa" : "transparent", // 添加高亮效果
                       }}
-                      onMouseEnter={() => handleEdit(rowIndex, column)}
                     >
-                      {editedCell && editedCell.rowIndex === rowIndex && editedCell.column === column ? (
-                        <input
-                          type="text"
-                          value={row[column]}
-                          onChange={(e) => {
-                            const newData = [...data];
-                            newData[rowIndex][column] = e.target.value;
-                            setTableDataState({
-                              ...tableDataState,
-                              tables: {
-                                ...tableDataState.tables,
-                                [tableName]: newData,
-                              },
-                            });
-                          }}
-                        />
-                      ) : (
-                        row[column]
-                      )}
+                      {/* {column === 'date' && row[column] ? new Date(row[column]).toISOString().split('T')[0] : row[column]} */}
+                      {row[column] }
                     </TableCell>
                   ))}
                 </TableRow>
@@ -198,6 +122,91 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
       </div>
     );
   };
+  // const renderTable = (data, columns, tableName, selectedColumns = [], borderColumns = [], fullHighlightColumns = []) => {
+  //   selectedColumns = selectedColumns || [];
+  //   borderColumns = borderColumns || [];
+  //   fullHighlightColumns = fullHighlightColumns || [];
+
+  //   const sortedData = sortData(data, sortConfig);
+
+  //   return (
+  //     <div className="table-section">
+  //       <TableContainer component={Paper} className="table-container">
+  //         <Table size="small" aria-label="simple table">
+  //           <TableHead>
+  //             <TableRow>
+  //               {columns.map((column) => (
+  //                 <TableCell
+  //                   key={column}
+  //                   className={`${fullHighlightColumns.includes(column) ? "full-highlight-column" : ""}`}
+  //                   style={{
+  //                     fontWeight: fullHighlightColumns.includes(column) ? "bold" : "normal",
+  //                     backgroundColor: selectedColumns.includes(column) ? "#d4edda" : "transparent",
+  //                     color: selectedColumns.includes(column) ? "#155724" : "inherit",
+  //                     borderTop: borderColumns.includes(column)  ? "2px solid #155724" : "",
+  //                     borderBottom: borderColumns.includes(column)  ? "" : "",
+  //                     borderLeft: borderColumns.includes(column)? "2px solid #155724" : "none",
+  //                     borderRight: borderColumns.includes(column) ? "2px solid #155724" : "none",
+  //                   }}
+  //                   onMouseEnter={() => setHoveredColumn(column)}
+  //                   onMouseLeave={() => setHoveredColumn(null)}
+  //                 >
+  //                   {column}
+  //                   <IconButton size="small" onClick={() => handleSort(column)}>
+  //                     <SortIcon />
+  //                   </IconButton>
+  //                 </TableCell>
+  //               ))}
+  //             </TableRow>
+  //           </TableHead>
+  //           <TableBody>
+  //             {sortedData.map((row, rowIndex) => (
+  //               <TableRow key={rowIndex}>
+  //                 {columns.map((column) => (
+  //                   <TableCell
+  //                     key={`${rowIndex}-${column}`}
+  //                     className={`${fullHighlightColumns.includes(column) ? "full-highlight-column" : ""}`}
+  //                     style={{
+  //                       fontWeight: fullHighlightColumns.includes(column) ? "normal" : "normal",
+  //                       backgroundColor: selectedColumns.includes(column)&&! borderColumns.includes(column) ? "#d4edda" : "transparent",
+  //                       color: selectedColumns.includes(column) ? "#155724" : "inherit",
+  //                       borderTop: borderColumns.includes(column) ? "" : "",
+  //                       borderBottom: borderColumns.includes(column) &&rowIndex === data.length - 1 ? "2px solid #155724" : "",
+  //                       borderLeft: borderColumns.includes(column)  ? "2px solid #155724" : "none",
+  //                       borderRight: borderColumns.includes(column)  ? "2px solid #155724" : "none",
+  //                       backgroundColor: hoveredColumn === column ? "#e0f7fa" : "transparent", // 添加高亮效果
+  //                     }}
+  //                     onMouseEnter={() => handleEdit(rowIndex, column)}
+  //                   >
+  //                     {editedCell && editedCell.rowIndex === rowIndex && editedCell.column === column ? (
+  //                       <input
+  //                         type="text"
+  //                         value={row[column]}
+  //                         onChange={(e) => {
+  //                           const newData = [...data];
+  //                           newData[rowIndex][column] = e.target.value;
+  //                           setTableDataState({
+  //                             ...tableDataState,
+  //                             tables: {
+  //                               ...tableDataState.tables,
+  //                               [tableName]: newData,
+  //                             },
+  //                           });
+  //                         }}
+  //                       />
+  //                     ) : (
+  //                       row[column]
+  //                     )}
+  //                   </TableCell>
+  //                 ))}
+  //               </TableRow>
+  //             ))}
+  //           </TableBody>
+  //         </Table>
+  //       </TableContainer>
+  //     </div>
+  //   );
+  // };
 
   const highlightTableNamesAndColumns = (description, tableNames = [], columnsToHighlight = [], numbersToHighlight = [], chartTypes = [], binByOptions = [], currentTableColumns = [], onChange) => {
     if (typeof description !== 'string') {
@@ -223,14 +232,20 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
   
     return description.split(' ').map((word, index) => {
       const cleanWord = word.replace(/[.,]/g, '');
+      const displayWord = wordReplacements[cleanWord] || cleanWord;
   
       if (tableNames.includes(cleanWord)) {
         return (
           <HighlightWithDropdown
             key={index}
-            text={cleanWord}
+            text={displayWord}
             options={optionsForType('table')}
-            onChange={(newVal) => onChange('table', cleanWord, newVal)}
+            onChange={(newVal) => {onChange('table', cleanWord, newVal);
+              setFromTable(newVal);
+              // setDescription((prevDescription) =>
+              //               prevDescription.replace(new RegExp(`\\b${cleanWord}\\b`), newVal)
+              //           );
+            }}
             className="highlight-table-name"
           />
         );
@@ -242,7 +257,9 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
             key={index}
             text={cleanWord}
             options={optionsForType('column')}
-            onChange={(newVal) => onChange('column', cleanWord, newVal)}
+            onChange={(newVal) => {
+              onChange('column', cleanWord, newVal);
+            }}
             className="highlight-join-column"
           />
         );
@@ -293,10 +310,111 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
         );
       }
   
-      return <span key={index}>{word} </span>;
+      return <span key={index}>{displayWord} </span>;
     });
   };
+  const highlightJoinTableNamesAndColumns = (
+    description,
+    tableNames = [],
+    joinTable1,
+    joinTable2,
+    joinColumn1,
+    joinColumn2,
+    dataTables = {},
+    onChange,
+) => {
+    if (typeof description !== 'string') {
+        return description;
+    }
+// 用于存储表名和列名的索引
+const tableIndices = [];
+const columnIndices = [];
 
+// 先找出表名和列名的索引
+description.split(' ').forEach((word, index) => {
+  const cleanWord = word.replace(/[.,]/g, '');
+  if (tableNames.includes(cleanWord)) {
+    tableIndices.push(index);
+  } else if (Object.keys(dataTables[joinTable1][0]).includes(cleanWord)) {
+    columnIndices.push(index);
+  } else if (Object.keys(dataTables[joinTable2][0]).includes(cleanWord)) {
+    columnIndices.push(index);
+  }
+});
+
+// 根据索引生成对应的下拉菜单组件
+return (
+  <>
+    {description.split(' ').map((word, index) => {
+      const cleanWord = word.replace(/[.,]/g, '');
+      const key = `${cleanWord}_${index}`;
+      const displayWord = wordReplacements[key] || cleanWord;
+      console.log('index',index)
+    if (tableIndices.includes(index)) {
+      const tableIndex = tableIndices.indexOf(index);
+      
+      return (
+        <HighlightWithDropdown
+          key={index}
+          text={displayWord}
+          options={tableNames}
+          onChange={(newVal) => {
+            setWordReplacements((prev) => ({
+              ...prev,
+              [key]: newVal,
+            }));
+            onChange('table', cleanWord, newVal);
+            if (tableIndex === 0) setJoinfindTable1(newVal);
+            if (tableIndex === 1) setJoinfindTable2(newVal);
+          }}
+          className="highlight-table-name"
+        />
+      );
+    }
+
+    if (columnIndices.includes(index)) {
+      const columnIndex = columnIndices.indexOf(index);
+      console.log('column1',joinfindColumn1)
+      console.log('column2',joinfindColumn2)
+      console.log('table1',joinfindTable1)
+      console.log('table2',joinfindTable2)
+      console.log('data',dataTables)
+      const columnOptions =
+        columnIndex === 0
+          ? joinfindTable1
+            ? Object.keys(dataTables[joinfindTable1][0])
+            : Object.keys(dataTables[joinTable1][0])
+          : joinfindTable2
+          ? Object.keys(dataTables[joinfindTable2][0])
+          : Object.keys(dataTables[joinTable2][0]);
+          
+      return (
+        <HighlightWithDropdown
+          key={index}
+          text={displayWord}
+          options={columnOptions}
+          onChange={(newVal) => {
+            setWordReplacements((prev) => ({
+              ...prev,
+              [key]: newVal,
+            }));
+            onChange('column', cleanWord, newVal);
+            if (columnIndex === 0) setJoinfindColumn1(newVal);
+            if (columnIndex === 1) setJoinfindColumn2(newVal);
+          }}
+          className="highlight-join-column"
+        />
+      );
+    }
+
+      return <span key={index}>{displayWord} </span>;
+    })}
+  </>
+);
+};
+  
+  
+  
   const renderFilteredTable = (data, columns, condition, isFirstCondition = true) => {
     const highlightedRows = new Set();
     const fullHighlightColumns = new Set();
@@ -564,11 +682,10 @@ function StepByStepExplanation({ explanation, tableData, showVQL, currentPage, o
     />
   );
   };
-const handleEditClick = (text) => {
+  const handleEditClick = (text) => {
     setEditingText(true);
     setEditedText(text);
   };
-
   const handleBlur = () => {
     setEditingText(false);
     console.log('Edited text:', editedText);
@@ -576,7 +693,6 @@ const handleEditClick = (text) => {
   const handleEdit = (rowIndex, column) => {
     setEditedCell({ rowIndex, column });
   };
-
   const handleSort = (column) => {
     let direction = 'asc';
     if (sortConfig.key === column && sortConfig.direction === 'asc') {
@@ -585,31 +701,27 @@ const handleEditClick = (text) => {
     setSortConfig({ key: column, direction });
   };
   const handleHighlightChange = (type, oldValue, newValue) => {
-
     console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
+    setWordReplacements(prev => ({
+        ...prev,
+        [oldValue]: newValue
+    }));
 
-    setTableDataState((prevState) => {
-      const updatedTables = { ...prevState.tables };
+    const { mergedData, columns, error } = mergeTables(
+        dataTables[joinfindTable1],
+        dataTables[joinfindTable2],
+        joinfindColumn1,
+        joinfindColumn2
+    );
 
-      if (type === 'table') {
-        updatedTables[newValue] = updatedTables[oldValue];
-        delete updatedTables[oldValue];
-      }
-
-      if (type === 'column') {
-        Object.keys(updatedTables).forEach((table) => {
-          updatedTables[table] = updatedTables[table].map((row) => {
-            const newRow = { ...row };
-            newRow[newValue] = newRow[oldValue];
-            delete newRow[oldValue];
-            return newRow;
-          });
-        });
-      }
-
-      return { ...prevState, tables: updatedTables };
-    });
-  };
+    if (!error) {
+        setJoinTableResults(mergedData);
+        setJoinColumnResults(columns);
+    } else {
+        console.error(error);
+        setErrorMessage(error);
+    }
+};
   const handleRangeChange = (newRange) => {
     console.log(`Range changed to: ${newRange}`);
   };
@@ -676,412 +788,182 @@ const handleEditClick = (text) => {
           
             return <Scatter data={chartData} options={chartOptions} />;
           };
+  const mergeTables = (tableData1, tableData2, joinColumn1, joinColumn2) => {
+    if (!tableData1 || !tableData2 || !joinColumn1 || !joinColumn2) {
+        return { mergedData: [], error: 'Invalid parameters for merging tables' };
+    }
+    if (!Array.isArray(tableData1) || !Array.isArray(tableData2)) {
+        return { mergedData: [], error: 'Invalid table data' };
+    }
+
+    const columns1 = Object.keys(tableData1[0]);
+    const columns2 = Object.keys(tableData2[0]);
+
+    // Check if join columns exist in respective tables
+    if (!columns1.includes(joinColumn1) || !columns2.includes(joinColumn2)) {
+        return { mergedData: [], error: 'Join columns do not exist in the respective tables' };
+    }
+
+    const merged = tableData1.map(row1 => {
+        const matchedRow2 = tableData2.find(row2 => row1[joinColumn1] === row2[joinColumn2]);
+        return matchedRow2 ? { ...row1, ...matchedRow2 } : null;
+    }).filter(row => row !== null);
+
+    if (merged.length === 0) {
+        return { mergedData: [], error: 'No matching rows found for join operation' };
+    }
+
+    const mergedWithDateHandling = merged.map(row => ({
+        ...row,
+        date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
+    }));
+
+    const mergedColumns = [...new Set([...columns1, ...columns2])];
+
+    return { mergedData: mergedWithDateHandling, columns: mergedColumns, error: null };
+};
+
+          
   let selectedColumns = [];
 
-// Find the selected columns for default viz in all steps
-explanation.forEach(step => {
-  if (step.operation === 'SELECT') {
-    selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
-  }
-});
-
-const renderStepContent = (step, steps) => {
-  if (!step) {
-    return <Typography variant="body2" color="error">No step data available</Typography>;
-  }
-  const tableNames = Object.keys(dataTables);
-
-  let currentTable = [];
-  let currentColumns = [];
-  let scatterData = {};
-  let scatterData_order = {};
-  let firstValue = '';
-  let xAxisType = '';
-
-  let tableData1, tableData2, joinColumn1, joinColumn2, tableName1, tableName2, columns1, columns2, groupByColumn;
-  let orderDirection, orderByColumn, orderByParts, binColumnName, binBy;
-  let ChartComponent, chartType;
-  // Process all steps up to the current step
-  steps.forEach(step => {
-    switch (step.operation) {
-      case 'FROM': {
-        const tableName = step.clause.split(' ')[1];
-        const tableData = dataTables[tableName];
-        if (tableData) {
-          currentTable = tableData;
-          currentColumns = Object.keys(tableData[0]);
-        }
-        break;
-      }
-      case 'JOIN': {
-        const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
-        if (joinClauseParts) {
-          tableName1 = joinClauseParts[2];
-          tableName2 = joinClauseParts[1];
-          joinColumn1 = joinClauseParts[3];
-          joinColumn2 = joinClauseParts[5];
-
-          tableData1 = dataTables[tableName1];
-          tableData2 = dataTables[tableName2];
-
-          if (tableData1 && tableData2) {
-            columns1 = Object.keys(tableData1[0]);
-            columns2 = Object.keys(tableData2[0]);
-
-            currentTable = tableData1.map(row1 => {
-              const matchedRow2 = tableData2.find(row2 => row1[joinColumn1] === row2[joinColumn2]);
-              return matchedRow2 ? { ...row1, ...matchedRow2 } : row1;
-            }).map(row => ({
-              ...row,
-              date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
-            }));
-
-            currentColumns = [...new Set([...columns1, ...columns2])];
-          }
-        }
-        break;
-      }
-      case 'WHERE': {
-        const basedata = currentTable;
-        const basedcolumn = currentColumns;
-        const combinedCondition = step.conditions.map((condition, index) => {
-          if (index === 0) {
-            return condition.condition;
-          }
-          return condition.condition.replace(/^\s*\b(?:AND|OR)\b\s*/, '');
-        }).join(' || ');
-
-        const cleanedCondition = combinedCondition
-          .replace(/\bAND\b/g, '&&')
-          .replace(/\bOR\b/g, '||')
-          .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]');
-
-        const finalFilteredData = currentTable.filter(row => {
-          try {
-            const conditionFunction = new Function('row', `return ${cleanedCondition};`);
-            return conditionFunction(row);
-          } catch (error) {
-            console.error(`Error evaluating condition: ${cleanedCondition}`, error);
-            return false;
-          }
-        });
-
-        currentTable = finalFilteredData;
-        currentColumns = basedcolumn;
-        break;
-      }
-      case 'GROUP BY': {
-        groupByColumn = step.clause.split(' ')[2];
-        break;
-      }
-      case 'ORDER BY': {
-          orderByParts = step.clause.split(' ');
-          orderByColumn = orderByParts[2];
-          orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
-          currentTable = sortData(currentTable, orderByColumn, orderDirection);
-          const shuffleArray = (array) => {
-            for (let i = array.length - 1; i > 0; i--) {
-              const j = Math.floor(Math.random() * (i + 1));
-              [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-          };
-
-          const xData = currentTable.map(row => row[selectedColumns[0]]);
-          const shuffledXData = shuffleArray([...xData]);
-          const stringXData = shuffledXData.map(date => new Date(date).toISOString().split('T')[0]);
-
-          scatterData_order = currentTable.map((row, index) => ({
-            x: stringXData[index],
-            y: row[selectedColumns[1]],
-          }));
-          break;
-      }
-      case 'BIN BY': {
-        const match = step.clause.split(' ')[2];
-        binBy = match;
-        const columnName=selectedColumns[0];
-        const updatedTable = binData(currentTable, binBy, columnName);
-        binColumnName = `binBy_${binBy}`;
-        currentTable=updatedTable;
-        currentColumns=[...currentColumns, binColumnName];
-        selectedColumns=[binColumnName, selectedColumns[1]];
-      }
-      case 'VISUALIZE': {
-        chartType = step.clause.split(' ')[1]; // 从 VISUALIZE 子句中提取图表类型
-        
-        switch (chartType) {
-          case 'bar':
-            ChartComponent = Bar;
-            break;
-          case 'scatter':
-            ChartComponent = Scatter;
-            break;
-          case 'line':
-            ChartComponent = Line;
-            break;
-          case 'pie':
-            ChartComponent = Pie;
-            break;
-          default:
-            ChartComponent = Scatter;
-        }
-      }
+  // Find the selected columns for default viz in all steps
+  explanation.forEach(step => {
+    if (step.operation === 'SELECT') {
+      selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
     }
   });
 
-  if (currentTable.length === 0 || currentColumns.length === 0) {
-    return <Typography variant="body2" color="error">No data available to display</Typography>;
-  }
-  const parseCondition = (condition) => {
-    const range = [0, 3000]; // default range, need to be limited by the selected column
-  
-    const match = condition.match(/(\d+)\s*-\s*(\d+)/);
-    if (match) {
-      range[0] = parseInt(match[1], 10);
-      range[1] = parseInt(match[2], 10);
-    } else {
-      const lowerMatch = condition.match(/>\s*(\d+)/);
-      const upperMatch = condition.match(/<\s*(\d+)/);
-  
-      if (lowerMatch) {
-        range[0] = parseInt(lowerMatch[1], 10);
-      }
-      if (upperMatch) {
-        range[1] = parseInt(upperMatch[1], 10);
-      }
+  const renderStepContent = (step, steps) => {
+    if (!step) {
+      return <Typography variant="body2" color="error">No step data available</Typography>;
     }
-  
-    return range;
-  };
-  
-  scatterData = {
-    datasets: [
-      {
-        label: 'Scatter Plot',
-        data: currentTable.map(row => {
-          if (row[selectedColumns[0]] === undefined || row[selectedColumns[1]] === undefined) {
-            console.error('Data contains undefined values for selected columns', row);
-            return { x: null, y: null };
+    const tableNames = Object.keys(dataTables);
+
+    let currentTable = [];
+    let previousTable = [];
+    let currentColumns = [];
+    let previousColumns = [];
+    let scatterData = {};
+    let scatterData_order = {};
+    let firstValue = '';
+    let xAxisType = '';
+
+    let tableData1, tableData2, joinColumn1, joinColumn2, tableName1, tableName2, columns1, columns2, groupByColumn;
+    let orderDirection, orderByColumn, orderByParts, binColumnName, binBy;
+    let ChartComponent, chartType;
+    // Process all steps up to the current step
+    steps.forEach(step => {
+      previousTable = [...currentTable];
+      previousColumns = [...currentColumns];
+      switch (step.operation) {
+        case 'FROM': {
+          const tableName = step.clause.split(' ')[1];
+          const tableData = dataTables[tableName];
+          if (tableData) {
+            currentTable = tableData;
+            currentColumns = Object.keys(tableData[0]);
           }
-          return {
-            x: row[selectedColumns[0]],
-            y: row[selectedColumns[1]],
-          };
-        }).filter(point => point.x !== null && point.y !== null),
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-      },
-    ],
-  };
+          break;
+        }
+        case 'JOIN': {
+          const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
+          if (joinClauseParts) {
+            tableName1 = joinClauseParts[2];
+            tableName2 = joinClauseParts[1];
+            joinColumn1 = joinClauseParts[3];
+            joinColumn2 = joinClauseParts[5];
 
-  const isDate = value => {
-    const date = new Date(value);
-    return !isNaN(date.getTime());
-  };
+            tableData1 = dataTables[tableName1];
+            tableData2 = dataTables[tableName2];
+            console.log('raw table1',tableData1)
+            console.log('raw table2',tableData2)
+            console.log('raw column1',joinColumn1)
+            console.log('raw column2',joinColumn2)
+            const { mergedData, columns, error } = mergeTables(tableData1, tableData2, joinColumn1, joinColumn2);
+            currentTable = mergedData
+            console.log('currenttable',currentTable)
+            currentColumns = columns
+            console.log('currentColumns',currentColumns)
+          }
+          break;
+        }
+      }
+    });
 
-  firstValue = currentTable[0][selectedColumns[0]];
-  xAxisType = isDate(firstValue) ? 'time' : 'category';
-
-  // Now process the current step for rendering
-  switch (step.operation) {
-    case 'FROM': {
-      return (
-        <div className="step-container" key={step.step}>
-          <div className="left-column1">
-            <Paper className="container explanation">
-              <div className="highlight-row-container">
-                <Typography variant="body1" className="highlight-row">
-                  {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(`${step.description}`, tableNames,[],[],[],[],[],handleHighlightChange)}
-                </Typography>
-              </div>
-              <div className="step-label">{`data::step${step.step}`}</div>
-              {renderTable(currentTable, currentColumns)}
-            </Paper>
-          </div>
-          <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-            <div className="chart">
-              <Scatter
-                data={scatterData}
-                options={{
-                  scales: {
-                    x: {
-                      type: xAxisType,
-                      position: 'bottom',
-                      ...(xAxisType === 'time' && {
-                        time: {
-                          unit: 'month',
-                        },
-                      }),
-                      title: {
-                        display: true,
-                        text: selectedColumns[0],
-                      },
-                    },
-                    y: {
-                      title: {
-                        display: true,
-                        text: selectedColumns[1]},
-                    },
-                  },
-                }}
-              />
-            </div>
-            {showVQL && (
-              <Card className="vql-card">
-              <CardContent>
-                {editingText ? (
-                  <input
-                    type="text"
-                    value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                    onBlur={handleBlur}
-                    autoFocus
-                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                  />
-                ) : (
-                  <Typography
-                    variant="body2"
-                    className="vql-line"
-                    onClick={() => handleEditClick(step.clause)}
-                  >
-                    {formatVQLLine(step.clause)}
-                  </Typography>
-                )}
-              </CardContent>
-            </Card>
-            )}
-          </div>
-        </div>
-      );
+    if (currentTable.length === 0 || currentColumns.length === 0) {
+      return <Typography variant="body2" color="error">No data available to display</Typography>;
     }
-    case 'JOIN': {
-      return (
-        <div className="step-container" key={step.step}>
-          <div className="left-column1">
-            <Paper className="container explanation">
-              <div className="highlight-row-container">
-                <Typography variant="body1" className="highlight-row">
-                  {highlightTableNamesAndColumns(`Step ${step.step}. ${step.description}`, tableNames, [joinColumn1,joinColumn2],[],[],[],currentColumns,handleHighlightChange)}
-                </Typography>
-              </div>
-              <div className="table-row">
-                <div className="table-column">
-                  <div className="step-label">{`Table: ${tableName1}`}</div>
-                  {renderTable(tableData1, columns1, tableName1, [joinColumn1], null, [joinColumn1])}
-                </div>
-                <div className="arrow"></div>
-                <div className="table-column">
-                  <div className="step-label">{`Table: ${tableName2}`}</div>
-                  {renderTable(tableData2, columns2, tableName2, joinColumn2, null, [joinColumn2])}
-                </div>
-              </div>
-              <div className="arrow-down"></div>
-              <div className="table-row">
-                <div className="table-column">
-                  <div className="step-label">{`data:: step${step.step}`}</div>
-                  {renderTable(currentTable, currentColumns, 'Merged')}
-                </div>
-              </div>
-            </Paper>
-          </div>
-          <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-            <div className="chart">
-              <Scatter
-                data={scatterData}
-                options={{
-                  scales: {
-                    x: {
-                      type: xAxisType,
-                      position: 'bottom',
-                      ...(xAxisType === 'time' && {
-                        time: {
-                          unit: 'month',
-                        },
-                      }),
-                      title: {
-                        display: true,
-                        text: selectedColumns[0],
-                      },
-                    },
-                    y: {
-                      title: {
-                        display: true,
-                        text: selectedColumns[1]},
-                    },
-                  },
-                }}
-              />
-            </div>
-            {showVQL && (
-              <Card className="vql-card">
-              <CardContent>
-                {editingText ? (
-                  <input
-                    type="text"
-                    value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                    onBlur={handleBlur}
-                    autoFocus
-                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                  />
-                ) : (
-                  <Typography
-                    variant="body2"
-                    className="vql-line"
-                    onClick={() => handleEditClick(step.clause)}
-                  >
-                    {formatVQLLine(step.clause)}
-                  </Typography>
-                )}
-              </CardContent>
-            </Card>
-            )}
-          </div>
-        </div>
-      );
-    }
-    case 'WHERE': {
-      const columnNames = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g)))];
-      const numbers = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b\d+\b/g)))];
+    const parseCondition = (condition) => {
+      const range = [0, 3000]; // default range, need to be limited by the selected column
+    
+      const match = condition.match(/(\d+)\s*-\s*(\d+)/);
+      if (match) {
+        range[0] = parseInt(match[1], 10);
+        range[1] = parseInt(match[2], 10);
+      } else {
+        const lowerMatch = condition.match(/>\s*(\d+)/);
+        const upperMatch = condition.match(/<\s*(\d+)/);
+    
+        if (lowerMatch) {
+          range[0] = parseInt(lowerMatch[1], 10);
+        }
+        if (upperMatch) {
+          range[1] = parseInt(upperMatch[1], 10);
+        }
+      }
+    
+      return range;
+    };
+    
+    scatterData = {
+      datasets: [
+        {
+          label: 'Scatter Plot',
+          data: currentTable.map(row => {
+            if (row[selectedColumns[0]] === undefined || row[selectedColumns[1]] === undefined) {
+              console.error('Data contains undefined values for selected columns', row);
+              return { x: null, y: null };
+            }
+            return {
+              x: row[selectedColumns[0]],
+              y: row[selectedColumns[1]],
+            };
+          }).filter(point => point.x !== null && point.y !== null),
+          backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        },
+      ],
+    };
 
-      return (
-        <div className="step-container" key={step.step}>
-          <div className="left-column1">
-            <Paper className="container explanation">
-              <div className="highlight-row-container">
-                <Typography variant="body1" className="highlight-row">
-                  {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(step.description, [], columnNames, numbers,[],currentColumns,[],handleHighlightChange)}
-                </Typography>
-              </div>
-              
-              {step.conditions.map((condition, index) => (
-                <div key={index} style={{ marginTop: '20px' }}>
-                  <Typography variant="body2">{`Condition ${index + 1}: ${condition.condition}`}</Typography>
-                  <RangeSlider
-                  initialRange={parseCondition(condition.condition)}
-                  min={0}
-                  max={2500}
-                  step={1}
-                  onChange={handleRangeChange}
-                />
-                  {renderFilteredTable(currentTable, currentColumns, condition, index === 0)}
-                  
+    const isDate = value => {
+      const date = new Date(value);
+      return !isNaN(date.getTime());
+    };
+
+    firstValue = currentTable[0][selectedColumns[0]];
+    xAxisType = isDate(firstValue) ? 'time' : 'category';
+
+    // Now process the current step for rendering
+    switch (step.operation) {
+      case 'FROM': {
+        
+        return (
+          <div className="step-container" key={step.step}>
+            <div className="left-column1">
+              <Paper className="container explanation">
+                <div className="highlight-row-container">
+                  <Typography variant="body1" className="highlight-row">
+                    {`Step ${step.step}: `}
+                    {highlightTableNamesAndColumns(`${step.description}`, tableNames,[],[],[],[],[],handleHighlightChange)}
+                  </Typography>
                 </div>
-              ))}
-              <div>
-                <div className="step-label" style={{ marginTop: '20px' }}>{`data::step${step.step}`}</div>
-                {renderTable(currentTable, currentColumns, 'Filtered')}
-              </div>
-            </Paper>
-          </div>
-          <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-            <div className="chart">
-              <Scatter
+                <div className="step-label">{`data::step${step.step}`}</div>
+                {renderTable(fromTable ? dataTables[fromTable] : currentTable, fromTable ? Object.keys(dataTables[fromTable][0]) : currentColumns)} 
+              </Paper>
+            </div>
+            <div className="right-column1">
+              <div className="step-label">{`viz::step${step.step}`}</div>
+              <div className="chart">
+                <Scatter
                   data={scatterData}
                   options={{
                     scales: {
@@ -1090,7 +972,7 @@ const renderStepContent = (step, steps) => {
                         position: 'bottom',
                         ...(xAxisType === 'time' && {
                           time: {
-                            unit: 'month', 
+                            unit: 'month',
                           },
                         }),
                         title: {
@@ -1098,421 +980,153 @@ const renderStepContent = (step, steps) => {
                           text: selectedColumns[0],
                         },
                       },
-                      y:{
+                      y: {
                         title: {
                           display: true,
-                          text: selectedColumns[1],
-                        },
-                      }
+                          text: selectedColumns[1]},
+                      },
                     },
                   }}
                 />
+              </div>
+              {showVQL && (
+                <Card className="vql-card">
+                <CardContent>
+                  {editingText ? (
+                    <input
+                      type="text"
+                      value={editedText}
+                      onChange={(e) => setEditedText(e.target.value)}
+                      onBlur={handleBlur}
+                      autoFocus
+                      style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                    />
+                  ) : (
+                    <Typography
+                      variant="body2"
+                      className="vql-line"
+                      onClick={() => handleEditClick(step.clause)}
+                    >
+                      {formatVQLLine(step.clause)}
+                    </Typography>
+                  )}
+                </CardContent>
+              </Card>
+              )}
             </div>
-            {showVQL && (
-              <Card className="vql-card">
-              <CardContent>
-                {editingText ? (
-                  <input
-                    type="text"
-                    value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                    onBlur={handleBlur}
-                    autoFocus
-                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                  />
-                ) : (
-                  <Typography
-                    variant="body2"
-                    className="vql-line"
-                    onClick={() => handleEditClick(step.clause)}
-                  >
-                    {formatVQLLine(step.clause)}
-                  </Typography>
-                )}
-              </CardContent>
-            </Card>
-            )}
           </div>
-        </div>
-      );
-    }
-    case 'SELECT':
-      return (
-        <div className="step-container" key={step.step}>
-          <div className="left-column1">
-            <Paper className="container explanation">
-              <div className="highlight-row-container">
-                <Typography variant="body1" className="highlight-row">
-                  {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(step.description, [], selectedColumns,[],[],currentColumns,[],handleHighlightChange)}
-                </Typography>
-              </div>
-              <div className="step-label">{`data:: step${step.step}`}</div>
-              {renderTable(currentTable, currentColumns, `Selected: ${selectedColumns.join(', ')}`, selectedColumns, selectedColumns, selectedColumns)}
-            </Paper>
-          </div>
-          <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-            <div className="chart">
-              <Scatter
-                data={scatterData}
-                options={{
-                  scales: {
-                    x: {
-                      type: xAxisType,
-                      position: 'bottom',
-                      ...(xAxisType === 'time' && {
-                        time: {
-                          unit: 'month',
-                        },
-                      }),
-                      title: {
-                        display: true,
-                        text: selectedColumns[0],
-                      },
-                    },
-                    y: {
-                      title: {
-                        display: true,
-                        text: selectedColumns[1]},
-                    },
-                  },
-                }}
-              />
-            </div>
-            {showVQL && (
-              <Card className="vql-card">
-              <CardContent>
-                {editingText ? (
-                  <input
-                    type="text"
-                    value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                    onBlur={handleBlur}
-                    autoFocus
-                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                  />
-                ) : (
-                  <Typography
-                    variant="body2"
-                    className="vql-line"
-                    onClick={() => handleEditClick(step.clause)}
-                  >
-                    {formatVQLLine(step.clause)}
-                  </Typography>
-                )}
-              </CardContent>
-            </Card>
-            )}
-          </div>
-        </div>
-      );
-    case 'GROUP BY': {
-      return (
-        <div className="step-container" key={step.step}>
-          <div className="left-column1">
-            <Paper className="container explanation">
-              <div className="highlight-row-container">
-                <Typography variant="body1" className="highlight-row">
-                  {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(step.description, [], [groupByColumn], [],[],currentColumns,[],handleHighlightChange)}
-                </Typography>
-              </div>
-              <div className="step-label">{`data::step${step.step}`}</div>
-              <div className="table-container">
-                {renderGroupedTable(currentTable, currentColumns, groupByColumn)}
-              </div>
-            </Paper>
-          </div>
-          <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-            <div className="chart">
-              {renderGroupedChart(currentTable, groupByColumn)}
-            </div>
-            {showVQL && (
-              <Card className="vql-card">
-              <CardContent>
-                {editingText ? (
-                  <input
-                    type="text"
-                    value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                    onBlur={handleBlur}
-                    autoFocus
-                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                  />
-                ) : (
-                  <Typography
-                    variant="body2"
-                    className="vql-line"
-                    onClick={() => handleEditClick(step.clause)}
-                  >
-                    {formatVQLLine(step.clause)}
-                  </Typography>
-                )}
-              </CardContent>
-            </Card>
-            )}
-          </div>
-        </div>
-      );
-    }
-    case 'ORDER BY': {
-      return (
-        <div className="step-container" key={step.step}>
-          <div className="left-column1">
-            <Paper className="container explanation">
-              <div className="highlight-row-container">
-                <Typography variant="body1" className="highlight-row">
-                  {`Step ${step.step}: `}
-                  {highlightTableNamesAndColumns(step.description, [], [orderByColumn], [],[],currentColumns,[],handleHighlightChange)}
-                </Typography>
-              </div>
-              <div className="step-label">{`data::step${step.step}`}</div>
-              <div className="table-container">
-                {renderTable(currentTable, currentColumns, `Sorted by: ${orderByColumn} ${orderDirection}`, [orderByColumn], [orderByColumn])}
-              </div>
-            </Paper>
-          </div>
-          <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-            <div className="chart">
-              <Scatter
-                data={{
-                  datasets: [
-                    {
-                      label: `Scatter Chart`,
-                      data: scatterData_order,
-                      backgroundColor: '#f0eea3',
-                    },
-                  ],
-                }}
-                options={{
-                  scales: {
-                    x: {
-                      type: 'category', 
-                      position: 'bottom',
-                      title: {
-                        display: true,
-                        text: selectedColumns[0],
-                      },
-
-                    },
-                    y: {
-                      title: {
-                        display: true,
-                        text: selectedColumns[1],
-
-                      },
-                    
-                    },
-                  },
-                }}
-              />
-            </div>
-            {showVQL && (
-              <Card className="vql-card">
-              <CardContent>
-                {editingText ? (
-                  <input
-                    type="text"
-                    value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                    onBlur={handleBlur}
-                    autoFocus
-                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                  />
-                ) : (
-                  <Typography
-                    variant="body2"
-                    className="vql-line"
-                    onClick={() => handleEditClick(step.clause)}
-                  >
-                    {formatVQLLine(step.clause)}
-                  </Typography>
-                )}
-              </CardContent>
-            </Card>
-            )}
-          </div>
-        </div>
-      );
-    }
-    case 'BIN BY': {
+        );
+      }
+      case 'JOIN': {
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
               <Paper className="container explanation">
                 <div className="highlight-row-container">
                   <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: `}
-                    {highlightTableNamesAndColumns(step.description, [], [],[],[],[binBy],[],handleHighlightChange)}
+                  {highlightJoinTableNamesAndColumns(`Step ${step.step}. ${step.description}`, tableNames, tableName1, tableName2,joinColumn1, joinColumn2, dataTables, handleHighlightChange)}
                   </Typography>
                 </div>
-                <div className="step-label">{`data::step${step.step}`}</div>
-                {renderTable(currentTable, currentColumns, `Binned by: ${binBy}`, [binColumnName],[], [binColumnName])}
-              </Paper>
-            </div>
-            <div className="right-column1">
-            <div className="step-label">{`viz::step${step.step}`}</div>
-            {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
-            <div className="chart">
-              <Scatter
-                data={scatterData}
-                options={{
-                  scales: {
-                    x: {
-                      type: 'category',
-                      position: 'bottom',
-                      title: {
-                        display: true,
-                        text: selectedColumns[0],
-                      },
-                    },
-                    y: {
-                      title: {
-                        display: true,
-                        text: selectedColumns[1],
-                      },
-                    },
-                  },
-                }}
-              />
-              </div>
-              {showVQL && (
-                <>
-                  {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
-                  <Card className="vql-card">
-              <CardContent>
-                {editingText ? (
-                  <input
-                    type="text"
-                    value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                    onBlur={handleBlur}
-                    autoFocus
-                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                  />
-                ) : (
-                  <Typography
-                    variant="body2"
-                    className="vql-line"
-                    onClick={() => handleEditClick(step.clause)}
-                  >
-                    {formatVQLLine(step.clause)}
-                  </Typography>
+                <div className="table-row">
+                <div className="table-column">
+                      <div className="step-label">{`Table: ${joinfindTable1 || tableName1}`}</div>
+                      {renderTable(joinfindTable1 ? dataTables[joinfindTable1] : tableData1, joinfindTable1 ? Object.keys(dataTables[joinfindTable1][0]) : Object.keys(tableData1[0]), joinfindTable1 || tableName1, [joinfindColumn1||joinColumn1], null, [joinfindColumn1||joinColumn1])}
+                    </div>
+                    <div className="arrow"></div>
+                    <div className="table-column">
+                      <div className="step-label">{`Table: ${joinfindTable2 || tableName2}`}</div>
+                      {renderTable(joinfindTable2 ? dataTables[joinfindTable2] : tableData2, joinfindTable2 ? Object.keys(dataTables[joinfindTable2][0]) : Object.keys(tableData2[0]), joinfindTable2 || tableName2, [joinfindColumn2||joinColumn2], null, [joinfindColumn2||joinColumn2])}
+                    </div>
+                  </div>
+                <div className="arrow-down"></div>
+                <div className="table-row">
+                  <div className="table-column">
+                  <div className="step-label">{`data:: step${step.step}`}</div>
+                  {ErrorMessage ? (
+                    <Typography variant="body2" color="error">{ErrorMessage}</Typography>
+                  ) : (renderTable(joinTableResults ? joinTableResults : currentTable, joinColumnResults ? joinColumnResults : currentColumns, 'Merged') 
                 )}
-              </CardContent>
-            </Card>
-                </>
-              )}
-            </div>
-          </div>
-        );
-    }
-    case 'VISUALIZE': {
-    return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: `}
-                    {highlightTableNamesAndColumns(step.description, [], [],[], [chartType],currentColumns,[],handleHighlightChange)}
-                  </Typography>
+                  </div>
                 </div>
-                <div className="step-label">{`data::step${step.step}`}</div>
-                {renderTable(currentTable, currentColumns, `Visualized by: ${chartType}`,[],[],selectedColumns)}
               </Paper>
             </div>
             <div className="right-column1">
               <div className="step-label">{`viz::step${step.step}`}</div>
               <div className="chart">
-                <ChartComponent
-                  data={{
-                    datasets: [
-                      {
-                        label: `${chartType.charAt(0).toUpperCase() + chartType.slice(1)} Chart`,
-                        data: currentTable.map(row => ({
-                          x: row[selectedColumns[0]],
-                          y: row[selectedColumns[1]], 
-                        })),
-                        backgroundColor: '#f0eea3',
-                      },
-                    ],
-                  }}
+                <Scatter
+                  data={scatterData}
                   options={{
                     scales: {
                       x: {
                         type: xAxisType,
                         position: 'bottom',
-                        
+                        ...(xAxisType === 'time' && {
+                          time: {
+                            unit: 'month',
+                          },
+                        }),
                         title: {
                           display: true,
                           text: selectedColumns[0],
                         },
                       },
-                      y:{
+                      y: {
                         title: {
                           display: true,
-                          text: selectedColumns[1],
-                        },
-                      }
+                          text: selectedColumns[1]},
+                      },
                     },
                   }}
                 />
               </div>
               {showVQL && (
-                <>
-                  {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
-                  <Card className="vql-card">
-              <CardContent>
-                {editingText ? (
-                  <input
-                    type="text"
-                    value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                    onBlur={handleBlur}
-                    autoFocus
-                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                  />
-                ) : (
-                  <Typography
-                    variant="body2"
-                    className="vql-line"
-                    onClick={() => handleEditClick(step.clause)}
-                  >
-                    {formatVQLLine(step.clause)}
-                  </Typography>
-                )}
-              </CardContent>
-            </Card>
-                </>
+                <Card className="vql-card">
+                <CardContent>
+                  {editingText ? (
+                    <input
+                      type="text"
+                      value={editedText}
+                      onChange={(e) => setEditedText(e.target.value)}
+                      onBlur={handleBlur}
+                      autoFocus
+                      style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                    />
+                  ) : (
+                    <Typography
+                      variant="body2"
+                      className="vql-line"
+                      onClick={() => handleEditClick(step.clause)}
+                    >
+                      {formatVQLLine(step.clause)}
+                    </Typography>
+                  )}
+                </CardContent>
+              </Card>
               )}
             </div>
           </div>
-      );
+        );
+      }
+        return <Typography variant="body2" color="error">Unsupported operation: {step.operation}</Typography>;
     }
-    default:
-      return <Typography variant="body2" color="error">Unsupported operation: {step.operation}</Typography>;
-  }
-};
+    
+  };
 
-const currentSteps = explanation.slice(0, currentPage + 1);
+  const currentSteps = explanation.slice(0, currentPage + 1);
 
-return (
-  <div className="step-by-step-explanation">
-    <div className="explanation-container">
-      <Typography variant="h6" className="purple-text">/ Step-by-Step Explanations</Typography>
-      {explanation && explanation.length > 0 ? renderStepContent(explanation[currentPage], currentSteps) : <Typography variant="body2">No explanations available</Typography>}
-      <div className="pagination">
-        <button onClick={onPrevPage} disabled={currentPage === 0}>← Previous step</button>
-        <span>{currentPage + 1} / {explanation ? explanation.length : 0}</span>
-        <button onClick={onNextPage} disabled={currentPage === explanation.length - 1}>Next step →</button>
+  return (
+    <div className="step-by-step-explanation">
+      <div className="explanation-container">
+        <Typography variant="h6" className="purple-text">/ Step-by-Step Explanations</Typography>
+        {explanation && explanation.length > 0 ? renderStepContent(explanation[currentPage], currentSteps) : <Typography variant="body2">No explanations available</Typography>}
+        <div className="pagination">
+          <button onClick={onPrevPage} disabled={currentPage === 0}>← Previous step</button>
+          <span>{currentPage + 1} / {explanation ? explanation.length : 0}</span>
+          <button onClick={onNextPage} disabled={currentPage === explanation.length - 1}>Next step →</button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 
 
 

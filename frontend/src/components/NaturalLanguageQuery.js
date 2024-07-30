@@ -49,7 +49,7 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
             {
               "step": 2,
               "operation": "JOIN",
-              "description": "Join the table price with the table name based on the id.",
+              "description": "Join the table price on id with the table name on id.",
               "clause": "JOIN name ON price.id = name.id"
             },
             {
