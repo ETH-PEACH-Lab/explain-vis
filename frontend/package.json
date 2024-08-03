@@ -2,7 +2,7 @@
   "name": "explainable_visualization",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yang-emily.github.io/explainable_visualization/",
+  "homepage": "./",
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -33,9 +33,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-prod": "dotenv -e .env.production react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "react-scripts build",
+    "build": "dotenv -e .env react-scripts build",
+    "build-prod": "dotenv -e .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -58,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "dotenv-cli": "^7.4.2",
     "gh-pages": "^6.1.1",
     "webpack": "^5.93.0",
     "webpack-cli": "^5.1.4"

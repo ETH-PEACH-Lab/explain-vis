@@ -1,5 +1,6 @@
 const express = require("express");
 const axios = require("axios");
+const path = require('path');
 const cors = require('cors');
 const { constant } = require("vega");
 require('dotenv').config();
@@ -19,9 +20,21 @@ if (!openaiApiKey) {
 }
 
 const openaiApiEndpoint = "https://api.openai.com/v1/completions";
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('/api', (req, res)=>{
+  res.send('Hello, API')
+})
+
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
 
 app.post('/api/generate-vegalite', async (req, res) => {
   const { query, data } = req.body;
+  console.log('get a post')
+  console.log(query, data)
 
   // const prompt = `Generate a concise Vega-Lite json based on the following natural language query and data:\n\nQuery: "${query}"\n\nData: ${JSON.stringify(data)}\n return the whole json to render in vega editor.`;
   const prompt = `Given the following data and query, generate VQL and Vega-Lite specifications.
