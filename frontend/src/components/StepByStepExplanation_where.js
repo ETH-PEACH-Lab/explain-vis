@@ -20,8 +20,9 @@ import DraggableNumber from './DraggableNumber';
 import RangeSlider from './RangeSlider';
 
 const parseCondition = (condition) => {
-  const range = [0, 3000];
+  const range = [0, 3000]; // default range, need to be limited by the selected column
 
+  // 正则表达式匹配顺序调整，先匹配组合条件
   const combinedMatch = condition.match(/>\s*(\d+)\s*AND\s*<\s*(\d+)/i);
   if (combinedMatch) {
     console.log("Matched combined condition:", combinedMatch);
@@ -52,6 +53,9 @@ const parseCondition = (condition) => {
   return range;
 };
 
+
+
+
 const updateConditionWithRange = (condition, range) => {
   const greaterThanMatch = condition.match(/>\s*\d+/);
   const lessThanMatch = condition.match(/<\s*\d+/);
@@ -76,7 +80,7 @@ const getConditionEligibleColumns = (tableData) => {
 
   for (const column in firstRow) {
     const value = firstRow[column];
-    if (typeof value === 'number') {
+    if (typeof value === 'number' ) {
       eligibleColumns.push(column);
     }
   }
@@ -90,14 +94,6 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   const [wordReplacements, setWordReplacements] = useState({});
   const [conditions, setConditions] = useState([]);
   const [whereResults, setWhereResults] = useState([]);
-  const [fromTable, setFromTable] = useState(null); 
-  const [joinfindTable1, setJoinfindTable1] = useState('price'); 
-  const [joinfindTable2, setJoinfindTable2] = useState('name'); 
-  const [joinfindColumn1, setJoinfindColumn1] = useState('id'); 
-  const [joinfindColumn2, setJoinfindColumn2] = useState('id'); 
-  const [joinTableResults, setJoinTableResults] = useState(null);
-  const [joinColumnResults, setJoinColumnResults] = useState(null);
-  const [ErrorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     if (explanation[currentPage].operation === 'WHERE' && explanation[currentPage].conditions) {
@@ -105,33 +101,9 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
         ...cond,
         range: parseCondition(cond.condition)
       })));
+      
     }
   }, [currentPage, explanation]);
-
-  useEffect(() => {
-    if (!joinfindTable1 || !joinfindTable2 || !joinfindColumn1 || !joinfindColumn2) {
-      setJoinTableResults(null);
-      setJoinColumnResults(null);
-      setErrorMessage('Please select valid tables and columns for merging.');
-      return; 
-    }
-
-    const { mergedData, columns, error } = mergeTables(
-      dataTables[joinfindTable1],
-      dataTables[joinfindTable2],
-      joinfindColumn1,
-      joinfindColumn2
-    );
-
-    if (error) {
-      console.error(error);
-      setErrorMessage(error);
-    } else {
-      setJoinTableResults(mergedData);
-      setJoinColumnResults(columns);
-      setErrorMessage(null); 
-    }
-  }, [joinfindTable1, joinfindTable2, joinfindColumn1, joinfindColumn2]); 
 
   const evaluateCondition = (row, condition) => {
     try {
@@ -193,44 +165,6 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
     });
     return acc;
   }, {});
-
-  const mergeTables = (tableData1, tableData2, joinColumn1, joinColumn2) => {
-    if (!tableData1 || !tableData2 || !joinColumn1 || !joinColumn2) {
-        return { mergedData: [], columns:[],  error: 'Invalid parameters for merging tables' };
-    }
-    if (!Array.isArray(tableData1) || !Array.isArray(tableData2)) {
-        return { mergedData: [], columns:[], error: 'Invalid table data' };
-    }
-
-    const columns1 = Object.keys(tableData1[0]);
-    const columns2 = Object.keys(tableData2[0]);
-
-    // Check if join columns exist in respective tables
-    if (!columns1.includes(joinColumn1) || !columns2.includes(joinColumn2)) {
-        return { mergedData: [], columns:[], error: 'Join columns do not exist in the respective tables' };
-    }
-
-    const merged = tableData1.map(row1 => {
-        const matchedRow2 = tableData2.find(row2 => row1[joinColumn1] === row2[joinColumn2]);
-        return matchedRow2 ? { ...row1, ...matchedRow2 } : null;
-    }).filter(row => row !== null);
-    
-    console.log('merged results', merged)
-
-    if (merged.length === 0) {
-        return { mergedData: [], columns:[], error: 'No matching rows found for join operation' };
-    }
-
-    const mergedWithDateHandling = merged.map(row => ({
-        ...row,
-        date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
-    }));
-
-    const mergedColumns = [...new Set([...columns1, ...columns2])];
-
-    return { mergedData: mergedWithDateHandling, columns: mergedColumns, error: null };
-};
-
 
   const formatVQLLine = (line) => {
     return line.split('').map((char, index) => {
@@ -302,55 +236,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       </div>
     );
   };
-  const highlightTablefrom = (description, tableNames = [], columnsToHighlight = [], numbersToHighlight = [], chartTypes = [], binByOptions = [], currentTableColumns = [], onChange) => {
-    if (typeof description !== 'string') {
-      return description;
-    }
-  
-    const optionsForType = (type) => {
-      switch (type) {
-        case 'table':
-          return tableNames;
-        case 'column':
-          return currentTableColumns;
-        case 'number':
-          return numbersToHighlight;
-        case 'chartType':
-          return ['bar', 'line', 'pie', 'scatter'];
-        case 'binBy':
-          return ['year', 'month', 'week', 'day', 'weekday', 'quarter'];
-        default:
-          return [];
-      }
-    };
-  
-    return description.split(' ').map((word, index) => {
-      const cleanWord = word.replace(/[.,]/g, '');
-      const key = `${cleanWord}_${index}`;
-      const displayWord = wordReplacements[key] || cleanWord;
 
-      if (tableNames.includes(cleanWord)) {
-        return (
-          <HighlightWithDropdown
-            key={index}
-            text={displayWord}
-            options={optionsForType('table')}
-            onChange={(newVal) => {
-              setWordReplacements((prev) => ({
-                ...prev,
-                [key]: newVal,
-              }));
-              onChange('column', cleanWord, newVal);
-              setFromTable(displayWord);
-            }}
-            className="highlight-table-name"
-          />
-        );
-      }
-  
-      return <span key={index}>{displayWord} </span>;
-    });
-  };
   const highlightTableNamesAndColumns = (description, tableNames = [], eligibleColumns = [], currentTableColumns = [], onChange) => {
     if (typeof description !== 'string') {
       return description;
@@ -385,6 +271,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
           const cleanWord = word.replace(/[.,]/g, '');
           const key = `${cleanWord}_${index}`;
           const displayWord = wordReplacements[key] || cleanWord;
+          
 
           if (tableIndices.includes(index)) {
             return (
@@ -404,6 +291,8 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
             );
           }
 
+          
+          
           const conditionIndex = columnIndices.indexOf(index);
           if (conditionIndex !== -1) {
             return (
@@ -416,124 +305,36 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
                   const updatedWordReplacements = {
                     ...wordReplacements,
                     [key]: newVal,
-                    [newKey]: newVal,
+                    [newKey]: newVal, // 确保新列名能够在后续更新中正确使用
                   };
                   setWordReplacements(updatedWordReplacements);
                   onChange('column', cleanWord, newVal);
-
+  
+                  console.log(`Updating condition at index ${conditionIndex} from ${displayWord} to ${newVal}`);
+                  
+                  // 更新对应条件的列名
                   setConditions((prevConditions) => {
                     const newConditions = [...prevConditions];
                     newConditions[conditionIndex] = {
                       ...newConditions[conditionIndex],
                       condition: newConditions[conditionIndex].condition.replace(new RegExp(`\\b${displayWord}\\b`, 'g'), newVal)
                     };
+                    console.log(`Updated conditions:`, newConditions);
                     return newConditions;
                   });
+                 
                 }}
                 className="highlight-join-column"
               />
             );
           }
-
+  
           return <span key={index}>{displayWord} </span>;
         })}
       </>
     );
   };
-  const highlightJoinTableNamesAndColumns = (
-    description,
-    tableNames = [],
-    joinTable1,
-    joinTable2,
-    joinColumn1,
-    joinColumn2,
-    dataTables = {},
-    onChange,
-) => {
-    if (typeof description !== 'string') {
-        return description;
-    }
-// 用于存储表名和列名的索引
-const tableIndices = [];
-const columnIndices = [];
 
-// 先找出表名和列名的索引
-description.split(' ').forEach((word, index) => {
-  const cleanWord = word.replace(/[.,]/g, '');
-  if (tableNames.includes(cleanWord)) {
-    tableIndices.push(index);
-  } else if (Object.keys(dataTables[joinTable1][0]).includes(cleanWord)) {
-    columnIndices.push(index);
-  } else if (Object.keys(dataTables[joinTable2][0]).includes(cleanWord)) {
-    columnIndices.push(index);
-  }
-});
-
-// 根据索引生成对应的下拉菜单组件
-return (
-  <>
-    {description.split(' ').map((word, index) => {
-      const cleanWord = word.replace(/[.,]/g, '');
-      const key = `${cleanWord}_${index}`;
-      const displayWord = wordReplacements[key] || cleanWord;
-      console.log('index',index)
-    if (tableIndices.includes(index)) {
-      const tableIndex = tableIndices.indexOf(index);
-      
-      return (
-        <HighlightWithDropdown
-          key={index}
-          text={displayWord}
-          options={tableNames}
-          onChange={(newVal) => {
-            setWordReplacements((prev) => ({
-              ...prev,
-              [key]: newVal,
-            }));
-            onChange('table', cleanWord, newVal);
-            if (tableIndex === 0) setJoinfindTable1(newVal);
-            if (tableIndex === 1) setJoinfindTable2(newVal);
-          }}
-          className="highlight-table-name"
-        />
-      );
-    }
-
-    if (columnIndices.includes(index)) {
-      const columnIndex = columnIndices.indexOf(index);
-      const columnOptions =
-        columnIndex === 0
-          ? joinfindTable1
-            ? Object.keys(dataTables[joinfindTable1][0])
-            : Object.keys(dataTables[joinTable1][0])
-          : joinfindTable2
-          ? Object.keys(dataTables[joinfindTable2][0])
-          : Object.keys(dataTables[joinTable2][0]);
-          
-      return (
-        <HighlightWithDropdown
-          key={index}
-          text={displayWord}
-          options={columnOptions}
-          onChange={(newVal) => {
-            setWordReplacements((prev) => ({
-              ...prev,
-              [key]: newVal,
-            }));
-            onChange('column', cleanWord, newVal);
-            if (columnIndex === 0) setJoinfindColumn1(newVal);
-            if (columnIndex === 1) setJoinfindColumn2(newVal);
-          }}
-          className="highlight-join-column"
-        />
-      );
-    }
-
-      return <span key={index}>{displayWord} </span>;
-    })}
-  </>
-);
-};
   const handleEditClick = (text) => {
     setEditingText(true);
     setEditedText(text);
@@ -543,20 +344,12 @@ return (
     setEditingText(false);
     console.log('Edited text:', editedText);
   };
-  const handleHighlighttableChange = (type, oldValue, newValue) => {
 
-    console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
-
-    setWordReplacements((prev) => ({
-      ...prev,
-      [oldValue]: newValue
-    }));
-  };
   const handleHighlightChange = (type, oldValue, newValue) => {
     console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
 
     if (type === 'column') {
-      setConditions((prevConditions) =>
+      setConditions((prevConditions) => 
         prevConditions.map((condition) => ({
           ...condition,
           condition: condition.condition.replace(new RegExp(`\\b${oldValue}\\b`, 'g'), newValue)
@@ -671,6 +464,7 @@ return (
 
   let selectedColumns = [];
 
+  // Find the selected columns for default viz in all steps
   explanation.forEach(step => {
     if (step.operation === 'SELECT') {
       selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
@@ -679,17 +473,9 @@ return (
 
   const calculateCurrentData = () => {
     let currentTable = [];
-    let previousTable = [];
     let currentColumns = [];
-    let previousColumns = [];
-    let scatterData = {};
-    let scatterData_order = {};
-    let firstValue = '';
-    let xAxisType = '';
-
-    let tableData1, tableData2, joinColumn1, joinColumn2, tableName1, tableName2, columns1, columns2, groupByColumn;
-
-
+    
+    // Process all steps up to the current step
     explanation.slice(0, currentPage + 1).forEach(step => {
       switch (step.operation) {
         case 'FROM': {
@@ -704,17 +490,17 @@ return (
         case 'JOIN': {
           const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
           if (joinClauseParts) {
-            tableName1 = joinClauseParts[2];
-            tableName2 = joinClauseParts[1];
-            joinColumn1 = joinClauseParts[3];
-            joinColumn2 = joinClauseParts[5];
+            const tableName1 = joinClauseParts[2];
+            const tableName2 = joinClauseParts[1];
+            const joinColumn1 = joinClauseParts[3];
+            const joinColumn2 = joinClauseParts[5];
 
-            tableData1 = dataTables[tableName1];
-            tableData2 = dataTables[tableName2];
+            const tableData1 = dataTables[tableName1];
+            const tableData2 = dataTables[tableName2];
 
             if (tableData1 && tableData2) {
-              columns1 = Object.keys(tableData1[0]);
-              columns2 = Object.keys(tableData2[0]);
+              const columns1 = Object.keys(tableData1[0]);
+              const columns2 = Object.keys(tableData2[0]);
 
               currentTable = tableData1.map(row1 => {
                 const matchedRow2 = tableData2.find(row2 => row1[joinColumn1] === row2[joinColumn2]);
@@ -730,6 +516,7 @@ return (
           break;
         }
         case 'WHERE': {
+          // This will be handled separately in useEffect
           break;
         }
         default:
@@ -781,189 +568,14 @@ return (
     const firstValue = currentTable[0][selectedColumns[0]];
     const xAxisType = isDate(firstValue) ? 'time' : 'category';
 
-    switch (step.operation) {
-      case 'FROM': {
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: `}
-                    {highlightTablefrom(`${step.description}`, tableNames,[],[],[],[],[],handleHighlighttableChange)}
-                  </Typography>
-                </div>
-                <div className="step-label">{`data::step${step.step}`}</div>
-                {renderTable(fromTable? dataTables[fromTable]:currentTable, fromTable? Object.keys(dataTables[fromTable][0]):currentColumns)}
-              </Paper>
-            </div>
-            <div className="right-column1">
-              <div className="step-label">{`viz::step${step.step}`}</div>
-              <div className="chart">
-                <Scatter
-                  data={scatterData}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType,
-                        position: 'bottom',
-                        ...(xAxisType === 'time' && {
-                          time: {
-                            unit: 'month',
-                          },
-                        }),
-                        title: {
-                          display: true,
-                          text: selectedColumns[0],
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: selectedColumns[1]},
-                      },
-                    },
-                  }}
-                />
-              </div>
-              {showVQL && (
-                <Card className="vql-card">
-                <CardContent>
-                  {editingText ? (
-                    <input
-                      type="text"
-                      value={editedText}
-                      onChange={(e) => setEditedText(e.target.value)}
-                      onBlur={handleBlur}
-                      autoFocus
-                      style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                    />
-                  ) : (
-                    <Typography
-                      variant="body2"
-                      className="vql-line"
-                      onClick={() => handleEditClick(step.clause)}
-                    >
-                      {formatVQLLine(step.clause)}
-                    </Typography>
-                  )}
-                </CardContent>
-              </Card>
-              )}
-            </div>
-          </div>
-        );
-      }
-      case 'JOIN': {
-        const tableNames = Object.keys(dataTables);
-        let tableName1, tableName2, joinColumn1, joinColumn2, tableData1, tableData2;
-        steps.forEach(step => {
-          if (step.operation === 'JOIN') {
-            const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
-            if (joinClauseParts) {
-              tableName1 = joinClauseParts[2];
-              tableName2 = joinClauseParts[1];
-              joinColumn1 = joinClauseParts[3];
-              joinColumn2 = joinClauseParts[5];
+    
 
-              tableData1 = dataTables[tableName1];
-              tableData2 = dataTables[tableName2];
-            }
-          }
-        });
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {highlightJoinTableNamesAndColumns(`Step ${step.step}. ${step.description}`, tableNames, tableName1, tableName2,joinColumn1, joinColumn2, dataTables, handleHighlightChange)}
-                  </Typography>
-                </div>
-                <div className="table-row">
-                  <div className="table-column">
-                    <div className="step-label">{`Table: ${joinfindTable1 || tableName1}`}</div>
-                    {renderTable(joinfindTable1 ? dataTables[joinfindTable1] : tableData1, joinfindTable1 ? Object.keys(dataTables[joinfindTable1][0]) : Object.keys(tableData1[0]), joinfindTable1 || tableName1, [joinfindColumn1||joinColumn1], null, [joinfindColumn1||joinColumn1])}
-                  </div>
-                  <div className="arrow"></div>
-                  <div className="table-column">
-                    <div className="step-label">{`Table: ${joinfindTable2 || tableName2}`}</div>
-                    {renderTable(joinfindTable2 ? dataTables[joinfindTable2] : tableData2, joinfindTable2 ? Object.keys(dataTables[joinfindTable2][0]) : Object.keys(tableData2[0]), joinfindTable2 || tableName2, [joinfindColumn2||joinColumn2], null, [joinfindColumn2||joinColumn2])}
-                  </div>
-                </div>
-                <div className="arrow-down"></div>
-                <div className="table-row">
-                  <div className="table-column">
-                    <div className="step-label">{`data:: step${step.step}`}</div>
-                    {ErrorMessage ? (
-                      <Typography variant="body2" color="error">{ErrorMessage}</Typography>
-                    ) : (
-                      renderTable(joinTableResults ? joinTableResults : currentTable, joinColumnResults ? joinColumnResults : currentColumns, 'Merged')
-                    )}
-                  </div>
-                </div>
-              </Paper>
-            </div>
-            <div className="right-column1">
-              <div className="step-label">{`viz::step${step.step}`}</div>
-              <div className="chart">
-                <Scatter
-                  data={scatterData}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType,
-                        position: 'bottom',
-                        ...(xAxisType === 'time' && {
-                          time: {
-                            unit: 'month',
-                          },
-                        }),
-                        title: {
-                          display: true,
-                          text: selectedColumns[0],
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: selectedColumns[1]},
-                      },
-                    },
-                  }}
-                />
-              </div>
-              {showVQL && (
-                <Card className="vql-card">
-                  <CardContent>
-                    {editingText ? (
-                      <input
-                        type="text"
-                        value={editedText}
-                        onChange={(e) => setEditedText(e.target.value)}
-                        onBlur={handleBlur}
-                        autoFocus
-                        style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                      />
-                    ) : (
-                      <Typography
-                        variant="body2"
-                        className="vql-line"
-                        onClick={() => handleEditClick(step.clause)}
-                      >
-                        {formatVQLLine(step.clause)}
-                      </Typography>
-                    )}
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-          </div>
-        );
-      }
+    // 现在处理当前步骤进行渲染
+    switch (step.operation) {
       case 'WHERE': {
         const columnNames = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g)))];
         const numbers = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b\d+\b/g)))];
+        // 获取可用于条件的列
         const eligibleColumns = getConditionEligibleColumns(currentTable);
         return (
           <div className="step-container" key={step.step}>
@@ -1027,7 +639,8 @@ return (
                       y: {
                         title: {
                           display: true,
-                          text: selectedColumns[1]},
+                          text: selectedColumns[1],
+                        },
                       },
                     },
                   }}
@@ -1061,7 +674,6 @@ return (
           </div>
         );
       }
-      
       default:
         return <Typography variant="body2" color="error">Unsupported operation: {step.operation}</Typography>;
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const DraggableNumber = ({ initialNumber, min, max, step, onChange }) => {
   const [number, setNumber] = useState(initialNumber);
@@ -26,7 +26,7 @@ const DraggableNumber = ({ initialNumber, min, max, step, onChange }) => {
     setDragging(false);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (dragging) {
       window.addEventListener('mousemove', handleMouseMove);
       window.addEventListener('mouseup', handleMouseUp);
@@ -41,12 +41,16 @@ const DraggableNumber = ({ initialNumber, min, max, step, onChange }) => {
     };
   }, [dragging]);
 
+  useEffect(() => {
+    setNumber(initialNumber); // 更新 number 以响应初始值的变化
+  }, [initialNumber]);
+
   return (
     <span
       onMouseDown={handleMouseDown}
       style={{ color: 'blue', cursor: 'ew-resize', userSelect: 'none' }}
     >
-      {Math.round(number * 100) / 100+' '} 
+      {Math.round(number * 100) / 100 + ' '}
     </span>
   );
 };
