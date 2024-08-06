@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Pagination from '@mui/material/Pagination';
+import CardContent from '@mui/material/CardContent';
 import PaginationItem from '@mui/material/PaginationItem';
 import HighlightWithDropdown from './HighlightWithDropdown';
 import Paper from '@mui/material/Paper';
@@ -99,7 +100,7 @@ const aggregateFunctionAliases = {
 };
 const aggregateFunctions = Object.keys(aggregateFunctionAliases);
 
-const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, onPageChange }) => {
+const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, onPrevPage, onNextPage }) => {
   const [editingText, setEditingText] = useState(null);
   const [editedText, setEditedText] = useState('');
   const [wordReplacements, setWordReplacements] = useState({});
@@ -1803,34 +1804,36 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
   };
 
   const currentSteps = explanation.slice(0, currentPage + 1);
-  const renderPagination = () => {
-    if (!explanation || explanation.length === 0) return null;
 
-    const pageButtons = [];
-    for (let i = 0; i < explanation.length; i++) {
-      pageButtons.push(
-        <button
-          key={i}
-          className={`page-button ${currentPage === i ? 'active' : ''}`}
-          onClick={() => onPageChange(i)}
-        >
-          {i + 1}
-        </button>
-      );
-    }
-
-    return <div className="pagination-button">{pageButtons}</div>;
-  };
   return (
     <div className="step-by-step-explanation">
       <div className="explanation-container">
         <Typography variant="h6" className="purple-text">/ Step-by-Step Explanations</Typography>
         {explanation && explanation.length > 0 ? renderStepContent(explanation[currentPage], currentSteps) : <Typography variant="body2">No explanations available</Typography>}
-        <div className="pagination">
-        <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 0}>← Pre </button>
-          {renderPagination()}
-          <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === explanation.length - 1}>Next →</button>
+        <div className="pagination-container">
+          <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 0}>← Previous step</button>
+          <Pagination
+            current={currentPage + 1}
+            total={explanation.length}
+            onChange={handleChange}
+            size="small"
+            showSizeChanger={false}
+            showQuickJumper={false}
+            hideOnSinglePage={false}
+            pageSize={1}
+            itemRender={(page, type, originalElement) => {
+              if (type === 'prev') {
+                return <button>← Previous step</button>;
+              }
+              if (type === 'next') {
+                return <button>Next step →</button>;
+              }
+              return originalElement;
+            }}
+          />
+          <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === explanation.length - 1}>Next step →</button>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -44,15 +44,12 @@ function App() {
     setInterfaces([...interfaces, newInterface]);
   };
 
-  const handlePageChange = (direction) => {
-    
-    if (direction === 'next' && currentPage < generatedVQL.explanation.length - 1) {
-      setCurrentPage(currentPage + 1);
-    } else if (direction === 'prev' && currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+  const handlePageChange = (page) => {
+    if (page >= 0 && page < generatedVQL.explanation.length) {
+      setCurrentPage(page);
     }
-    console.log('page',currentPage)
-  };
+    console.log('page', page);
+  }
 
   const handleGenerate = (generated) => {
     console.log('Generated data received:', generated);
@@ -103,8 +100,7 @@ function App() {
                     tableData={tableData}
                     showVQL={showVQL}
                     currentPage={currentPage}
-                    onPrevPage={() => handlePageChange('prev')}
-                    onNextPage={() => handlePageChange('next')}
+                    onPageChange={handlePageChange}
                   />
                 )}
               </div>
