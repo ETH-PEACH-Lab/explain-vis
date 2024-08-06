@@ -12,7 +12,7 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
     try {
       if (query === placeholderText) {
         // 使用测试数据
-        const VQL = 'VISUALIZE bar\\nSELECT date, price FROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price)\\nDESC BIN BY quarter'
+        const VQL = 'VISUALIZE bar\\nSELECT date, AVG(price) FROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price)\\nDESC BIN BY quarter'
 
         const vegaLiteSpec= {
           "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -70,21 +70,21 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
             },
             {
               "step": 4,
-              "operation": "SELECT",
-              "description": "Select the date and price columns.",
-              "clause": "SELECT date, price"
+              "operation": "GROUP BY",
+              "description": "Group data by date.",
+              "clause": "GROUP BY date"
             },
             {
               "step": 5,
-              "operation": "GROUP BY",
-              "description": "Group data by date and calculate the average price for each date.",
-              "clause": "GROUP BY date"
+              "operation": "SELECT",
+              "description": "Select the date and the average of price columns.",
+              "clause": "SELECT date, AVG(price)"
             },
             {
               "step": 6,
               "operation": "ORDER BY",
               "description": "Order the results by price in descending order.",
-              "clause": "ORDER BY price DESC"
+              "clause": "ORDER BY AVG(price) DESC"
             },
             {
               "step": 7,

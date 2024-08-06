@@ -83,20 +83,6 @@ const getConditionEligibleColumns = (tableData) => {
 
   return eligibleColumns;
 };
-const aggregateFunctionAliases = {
-  'SUM': 'SUM',
-  'AVG': 'AVG',
-  'COUNT': 'COUNT',
-  'MIN': 'MIN',
-  'MAX': 'MAX',
-  'SUMMATION': 'SUM',
-  'AVERAGE': 'AVG',
-  'TOTAL': 'SUM',
-  'TOTAL COUNT': 'COUNT',
-  'MINIMUM': 'MIN',
-  'MAXIMUM': 'MAX'
-};
-const aggregateFunctions = Object.keys(aggregateFunctionAliases);
 
 const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, onPrevPage, onNextPage }) => {
   const [editingText, setEditingText] = useState(null);
@@ -113,158 +99,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   const [joinColumnResults, setJoinColumnResults] = useState(null);
   const [ErrorMessage, setErrorMessage] = useState(null);
   const [groupcolumn, setGroupColumn] = useState('date')
-  const [aggFunction, setAggFunction] = useState('');
-  const [aggColumn, setAggColumn] = useState('');
-  const [selectedColumnsOthers, setSelectedColumnsOthers] = useState('');
-  const [selectTableResults, setSelectTableResults] = useState(['hi']);
-  const [highlightIndexes, setHighlightIndexes] = useState({});
-  console.log('A currentPage:', currentPage);
-  console.log('opperation:',explanation[currentPage].operation)
-  useEffect(() => {
-    console.log('useEffect triggered');
-    console.log('explanation:', explanation);
-    console.log('currentPage:', currentPage);
-    console.log('opperation:',explanation[currentPage].operation)
-    if (explanation[currentPage].operation === 'SELECT') {
-      const description = explanation[currentPage].description;
-      const words = description.split(' ');
-      let aggFunc = '';
-      let aggCol = '';
-      let otherCols = [];
-      let indexes = {};
-      console.log('cc',words)
-      const currentData = calculateCurrentData();
-      
-      const currentTableColumns = currentData.currentColumns_select;
-      console.log('cc',currentTableColumns)
 
-      words.forEach((word, index) => {
-        const cleanWord = word.replace(/[.,]/g, '');
-        const match = cleanWord.match(/(SUM|AVG|COUNT|MIN|MAX)\((\w+)\)/i);
-        if (match) {
-          aggFunc = match[1].toUpperCase();
-          aggCol = match[2];
-          indexes.aggFunction = index;
-          indexes.aggColumn = index + 1; // 假设聚合函数后面紧跟聚合列
-        } else if (aggregateFunctions.includes(cleanWord.toUpperCase()) || Object.keys(aggregateFunctionAliases).includes(cleanWord.toUpperCase())) {
-          aggFunc = aggregateFunctionAliases[cleanWord.toUpperCase()] || cleanWord.toUpperCase();
-          indexes.aggFunction = index;
-        } else if (aggFunc && !aggCol && currentTableColumns.includes(cleanWord)) {
-          aggCol = cleanWord;
-          indexes.aggColumn = index;
-        } else if (currentTableColumns.includes(cleanWord)){
-          otherCols.push(cleanWord);
-          indexes.otherColumns = indexes.otherColumns || [];
-          indexes.otherColumns.push(index);
-        }
-      });
-
-      setAggFunction(aggFunc);
-      setAggColumn(aggCol);
-      setSelectedColumnsOthers(otherCols);
-      setHighlightIndexes(indexes);
-      console.log('index', indexes);
-    }
-  }, [currentPage, explanation]);
-
-  useEffect(() => {
-    if (explanation[currentPage].operation === 'SELECT') {
-    const calculateSelectTableResults = (data) => {
-      let currentTable = data.selectpredata;
-      console.log('selectpre',currentTable)
-      if (aggFunction && aggColumn) {
-        const columnName = `${aggFunction}(${aggColumn})`;
-        let newTable = currentTable.map(row => ({ ...row }));
-        
-        if (data.groupByColumn) {
-          const groupedData = currentTable.reduce((acc, row) => {
-            const key = row[data.groupByColumn];
-            if (!acc[key]) {
-              acc[key] = [];
-            }
-            acc[key].push(row);
-            return acc;
-          }, {});
-          console.log('groupdata', groupedData);
-          const aggregatedData = Object.keys(groupedData).map(group => {
-            const rows = groupedData[group];
-            let aggregatedValue;
-
-            switch (aggFunction) {
-              case 'SUM':
-                aggregatedValue = rows.reduce((sum, r) => sum + r[aggColumn], 0);
-                break;
-              case 'AVG':
-                aggregatedValue = rows.reduce((sum, r) => sum + r[aggColumn], 0) / rows.length;
-                break;
-              case 'COUNT':
-                aggregatedValue = rows.length;
-                break;
-              case 'MIN':
-                aggregatedValue = Math.min(...rows.map(r => r[aggColumn]));
-                break;
-              case 'MAX':
-                aggregatedValue = Math.max(...rows.map(r => r[aggColumn]));
-                break;
-              default:
-                break;
-            }
-            console.log('agg',aggregatedValue)
-            rows.forEach(row => {
-              row[columnName] = aggregatedValue;
-            });
-
-            return rows;
-          }).flat();
-
-          newTable = aggregatedData;
-          console.log('newselectdata',newTable)
-        } else {
-          let aggregatedValue;
-
-          switch (aggFunction) {
-            case 'SUM':
-              aggregatedValue = currentTable.reduce((sum, r) => sum + r[aggColumn], 0);
-              break;
-            case 'AVG':
-              aggregatedValue = currentTable.reduce((sum, r) => sum + r[aggColumn], 0) / currentTable.length;
-              break;
-            case 'COUNT':
-              aggregatedValue = currentTable.length;
-              break;
-            case 'MIN':
-              aggregatedValue = Math.min(...currentTable.map(r => r[aggColumn]));
-              break;
-            case 'MAX':
-              aggregatedValue = Math.max(...currentTable.map(r => r[aggColumn]));
-              break;
-            default:
-              break;
-          }
-
-          newTable = currentTable.map(row => ({
-            ...row,
-            [columnName]: aggregatedValue
-          }));
-        }
-
-        return newTable;
-      } else {
-        return currentTable;
-      }
-    };
-
-    const currentData = calculateCurrentData();
-    console.log('currentdata',currentData)
-    const newtable = calculateSelectTableResults(currentData)
-    console.log('select results', newtable)
-    setSelectTableResults(newtable);
-    console.log('set select results', selectTableResults)
-    console.log('select results columns', Object.keys(selectTableResults[0]))
-  }
-  }, [aggFunction, aggColumn, selectedColumnsOthers]);
-
-  
   useEffect(() => {
     if (explanation[currentPage].operation === 'WHERE' && explanation[currentPage].conditions) {
       setConditions(explanation[currentPage].conditions.map(cond => ({
@@ -298,9 +133,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       setErrorMessage(null); 
     }
   }, [joinfindTable1, joinfindTable2, joinfindColumn1, joinfindColumn2]); 
-  useEffect(() => {
-    console.log('Updated selectTableResults:', selectTableResults);
-  }, [selectTableResults]);
+
   const evaluateCondition = (row, condition) => {
     try {
       const jsCondition = condition
@@ -704,128 +537,6 @@ return (
   </>
 );
 };
-
-const handleSelectChange = (type, oldVal, newVal) => {
-  if (type === 'aggregate') {
-    setAggFunction(newVal);
-  } else if (type === 'agg-column') {
-    setAggColumn(newVal);
-  } else {
-    console.log('other',selectedColumnsOthers)
-    setSelectedColumnsOthers(prevColumns => {
-      // 创建一个新的数组副本
-      const updatedColumns = [...prevColumns];
-      // 找到 oldVal 在数组中的索引
-      const index = updatedColumns.indexOf(oldVal);
-      // 如果找到了，更新为 newVal
-      if (index !== -1) {
-        updatedColumns[index] = newVal;
-      }
-      console.log('other update', updatedColumns);
-      return updatedColumns;
-    });
-  }
-};
-const highlightSelect = (description, tableNames = [], currentTableColumns = [], onChange) => {
-  if (typeof description !== 'string') {
-    return description;
-  }
-
-  const optionsForType = (type) => {
-    switch (type) {
-      case 'table':
-        return tableNames;
-      case 'column':
-        return currentTableColumns;
-      case 'aggregate':
-        return ['SUM', 'AVG', 'COUNT', 'MIN', 'MAX'];
-      default:
-        return [];
-    }
-  };
-
-  
-  console.log('hilightselect')
-
-  return description.split(' ').map((word, index) => {
-    const cleanWord = word.replace(/[.,]/g, '');
-    const key = `${cleanWord}_${index}`;
-    const displayWord = wordReplacements[key] || cleanWord;
-
-    if (index === highlightIndexes.aggFunction) {
-      return (
-        <HighlightWithDropdown
-          key={index}
-          text={displayWord}
-          options={optionsForType('aggregate')}
-          onChange={(newVal) => {
-            const normalizedAgg = aggregateFunctionAliases[newVal.toUpperCase()] || newVal;
-            setWordReplacements((prev) => ({
-              ...prev,
-              [key]: newVal,
-            }));
-            onChange('aggregate', cleanWord, normalizedAgg);
-            setAggFunction(normalizedAgg)
-          }}
-          className="highlight-join-column"
-        />
-      );
-    }
-
-    if (index === highlightIndexes.aggColumn) {
-      return (
-        <HighlightWithDropdown
-          key={index}
-          text={displayWord}
-          options={optionsForType('column')}
-          onChange={(newVal) => {
-            setWordReplacements((prev) => ({
-              ...prev,
-              [key]: newVal,
-            }));
-            onChange('agg-column', cleanWord, newVal);
-            setAggColumn(newVal)
-          }}
-          className="highlight-join-column"
-        />
-      );
-    }
-
-    if (highlightIndexes.otherColumns && highlightIndexes.otherColumns.includes(index)) {
-      return (
-        <HighlightWithDropdown
-          key={index}
-          text={displayWord}
-          options={optionsForType('column')}
-          onChange={(newVal) => {
-            setWordReplacements((prev) => ({
-              ...prev,
-              [key]: newVal,
-            }));
-            onChange('other', cleanWord, newVal);
-            setSelectedColumnsOthers((prevColumns) => {
-              // Create a new array with the updated value at the specified index
-              const updatedColumns = [...prevColumns];
-              // Check if the token's index is in highlightIndexes.otherColumns
-              const tokenIndex = highlightIndexes.otherColumns.indexOf(index);
-              if (tokenIndex !== -1) {
-                // Update the value in updatedColumns at the found tokenIndex
-                updatedColumns[tokenIndex] = newVal;
-              }
-              console.log('update othercol', updatedColumns);
-              return updatedColumns;
-            });
-          }}
-          className="highlight-join-column"
-        />
-      );
-    }
-    
-
-    return <span key={index}>{displayWord} </span>;
-  });
-};
-
 const highlightGroup = (description, columnsToHighlight = [], currentTableColumns = [], onChange) => {
   if (typeof description !== 'string') {
     return description;
@@ -1116,10 +827,7 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
 
   explanation.forEach(step => {
     if (step.operation === 'SELECT') {
-      selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => {
-        const match = col.match(/(SUM|AVG|COUNT|MIN|MAX)\((\w+)\)/i);
-        return match ? match[2] : col.trim();
-      });
+      selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
     }
   });
 
@@ -1146,10 +854,6 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
     let currentColumns_order = [];
     let currentTable_bin = [];
     let currentColumns_bin = [];
-    let selectedColumns_final = [];
-    let aggregateColumns = [];
-    let hasAggregateFunction = false;
-    let selectpredata = [];
     let tableData1, tableData2, joinColumn1, joinColumn2, tableName1, tableName2, columns1, columns2, groupByColumn;
 
 
@@ -1233,95 +937,11 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
           groupByColumn  = step.clause.split(' ')[2];
           break;
         }
-        case 'SELECT': {
-          const columns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
-          selectpredata = currentTable
-          selectedColumns_final = columns.map(col => {
-            const match = col.match(/(SUM|AVG|COUNT|MIN|MAX)\((\w+)\)/i);
-            if (match) {
-              hasAggregateFunction = true;
-              const columnName = `${match[1].toUpperCase()}(${match[2]})`;
-              aggregateColumns.push({ function: match[1].toUpperCase(), column: match[2], alias: columnName });
-              return columnName;
-            } else {
-              return col;
-            }
-          });
-          console.log('select col', selectedColumns_final)
-          if (hasAggregateFunction && groupByColumn) {
-            const groupedData = {};
-            currentTable.forEach(row => {
-              const key = row[groupByColumn];
-              if (!groupedData[key]) {
-                groupedData[key] = [];
-              }
-              groupedData[key].push(row);
-            });
-            console.log('group select', groupedData)
-            currentTable = Object.keys(groupedData).map(key => {
-              const aggregatedRow = { ...groupedData[key][0], [groupByColumn]: key };
-              console.log('agg row', aggregatedRow)
-              aggregateColumns.forEach(agg => {
-                const columnName = `${agg.function}(${agg.column})`;
-                switch (agg.function.toUpperCase()) {
-                  case 'SUM':
-                    aggregatedRow[columnName] = groupedData[key].reduce((sum, r) => sum + r[agg.column], 0);
-                    break;
-                  case 'AVG':
-                    aggregatedRow[columnName] = groupedData[key].reduce((sum, r) => sum + r[agg.column], 0) / groupedData[key].length;
-                    break;
-                  case 'COUNT':
-                    aggregatedRow[columnName] = groupedData[key].length;
-                    break;
-                  case 'MIN':
-                    aggregatedRow[columnName] = Math.min(...groupedData[key].map(r => r[agg.column]));
-                    break;
-                  case 'MAX':
-                    aggregatedRow[columnName] = Math.max(...groupedData[key].map(r => r[agg.column]));
-                    break;
-                  default:
-                    break;
-                }
-              });
-              return aggregatedRow;
-            });
-          } else if (hasAggregateFunction&&!groupByColumn) {
-            const newAggregatedRow = currentTable[0] ? { ...currentTable[0] } : {};
-            aggregateColumns.forEach(agg => {
-              switch (agg.function) {
-                case 'SUM':
-                  newAggregatedRow[agg.alias] = currentTable.reduce((sum, r) => sum + r[agg.column], 0);
-                  break;
-                case 'AVG':
-                  newAggregatedRow[agg.alias] = currentTable.reduce((sum, r) => sum + r[agg.column], 0) / currentTable.length;
-                  break;
-                case 'COUNT':
-                  newAggregatedRow[agg.alias] = currentTable.length;
-                  break;
-                case 'MIN':
-                  newAggregatedRow[agg.alias] = Math.min(...currentTable.map(r => r[agg.column]));
-                  break;
-                case 'MAX':
-                  newAggregatedRow[agg.alias] = Math.max(...currentTable.map(r => r[agg.column]));
-                  break;
-                default:
-                  break;
-              }
-            });
-            currentTable = [newAggregatedRow];
-          }
-          
-          currentColumns = [...new Set([...Object.keys(currentTable[0]), ...aggregateColumns.map(agg => agg.alias)])];
-          currentTable_select = currentTable
-          currentColumns_select = currentColumns
-          console.log('selectdata',currentTable_select)
-          break;
-        }
         default:
           break;
       }
     });
-    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns,selectedColumns_final,selectpredata,groupByColumn};
+    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns};
   };
 
   const renderStepContent = (step, steps) => {
@@ -1349,10 +969,7 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
       currentTable,
       currentColumns,
       previousTable,
-      previousColumns,
-      selectedColumns_final,
-      selectpredata,
-      groupByColumn
+      previousColumns
      } = calculateCurrentData();
     
     const generateScatterData = (currentTable, selectedColumns) => {
@@ -1718,79 +1335,6 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
                   )}
                 </CardContent>
               </Card>
-              )}
-            </div>
-          </div>
-        );
-      }
-      case 'SELECT': {  
-        return (
-          <div className="step-container" key={step.step}>
-            <div className="left-column1">
-              <Paper className="container explanation">
-                <div className="highlight-row-container">
-                  <Typography variant="body1" className="highlight-row">
-                    {`Step ${step.step}: `}
-                    {highlightSelect(step.description, [], selectTableResults?Object.keys(selectTableResults[0]):currentColumns_select, handleSelectChange)}
-                  </Typography>
-                </div>
-                <div className="step-label">{`data::step${step.step}`}</div>
-                {renderTable(selectTableResults?selectTableResults:currentTable_select, selectTableResults?Object.keys(selectTableResults[0]):currentColumns_select, 'Select', [`${aggFunction}(${aggColumn})`,...selectedColumnsOthers], [`${aggFunction}(${aggColumn})`,...selectedColumnsOthers], [`${aggFunction}(${aggColumn})`,...selectedColumnsOthers])}
-              </Paper>
-            </div>
-            <div className="right-column1">
-              <div className="step-label">{`viz::step${step.step}`}</div>
-              <div className="chart">
-                <Scatter
-                  data={generateScatterData(selectTableResults?selectTableResults:currentTable_select, selectTableResults?[selectedColumnsOthers[0],`${aggFunction}(${aggColumn})`]:selectedColumns_final)}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType,
-                        position: 'bottom',
-                        ...(xAxisType === 'time' && {
-                          time: {
-                            unit: 'month',
-                          },
-                        }),
-                        title: {
-                          display: true,
-                          text: selectedColumnsOthers[0],
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: `${aggFunction}(${aggColumn})`,
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>
-              {showVQL && (
-                <Card className="vql-card">
-                  <CardContent>
-                    {editingText ? (
-                      <input
-                        type="text"
-                        value={editedText}
-                        onChange={(e) => setEditedText(e.target.value)}
-                        onBlur={handleBlur}
-                        autoFocus
-                        style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
-                      />
-                    ) : (
-                      <Typography
-                        variant="body2"
-                        className="vql-line"
-                        onClick={() => handleEditClick(step.clause)}
-                      >
-                        {formatVQLLine(step.clause)}
-                      </Typography>
-                    )}
-                  </CardContent>
-                </Card>
               )}
             </div>
           </div>

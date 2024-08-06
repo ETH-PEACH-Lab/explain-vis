@@ -45,11 +45,13 @@ function App() {
   };
 
   const handlePageChange = (direction) => {
+    
     if (direction === 'next' && currentPage < generatedVQL.explanation.length - 1) {
       setCurrentPage(currentPage + 1);
     } else if (direction === 'prev' && currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
+    console.log('page',currentPage)
   };
 
   const handleGenerate = (generated) => {
