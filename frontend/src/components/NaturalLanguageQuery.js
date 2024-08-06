@@ -83,7 +83,7 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
             {
               "step": 6,
               "operation": "ORDER BY",
-              "description": "Order the results by price in descending order.",
+              "description": "Order the results by AVG(price) in descending order.",
               "clause": "ORDER BY AVG(price) DESC"
             },
             {

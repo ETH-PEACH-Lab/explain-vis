@@ -350,7 +350,7 @@ td {
 }
 
 .pagination button:disabled {
-  background-color: #d1c4e9;
+  background-color: rgb(243, 242, 242);
   cursor: not-allowed;
 }
 

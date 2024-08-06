@@ -119,13 +119,16 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   const [selectedColumnsOthers, setSelectedColumnsOthers] = useState('');
   const [selectTableResults, setSelectTableResults] = useState(['hi']);
   const [highlightIndexes, setHighlightIndexes] = useState({});
-  console.log('A currentPage:', currentPage);
+  const [ordercolumn,setOrdercolumn] = useState({})
+  const [order,setOrder] = useState({})
+  const [orderresults,setOrderResults] = useState(['hi'])
+  const [orderchart, setOrderchart] = useState(['hi'])
   console.log('opperation:',explanation[currentPage].operation)
   useEffect(() => {
-    console.log('useEffect triggered');
-    console.log('explanation:', explanation);
-    console.log('currentPage:', currentPage);
-    console.log('opperation:',explanation[currentPage].operation)
+    // console.log('useEffect triggered');
+    // console.log('explanation:', explanation);
+    // console.log('currentPage:', currentPage);
+    // console.log('opperation:',explanation[currentPage].operation)
     if (explanation[currentPage].operation === 'SELECT') {
       const description = explanation[currentPage].description;
       const words = description.split(' ');
@@ -133,11 +136,11 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       let aggCol = '';
       let otherCols = [];
       let indexes = {};
-      console.log('cc',words)
+      // console.log('cc',words)
       const currentData = calculateCurrentData();
       
       const currentTableColumns = currentData.currentColumns_select;
-      console.log('cc',currentTableColumns)
+      // console.log('cc',currentTableColumns)
 
       words.forEach((word, index) => {
         const cleanWord = word.replace(/[.,]/g, '');
@@ -164,7 +167,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       setAggColumn(aggCol);
       setSelectedColumnsOthers(otherCols);
       setHighlightIndexes(indexes);
-      console.log('index', indexes);
+      // console.log('index', indexes);
     }
   }, [currentPage, explanation]);
 
@@ -210,7 +213,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
               default:
                 break;
             }
-            console.log('agg',aggregatedValue)
+            // console.log('agg',aggregatedValue)
             rows.forEach(row => {
               row[columnName] = aggregatedValue;
             });
@@ -219,7 +222,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
           }).flat();
 
           newTable = aggregatedData;
-          console.log('newselectdata',newTable)
+          // console.log('newselectdata',newTable)
         } else {
           let aggregatedValue;
 
@@ -348,6 +351,93 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
     const currentData = calculateCurrentData();
     setWhereResults(combineConditionsAndFilter(currentData.currentTable_where));
   }, [conditions]);
+
+  useEffect(() => {
+    if (explanation[currentPage].operation === 'ORDER BY') {
+      // const description = explanation[currentPage].description;
+      const currentData = calculateCurrentData()
+      console.log('order',currentData)
+      setOrdercolumn(currentData.orderByColumn)
+      setOrder(currentData.orderDirection)
+      setOrderResults(sortData(currentData.currentTable_order,ordercolumn,order))
+      console.log('ordercolumn',ordercolumn)
+      console.log('order',order)
+      console.log('orderresults',orderresults)
+    }
+  }, [currentPage, explanation]);
+
+  useEffect(() => {  
+    if (!ordercolumn || !order || !orderresults ) {
+      setOrderResults(sortData(orderresults,ordercolumn,order))
+    }
+  }, [ordercolumn, order]);
+
+  useEffect(() => {
+    const calchart = (data) => {
+    if (orderresults && orderresults.length > 0) {
+      const selectedColumn = data.selectedColumns_final;
+
+      const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      };
+
+      const isDate = (date) => {
+        if (typeof date !== 'string') return false;
+
+        // 简单的日期格式检查 (YYYY-MM-DD, YYYY/MM/DD, DD-MM-YYYY, DD/MM/YYYY)
+        const datePattern = /^(?:(?:31(\/|-|\.)?(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)?(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)?0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)?(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+        return datePattern.test(date);
+      };
+
+      const xData = orderresults.map(row => row[selectedColumn[0]]);
+      console.log('x', selectedColumn[0]);
+      console.log('orderdata', orderresults);
+      console.log('orderxdata', xData);
+
+      // 判断 xData 是否为时间值
+      const isXDataDate = xData.every(isDate);
+      console.log('date?', isXDataDate);
+
+      let scatterData_order = null;
+
+      if (isXDataDate) {
+        // 如果 xData 是日期类型
+        const shuffledXData = shuffleArray([...xData]);
+        const stringXData = shuffledXData.map(date => new Date(date).toISOString().split('T')[0]);
+        scatterData_order = orderresults.map((row, index) => ({
+          x: stringXData[index],
+          y: row[`${aggFunction}(${aggColumn})`],
+        }));
+      } else {
+        // 如果 xData 不是日期类型，直接使用原数据
+        scatterData_order = orderresults.map((row, index) => ({
+          x: row[selectedColumn[0]],
+          y: row[selectedColumn[1]],
+        }));
+      }
+
+      return scatterData_order;
+    };
+    
+  }
+      const currentData = calculateCurrentData();
+      setOrderchart(calchart(currentData));
+  }, [orderresults]);
+
+  useEffect(() => {
+    console.log('ordercolumn', ordercolumn);
+    console.log('order', order);
+    console.log('orderresults', orderresults);
+  }, [ordercolumn, order, orderresults]); 
+  
+  useEffect(() => {
+    console.log('orderresults', orderresults);
+    console.log('orderchart', orderchart);
+  }, [orderresults,orderchart]); 
 
   if (!tableData || !tableData.tables) {
     return <Typography variant="body2" color="error">No table data available</Typography>;
@@ -706,166 +796,249 @@ return (
 );
 };
 
-const handleSelectChange = (type, oldVal, newVal) => {
-  if (type === 'aggregate') {
-    setAggFunction(newVal);
-  } else if (type === 'agg-column') {
-    setAggColumn(newVal);
-  } else {
-    console.log('other',selectedColumnsOthers)
-    setSelectedColumnsOthers(prevColumns => {
-      // 创建一个新的数组副本
-      const updatedColumns = [...prevColumns];
-      // 找到 oldVal 在数组中的索引
-      const index = updatedColumns.indexOf(oldVal);
-      // 如果找到了，更新为 newVal
-      if (index !== -1) {
-        updatedColumns[index] = newVal;
+  const handleSelectChange = (type, oldVal, newVal) => {
+    if (type === 'aggregate') {
+      setAggFunction(newVal);
+    } else if (type === 'agg-column') {
+      setAggColumn(newVal);
+    } else {
+      console.log('other',selectedColumnsOthers)
+      setSelectedColumnsOthers(prevColumns => {
+        // 创建一个新的数组副本
+        const updatedColumns = [...prevColumns];
+        // 找到 oldVal 在数组中的索引
+        const index = updatedColumns.indexOf(oldVal);
+        // 如果找到了，更新为 newVal
+        if (index !== -1) {
+          updatedColumns[index] = newVal;
+        }
+        console.log('other update', updatedColumns);
+        return updatedColumns;
+      });
+    }
+  };
+  const highlightSelect = (description, tableNames = [], currentTableColumns = [], onChange) => {
+    if (typeof description !== 'string') {
+      return description;
+    }
+
+    const optionsForType = (type) => {
+      switch (type) {
+        case 'table':
+          return tableNames;
+        case 'column':
+          return currentTableColumns;
+        case 'aggregate':
+          return ['SUM', 'AVG', 'COUNT', 'MIN', 'MAX'];
+        default:
+          return [];
       }
-      console.log('other update', updatedColumns);
-      return updatedColumns;
-    });
-  }
-};
-const highlightSelect = (description, tableNames = [], currentTableColumns = [], onChange) => {
-  if (typeof description !== 'string') {
-    return description;
-  }
+    };
 
-  const optionsForType = (type) => {
-    switch (type) {
-      case 'table':
-        return tableNames;
-      case 'column':
-        return currentTableColumns;
-      case 'aggregate':
-        return ['SUM', 'AVG', 'COUNT', 'MIN', 'MAX'];
-      default:
-        return [];
-    }
-  };
-
-  
-  console.log('hilightselect')
-
-  return description.split(' ').map((word, index) => {
-    const cleanWord = word.replace(/[.,]/g, '');
-    const key = `${cleanWord}_${index}`;
-    const displayWord = wordReplacements[key] || cleanWord;
-
-    if (index === highlightIndexes.aggFunction) {
-      return (
-        <HighlightWithDropdown
-          key={index}
-          text={displayWord}
-          options={optionsForType('aggregate')}
-          onChange={(newVal) => {
-            const normalizedAgg = aggregateFunctionAliases[newVal.toUpperCase()] || newVal;
-            setWordReplacements((prev) => ({
-              ...prev,
-              [key]: newVal,
-            }));
-            onChange('aggregate', cleanWord, normalizedAgg);
-            setAggFunction(normalizedAgg)
-          }}
-          className="highlight-join-column"
-        />
-      );
-    }
-
-    if (index === highlightIndexes.aggColumn) {
-      return (
-        <HighlightWithDropdown
-          key={index}
-          text={displayWord}
-          options={optionsForType('column')}
-          onChange={(newVal) => {
-            setWordReplacements((prev) => ({
-              ...prev,
-              [key]: newVal,
-            }));
-            onChange('agg-column', cleanWord, newVal);
-            setAggColumn(newVal)
-          }}
-          className="highlight-join-column"
-        />
-      );
-    }
-
-    if (highlightIndexes.otherColumns && highlightIndexes.otherColumns.includes(index)) {
-      return (
-        <HighlightWithDropdown
-          key={index}
-          text={displayWord}
-          options={optionsForType('column')}
-          onChange={(newVal) => {
-            setWordReplacements((prev) => ({
-              ...prev,
-              [key]: newVal,
-            }));
-            onChange('other', cleanWord, newVal);
-            setSelectedColumnsOthers((prevColumns) => {
-              // Create a new array with the updated value at the specified index
-              const updatedColumns = [...prevColumns];
-              // Check if the token's index is in highlightIndexes.otherColumns
-              const tokenIndex = highlightIndexes.otherColumns.indexOf(index);
-              if (tokenIndex !== -1) {
-                // Update the value in updatedColumns at the found tokenIndex
-                updatedColumns[tokenIndex] = newVal;
-              }
-              console.log('update othercol', updatedColumns);
-              return updatedColumns;
-            });
-          }}
-          className="highlight-join-column"
-        />
-      );
-    }
     
+    console.log('hilightselect')
 
-    return <span key={index}>{displayWord} </span>;
-  });
-};
+    return description.split(' ').map((word, index) => {
+      const cleanWord = word.replace(/[.,]/g, '');
+      const key = `${cleanWord}_${index}`;
+      const displayWord = wordReplacements[key] || cleanWord;
 
-const highlightGroup = (description, columnsToHighlight = [], currentTableColumns = [], onChange) => {
-  if (typeof description !== 'string') {
-    return description;
-  }
+      if (index === highlightIndexes.aggFunction) {
+        return (
+          <HighlightWithDropdown
+            key={index}
+            text={displayWord}
+            options={optionsForType('aggregate')}
+            onChange={(newVal) => {
+              const normalizedAgg = aggregateFunctionAliases[newVal.toUpperCase()] || newVal;
+              setWordReplacements((prev) => ({
+                ...prev,
+                [key]: newVal,
+              }));
+              onChange('aggregate', cleanWord, normalizedAgg);
+              setAggFunction(normalizedAgg)
+            }}
+            className="highlight-join-column"
+          />
+        );
+      }
 
-  const optionsForType = (type) => {
-    switch (type) {
-      case 'column':
-        return currentTableColumns;
-      default:
-        return [];
-    }
+      if (index === highlightIndexes.aggColumn) {
+        return (
+          <HighlightWithDropdown
+            key={index}
+            text={displayWord}
+            options={optionsForType('column')}
+            onChange={(newVal) => {
+              setWordReplacements((prev) => ({
+                ...prev,
+                [key]: newVal,
+              }));
+              onChange('agg-column', cleanWord, newVal);
+              setAggColumn(newVal)
+            }}
+            className="highlight-join-column"
+          />
+        );
+      }
+
+      if (highlightIndexes.otherColumns && highlightIndexes.otherColumns.includes(index)) {
+        return (
+          <HighlightWithDropdown
+            key={index}
+            text={displayWord}
+            options={optionsForType('column')}
+            onChange={(newVal) => {
+              setWordReplacements((prev) => ({
+                ...prev,
+                [key]: newVal,
+              }));
+              onChange('other', cleanWord, newVal);
+              setSelectedColumnsOthers((prevColumns) => {
+                // Create a new array with the updated value at the specified index
+                const updatedColumns = [...prevColumns];
+                // Check if the token's index is in highlightIndexes.otherColumns
+                const tokenIndex = highlightIndexes.otherColumns.indexOf(index);
+                if (tokenIndex !== -1) {
+                  // Update the value in updatedColumns at the found tokenIndex
+                  updatedColumns[tokenIndex] = newVal;
+                }
+                console.log('update othercol', updatedColumns);
+                return updatedColumns;
+              });
+            }}
+            className="highlight-join-column"
+          />
+        );
+      }
+      
+
+      return <span key={index}>{displayWord} </span>;
+    });
   };
 
-  return description.split(' ').map((word, index) => {
-    const cleanWord = word.replace(/[.,]/g, '');
-    const displayWord = wordReplacements[index] || cleanWord;
-    if (columnsToHighlight.includes(cleanWord)) {
-      return (
-        <HighlightWithDropdown
-          key={index}
-          text={displayWord}
-          options={optionsForType('column')}
-          onChange={(newVal) => {
-            setWordReplacements((prev) => ({
-              ...prev,
-              [index]: newVal,
-            }));
-            onChange('column', cleanWord, newVal);
-            setGroupColumn(newVal)
-          }}
-          className="highlight-table-name"
-        />
-      );
+  const highlightGroup = (description, columnsToHighlight = [], currentTableColumns = [], onChange) => {
+    if (typeof description !== 'string') {
+      return description;
     }
 
-    return <span key={index}>{displayWord} </span>;
-  });
-};
+    const optionsForType = (type) => {
+      switch (type) {
+        case 'column':
+          return currentTableColumns;
+        default:
+          return [];
+      }
+    };
+
+    return description.split(' ').map((word, index) => {
+      const cleanWord = word.replace(/[.,]/g, '');
+      const displayWord = wordReplacements[index] || cleanWord;
+      if (columnsToHighlight.includes(cleanWord)) {
+        return (
+          <HighlightWithDropdown
+            key={index}
+            text={displayWord}
+            options={optionsForType('column')}
+            onChange={(newVal) => {
+              setWordReplacements((prev) => ({
+                ...prev,
+                [index]: newVal,
+              }));
+              onChange('column', cleanWord, newVal);
+              setGroupColumn(newVal)
+            }}
+            className="highlight-table-name"
+          />
+        );
+      }
+
+      return <span key={index}>{displayWord} </span>;
+    });
+  };
+  const highlightOrder = (
+    description,
+    columnsToHighlight = [],
+    currentTableColumns = [],
+    tableData = [],
+    onChange
+  ) => {
+  
+    const isNumericColumn = (column) => {
+      if (tableData.length === 0) return false;
+      return tableData.every(row => !isNaN(parseFloat(row[column])));
+    };
+  
+    const optionsForType = (type) => {
+      switch (type) {
+        case 'column':
+          return currentTableColumns.filter(isNumericColumn);
+        case 'order':
+          return ['asc', 'desc'];
+        default:
+          return [];
+      }
+    };
+  
+    const orderMappings = {
+      asc: ['asc', 'ascending', 'ascend', 'increasing', 'increment', 'incremental', 'rise', 'rising', 'grow', 'growing', 'upward'],
+      desc: ['desc', 'descending', 'descend', 'decreasing', 'decrement', 'decremental', 'fall', 'falling', 'decline', 'declining', 'downward']
+    };
+  
+    const getOrderKey = (word) => {
+      for (const [key, values] of Object.entries(orderMappings)) {
+        if (values.includes(word.toLowerCase())) {
+          return key;
+        }
+      }
+      return null;
+    };
+  
+    return description.split(' ').map((word, index) => {
+      const cleanWord = word.replace(/[.,]/g, '');
+      const displayWord = wordReplacements[index] || cleanWord;
+  
+      if (columnsToHighlight.includes(cleanWord)) {
+        return (
+          <HighlightWithDropdown
+            key={index}
+            text={displayWord}
+            options={optionsForType('column')}
+            onChange={(newVal) => {
+              setWordReplacements((prev) => ({
+                ...prev,
+                [index]: newVal,
+              }));
+              onChange('column', cleanWord, newVal);
+            }}
+            className="highlight-join-column"
+          />
+        );
+      }
+  
+      const orderKey = getOrderKey(cleanWord);
+      if (orderKey) {
+        return (
+          <HighlightWithDropdown
+            key={index}
+            text={displayWord}
+            options={optionsForType('order')}
+            onChange={(newVal) => {
+              setWordReplacements((prev) => ({
+                ...prev,
+                [index]: newVal,
+              }));
+              onChange('order', cleanWord, newVal);
+            }}
+            className="highlight-join-column"
+          />
+        );
+      }
+  
+      return <span key={index}>{displayWord} </span>;
+    });
+  };
+
   const handleEditClick = (text) => {
     setEditingText(true);
     setEditedText(text);
@@ -883,6 +1056,27 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
       ...prev,
       [oldValue]: newValue
     }));
+  };
+  const hilightorder = (type, originalValue, newValue) => {
+    console.log(`Type: ${type}, Original: ${originalValue}, New: ${newValue}`);
+    
+    // Add your logic here to handle the change
+    // For example, update state, make an API call, etc.
+    setWordReplacements((prev) => ({
+      ...prev,
+      [originalValue]: newValue
+    }));
+    if (type === 'column') {
+      // Handle column change
+      console.log(`Column changed from ${originalValue} to ${newValue}`);
+      setOrdercolumn(newValue)
+      setOrderResults(sortData(orderresults,ordercolumn,order))
+    } else if (type === 'order') {
+      // Handle order change
+      console.log(`Order changed from ${originalValue} to ${newValue}`);
+      setOrder(newValue)
+      setOrderResults(sortData(orderresults,ordercolumn,order))
+    }
   };
   const handleHighlightChange = (type, oldValue, newValue) => {
     console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
@@ -1112,7 +1306,13 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
       </TableContainer>
     );
   };
-
+  const sortData = (data, orderByColumn, orderDirection = 'asc') => {
+    return data.slice().sort((a, b) => {
+      if (a[orderByColumn] < b[orderByColumn]) return orderDirection === 'asc' ? -1 : 1;
+      if (a[orderByColumn] > b[orderByColumn]) return orderDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  };
   let selectedColumns = [];
 
   explanation.forEach(step => {
@@ -1152,6 +1352,7 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
     let hasAggregateFunction = false;
     let selectpredata = [];
     let tableData1, tableData2, joinColumn1, joinColumn2, tableName1, tableName2, columns1, columns2, groupByColumn;
+    let orderDirection, orderByColumn, orderByParts, binColumnName, binBy;
 
 
     explanation.slice(0, currentPage + 1).forEach(step => {
@@ -1164,7 +1365,7 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
           if (tableData) {
             currentTable_from = tableData;
             currentColumns_from = Object.keys(tableData[0]);
-            console.log('current',currentColumns_from)
+            // console.log('current',currentColumns_from)
             currentTable = currentTable_from
             currentColumns = currentColumns_from
           }
@@ -1248,7 +1449,7 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
               return col;
             }
           });
-          console.log('select col', selectedColumns_final)
+          // console.log('select col', selectedColumns_final)
           if (hasAggregateFunction && groupByColumn) {
             const groupedData = {};
             currentTable.forEach(row => {
@@ -1258,10 +1459,10 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
               }
               groupedData[key].push(row);
             });
-            console.log('group select', groupedData)
+            // console.log('group select', groupedData)
             currentTable = Object.keys(groupedData).map(key => {
               const aggregatedRow = { ...groupedData[key][0], [groupByColumn]: key };
-              console.log('agg row', aggregatedRow)
+              // console.log('agg row', aggregatedRow)
               aggregateColumns.forEach(agg => {
                 const columnName = `${agg.function}(${agg.column})`;
                 switch (agg.function.toUpperCase()) {
@@ -1315,14 +1516,22 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
           currentColumns = [...new Set([...Object.keys(currentTable[0]), ...aggregateColumns.map(agg => agg.alias)])];
           currentTable_select = currentTable
           currentColumns_select = currentColumns
-          console.log('selectdata',currentTable_select)
+          currentTable = currentTable_select
+          currentColumns=currentColumns_select
           break;
         }
+        case 'ORDER BY': {
+          orderByParts = step.clause.split(' ');
+          orderByColumn = orderByParts[2];
+          orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
+          currentTable_order = currentTable          
+          break;
+      }
         default:
           break;
       }
     });
-    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns,selectedColumns_final,selectpredata,groupByColumn};
+    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns,selectedColumns_final,selectpredata,groupByColumn,orderByColumn,orderDirection};
   };
 
   const renderStepContent = (step, steps) => {
@@ -1353,7 +1562,9 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
       previousColumns,
       selectedColumns_final,
       selectpredata,
-      groupByColumn
+      groupByColumn,
+      orderByColumn,
+      orderDirection
      } = calculateCurrentData();
     
     const generateScatterData = (currentTable, selectedColumns) => {
@@ -1797,6 +2008,89 @@ const highlightGroup = (description, columnsToHighlight = [], currentTableColumn
           </div>
         );
       }
+      case 'ORDER BY': {
+        
+        return (
+          <div className="step-container" key={step.step}>
+            <div className="left-column1">
+              <Paper className="container explanation">
+                <div className="highlight-row-container">
+                  <Typography variant="body1" className="highlight-row">
+                    {`Step ${step.step}: `}
+                    {highlightOrder(step.description, Object.keys(orderresults[0]), Object.keys(orderresults[0]),orderresults,hilightorder)}
+                  </Typography>
+                </div>
+                <div className="step-label">{`data::step${step.step}`}</div>
+                <div className="table-container">
+                  {renderTable(orderresults, Object.keys(orderresults[0]), `Sorted by: ${ordercolumn} ${order}`, [ordercolumn], [ordercolumn])}
+                </div>
+              </Paper>
+            </div>
+            <div className="right-column1">
+              <div className="step-label">{`viz::step${step.step}`}</div>
+              <div className="chart">
+                <Scatter
+                  data={{
+                    datasets: [
+                      {
+                        label: `Scatter Chart`,
+                        data: orderchart,
+                        backgroundColor: '#f0eea3',
+                      },
+                    ],
+                  }}
+                  options={{
+                    scales: {
+                      x: {
+                        type: 'category', 
+                        position: 'bottom',
+                        title: {
+                          display: true,
+                          text: selectedColumns_final[0],
+                        },
+  
+                      },
+                      y: {
+                        title: {
+                          display: true,
+                          text: selectedColumns_final[1],
+  
+                        },
+                      
+                      },
+                    },
+                  }}
+                />
+              </div>
+              {showVQL && (
+                <Card className="vql-card">
+                <CardContent>
+                  {editingText ? (
+                    <input
+                      type="text"
+                      value={editedText}
+                      onChange={(e) => setEditedText(e.target.value)}
+                      onBlur={handleBlur}
+                      autoFocus
+                      style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                    />
+                  ) : (
+                    <Typography
+                      variant="body2"
+                      className="vql-line"
+                      onClick={() => handleEditClick(step.clause)}
+                    >
+                      {formatVQLLine(step.clause)}
+                    </Typography>
+                  )}
+                </CardContent>
+              </Card>
+              )}
+            </div>
+          </div>
+        );
+      }
+      
       default:
         return <Typography variant="body2" color="error">Unsupported operation: {step.operation}</Typography>;
     }
