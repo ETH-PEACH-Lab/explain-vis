@@ -359,7 +359,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       console.log('order',currentData)
       setOrdercolumn(currentData.orderByColumn)
       setOrder(currentData.orderDirection)
-      setOrderResults(sortData(currentData.currentTable_order,ordercolumn,order))
+      setOrderResults(currentData.currentTable_order)
       console.log('ordercolumn',ordercolumn)
       console.log('order',order)
       console.log('orderresults',orderresults)
@@ -367,7 +367,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   }, [currentPage, explanation]);
 
   useEffect(() => {  
-    if (!ordercolumn || !order || !orderresults ) {
+    if (ordercolumn || order || orderresults ) {
       setOrderResults(sortData(orderresults,ordercolumn,order))
     }
   }, [ordercolumn, order]);
@@ -422,7 +422,6 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
 
       return scatterData_order;
     };
-    
   }
       const currentData = calculateCurrentData();
       setOrderchart(calchart(currentData));
@@ -1524,7 +1523,7 @@ return (
           orderByParts = step.clause.split(' ');
           orderByColumn = orderByParts[2];
           orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
-          currentTable_order = currentTable          
+          currentTable_order = sortData(currentTable ,orderByColumn,orderDirection)
           break;
       }
         default:
