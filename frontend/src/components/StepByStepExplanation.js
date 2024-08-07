@@ -2385,7 +2385,7 @@ return (
             <div className="step-label">{`viz::step${step.step}`}</div>
             {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
             <div className="chart">
-              {/* <Scatter
+              <Scatter
                 data={generateScatterData(BinByResults,[`binBy_${BinByColumn}`,selectedColumns_final[1]])}
                 options={{
                   scales: {
@@ -2405,7 +2405,7 @@ return (
                     },
                   },
                 }}
-              /> */}
+              />
               </div>
               {showVQL && (
                 <>
