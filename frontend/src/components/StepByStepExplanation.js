@@ -14,7 +14,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import IconButton from '@mui/material/IconButton';
 import SortIcon from '@mui/icons-material/Sort';
-import { Scatter, Bar, Line, Pie } from 'react-chartjs-2';
+import { Scatter, Bar, Line, Pie, Chart } from 'react-chartjs-2';
 import './styles/stepByStepExplanation.css';
 import 'chartjs-adapter-date-fns';
 import DraggableNumber from './DraggableNumber';
@@ -123,7 +123,40 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   const [order,setOrder] = useState({})
   const [orderresults,setOrderResults] = useState(['hi'])
   const [orderchart, setOrderchart] = useState(['hi'])
+  const [BinByColumn, setBinByColumn] = useState('hi')
+  const [BinByResults, setBinByResults] = useState(['hi'])
+  const [chart, setchart] = useState('scatter')
+
   console.log('opperation:',explanation[currentPage].operation)
+
+  useEffect(()=>{
+    if (explanation[currentPage].operation === 'VISUALIZE') {
+      const currentData = calculateCurrentData();
+      setchart(currentData.ChartComponent)
+    }
+  }, [currentPage, explanation])
+
+  useEffect(() => {
+    console.log('charttype', chart);
+  }, [chart]); 
+
+  useEffect(()=>{
+    if (explanation[currentPage].operation === 'BIN BY') {
+      const currentData = calculateCurrentData();
+      setBinByColumn(currentData.binBy)
+      setBinByResults(currentData.currentTable_bin)
+    }
+  }, [currentPage, explanation])
+
+  useEffect(() => {  
+    if (BinByColumn || BinByResults) {
+        const currentData = calculateCurrentData();
+        const columnName=currentData.selectedColumns_final[0];
+        const updatedTable = binData(currentData.currentTablebin_pre, BinByColumn, columnName);
+        setBinByResults(updatedTable)
+    }
+  }, [BinByColumn]);
+
   useEffect(() => {
     // console.log('useEffect triggered');
     // console.log('explanation:', explanation);
@@ -569,14 +602,6 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       switch (type) {
         case 'table':
           return tableNames;
-        case 'column':
-          return currentTableColumns;
-        case 'number':
-          return numbersToHighlight;
-        case 'chartType':
-          return ['bar', 'line', 'pie', 'scatter'];
-        case 'binBy':
-          return ['year', 'month', 'week', 'day', 'weekday', 'quarter'];
         default:
           return [];
       }
@@ -601,6 +626,110 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
               onChange('column', cleanWord, newVal);
               setFromTable(newVal);
               console.log('table now',newVal)
+            }}
+            className="highlight-table-name"
+          />
+        );
+      }
+  
+      return <span key={index}>{displayWord} </span>;
+    });
+  };
+  const highlightVis = (description, onChange) => {
+    if (typeof description !== 'string') {
+      return description;
+    }
+  
+    const chartTypes = ['Bar', 'Line', 'Pie', 'Scatter'];
+
+    const typeAliases = {
+      point: 'Scatter',
+      scatterplot: 'Scatter',
+      bubble: 'Scatter', 
+      linegraph: 'Line',
+      column: 'Bar',
+      barchart: 'Bar',
+      piechart: 'Pie',
+      'bar': 'Bar',
+      'line': 'Line',
+      'pie': 'Pie',
+      'scatter': 'Scatter',
+      'pointchart': 'Scatter',
+      'ScatterPlot': 'Scatter',
+      'LineGraph': 'Line',
+      'BarChart': 'Bar',
+      'PieChart': 'Pie',
+    };
+  
+    const optionsForType = (type) => {
+      switch (type) {
+        case 'chartType':
+          return chartTypes;
+        default:
+          return [];
+      }
+    };
+  
+    return description.split(' ').map((word, index) => {
+      const cleanWord = word.replace(/[.,]/g, '').toLowerCase();
+      const key = `${cleanWord}_${index}`;
+      const displayWord = wordReplacements[key] || cleanWord;
+      const normalizedWord = typeAliases[cleanWord] || cleanWord;
+  
+      if (chartTypes.includes(normalizedWord)) {
+        return (
+          <HighlightWithDropdown
+            key={index}
+            text={displayWord}
+            options={optionsForType('chartType')}
+            onChange={(newVal) => {
+              setWordReplacements((prev) => ({
+                ...prev,
+                [key]: newVal,
+              }));
+              onChange('chartType', cleanWord, newVal);
+              setchart(newVal); 
+            }}
+            className="highlight-chart-type"
+          />
+        );
+      }
+  
+      return <span key={index}>{displayWord} </span>;
+    });
+  };
+  const highlightbin = (description, onChange) => {
+    if (typeof description !== 'string') {
+      return description;
+    }
+    const binoption = ['year', 'month', 'week', 'day', 'weekday', 'quarter'];
+    const optionsForType = (type) => {
+      switch (type) {
+        case 'binBy':
+          return binoption;
+        default:
+          return [];
+      }
+    };
+  
+    return description.split(' ').map((word, index) => {
+      const cleanWord = word.replace(/[.,]/g, '');
+      const key = `${cleanWord}_${index}`;
+      const displayWord = wordReplacements[key] || cleanWord;
+
+      if (binoption.includes(cleanWord)) {
+        return (
+          <HighlightWithDropdown
+            key={index}
+            text={displayWord}
+            options={optionsForType('binBy')}
+            onChange={(newVal) => {
+              setWordReplacements((prev) => ({
+                ...prev,
+                [key]: newVal,
+              }));
+              onChange('column', cleanWord, newVal);
+              setBinByColumn(newVal);
             }}
             className="highlight-table-name"
           />
@@ -1094,7 +1223,14 @@ return (
       [oldValue]: newValue
     }));
   };
+  const handlebinbyChange = (type, oldValue, newValue) => {
+    console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
 
+    setWordReplacements((prev) => ({
+      ...prev,
+      [oldValue]: newValue
+    }));
+  };
   const handleRangeChange = (index, newRange) => {
     setConditions(prev => {
       const newConditions = [...prev];
@@ -1312,6 +1448,93 @@ return (
       return 0;
     });
   };
+  const binData = (data, binBy, columnName) => {
+    const binColumnName = `binBy_${binBy}`;
+    const updatedData = data.map(row => {
+      const date = new Date(row[columnName]);
+      let binValue;
+  
+      switch (binBy) {
+        case 'year':
+          binValue = date.getFullYear();
+          break;
+        case 'month':
+          binValue = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+          break;
+        case 'week':
+          const startOfYear = new Date(date.getFullYear(), 0, 1);
+          const weekNumber = Math.ceil(((date - startOfYear) / 86400000 + startOfYear.getDay() + 1) / 7);
+          binValue = `${date.getFullYear()}-W${String(weekNumber).padStart(2, '0')}`;
+          break;
+        case 'day':
+          binValue = date.toISOString().split('T')[0];
+          break;
+        case 'weekday':
+          binValue = date.toLocaleString('default', { weekday: 'long' });
+          break;
+        case 'quarter':
+          binValue = `Q${Math.ceil((date.getMonth() + 1) / 3)}`;
+          break;
+        default:
+          binValue = row[columnName];
+      }
+  
+      return {
+        ...row,
+        [binColumnName]: binValue,
+      };
+    });
+  
+    return updatedData;
+  };
+  const isDate = value => {
+    const date = new Date(value);
+    return !isNaN(date.getTime());
+  };
+  
+
+  const generateChart = (currentTable, chart, selectedColumns_final, selectedColumns_bin) => {
+    const selectedColumns = selectedColumns_bin ? selectedColumns_bin : selectedColumns_final
+    const data = {
+      datasets: [{
+        label: `${chart} Chart`,
+        data: currentTable.map(row => ({
+          x: row[selectedColumns[0]],
+          y: row[selectedColumns[1]],
+        })),
+        backgroundColor: '#f0eea3',
+      }],
+    };
+
+    const options = {
+      scales: {
+        x: {
+          type: isDate(currentTable[0][selectedColumns[0]]) ? 'time' : 'category', 
+          position: 'bottom',
+          title: {
+            display: true,
+            text: selectedColumns[0],
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: selectedColumns[1],
+          },
+        },
+      },
+    };
+    console.log('chart',chart.toLowerCase())
+    console.log('chart data',data)
+    console.log('chart option',options)
+    return (
+      <Chart
+        type={chart.toLowerCase()}
+        data={data}
+        options={options}
+      />
+    );
+  };
   let selectedColumns = [];
 
   explanation.forEach(step => {
@@ -1346,13 +1569,15 @@ return (
     let currentColumns_order = [];
     let currentTable_bin = [];
     let currentColumns_bin = [];
-    let selectedColumns_final = [];
+    let selectedColumns_final = selectedColumns;
     let aggregateColumns = [];
     let hasAggregateFunction = false;
     let selectpredata = [];
     let tableData1, tableData2, joinColumn1, joinColumn2, tableName1, tableName2, columns1, columns2, groupByColumn;
     let orderDirection, orderByColumn, orderByParts, binColumnName, binBy;
-
+    let selectedColumns_bin = [];
+    let currentTablebin_pre = [];
+    let ChartComponent, chartType;
 
     explanation.slice(0, currentPage + 1).forEach(step => {
       previousTable = [...currentTable];
@@ -1524,13 +1749,47 @@ return (
           orderByColumn = orderByParts[2];
           orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
           currentTable_order = sortData(currentTable ,orderByColumn,orderDirection)
+          currentTable = currentTable_order
           break;
-      }
+        }
+        case 'BIN BY': {
+          currentTablebin_pre = currentTable
+          const match = step.clause.split(' ')[2];
+          binBy = match;
+          const columnName=selectedColumns_final[0];
+          const updatedTable = binData(currentTable, binBy, columnName);
+          binColumnName = `binBy_${binBy}`;
+          currentTable=updatedTable;
+          currentTable_bin=currentTable
+          currentColumns=[...currentColumns, binColumnName];
+          currentColumns_bin=currentColumns
+          selectedColumns_bin=[binColumnName, selectedColumns_final[1]];
+        }
+        case 'VISUALIZE': {
+          chartType = step.clause.split(' ')[1].toLowerCase(); // 从 VISUALIZE 子句中提取图表类型
+          console.log('charttype init', chartType);
+          switch (chartType) {
+            case 'bar':
+              ChartComponent = 'Bar';
+              break;
+            case 'scatter':
+              ChartComponent = 'Scatter';
+              break;
+            case 'line':
+              ChartComponent = 'Line';
+              break;
+            case 'pie':
+              ChartComponent = 'Pie';
+              break;
+            default:
+              ChartComponent = 'Scatter';
+          }
+        }
         default:
           break;
       }
     });
-    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns,selectedColumns_final,selectpredata,groupByColumn,orderByColumn,orderDirection};
+    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns,selectedColumns_final,selectpredata,groupByColumn,orderByColumn,orderDirection,binBy,currentTablebin_pre,ChartComponent,selectedColumns_bin};
   };
 
   const renderStepContent = (step, steps) => {
@@ -1563,18 +1822,20 @@ return (
       selectpredata,
       groupByColumn,
       orderByColumn,
-      orderDirection
+      orderDirection,
+      binBy,
+      selectedColumns_bin
      } = calculateCurrentData();
     
-    const generateScatterData = (currentTable, selectedColumns) => {
-      console.log('table join results', currentTable)
+     const generateScatterData = (currentTable, selectedColumns) => {
+      console.log('table join results', currentTable);
       if (!currentTable || currentTable.length === 0 || !selectedColumns || selectedColumns.length < 2) {
         console.error('Invalid input data or selected columns');
         return {
           datasets: [],
         };
       }
-    
+      
       return {
         datasets: [
           {
@@ -1584,9 +1845,12 @@ return (
                 console.error('Data contains undefined values for selected columns', row);
                 return { x: null, y: null };
               }
+              // 将 x 值转换为字符串
+              let xValue = String(row[selectedColumns[0]]);
+              let yValue = row[selectedColumns[1]];
               return {
-                x: row[selectedColumns[0]],
-                y: row[selectedColumns[1]],
+                x: xValue,
+                y: yValue,
               };
             }).filter(point => point.x !== null && point.y !== null),
             backgroundColor: 'rgba(75, 192, 192, 0.6)',
@@ -2089,7 +2353,129 @@ return (
           </div>
         );
       }
-      
+      case 'BIN BY': {
+        return (
+          <div className="step-container" key={step.step}>
+            <div className="left-column1">
+              <Paper className="container explanation">
+                <div className="highlight-row-container">
+                  <Typography variant="body1" className="highlight-row">
+                    {`Step ${step.step}: `}
+                    {highlightbin(step.description,handlebinbyChange)}
+                  </Typography>
+                </div>
+                <div className="step-label">{`data::step${step.step}`}</div>
+                {renderTable(BinByResults, Object.keys(BinByResults[0]), `Binned by: ${BinByColumn}`, [`binBy_${BinByColumn}`],[], [`binBy_${BinByColumn}`])}
+              </Paper>
+            </div>
+            <div className="right-column1">
+            <div className="step-label">{`viz::step${step.step}`}</div>
+            {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
+            <div className="chart">
+              <Scatter
+                data={generateScatterData(BinByResults,[`binBy_${BinByColumn}`,selectedColumns_final[1]])}
+                options={{
+                  scales: {
+                    x: {
+                      type: 'category',
+                      position: 'bottom',
+                      title: {
+                        display: true,
+                        text: `binBy_${BinByColumn}`,
+                      },
+                    },
+                    y: {
+                      title: {
+                        display: true,
+                        text: selectedColumns_final[1],
+                      },
+                    },
+                  },
+                }}
+              />
+              </div>
+              {showVQL && (
+                <>
+                  {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
+                  <Card className="vql-card">
+              <CardContent>
+                {editingText ? (
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    onBlur={handleBlur}
+                    autoFocus
+                    style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                  />
+                ) : (
+                  <Typography
+                    variant="body2"
+                    className="vql-line"
+                    onClick={() => handleEditClick(step.clause)}
+                  >
+                    {formatVQLLine(step.clause)}
+                  </Typography>
+                )}
+              </CardContent>
+            </Card>
+                </>
+              )}
+            </div>
+          </div>
+        );
+      }
+      case 'VISUALIZE': {
+        return (
+              <div className="step-container" key={step.step}>
+                <div className="left-column1">
+                  <Paper className="container explanation">
+                    <div className="highlight-row-container">
+                      <Typography variant="body1" className="highlight-row">
+                        {`Step ${step.step}: `}
+                        {highlightVis(step.description, handlebinbyChange)}
+                      </Typography>
+                    </div>
+                    <div className="step-label">{`data::step${step.step}`}</div>
+                    {renderTable(currentTable, currentColumns, `Visualized by: ${chart}`,[],[],selectedColumns_bin?selectedColumns_bin:selectedColumns_final)}
+                  </Paper>
+                </div>
+                <div className="right-column1">
+                  <div className="step-label">{`viz::step${step.step}`}</div>
+                  <div className="chart">
+                      {generateChart(currentTable, chart, selectedColumns_final, selectedColumns_bin)}
+                  </div>
+                  {showVQL && (
+                    <>
+                      {/* <Typography variant="h6" className="vql-title">/ VQL</Typography> */}
+                      <Card className="vql-card">
+                  <CardContent>
+                    {editingText ? (
+                      <input
+                        type="text"
+                        value={editedText}
+                        onChange={(e) => setEditedText(e.target.value)}
+                        onBlur={handleBlur}
+                        autoFocus
+                        style={{ width: '100%', fontSize: '1rem', border: 'none', outline: 'none' }}
+                      />
+                    ) : (
+                      <Typography
+                        variant="body2"
+                        className="vql-line"
+                        onClick={() => handleEditClick(step.clause)}
+                      >
+                        {formatVQLLine(step.clause)}
+                      </Typography>
+                    )}
+                  </CardContent>
+                </Card>
+                    </>
+                  )}
+                </div>
+              </div>
+          );
+        }
       default:
         return <Typography variant="body2" color="error">Unsupported operation: {step.operation}</Typography>;
     }

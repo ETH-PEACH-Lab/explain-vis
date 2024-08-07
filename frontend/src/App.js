@@ -4,6 +4,7 @@ import NaturalLanguageQuery from './components/NaturalLanguageQuery';
 import DataTable from './components/DataTable';
 import Visualization from './components/Visualization';
 import StepByStepExplanation from './components/StepByStepExplanation';
+import FinalVis from './components/FinalVis.js';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import './components/styles/styles.css';
@@ -87,9 +88,14 @@ function App() {
                   <DataTable onDataUpdate={handleDataUpdate} />
                 </div>
                 <div className="right-column">
-                  {generatedVQL.vegaLiteSpec && (
-                    <Visualization spec={generatedVQL.vegaLiteSpec} showVQL={showVQL} vql={generatedVQL.VQL} />
-                  )}
+                {generatedVQL.explanation.length > 0 && (
+                  <FinalVis
+                    VQL={generatedVQL.VQL}
+                    explanation={generatedVQL.explanation}
+                    tableData={tableData}
+                    showVQL={showVQL}
+                  />
+                )}
                 </div>
               </div>
               <hr />

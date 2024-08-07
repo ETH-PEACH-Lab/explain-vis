@@ -12,7 +12,7 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
     try {
       if (query === placeholderText) {
         // 使用测试数据
-        const VQL = 'VISUALIZE bar\\nSELECT date, AVG(price) FROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price)\\nDESC BIN BY quarter'
+        const VQL = 'VISUALIZE bar\\nSELECT date, AVG(price) FROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price) DESC\\nBIN BY quarter'
 
         const vegaLiteSpec= {
           "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
