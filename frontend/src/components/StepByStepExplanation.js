@@ -741,7 +741,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
               onChange('column', cleanWord, newVal);
               setBinByColumn(newVal);
             }}
-            className="highlight-table-name"
+            className="highlight-bin-by"
           />
         );
       }
@@ -1086,7 +1086,7 @@ return (
               onChange('column', cleanWord, newVal);
               setGroupColumn(newVal)
             }}
-            className="highlight-table-name"
+            className="highlight-join-column"
           />
         );
       }
@@ -1422,7 +1422,7 @@ return (
                   className={column === groupByColumn ? "highlight-group-column" : ""}
                   style={{
                     fontWeight: column === groupByColumn ? "bold" : "normal",
-                    backgroundColor: column === groupByColumn ? "#a78cc8" : "transparent",
+                    backgroundColor: column === groupByColumn ? "#d4edda" : "transparent",
                     color: column === groupByColumn ? "black" : "inherit",
                   }}
                 >
