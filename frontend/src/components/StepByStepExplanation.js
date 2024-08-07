@@ -144,15 +144,22 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
     if (explanation[currentPage].operation === 'BIN BY') {
       const currentData = calculateCurrentData();
       setBinByColumn(currentData.binBy)
-      setBinByResults(currentData.currentTable_bin)
     }
   }, [currentPage, explanation])
 
+  // useEffect(() => {
+  //   console.log('binbycolumn', BinByColumn);
+  //   console.log('binbyresults', BinByResults);
+  // }, [BinByColumn,BinByResults]); 
+
   useEffect(() => {  
-    if (BinByColumn || BinByResults) {
+    if (BinByColumn) {
         const currentData = calculateCurrentData();
+        console.log('binbycurrent',currentData)
         const columnName=currentData.selectedColumns_final[0];
+        console.log('binbycol',columnName)
         const updatedTable = binData(currentData.currentTablebin_pre, BinByColumn, columnName);
+        console.log('binbyupdate',updatedTable)
         setBinByResults(updatedTable)
     }
   }, [BinByColumn]);
@@ -536,6 +543,9 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   };
 
   const renderTable = (data, columns, tableName, selectedColumns = [], borderColumns = [], fullHighlightColumns = []) => {
+    if (!data) {
+      return <Typography variant="body2" color="error">No table data available</Typography>;
+    }
     selectedColumns = selectedColumns || [];
     borderColumns = borderColumns || [];
     fullHighlightColumns = fullHighlightColumns || [];
@@ -1824,7 +1834,8 @@ return (
       orderByColumn,
       orderDirection,
       binBy,
-      selectedColumns_bin
+      selectedColumns_bin,
+      currentTablebin_pre
      } = calculateCurrentData();
     
      const generateScatterData = (currentTable, selectedColumns) => {
@@ -2354,6 +2365,8 @@ return (
         );
       }
       case 'BIN BY': {
+        console.log('bincol',BinByColumn)
+        console.log('bindata',BinByResults)
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -2365,14 +2378,14 @@ return (
                   </Typography>
                 </div>
                 <div className="step-label">{`data::step${step.step}`}</div>
-                {renderTable(BinByResults, Object.keys(BinByResults[0]), `Binned by: ${BinByColumn}`, [`binBy_${BinByColumn}`],[], [`binBy_${BinByColumn}`])}
+                {renderTable(BinByResults, [...Object.keys(currentTablebin_pre[0]), `binBy_${BinByColumn}`], `Binned by: ${BinByColumn}`, [`binBy_${BinByColumn}`],[], [`binBy_${BinByColumn}`])}
               </Paper>
             </div>
             <div className="right-column1">
             <div className="step-label">{`viz::step${step.step}`}</div>
             {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
             <div className="chart">
-              <Scatter
+              {/* <Scatter
                 data={generateScatterData(BinByResults,[`binBy_${BinByColumn}`,selectedColumns_final[1]])}
                 options={{
                   scales: {
@@ -2392,7 +2405,7 @@ return (
                     },
                   },
                 }}
-              />
+              /> */}
               </div>
               {showVQL && (
                 <>
