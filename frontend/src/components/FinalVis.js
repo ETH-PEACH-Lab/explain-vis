@@ -152,8 +152,8 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   };
   
 
-  const generateChart = (currentTable, chart, selectedColumns_final, selectedColumns_bin) => {
-    const selectedColumns = selectedColumns_bin ? selectedColumns_bin : selectedColumns_final
+  const generateChart = (currentTable, chart, selectedColumns) => {
+
     const data = {
       datasets: [{
         label: `${chart} Chart`,
@@ -744,7 +744,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       }
       case 'VISUALIZE': {
         return (
-              generateChart(currentTable, ChartComponent, selectedColumns_final, selectedColumns_bin)
+              generateChart(currentTable, ChartComponent, binBy?selectedColumns_bin:selectedColumns_final)
           );
         }
       default:
