@@ -1,4 +1,6 @@
 # README
+## dowload the data source
+Please visit the [link](https://drive.google.com/file/d/1H8j2VJbSCbxZRNkRrEVNpN8O-FlHZWp3/view?usp=drive_link) to download the data source files and extract the files to the `./backend/utils/data` directory.
 
 ## Run Docker Locally
 1. Create `./.env` for the OPENAI API
