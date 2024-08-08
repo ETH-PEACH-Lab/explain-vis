@@ -178,9 +178,17 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       let indexes = {};
       // console.log('cc',words)
       const currentData = calculateCurrentData();
+      let currentTableColumns = currentData.selectedColumns_final;
       
-      const currentTableColumns = currentData.selectedColumns_final;
-      // console.log('cc',currentTableColumns)
+      // Check if there are any aggregate functions in the description
+      const hasAggregateFunction = words.some(word => 
+        /(SUM|AVG|COUNT|MIN|MAX)\((\w+)\)/i.test(word) || 
+        aggregateFunctions.includes(word.toUpperCase()) || 
+        Object.keys(aggregateFunctionAliases).includes(word.toUpperCase())
+      );
+      if (hasAggregateFunction) {
+        currentTableColumns = currentData.currentColumns;
+      }
 
       words.forEach((word, index) => {
         const cleanWord = word.replace(/[.,]/g, '');
