@@ -171,7 +171,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
   const exampleEncoderQuestions = fs.readFileSync('./utils/data/train/train_encode.txt', 'utf-8').split('\n');
   const exampleDecoderAnswers = fs.readFileSync('./utils/data/train/train_decode_db.txt', 'utf-8').split('\n');
   const limitTable = 0;
-  const nshot = 20;
+  const nshot = 10;
 
   try {
     const prompt = await composePrompt(data, query, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
@@ -204,7 +204,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
     );
 
     const generatedText = response.data.choices[0].text;
-
+    console.log(generatedText)
     res.json({ VQL: generatedText });
   } catch (error) {
     console.error('Error:', error.message);
@@ -284,28 +284,15 @@ app.post('/api/explain-vql', async (req, res) => {
         "clause": "VISUALIZE bar"
       }]
   }
-  const prompt = `You are a excellent software engineer or developer. I have an example of a VQL (Visual Query Language) and its corresponding explanation in a specific JSON format. Here is the example:
+  const prompt = `You are a excellent software engineer or developer. I have an example of a VQL (Visual Query Language) and its corresponding explanation in a specific JSON format. 
 
 Example VQL:
-\`\`\`
 ${VQL_exp}
-\`\`\`
 
 Example Explanation in JSON:
-\`\`\`json
 ${JSON.stringify(explanation_exp, null, 2)}
-\`\`\`
-
-Your Task:
-Please provide a detailed explanation in the same JSON format for the following VQL:
-
-VQL:
-\`\`\`
-${VQL}
-\`\`\`
 
 Expected JSON Format:
-\`\`\`json
 {
   "explanation": [
     {
@@ -317,9 +304,19 @@ Expected JSON Format:
     // ... other steps
   ]
 }
-\`\`\`
 
-Make sure that the returned JSON is correctly formatted and that each field is properly filled in. Only need to return the json.`
+Make sure that the returned JSON is correctly formatted and that each field is properly filled in. 
+Please generate explanation based on the keyword and in logical order.
+Only need to return the json and no other words additinally. 
+
+Your Task:
+Now please provide a detailed explanation in the same JSON format for the following specific VQL. begin with: JSON
+
+VQL:
+${VQL}
+
+JSON:
+`
 
   try {
     const response = await axios.post(

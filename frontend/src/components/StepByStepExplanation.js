@@ -179,7 +179,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       // console.log('cc',words)
       const currentData = calculateCurrentData();
       
-      const currentTableColumns = currentData.currentColumns_select;
+      const currentTableColumns = currentData.selectedColumns_final;
       // console.log('cc',currentTableColumns)
 
       words.forEach((word, index) => {
@@ -1503,8 +1503,8 @@ return (
   };
   
 
-  const generateChart = (currentTable, chart, selectedColumns_final, selectedColumns_bin) => {
-    const selectedColumns = selectedColumns_bin ? selectedColumns_bin : selectedColumns_final
+  const generateChart = (currentTable, chart, selectedColumns) => {
+    console.log('chart col',selectedColumns)
     const data = {
       datasets: [{
         label: `${chart} Chart`,
@@ -1683,6 +1683,7 @@ return (
               return col;
             }
           });
+          
           // console.log('select col', selectedColumns_final)
           if (hasAggregateFunction && groupByColumn) {
             const groupedData = {};
@@ -1880,6 +1881,8 @@ return (
 
     switch (step.operation) {
       case 'FROM': {
+        console.log('from column',selectedColumns)
+        console.log('from chart data',generateScatterData(fromTable? dataTables[fromTable]:currentTable_from,selectedColumns)      )
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -2228,7 +2231,7 @@ return (
               <div className="step-label">{`viz::step${step.step}`}</div>
               <div className="chart">
                 <Scatter
-                  data={generateScatterData(selectTableResults?selectTableResults:currentTable_select, selectTableResults?[selectedColumnsOthers[0],`${aggFunction}(${aggColumn})`]:selectedColumns_final)}
+                  data={generateScatterData(selectTableResults?selectTableResults:currentTable_select, selectTableResults?[selectedColumnsOthers?selectedColumnsOthers[0]:selectedColumns[0],aggFunction?`${aggFunction}(${aggColumn})`:selectedColumnsOthers[1]]:selectedColumns_final)}
                   options={{
                     scales: {
                       x: {
@@ -2241,13 +2244,13 @@ return (
                         }),
                         title: {
                           display: true,
-                          text: selectedColumnsOthers[0],
+                          text: selectedColumnsOthers?selectedColumnsOthers[0]:selectedColumns[0],
                         },
                       },
                       y: {
                         title: {
                           display: true,
-                          text: `${aggFunction}(${aggColumn})`,
+                          text: aggFunction?`${aggFunction}(${aggColumn})`:selectedColumnsOthers[1],
                         },
                       },
                     },
@@ -2450,13 +2453,13 @@ return (
                       </Typography>
                     </div>
                     <div className="step-label">{`data::step${step.step}`}</div>
-                    {renderTable(currentTable, currentColumns, `Visualized by: ${chart}`,[],[],selectedColumns_bin?selectedColumns_bin:selectedColumns_final)}
+                    {renderTable(currentTable, currentColumns, `Visualized by: ${chart}`,[],[],binBy?selectedColumns_bin:selectedColumns_final)}
                   </Paper>
                 </div>
                 <div className="right-column1">
                   <div className="step-label">{`viz::step${step.step}`}</div>
                   <div className="chart">
-                      {generateChart(currentTable, chart, selectedColumns_final, selectedColumns_bin)}
+                      {generateChart(currentTable, chart, binBy?selectedColumns_bin:selectedColumns_final)}
                   </div>
                   {showVQL && (
                     <>
