@@ -2221,6 +2221,19 @@ return (
         );
       }
       case 'SELECT': {  
+        const isDate = value => {
+          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+        };
+        
+        const isNumeric = value => {
+          return !isNaN(parseFloat(value)) && isFinite(value);
+        };        
+    
+        const table_data = selectTableResults?selectTableResults:currentTable_select;
+        const columns = selectTableResults?[selectedColumnsOthers?selectedColumnsOthers[0]:selectedColumns[0],aggFunction?`${aggFunction}(${aggColumn})`:selectedColumnsOthers[1]]:selectedColumns_final
+        const firstValue_select = table_data[0][columns[0]];
+        const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
+
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -2243,9 +2256,9 @@ return (
                   options={{
                     scales: {
                       x: {
-                        type: xAxisType,
+                        type: xAxisType_select,
                         position: 'bottom',
-                        ...(xAxisType === 'time' && {
+                        ...(xAxisType_select === 'time' && {
                           time: {
                             unit: 'month',
                           },
@@ -2318,9 +2331,9 @@ return (
                   data={{
                     datasets: [
                       {
-                        label: `Scatter Chart`,
+                        label: `Scatter Plot`,
                         data: orderchart,
-                        backgroundColor: '#f0eea3',
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
                       },
                     ],
                   }}
@@ -2528,12 +2541,12 @@ return (
     <div className="step-by-step-explanation">
       <div className="explanation-container">
         <Typography variant="h6" className="purple-text">/ Step-by-Step Explanations</Typography>
-        {explanation && explanation.length > 0 ? renderStepContent(explanation[currentPage], currentSteps) : <Typography variant="body2">No explanations available</Typography>}
         <div className="pagination">
         <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 0}>← Pre </button>
           {renderPagination()}
           <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === explanation.length - 1}>Next →</button>
         </div>
+        {explanation && explanation.length > 0 ? renderStepContent(explanation[currentPage], currentSteps) : <Typography variant="body2">No explanations available</Typography>}
       </div>
     </div>
   );
