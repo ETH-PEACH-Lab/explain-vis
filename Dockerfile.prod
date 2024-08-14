@@ -12,6 +12,7 @@ RUN npm run build-prod
 WORKDIR /app/backend
 RUN rm -rf node_modules
 COPY ./backend/package*.json ./
+
 # Install build dependencies for node-gyp and sqlite3
 RUN apt-get update && apt-get install -y build-essential python3
 RUN apt-get update && apt-get install -y libsqlite3-dev
@@ -21,6 +22,11 @@ RUN npm install -g node-gyp
 RUN npm install && npm rebuild sqlite3 --build-from-source --arch=x64 --platform=linux
 
 COPY ./backend .
+
+# Add labels for GitHub Container Registry
+LABEL org.opencontainers.image.source="https://github.com/eth-peach-lab/explain-vis"
+LABEL org.opencontainers.image.description="A full-stack application with a Node.js backend and React frontend."
+LABEL org.opencontainers.image.licenses="MIT"
 
 # Final stage: Run the application
 WORKDIR /app/backend
