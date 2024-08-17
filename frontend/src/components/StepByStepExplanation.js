@@ -1512,47 +1512,98 @@ return (
   
 
   const generateChart = (currentTable, chart, selectedColumns) => {
-    console.log('chart col',selectedColumns)
-    const data = {
-      datasets: [{
-        label: `${chart} Chart`,
-        data: currentTable.map(row => ({
-          x: row[selectedColumns[0]],
-          y: row[selectedColumns[1]],
-        })),
-        backgroundColor: '#f0eea3',
-      }],
-    };
+    let data = {};
+    let dataother = {};
+    let options = {};
 
-    const options = {
-      scales: {
-        x: {
-          type: isDate(currentTable[0][selectedColumns[0]]) ? 'time' : 'category', 
-          position: 'bottom',
-          title: {
-            display: true,
-            text: selectedColumns[0],
-          },
-        },
-        y: {
-          title: {
-            display: true,
-            text: selectedColumns[1],
-          },
-        },
-      },
-    };
-    console.log('chart',chart.toLowerCase())
-    console.log('chart data',data)
-    console.log('chart option',options)
-    return (
-      <Chart
-        type={chart.toLowerCase()}
-        data={data}
-        options={options}
-      />
-    );
-  };
+    if (chart.toLowerCase() === 'pie') {
+        // Pie chart specific logic
+        const aggregatedData = currentTable.reduce((acc, row) => {
+            const xValue = row[selectedColumns[0]];
+            const yValue = row[selectedColumns[1]];
+
+            const existing = acc.find(item => item.x === xValue);
+
+            if (existing) {
+                existing.y += yValue;
+            } else {
+                acc.push({ x: xValue, y: yValue });
+            }
+
+            return acc;
+        }, []);
+
+        const labels = aggregatedData.map(item => String(item.x));
+        const datasetData = aggregatedData.map(item => item.y);
+
+        console.log('Labels:', labels);
+        console.log('Dataset data:', datasetData);
+
+        if (labels.length === datasetData.length) {
+            data = {
+                labels: labels,  // Ensure labels are added only for Pie chart
+                datasets: [{
+                    data: datasetData,
+                    backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
+                }],
+            };
+
+            options = {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right',
+                    },
+                },
+            };
+        } else {
+            console.error('Labels and data arrays do not match in length!');
+        }
+        return <Pie data={data} options={options} />;
+    } 
+    else {
+        // Other chart types logic
+        
+        dataother = {
+            datasets: [{
+                label: `${chart} Chart`,
+                data: currentTable.map(row => ({
+                    x: row[selectedColumns[0]],
+                    y: row[selectedColumns[1]],
+                })),
+                backgroundColor: '#f0eea3',
+            }],
+        };
+
+        options = {
+            scales: {
+                x: {
+                    type: isDate(currentTable[0][selectedColumns[0]]) ? 'time' : 'category',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: selectedColumns[0],
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: selectedColumns[1],
+                    },
+                },
+            },
+        };
+        return (
+          <Chart
+              type={chart.toLowerCase()}
+              data={dataother}
+              options={options}
+          />
+      );
+    }    
+};
+
+
   let selectedColumns = [];
 
   explanation.forEach(step => {
