@@ -61,7 +61,7 @@ const getSchema = (db, db_id, tableNames, question, limit) => {
   return new Promise((resolve, reject) => {
     let tables = "";
     let databaseFile = path.join(db_id, db, `${db}.sqlite`);
-    console.log('Database File Path:', databaseFile); // Debugging statement
+    // console.log('Database File Path:', databaseFile); // Debugging statement
     let conn = new sqlite3.Database(databaseFile, sqlite3.OPEN_READONLY);
 
     const tablePromises = tableNames.map((tableName) => {
@@ -74,7 +74,7 @@ const getSchema = (db, db_id, tableNames, question, limit) => {
               return;
             }
             let ddl = row.sql;
-            console.log('ddl', ddl);
+            // console.log('ddl', ddl);
             if (limit) {
               conn.all(`SELECT * FROM ${tableName}`, [], (err, rows) => {
                 if (err) {
@@ -140,11 +140,11 @@ const searchExampleByQuestion = async (question, exampleEncoderQuestions, exampl
     let dbStr = await Promise.all(tableNames.filter(t => !tables.includes(t)).map(async t => {
       tables.push(t);
       const dbeg = await getSchema(db, db_id, [t], query, limitTable);
-      console.log('db', dbeg);
+      // console.log('db', dbeg);
       return dbeg;
     }));
     exampleData += `${dbStr.join('')} \nQuestion: ${query}, \nVQL: ${g} \n`;
-    console.log('expdata', exampleData);
+    // console.log('expdata', exampleData);
   }
 
   return exampleData;
@@ -157,27 +157,62 @@ const composePrompt = async (data, question, exampleEncoderQuestions, exampleDec
 
   let exampleData = await searchExampleByQuestion(question, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
   question = '\nQuestion: ' + question + '\nVQL:';
-  let prompt = `${preText} This is an example: \n${exampleData} Now, please generate VQL to answer this question based on json table. Generate VQL in one line and begin with : visualize\n${JSON.stringify(dbPrompt)}${question}`;
+  let prompt = `${preText} This is an example: \n${exampleData} Now, 
+  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:
+
+JOIN Clause: When performing joins, use the table.column format. Do not rename or alias the table names (i.e., do not use the AS keyword).
+Other Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.
+No Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.
+Format: Generate the VQL in a single line, starting with the keyword visualize.
+please generate VQL to answer this question based on json table. Generate VQL in one line and begin with : visualize\n${JSON.stringify(dbPrompt)}${question}`;
   return prompt;
 };
 
-app.post('/api/generate-vegalite', async (req, res) => {
-  const { query, data } = req.body;
-  console.log('Received POST request');
-  console.log('Query:', query);
-  console.log('Data:', data);
+function validateVQL(vql) {
 
-  const db_id = './utils/data/database'; // Set the db_id based on your directory structure
-  const exampleEncoderQuestions = fs.readFileSync('./utils/data/train/train_encode.txt', 'utf-8').split('\n');
-  const exampleDecoderAnswers = fs.readFileSync('./utils/data/train/train_decode_db.txt', 'utf-8').split('\n');
-  const limitTable = 0;
-  const nshot = 10;
+  const hasAlias = /\bAS\b/i.test(vql);
+  if (hasAlias) {
+    console.log('Validation Failed: VQL uses aliasing (AS keyword).');
+    return false;
+  }
 
+  // const joinPattern = /\bJOIN\b\s+\w+\s+ON\s+\w+\.\w+/i;
+  // const matches = vql.match(joinPattern);
+  // if (matches) {
+  //   for (const match of matches) {
+  //     const joinClause = match.split(' ON ')[1];
+  //     if (!/\w+\.\w+\s+=\s+\w+\.\w+/.test(joinClause)) {
+  //       console.log('Validation Failed: JOIN clause does not use table.column format.');
+  //       return false;
+  //     }
+  //   }
+  // } else {
+  //   console.log('Validation Failed: No JOIN clause found or incorrect format.');
+  //   return false;
+  // }
+
+  const hasNestedQueries = /\(\s*SELECT\b/i.test(vql);
+  if (hasNestedQueries) {
+    console.log('Validation Failed: VQL contains nested queries.');
+    return false;
+  }
+
+  // const startsWithVisualize = vql.trim().toLowerCase().startsWith('visualize');
+  // if (!startsWithVisualize) {
+  //   console.log('Validation Failed: VQL does not start with "visualize".');
+  //   return false;
+  // }
+
+  console.log('Validation Passed: VQL is valid.');
+  return true;
+}
+
+async function callOpenAIWithRetryforVQL(prompt, retries = 5, lastError = '') {
   try {
-    const prompt = await composePrompt(data, query, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
-
-    console.log('api', openaiApiKey);
-    console.log('prompt', prompt);
+    // 如果上次有错误信息，则将其添加到 prompt 中，强调需要避免的错误
+    if (lastError) {
+      prompt += `\nPlease note: ${lastError}`;
+    }
 
     const response = await axios.post(
       openaiApiEndpoint,
@@ -195,16 +230,107 @@ app.post('/api/generate-vegalite', async (req, res) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${openaiApiKey}`,
         },
-        // proxy: {
-        //   protocol: "http",
-        //   host: "127.0.0.1",
-        //   port: 7890,
-        // },
       }
     );
 
-    const generatedText = response.data.choices[0].text;
-    console.log(generatedText)
+    const generatedText = response.data.choices[0].text.trim();
+    console.log('generated VQL', generatedText)
+    // 检查生成的 VQL 是否符合 guidelines
+    if (validateVQL(generatedText)) {
+      return generatedText;
+    } else {
+      throw new Error('Generated VQL does not meet the guidelines.');
+    }
+  } catch (error) {
+    console.error('Error during OpenAI API call:', error.message);
+    if (retries > 0) {
+      // 分析错误并决定如何修改下次尝试的 prompt
+      let errorMessage = '';
+      if (error.message.includes('aliasing')) {
+        errorMessage = 'Do not use the AS keyword for aliasing table names.';
+      } else if (error.message.includes('JOIN clause')) {
+        errorMessage = 'Make sure to use the table.column format in the JOIN clause.';
+      } else if (error.message.includes('nested queries')) {
+        errorMessage = 'Avoid using nested queries.';
+      } else if (error.message.includes('visualize')) {
+        errorMessage = 'Ensure the VQL starts with the keyword "visualize".';
+      } else {
+        errorMessage = 'Please adhere strictly to the provided guidelines.';
+      }
+
+      console.log(`Retrying with additional instruction: ${errorMessage} (${retries} attempts left)`);
+      return callOpenAIWithRetry(prompt, retries - 1, errorMessage);
+    } else {
+      throw new Error('Failed to generate valid VQL from OpenAI after multiple attempts');
+    }
+  }
+}
+
+app.post('/api/generate-vegalite', async (req, res) => {
+  console.time('GET * VQL Request Duration');
+  const { query, data } = req.body;
+  // console.log('Received POST request');
+  // console.log('Query:', query);
+  // console.log('Data:', data);
+
+  const db_id = './utils/data/database'; // Set the db_id based on your directory structure
+  const exampleEncoderQuestions = fs.readFileSync('./utils/data/train/train_encode.txt', 'utf-8').split('\n');
+  const exampleDecoderAnswers = fs.readFileSync('./utils/data/train/train_decode_db.txt', 'utf-8').split('\n');
+  const limitTable = 0;
+  const nshot = 10;
+
+  // try {
+  //   const prompt = await composePrompt(data, query, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
+
+  //   // console.log('api', openaiApiKey);
+  //   console.log('prompt', prompt);
+
+  //   const response = await axios.post(
+  //     openaiApiEndpoint,
+  //     {
+  //       model: "gpt-3.5-turbo-instruct",
+  //       prompt: prompt,
+  //       temperature: 1,
+  //       max_tokens: 1000,
+  //       top_p: 1,
+  //       frequency_penalty: 0,
+  //       presence_penalty: 0,
+  //     },
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${openaiApiKey}`,
+  //       },
+  //       // proxy: {
+  //       //   protocol: "http",
+  //       //   host: "127.0.0.1",
+  //       //   port: 7890,
+  //       // },
+  //     }
+  //   );
+
+  //   const generatedText = response.data.choices[0].text;
+  //   console.timeEnd('GET * VQL Request Duration');
+  //   console.log(generatedText)
+  //   res.json({ VQL: generatedText });
+  // } catch (error) {
+  //   console.error('Error:', error.message);
+  //   if (error.response) {
+  //     console.error('Status:', error.response.status);
+  //     console.error('Headers:', error.response.headers);
+  //     console.error('Data:', error.response.data);
+  //   }
+  //   res.status(500).json({ error: error.message });
+  // }
+  try {
+    const prompt = await composePrompt(data, query, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
+
+    console.log('Generated Prompt:', prompt);
+
+    const generatedText = await callOpenAIWithRetryforVQL(prompt);
+
+    console.timeEnd('GET * VQL Request Duration');
+    console.log('Generated VQL:', generatedText);
     res.json({ VQL: generatedText });
   } catch (error) {
     console.error('Error:', error.message);
@@ -217,9 +343,63 @@ app.post('/api/generate-vegalite', async (req, res) => {
   }
 });
 
+function extractJSON(text) {
+  const startIndex = text.indexOf('{');
+  const endIndex = text.lastIndexOf('}');
+  if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
+    const jsonString = text.slice(startIndex, endIndex + 1);
+    try {
+      return JSON.parse(jsonString);
+    } catch (error) {
+      console.error('Error parsing extracted JSON:', error.message);
+      return null;
+    }
+  }
+  return null;
+}
 
+async function callOpenAIWithRetry(prompt, retries = 5) {
+  try {
+    const response = await axios.post(
+      `${openaiApiEndpoint}`,
+      {
+        model: "gpt-3.5-turbo-instruct",
+        prompt: prompt,
+        temperature: 1,
+        max_tokens: 2000,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${openaiApiKey}`,
+        },
+      }
+    );
+
+    const responseText = response.data.choices[0].text.trim();
+    const explanation = extractJSON(responseText);
+
+    if (explanation) {
+      return explanation;
+    } else {
+      throw new Error('No valid JSON found in the response');
+    }
+  } catch (error) {
+    console.error('Error during processing:', error.message);
+    if (retries > 0) {
+      console.log(`Retrying... (${retries} attempts left)`);
+      return callOpenAIWithRetry(prompt, retries - 1);
+    } else {
+      throw new Error('Failed to get valid JSON from OpenAI after multiple attempts');
+    }
+  }
+}
 
 app.post('/api/explain-vql', async (req, res) => {
+  console.time('POST /api/explain-vql Duration');
   const { VQL } = req.body;
   const VQL_exp = 'VISUALIZE bar\\nSELECT date, AVG(price) FROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price) DESC\\nBIN BY quarter'
 
@@ -286,91 +466,100 @@ app.post('/api/explain-vql', async (req, res) => {
   }
   const prompt = `You are a excellent software engineer or developer. I have an example of a VQL (Visual Query Language) and its corresponding explanation in a specific JSON format. 
 
-Example VQL:
-${VQL_exp}
+  Example VQL:
+  ${VQL_exp}
 
-Example Explanation in JSON:
-${JSON.stringify(explanation_exp, null, 2)}
+  Example Explanation in JSON:
+  ${JSON.stringify(explanation_exp, null, 2)}
 
-Expected JSON Format:
-{
-  "explanation": [
-    {
-      "step": "execution order",
-      "operation": "Operation Name",
-      "description": "A detailed description of the operation.",
-      "clause": "The corresponding VQL clause"
-    },
-    // ... other steps
-  ]
-}
+  Expected JSON Format:
+  {
+    "explanation": [
+      {
+        "step": "execution order",
+        "operation": "Operation Name",
+        "description": "A detailed description of the operation.",
+        "clause": "The corresponding VQL clause"
+      },
+      // ... other steps
+    ]
+  }
 
-Make sure that the returned JSON is correctly formatted and that each field is properly filled in. 
-Please generate explanation based on the keyword and in logical order.
-Only need to return the json and no other words additinally. 
+  Make sure that the returned JSON is correctly formatted and that each field is properly filled in. 
+  Please generate explanation based on the keyword and in logical order.
+  Only need to return the json and no other words additinally. 
 
-Your Task:
-Now please provide a detailed explanation in the same JSON format for the following specific VQL. begin with: JSON
+  Your Task:
+  Now please provide a detailed explanation in the same JSON format for the following specific VQL. begin with: JSON
 
-VQL:
-${VQL}
+  VQL:
+  ${VQL}
 
-JSON:
-`
+  JSON:
+  `
 
+//   try {
+//     const response = await axios.post(
+//         `${openaiApiEndpoint}`,
+//         {
+//           model: "gpt-3.5-turbo-instruct",
+//           prompt: prompt,
+//           temperature: 1,
+//           max_tokens: 2000,
+//           top_p: 1,
+//           frequency_penalty: 0,
+//           presence_penalty: 0,
+//         },
+//         // {
+//         //   model: "gpt-3.5-turbo",
+//         //   messages: [
+//         //     {
+//         //       role: "system",
+//         //       content: "You are a helpful assistant that formats explanations for VQL queries."
+//         //     },
+//         //     {
+//         //       role: "user",
+//         //       content: prompt
+//         //     }
+//         //   ],
+//         //   temperature: 1,
+//         //   max_tokens: 2000,
+//         //   top_p: 1,
+//         //   frequency_penalty: 0,
+//         //   presence_penalty: 0,
+//         // },
+//         {
+//           // proxy: {
+//           //   protocol: "http",
+//           //   host: "127.0.0.1",
+//           //   port: 7890,
+//           // },
+//           headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${openaiApiKey}`,
+//           },
+//       }
+//     );
+//   // console.log("Response explanation from OpenAI:", response.data.choices[0].text.trim());
+
+//   const explanation = await parseJSONWithRetry(response.data.choices[0].text.trim());
+//   console.timeEnd('POST /api/explain-vql Duration');
+//   console.log("Parsed JSON Explanation:", explanation);
+  
+//   res.json(explanation);
+// } catch (error) {
+//   console.error('Error parsing JSON:', error.message);
+//   res.status(500).json({ error: error.message });
+// }
   try {
-    const response = await axios.post(
-        `${openaiApiEndpoint}`,
-        {
-          model: "gpt-3.5-turbo-instruct",
-          prompt: prompt,
-          temperature: 1,
-          max_tokens: 2000,
-          top_p: 1,
-          frequency_penalty: 0,
-          presence_penalty: 0,
-        },
-        // {
-        //   model: "gpt-3.5-turbo",
-        //   messages: [
-        //     {
-        //       role: "system",
-        //       content: "You are a helpful assistant that formats explanations for VQL queries."
-        //     },
-        //     {
-        //       role: "user",
-        //       content: prompt
-        //     }
-        //   ],
-        //   temperature: 1,
-        //   max_tokens: 2000,
-        //   top_p: 1,
-        //   frequency_penalty: 0,
-        //   presence_penalty: 0,
-        // },
-        {
-          // proxy: {
-          //   protocol: "http",
-          //   host: "127.0.0.1",
-          //   port: 7890,
-          // },
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${openaiApiKey}`,
-          },
-      }
-    );
-  console.log("Response explanation from OpenAI:", response.data.choices[0].text.trim());
-  
-  const explanation = JSON.parse(response.data.choices[0].text.trim());
-
-  console.log("Parsed JSON Explanation:", explanation);
-  
-  res.json(explanation);
-} catch (error) {
-  console.error('Error parsing JSON:', error.message);
-  res.status(500).json({ error: error.message });
-}
+    const explanation = await callOpenAIWithRetry(prompt);
+    console.timeEnd('POST /api/explain-vql Duration');
+    console.log("Parsed JSON Explanation:", explanation);
+    res.json(explanation);
+  } catch (error) {
+    console.error('Final error after retries:', error.message);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 
