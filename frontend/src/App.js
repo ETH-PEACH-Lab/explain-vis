@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar.js';
+import NaturalLanguageQuery from './components/NaturalLanguageQuery.js';
+import DataTable from './components/DataTable.js';
+import Visualization from './components/Visualization.js';
+import StepByStepExplanation from './components/StepByStepExplanation.js';
+import FinalVis from './components/FinalVis.js';
+import Switch from '@mui/material/Switch';
+import Typography from '@mui/material/Typography';
+import './components/styles/styles.css';
 import HomePage from './Homepage';
 import TutorialPage from './TutorialPage';
 import FixedTaskNL2Vis from './FixedTaskNL2Vis';

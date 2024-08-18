@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import NaturalLanguageQuery from './components/NaturalLanguageQuery';
 import DataTable from './components/DataTable';
+import Visualization from './components/Visualization.js';
 import StepByStepExplanation from './components/StepByStepExplanation';
 import FinalVis from './components/FinalVis.js';
 import Switch from '@mui/material/Switch';

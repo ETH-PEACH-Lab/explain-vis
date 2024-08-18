@@ -6,6 +6,7 @@ import StepByStepExplanation from './components/StepByStepExplanation';
 import FinalVis from './components/FinalVis.js';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
+import Visualization from './components/Visualization.js';
 import './components/styles/styles.css';
 
 const defaultData = {
@@ -63,7 +64,7 @@ function FixedTaskNL2VisExplain() {
     <div>
       <div className="header">
         <Typography variant="h6" className="title">
-          NL2ViZ - Tutorial
+          NL2ViZ - Fixed Task 2 with Explanation
         </Typography>
         <div className="vql-switch">
           <Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} />

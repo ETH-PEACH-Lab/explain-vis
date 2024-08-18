@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import NaturalLanguageQuery from './components/NaturalLanguageQuery';
 import DataTable from './components/DataTable';
-import StepByStepExplanation from './components/StepByStepExplanation';
+import Visualization from './components/Visualization.js';
+import StepByStepExplanation from './components/StepByStepExplanation.js';
 import FinalVis from './components/FinalVis.js';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
@@ -63,7 +64,7 @@ function FixedTaskNL2Vis() {
     <div>
       <div className="header">
         <Typography variant="h6" className="title">
-          NL2ViZ - Tutorial
+          NL2ViZ - Fixed Task 1 w/o Explanation
         </Typography>
         <div className="vql-switch">
           <Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} />
@@ -89,8 +90,8 @@ function FixedTaskNL2Vis() {
                 )}
               </div>
             </div>
-            <hr />
-            <div className="second-row">
+            {/* <hr /> */}
+            {/* <div className="second-row">
               {generatedVQL.explanation.length > 0 && (
                 <StepByStepExplanation
                   explanation={generatedVQL.explanation}
@@ -100,7 +101,7 @@ function FixedTaskNL2Vis() {
                   onPageChange={handlePageChange}
                 />
               )}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>

@@ -6,6 +6,7 @@ import StepByStepExplanation from './components/StepByStepExplanation';
 import FinalVis from './components/FinalVis.js';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
+import Visualization from './components/Visualization.js';
 import './components/styles/styles.css';
 
 const defaultData = {
@@ -63,7 +64,7 @@ function OpenEndNL2Vis() {
     <div>
       <div className="header">
         <Typography variant="h6" className="title">
-          NL2ViZ - Tutorial
+          NL2ViZ - Open-ended Task 1 w/o Explanation
         </Typography>
         <div className="vql-switch">
           <Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} />
@@ -89,7 +90,7 @@ function OpenEndNL2Vis() {
                 )}
               </div>
             </div>
-            <hr />
+            {/* <hr />
             <div className="second-row">
               {generatedVQL.explanation.length > 0 && (
                 <StepByStepExplanation
@@ -100,7 +101,7 @@ function OpenEndNL2Vis() {
                   onPageChange={handlePageChange}
                 />
               )}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>

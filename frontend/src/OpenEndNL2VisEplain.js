@@ -5,6 +5,7 @@ import DataTable from './components/DataTable';
 import StepByStepExplanation from './components/StepByStepExplanation';
 import FinalVis from './components/FinalVis.js';
 import Switch from '@mui/material/Switch';
+import Visualization from './components/Visualization.js';
 import Typography from '@mui/material/Typography';
 import './components/styles/styles.css';
 const defaultData = {
@@ -62,7 +63,7 @@ function OpenEndNL2VisExplain() {
     <div>
       <div className="header">
         <Typography variant="h6" className="title">
-          NL2ViZ - Tutorial
+          NL2ViZ - Open-ended Task 2 with Explanation
         </Typography>
         <div className="vql-switch">
           <Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} />
