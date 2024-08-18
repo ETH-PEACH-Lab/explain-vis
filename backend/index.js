@@ -420,7 +420,7 @@ async function callOpenAIWithRetry(prompt, retries = 10) {
       console.log(`Retrying... (${retries} attempts left)`);
       return callOpenAIWithRetry(prompt, retries - 1);
     } else {
-      throw new Error('Failed to get valid JSON from OpenAI after multiple attempts');
+      throw new Error('Failed to get valid JSON from OpenAI after multiple attempts. Please revise your query.');
     }
   }
 }

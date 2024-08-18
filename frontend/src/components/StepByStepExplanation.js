@@ -19,6 +19,7 @@ import './styles/stepByStepExplanation.css';
 import 'chartjs-adapter-date-fns';
 import DraggableNumber from './DraggableNumber';
 import RangeSlider from './RangeSlider';
+import Alert from '@mui/material/Alert';
 
 const parseCondition = (condition) => {
   const range = [0, 3000];
@@ -126,8 +127,24 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   const [BinByColumn, setBinByColumn] = useState('hi')
   const [BinByResults, setBinByResults] = useState(['hi'])
   const [chart, setchart] = useState('scatter')
+  const [error, setError] = useState(null);
   console.log('page', currentPage)
   console.log('opperation:',explanation[currentPage].operation)
+
+  useEffect(() => {
+    try {
+      if (!explanation || explanation.length === 0) {
+        throw new Error('Missing or invalid explanation data.');
+      }
+      if (!tableData || Object.keys(tableData).length === 0) {
+        throw new Error('Missing or invalid table data.');
+      }
+      // Additional logic can be placed here...
+    } catch (err) {
+      console.error('Error in StepByStepExplanation:', err);
+      setError('An error occurred while generating the step-by-step explanation. Please try again.');
+    }
+  }, [explanation, tableData]);
 
   useEffect(()=>{
     if (explanation[currentPage].operation === 'VISUALIZE') {
@@ -486,6 +503,10 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
     console.log('orderchart', orderchart);
   }, [orderresults,orderchart]); 
 
+  if (error) {
+    return <Alert severity="error">{error}</Alert>;
+  }
+  
   if (!tableData || !tableData.tables) {
     return <Typography variant="body2" color="error">No table data available</Typography>;
   }
@@ -1928,7 +1949,7 @@ return (
      if (!currentTable || !currentColumns || !selectedColumns) {
       return <Typography variant="body2" color="error">Invalid table or column data</Typography>;
     }
-    
+
      const generateScatterData = (currentTable_new, selectedColumns) => {
       console.log('table join results', currentTable_new);
       if (!currentTable_new || currentTable_new.length === 0 || !selectedColumns || selectedColumns.length < 2) {

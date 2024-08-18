@@ -1,17 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Scatter, Bar, Line, Pie, Chart } from 'react-chartjs-2';
 import './styles/stepByStepExplanation.css';
 import 'chartjs-adapter-date-fns';
-
+import Alert from '@mui/material/Alert';
 
 
 
 const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
 
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    try {
+      if (!VQL) {
+        throw new Error('Missing VQL data.');
+      }
+      if (!explanation || explanation.length === 0) {
+        throw new Error('Missing or invalid explanation data.');
+      }
+      if (!tableData || Object.keys(tableData).length === 0) {
+        throw new Error('Missing or invalid table data.');
+      }
+      // Visualization logic can be placed here...
+    } catch (err) {
+      console.error('Error in FinalVis:', err);
+      setError('An error occurred while generating the final visualization. Please try again.');
+    }
+  }, [VQL, explanation, tableData]);
+
+  if (error) {
+    return <Alert severity="error">{error}</Alert>;
+  }
   const dataTables = Object.keys(tableData.tables).reduce((acc, key) => {
     acc[key] = tableData.tables[key].map((row) => {
       const date = new Date(row.date);

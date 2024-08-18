@@ -9,6 +9,8 @@ import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import './components/styles/styles.css';
+import Alert from '@mui/material/Alert';
+import Modal from '@mui/material/Modal';
 
 const defaultData = {
   tables: {
@@ -41,6 +43,7 @@ function TutorialPage() {
   const [showVQL, setShowVQL] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [error, setError] = useState(null); // Error state
 
   const handleAddInterface = () => {
     const newInterface = { id: interfaces.length + 1 };
@@ -53,12 +56,21 @@ function TutorialPage() {
     }
   };
 
-  const handleGenerate = (generated) => {
+  const handleGenerate = async (generated) => {
     setIsLoading(true); // Start loading
-    setGeneratedVQL(generated);
-    setCurrentPage(0); // Reset to page 0 when new data is generated
-    setIsLoading(false); // End loading
+    setError(null); // Clear any previous errors
+    try {
+      // Your generation logic here, wrapped in try-catch to catch unexpected errors
+      setGeneratedVQL(generated);
+      setCurrentPage(0); // Reset to page 0 when new data is generated
+    } catch (err) {
+      console.error('Error during generation:', err);
+      setError('An unexpected error occurred while generating the visualization. Please try again.');
+    } finally {
+      setIsLoading(false); // End loading
+    }
   };
+
 
   const handleDataUpdate = (data) => {
     setTableData(data);

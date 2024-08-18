@@ -4,11 +4,16 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import './styles/naturalLanguageQuery.css';
+import Alert from '@mui/material/Alert';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 
 function NaturalLanguageQuery({ onGenerate, tableData }) {
   const placeholderText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
   const [query, setQuery] = useState(placeholderText);
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [error, setError] = useState(null); // Error state
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
   function formatVQL(vql) {
     // Define the list of keywords, operators, and functions to insert a newline before and to uppercase
@@ -174,14 +179,18 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
           console.log('explanation:', explanation);
           onGenerate({ VQL, vegaLiteSpec, explanation });
         } else {
-          console.error('Error fetching explanation');
+          const { error } = await explanationResponse.json();
+          throw new Error(error || 'Error fetching explanation');
         }
       } else {
-        console.error('Error generating Vega-Lite spec');
+        const { error } = await response.json();
+        throw new Error(error || 'Error generating VQL spec');
       }
     }
     } catch (error) {
-      console.error('Error generating Vega-Lite spec:', error);
+      console.error('Error generating VQL spec:', error);
+      setError(error.message);
+      setIsModalOpen(true); // Open the modal to show the error
     } finally {
       setIsLoading(false); // End loading
     }
@@ -219,6 +228,34 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
         style={{ border: 'none' }}
         onChange={(e) => setQuery(e.target.value)}
       />
+
+      {/* Modal for error handling */}
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 300,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            textAlign: 'center'
+          }}
+        >
+          <Typography variant="h6" color="error">Error</Typography>
+          <Typography variant="body2" color="textSecondary">{error}</Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setIsModalOpen(false)}
+            style={{ marginTop: '20px' }}
+          >
+            OK
+          </Button>
+        </Box>
+      </Modal>
     </div>
   );
 }
