@@ -162,54 +162,79 @@ const composePrompt = async (data, question, exampleEncoderQuestions, exampleDec
 
 JOIN Clause: When performing joins, use the table.column format. Do not rename or alias the table names (i.e., do not use the AS keyword).
 Other Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.
+SELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).
+The BIN BY options are: year, month, week, day, weekday, quarter.
+GROUP BY and ORDER BY Clauses use only columns.
 No Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.
 Format: Generate the VQL in a single line, starting with the keyword visualize.
 please generate VQL to answer this question based on json table. Generate VQL in one line and begin with : visualize\n${JSON.stringify(dbPrompt)}${question}`;
   return prompt;
 };
 
-function validateVQL(vql) {
+function validateVQL(vql, tableSchema) {
+  const validTypes = ['pie', 'scatter', 'line', 'bar'];
+  const visualizeRegex = /^visualize\s+(pie|scatter|line|bar)/i;
+
+  if (!visualizeRegex.test(vql)) {
+    console.error('Validation Failed: VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar).');
+    return false;
+  }
 
   const hasAlias = /\bAS\b/i.test(vql);
   if (hasAlias) {
-    console.log('Validation Failed: VQL uses aliasing (AS keyword).');
-    return false;
+      console.error('Validation Failed: VQL uses aliasing (AS keyword).');
+      return false;
   }
 
-  // const joinPattern = /\bJOIN\b\s+\w+\s+ON\s+\w+\.\w+/i;
-  // const matches = vql.match(joinPattern);
-  // if (matches) {
-  //   for (const match of matches) {
-  //     const joinClause = match.split(' ON ')[1];
-  //     if (!/\w+\.\w+\s+=\s+\w+\.\w+/.test(joinClause)) {
-  //       console.log('Validation Failed: JOIN clause does not use table.column format.');
-  //       return false;
-  //     }
-  //   }
-  // } else {
-  //   console.log('Validation Failed: No JOIN clause found or incorrect format.');
-  //   return false;
-  // }
+  const joinRegex = /join\s+\w+\.\w+/i;
+  const nonJoinRegex = /(select|where|group\s+by|order\s+by|bin\s+by)\s+[^\s]+\.\w+/i;
+
+  // Check for table.column outside of JOIN clauses
+  const match = vql.match(nonJoinRegex);
+  if (match) {
+      console.error('Error: Do not use table.column outside of JOIN clauses.');
+      return false;
+  }
+
+  // Extract SELECT, GROUP BY, BIN BY, and FROM clauses
+  const selectMatch = vql.match(/select\s+(.+?)\s+from/i);
+  const groupByMatch = vql.match(/group\s+by\s+(.+?)(\s+order\s+by|\s*$)/i);
+  const binByMatch = vql.match(/bin\s+by\s+(.+?)(\s+group\s+by|\s+order\s+by|\s*$)/i);
+  const fromMatch = vql.match(/from\s+(\w+)/i);
+
+  if (!selectMatch || !groupByMatch || !fromMatch) {
+      console.error('Error: Unable to parse SELECT, GROUP BY, or FROM clauses.');
+      return false;
+  }
+
+  const selectElements = selectMatch[1].split(',').map(el => el.trim().split(' ')[0]);
+  const groupByElements = groupByMatch[1].split(',').map(el => el.trim());
+  const binByElements = binByMatch ? binByMatch[1].split(',').map(el => `binBy_${el.trim()}`) : [];
+  const fromTable = fromMatch[1].trim();
+
+  // Validate each element in GROUP BY
+  for (const groupEl of groupByElements) {
+      if (!selectElements.includes(groupEl) && 
+          !binByElements.includes(groupEl) && 
+          !tableSchema[fromTable].includes(groupEl)) {
+          console.error(`Error: GROUP BY element "${groupEl}" is not valid. It must be in SELECT, BIN BY, or a column from the table "${fromTable}".`);
+          return false;
+      }
+  }
 
   const hasNestedQueries = /\(\s*SELECT\b/i.test(vql);
   if (hasNestedQueries) {
-    console.log('Validation Failed: VQL contains nested queries.');
-    return false;
+      console.error('Validation Failed: VQL contains nested queries.');
+      return false;
   }
-
-  // const startsWithVisualize = vql.trim().toLowerCase().startsWith('visualize');
-  // if (!startsWithVisualize) {
-  //   console.log('Validation Failed: VQL does not start with "visualize".');
-  //   return false;
-  // }
 
   console.log('Validation Passed: VQL is valid.');
   return true;
 }
 
-async function callOpenAIWithRetryforVQL(prompt, retries = 5, lastError = '') {
+
+async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, lastError = '') {
   try {
-    // 如果上次有错误信息，则将其添加到 prompt 中，强调需要避免的错误
     if (lastError) {
       prompt += `\nPlease note: ${lastError}`;
     }
@@ -234,9 +259,9 @@ async function callOpenAIWithRetryforVQL(prompt, retries = 5, lastError = '') {
     );
 
     const generatedText = response.data.choices[0].text.trim();
-    console.log('generated VQL', generatedText)
-    // 检查生成的 VQL 是否符合 guidelines
-    if (validateVQL(generatedText)) {
+    console.log('Generated VQL:', generatedText);
+
+    if (validateVQL(generatedText, tableSchema)) {
       return generatedText;
     } else {
       throw new Error('Generated VQL does not meet the guidelines.');
@@ -244,27 +269,29 @@ async function callOpenAIWithRetryforVQL(prompt, retries = 5, lastError = '') {
   } catch (error) {
     console.error('Error during OpenAI API call:', error.message);
     if (retries > 0) {
-      // 分析错误并决定如何修改下次尝试的 prompt
       let errorMessage = '';
       if (error.message.includes('aliasing')) {
         errorMessage = 'Do not use the AS keyword for aliasing table names.';
-      } else if (error.message.includes('JOIN clause')) {
-        errorMessage = 'Make sure to use the table.column format in the JOIN clause.';
+      } else if (error.message.includes('table.column')) {
+        errorMessage = 'Make sure do not use table.column outside of JOIN clauses.';
       } else if (error.message.includes('nested queries')) {
         errorMessage = 'Avoid using nested queries.';
       } else if (error.message.includes('visualize')) {
-        errorMessage = 'Ensure the VQL starts with the keyword "visualize".';
+        errorMessage = 'VQL must start with "visualization" followed by a valid type (e.g., pie, scatter, line, bar).';
+      } else if (error.message.includes('GROUP BY element')) {
+        errorMessage = 'Ensure that elements in GROUP BY are either in SELECT, BIN BY, or the table schema.';
       } else {
         errorMessage = 'Please adhere strictly to the provided guidelines.';
       }
 
       console.log(`Retrying with additional instruction: ${errorMessage} (${retries} attempts left)`);
-      return callOpenAIWithRetry(prompt, retries - 1, errorMessage);
+      return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, errorMessage);
     } else {
       throw new Error('Failed to generate valid VQL from OpenAI after multiple attempts');
     }
   }
 }
+
 
 app.post('/api/generate-vegalite', async (req, res) => {
   console.time('GET * VQL Request Duration');
@@ -327,7 +354,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
 
     console.log('Generated Prompt:', prompt);
 
-    const generatedText = await callOpenAIWithRetryforVQL(prompt);
+    const generatedText = await callOpenAIWithRetryforVQL(prompt,data);
 
     console.timeEnd('GET * VQL Request Duration');
     console.log('Generated VQL:', generatedText);
@@ -358,7 +385,7 @@ function extractJSON(text) {
   return null;
 }
 
-async function callOpenAIWithRetry(prompt, retries = 5) {
+async function callOpenAIWithRetry(prompt, retries = 10) {
   try {
     const response = await axios.post(
       `${openaiApiEndpoint}`,

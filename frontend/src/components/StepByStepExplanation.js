@@ -126,7 +126,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   const [BinByColumn, setBinByColumn] = useState('hi')
   const [BinByResults, setBinByResults] = useState(['hi'])
   const [chart, setchart] = useState('scatter')
-
+  console.log('page', currentPage)
   console.log('opperation:',explanation[currentPage].operation)
 
   useEffect(()=>{
@@ -677,6 +677,7 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       'LineGraph': 'Line',
       'BarChart': 'Bar',
       'PieChart': 'Pie',
+      'histogram': 'Bar'
     };
   
     const optionsForType = (type) => {
@@ -1511,14 +1512,24 @@ return (
   };
   
 
-  const generateChart = (currentTable, chart, selectedColumns) => {
+  const generateChart = (currentTable_now, chart, selectedColumns) => {
     let data = {};
     let dataother = {};
     let options = {};
+    const isDate = value => {
+      return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+    };
+    
+    const isNumeric = value => {
+      return !isNaN(parseFloat(value)) && isFinite(value);
+    };        
+
+    const firstValue_select = currentTable_now[0][selectedColumns[0]];
+    const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
 
     if (chart.toLowerCase() === 'pie') {
         // Pie chart specific logic
-        const aggregatedData = currentTable.reduce((acc, row) => {
+        const aggregatedData = currentTable_now.reduce((acc, row) => {
             const xValue = row[selectedColumns[0]];
             const yValue = row[selectedColumns[1]];
 
@@ -1567,7 +1578,7 @@ return (
         dataother = {
             datasets: [{
                 label: `${chart} Chart`,
-                data: currentTable.map(row => ({
+                data: currentTable_now.map(row => ({
                     x: row[selectedColumns[0]],
                     y: row[selectedColumns[1]],
                 })),
@@ -1578,7 +1589,7 @@ return (
         options = {
             scales: {
                 x: {
-                    type: isDate(currentTable[0][selectedColumns[0]]) ? 'time' : 'category',
+                    type: isDate(currentTable_now[0][selectedColumns[0]]) ? 'time' : 'category',
                     position: 'bottom',
                     title: {
                         display: true,
@@ -1815,9 +1826,24 @@ return (
           break;
         }
         case 'ORDER BY': {
+          // orderByParts = step.clause.split(' ');
+          // orderByColumn = orderByParts[2];
+          // orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
           orderByParts = step.clause.split(' ');
-          orderByColumn = orderByParts[2];
-          orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
+    
+    if (orderByParts.length === 3) {
+        // Case: ORDER BY x
+        orderByColumn = orderByParts[2];
+        orderDirection = 'asc'; // Default direction
+    } else if (orderByParts.length === 4) {
+        // Case: ORDER x BY a
+        orderByColumn = orderByParts[2];
+        orderDirection = orderByParts[3].toLowerCase();
+    } else {
+        // Default to handle any unexpected cases
+        orderByColumn = orderByParts[2] || '';
+        orderDirection = 'asc';
+    }
           currentTable_order = sortData(currentTable ,orderByColumn,orderDirection)
           currentTable = currentTable_order
           break;
@@ -1898,20 +1924,20 @@ return (
       currentTablebin_pre
      } = calculateCurrentData();
     
-     const generateScatterData = (currentTable, selectedColumns) => {
-      console.log('table join results', currentTable);
-      if (!currentTable || currentTable.length === 0 || !selectedColumns || selectedColumns.length < 2) {
+     const generateScatterData = (currentTable_new, selectedColumns) => {
+      console.log('table join results', currentTable_new);
+      if (!currentTable_new || currentTable_new.length === 0 || !selectedColumns || selectedColumns.length < 2) {
         console.error('Invalid input data or selected columns');
         return {
           datasets: [],
         };
       }
       
-      return {
+      const data =  {
         datasets: [
           {
             label: 'Scatter Plot',
-            data: currentTable.map(row => {
+            data: currentTable_new.map(row => {
               if (row[selectedColumns[0]] === undefined || row[selectedColumns[1]] === undefined) {
                 console.error('Data contains undefined values for selected columns', row);
                 return { x: null, y: null };
@@ -1928,6 +1954,8 @@ return (
           },
         ],
       };
+      console.log('data',data)
+      return data
     };
 
     const isDate = value => {
@@ -1941,7 +1969,21 @@ return (
     switch (step.operation) {
       case 'FROM': {
         console.log('from column',selectedColumns)
+        console.log('current table', currentTable)
+        console.log('current from table', currentTable_from)
         console.log('from chart data',generateScatterData(fromTable? dataTables[fromTable]:currentTable_from,selectedColumns)      )
+        const isDate = value => {
+          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+        };
+        
+        const isNumeric = value => {
+          return !isNaN(parseFloat(value)) && isFinite(value);
+        };        
+    
+        const table_data = fromTable? dataTables[fromTable]:currentTable_from;
+        const columns = selectedColumns
+        const firstValue_select = table_data[0][columns[0]];
+        const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -1964,9 +2006,9 @@ return (
                   options={{
                     scales: {
                       x: {
-                        type: xAxisType,
+                        type: xAxisType_select,
                         position: 'bottom',
-                        ...(xAxisType === 'time' && {
+                        ...(xAxisType_select === 'time' && {
                           time: {
                             unit: 'month',
                           },
@@ -2030,6 +2072,18 @@ return (
             }
           }
         });
+        const isDate = value => {
+          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+        };
+        
+        const isNumeric = value => {
+          return !isNaN(parseFloat(value)) && isFinite(value);
+        };        
+    
+        const table_data = joinTableResults ? joinTableResults : currentTable_join;
+        const columns = selectedColumns
+        const firstValue_select = table_data[0][columns[0]];
+        const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -2071,9 +2125,9 @@ return (
                   options={{
                     scales: {
                       x: {
-                        type: xAxisType,
+                        type: xAxisType_select,
                         position: 'bottom',
-                        ...(xAxisType === 'time' && {
+                        ...(xAxisType_select === 'time' && {
                           time: {
                             unit: 'month',
                           },

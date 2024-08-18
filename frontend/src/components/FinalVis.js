@@ -152,48 +152,107 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   };
   
 
-  const generateChart = (currentTable, chart, selectedColumns) => {
-
-    const data = {
-      datasets: [{
-        label: `${chart} Chart`,
-        data: currentTable.map(row => ({
-          x: row[selectedColumns[0]],
-          y: row[selectedColumns[1]],
-        })),
-        backgroundColor: '#f0eea3',
-      }],
+  const generateChart = (currentTable_now, chart, selectedColumns) => {
+    let data = {};
+    let dataother = {};
+    let options = {};
+    const isDate = value => {
+      return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
+    
+    const isNumeric = value => {
+      return !isNaN(parseFloat(value)) && isFinite(value);
+    };        
 
-    const options = {
-      scales: {
-        x: {
-          type: isDate(currentTable[0][selectedColumns[0]]) ? 'time' : 'category', 
-          position: 'bottom',
-          title: {
-            display: true,
-            text: selectedColumns[0],
-          },
-        },
-        y: {
-          title: {
-            display: true,
-            text: selectedColumns[1],
-          },
-        },
-      },
-    };
-    console.log('chart',chart.toLowerCase())
-    console.log('chart data',data)
-    console.log('chart option',options)
-    return (
-      <Chart
-        type={chart.toLowerCase()}
-        data={data}
-        options={options}
-      />
-    );
-  };
+    const firstValue_select = currentTable_now[0][selectedColumns[0]];
+    const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
+    console.log('chart',chart)
+    if (chart.toLowerCase() === 'pie') {
+        // Pie chart specific logic
+        const aggregatedData = currentTable_now.reduce((acc, row) => {
+            const xValue = row[selectedColumns[0]];
+            const yValue = row[selectedColumns[1]];
+
+            const existing = acc.find(item => item.x === xValue);
+
+            if (existing) {
+                existing.y += yValue;
+            } else {
+                acc.push({ x: xValue, y: yValue });
+            }
+
+            return acc;
+        }, []);
+
+        const labels = aggregatedData.map(item => String(item.x));
+        const datasetData = aggregatedData.map(item => item.y);
+
+        console.log('Labels:', labels);
+        console.log('Dataset data:', datasetData);
+
+        if (labels.length === datasetData.length) {
+            data = {
+                labels: labels,  // Ensure labels are added only for Pie chart
+                datasets: [{
+                    data: datasetData,
+                    backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
+                }],
+            };
+
+            options = {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right',
+                    },
+                },
+            };
+        } else {
+            console.error('Labels and data arrays do not match in length!');
+        }
+        return <Pie data={data} options={options} />;
+    } 
+    else {
+        // Other chart types logic
+        
+        dataother = {
+            datasets: [{
+                label: `${chart} Chart`,
+                data: currentTable_now.map(row => ({
+                    x: row[selectedColumns[0]],
+                    y: row[selectedColumns[1]],
+                })),
+                backgroundColor: '#f0eea3',
+            }],
+        };
+
+        options = {
+            scales: {
+                x: {
+                    type: isDate(currentTable_now[0][selectedColumns[0]]) ? 'time' : 'category',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: selectedColumns[0],
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: selectedColumns[1],
+                    },
+                },
+            },
+        };
+        return (
+          <Chart
+              type={chart.toLowerCase()}
+              data={dataother}
+              options={options}
+          />
+      );
+    }    
+};
   let selectedColumns = [];
 
   explanation.forEach(step => {
@@ -405,8 +464,20 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         }
         case 'ORDER BY': {
           orderByParts = step.clause.split(' ');
-          orderByColumn = orderByParts[2];
-          orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
+    
+    if (orderByParts.length === 3) {
+        // Case: ORDER BY x
+        orderByColumn = orderByParts[2];
+        orderDirection = 'asc'; // Default direction
+    } else if (orderByParts.length === 4) {
+        // Case: ORDER x BY a
+        orderByColumn = orderByParts[2];
+        orderDirection = orderByParts[3].toLowerCase();
+    } else {
+        // Default to handle any unexpected cases
+        orderByColumn = orderByParts[2] || '';
+        orderDirection = 'asc';
+    } 
           currentTable_order = sortData(currentTable ,orderByColumn,orderDirection)
           currentTable = currentTable_order
           const shuffleArray = (array) => {
@@ -543,15 +614,28 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
 
     switch (step.operation) {
       case 'FROM': {
+        const isDate = value => {
+          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+        };
+        
+        const isNumeric = value => {
+          return !isNaN(parseFloat(value)) && isFinite(value);
+        };        
+    
+        const table_data = currentTable_from;
+        const columns = selectedColumns
+        const firstValue_select = table_data[0][columns[0]];
+        const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
+
         return (
                 <Scatter
                   data={generateScatterData(currentTable_from,selectedColumns)}
                   options={{
                     scales: {
                       x: {
-                        type: xAxisType,
+                        type: xAxisType_select,
                         position: 'bottom',
-                        ...(xAxisType === 'time' && {
+                        ...(xAxisType_select === 'time' && {
                           time: {
                             unit: 'month',
                           },
@@ -587,15 +671,28 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
             }
           }
         });
+        const isDate = value => {
+          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+        };
+        
+        const isNumeric = value => {
+          return !isNaN(parseFloat(value)) && isFinite(value);
+        };        
+    
+        const table_data = currentTable_join;
+        const columns = selectedColumns
+        const firstValue_select = table_data[0][columns[0]];
+        const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
+
         return (
                 <Scatter
                   data={generateScatterData(currentTable_join,selectedColumns)}
                   options={{
                     scales: {
                       x: {
-                        type: xAxisType,
+                        type: xAxisType_select,
                         position: 'bottom',
-                        ...(xAxisType === 'time' && {
+                        ...(xAxisType_select === 'time' && {
                           time: {
                             unit: 'month',
                           },

@@ -55,6 +55,7 @@ function App() {
   const handleGenerate = (generated) => {
     console.log('Generated data received:', generated);
     setGeneratedVQL(generated);
+    setCurrentPage(0); // Reset to page 0 when new data is generated
   };
 
   const handleDataUpdate = (data) => {
