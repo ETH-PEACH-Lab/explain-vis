@@ -7,6 +7,7 @@ import StepByStepExplanation from './components/StepByStepExplanation';
 import FinalVis from './components/FinalVis.js';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 import './components/styles/styles.css';
 
 const defaultData = {
@@ -39,6 +40,7 @@ function TutorialPage() {
   const [tableData, setTableData] = useState(defaultData);
   const [showVQL, setShowVQL] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   const handleAddInterface = () => {
     const newInterface = { id: interfaces.length + 1 };
@@ -52,8 +54,10 @@ function TutorialPage() {
   };
 
   const handleGenerate = (generated) => {
+    setIsLoading(true); // Start loading
     setGeneratedVQL(generated);
     setCurrentPage(0); // Reset to page 0 when new data is generated
+    setIsLoading(false); // End loading
   };
 
   const handleDataUpdate = (data) => {
@@ -80,13 +84,20 @@ function TutorialPage() {
                 <DataTable onDataUpdate={handleDataUpdate} />
               </div>
               <div className="right-column">
-                {generatedVQL.explanation.length > 0 && (
-                  <FinalVis
-                    VQL={generatedVQL.VQL}
-                    explanation={generatedVQL.explanation}
-                    tableData={tableData}
-                    showVQL={showVQL}
-                  />
+              {isLoading ? (
+                  <div className="loading-container">
+                    <CircularProgress />
+                    <Typography variant="body2" color="textSecondary">Generating visualization...</Typography>
+                  </div>
+                ) : (
+                  generatedVQL.explanation.length > 0 && (
+                    <FinalVis
+                      VQL={generatedVQL.VQL}
+                      explanation={generatedVQL.explanation}
+                      tableData={tableData}
+                      showVQL={showVQL}
+                    />
+                  )
                 )}
               </div>
             </div>

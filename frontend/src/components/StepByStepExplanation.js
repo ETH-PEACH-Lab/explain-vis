@@ -1892,7 +1892,8 @@ return (
     if (!step) {
       return <Typography variant="body2" color="error">No step data available</Typography>;
     }
-
+    
+    
     const tableNames = Object.keys(dataTables);
 
     const {
@@ -1923,6 +1924,10 @@ return (
       selectedColumns_bin,
       currentTablebin_pre
      } = calculateCurrentData();
+
+     if (!currentTable || !currentColumns || !selectedColumns) {
+      return <Typography variant="body2" color="error">Invalid table or column data</Typography>;
+    }
     
      const generateScatterData = (currentTable_new, selectedColumns) => {
       console.log('table join results', currentTable_new);

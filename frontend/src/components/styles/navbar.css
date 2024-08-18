@@ -45,11 +45,3 @@
   padding: 20px;
 }
 
-.label-button.selected {
-  background-color: #714288; /* Darker background for selected label */
-  color: white; /* Change text/icon color for selected label */
-}
-
-.label-button:hover {
-  background-color: #e0e0e0; /* Slightly darker background on hover */
-}

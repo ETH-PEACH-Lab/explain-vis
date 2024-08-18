@@ -2,17 +2,51 @@ import React, { useState } from 'react';
 import { Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import './styles/naturalLanguageQuery.css';
 
 function NaturalLanguageQuery({ onGenerate, tableData }) {
   const placeholderText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
   const [query, setQuery] = useState(placeholderText);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+
+  function formatVQL(vql) {
+    // Define the list of keywords, operators, and functions to insert a newline before and to uppercase
+    const keywords = [
+        'VISUALIZE', 'SELECT', 'FROM', 'JOIN', 'WHERE', 'GROUP BY', 'ORDER BY', 'BIN BY'
+    ];
+
+    const operators = [
+        'AND', 'OR', 'NOT', 'BETWEEN', 'IN', 'LIKE', 'IS', '=', '!=', '<>', '<', '<=', '>', '>=',
+        '\\+', '-', '\\*', '/', '%', '\\^', '&&', '\\|\\|', '!', 'ASC', 'DESC'
+    ];
+
+    const functions = [
+        'SUM', 'AVG', 'COUNT', 'MIN', 'MAX'
+    ];
+
+    // Combine all for the regex
+    const allTerms = [...keywords, ...operators, ...functions];
+
+    // Regular expression to match keywords, operators, and functions, with word boundaries and case-insensitive flag
+    const regex = new RegExp(`\\b(${allTerms.join('|')})\\b`, 'gi');
+
+    // Replace the matched keywords, operators, and functions with uppercase, and insert the escaped newline for keywords
+    return vql.replace(regex, (match) => {
+        if (keywords.includes(match.toUpperCase())) {
+            return `\\n${match.toUpperCase()}`;
+        } else {
+            return match.toUpperCase();
+        }
+    }).trim();
+}
 
   const handleGenerate = async () => {
+    setIsLoading(true); // Start loading
     try {
       if (query === placeholderText) {
         // 使用测试数据
-        const VQL = 'VISUALIZE bar\\nSELECT date, AVG(price) FROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price) DESC\\nBIN BY quarter'
+        const VQL = 'VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price) DESC\\nBIN BY quarter'
 
         const vegaLiteSpec= {
           "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -117,18 +151,20 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
 
       if (response.ok) {
         const result = await response.json();
-        const { VQL, vegaLiteSpec } = result;
+        let { VQL, vegaLiteSpec } = result;
       
+        VQL = formatVQL(VQL)
+
         const explanationApiUrl = `${baseUrl}/api/explain-vql`;
         console.log('API URL:', explanationApiUrl);
-        console.log('VQL',JSON.stringify({ VQL }))
+        console.log('VQL',VQL)
         
         const explanationResponse = await fetch(explanationApiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ VQL }),
+          body: JSON.stringify({ VQL}),
         });
                 
         if (explanationResponse.ok) {
@@ -146,6 +182,8 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
     }
     } catch (error) {
       console.error('Error generating Vega-Lite spec:', error);
+    } finally {
+      setIsLoading(false); // End loading
     }
   };
 
@@ -153,8 +191,20 @@ function NaturalLanguageQuery({ onGenerate, tableData }) {
     <div className="nl">
       <div className="nl-query-header">
         <Typography variant="h6" className="nl-query-title">Natural Language Query</Typography>
-        <Button variant="contained" className="import-btn" style={{ backgroundColor: '#a78cc8', color: 'white', fontWeight: 'bold', marginLeft: '100px', borderRadius: '20px' }} onClick={handleGenerate}>
-          Generate
+        <Button
+          variant="contained"
+          className="import-btn"
+          style={{
+            backgroundColor: '#a78cc8',
+            color: 'white',
+            fontWeight: 'bold',
+            marginLeft: '100px',
+            borderRadius: '20px'
+          }}
+          onClick={handleGenerate}
+          disabled={isLoading} // Disable while loading
+        >
+          {isLoading ? <CircularProgress size={24} style={{ color: 'white' }} /> : 'Generate'}
         </Button>
       </div>
       <TextField
