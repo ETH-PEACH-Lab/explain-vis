@@ -12,130 +12,109 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const defaultData = {
   tables: {
-    employee: [
-      {
-        "EMPLOYEE_ID": 100,
-        "FIRST_NAME": "Steven",
-        "JOB_ID": "AD_PRES",
-        "SALARY": 24000,
-        "MANAGER_ID": 0,
-        "DEPARTMENT_ID": 90
-      },
-      {
-        "EMPLOYEE_ID": 101,
-        "FIRST_NAME": "Neena",
-        "JOB_ID": "AD_VP",
-        "SALARY": 17000,
-        "MANAGER_ID": 100,
-        "DEPARTMENT_ID": 90
-      },
-      {
-        "EMPLOYEE_ID": 102,
-        "FIRST_NAME": "Lex",
-        "JOB_ID": "AD_VP",
-        "SALARY": 17000,
-        "MANAGER_ID": 100,
-        "DEPARTMENT_ID": 90
-      },
-      {
-        "EMPLOYEE_ID": 103,
-        "FIRST_NAME": "Alexander",
-        "JOB_ID": "IT_PROG",
-        "SALARY": 9000,
-        "MANAGER_ID": 102,
-        "DEPARTMENT_ID": 60
-      },
-      {
-        "EMPLOYEE_ID": 104,
-        "FIRST_NAME": "Bruce",
-        "JOB_ID": "IT_PROG",
-        "SALARY": 6000,
-        "MANAGER_ID": 103,
-        "DEPARTMENT_ID": 60
-      },
-      {
-        "EMPLOYEE_ID": 105,
-        "FIRST_NAME": "David",
-        "JOB_ID": "IT_PROG",
-        "SALARY": 4800,
-        "MANAGER_ID": 103,
-        "DEPARTMENT_ID": 60
-      },
-      {
-        "EMPLOYEE_ID": 106,
-        "FIRST_NAME": "Valli",
-        "JOB_ID": "SA_REP",
-        "SALARY": 4500,
-        "MANAGER_ID": 145,
-        "DEPARTMENT_ID": 80
-      },
-      {
-        "EMPLOYEE_ID": 107,
-        "FIRST_NAME": "Diana",
-        "JOB_ID": "SA_REP",
-        "SALARY": 4200,
-        "MANAGER_ID": 145,
-        "DEPARTMENT_ID": 80
-      },
-      {
-        "EMPLOYEE_ID": 108,
-        "FIRST_NAME": "Nancy",
-        "JOB_ID": "SA_REP",
-        "SALARY": 4000,
-        "MANAGER_ID": 146,
-        "DEPARTMENT_ID": 80
-      },
-      {
-        "EMPLOYEE_ID": 109,
-        "FIRST_NAME": "Daniel",
-        "JOB_ID": "SA_REP",
-        "SALARY": 3900,
-        "MANAGER_ID": 146,
-        "DEPARTMENT_ID": 80
-      }
-    ],
     departments: [
       {
-        "DEPARTMENT_ID": 10,
-        "DEPARTMENT_NAME": "Administration",
-        "MANAGER_ID": 200,
-        "LOCATION_ID": 1700
+        "department_id": 10,
+        "department_name": "administration",
+        "manager_id": 200,
+        "location_id": 1700
       },
       {
-        "DEPARTMENT_ID": 20,
-        "DEPARTMENT_NAME": "Marketing",
-        "MANAGER_ID": 201,
-        "LOCATION_ID": 1800
+        "department_id": 20,
+        "department_name": "marketing",
+        "manager_id": 201,
+        "location_id": 1800
       },
       {
-        "DEPARTMENT_ID": 30,
-        "DEPARTMENT_NAME": "Purchasing",
-        "MANAGER_ID": 114,
-        "LOCATION_ID": 1700
+        "department_id": 30,
+        "department_name": "purchasing",
+        "manager_id": 114,
+        "location_id": 1700
       },
       {
-        "DEPARTMENT_ID": 40,
-        "DEPARTMENT_NAME": "Human Resources",
-        "MANAGER_ID": 203,
-        "LOCATION_ID": 2400
+        "department_id": 40,
+        "department_name": "human resources",
+        "manager_id": 203,
+        "location_id": 2400
       },
       {
-        "DEPARTMENT_ID": 50,
-        "DEPARTMENT_NAME": "Shipping",
-        "MANAGER_ID": 121,
-        "LOCATION_ID": 1500
+        "department_id": 50,
+        "department_name": "shipping",
+        "manager_id": 121,
+        "location_id": 1500
       },
       {
-        "DEPARTMENT_ID": 60,
-        "DEPARTMENT_NAME": "IT",
-        "MANAGER_ID": 103,
-        "LOCATION_ID": 1400
+        "department_id": 60,
+        "department_name": "it",
+        "manager_id": 103,
+        "location_id": 1400
       }
-    ]
+    ],
+    employee: [
+      {
+        "employee_id": 200,
+        "first_name": "steven",
+        "job_id": "ad_pres",
+        "salary": 24000,
+      },
+      {
+        "employee_id": 201,
+        "first_name": "neena",
+        "job_id": "ad_vp",
+        "salary": 17000,
+      },
+      {
+        "employee_id": 102,
+        "first_name": "lex",
+        "job_id": "ad_vp",
+        "salary": 17000,
+      },
+      {
+        "employee_id": 114,
+        "first_name": "alexander",
+        "job_id": "it_prog",
+        "salary": 9000,
+      },
+      {
+        "employee_id": 203,
+        "first_name": "bruce",
+        "job_id": "it_prog",
+        "salary": 6000,
+      },
+      {
+        "employee_id": 103,
+        "first_name": "david",
+        "job_id": "it_prog",
+        "salary": 4800,
+      },
+      {
+        "employee_id": 121,
+        "first_name": "valli",
+        "job_id": "sa_rep",
+        "salary": 4500,
+      },
+      {
+        "employee_id": 107,
+        "first_name": "diana",
+        "job_id": "sa_rep",
+        "salary": 4200,
+      },
+      {
+        "employee_id": 108,
+        "first_name": "nancy",
+        "job_id": "sa_rep",
+        "salary": 4000,
+      },
+      {
+        "employee_id": 109,
+        "first_name": "daniel",
+        "job_id": "sa_rep",
+        "salary": 3900,
+      }
+    ],
   },
-  tableNames: ["employee", "departments"]
+  tableNames: ["departments", "employee"]
 };
-
 
 
 function FixedTaskNL2Vis() {
@@ -215,8 +194,8 @@ function FixedTaskNL2Vis() {
                 )}
               </div>
             </div>
-            {/* <hr /> */}
-            {/* <div className="second-row">
+            <hr />
+            <div className="second-row">
               {generatedVQL.explanation.length > 0 && (
                 <StepByStepExplanation
                   explanation={generatedVQL.explanation}
@@ -226,7 +205,7 @@ function FixedTaskNL2Vis() {
                   onPageChange={handlePageChange}
                 />
               )}
-            </div> */}
+            </div>
           </div>
         ))}
       </div>

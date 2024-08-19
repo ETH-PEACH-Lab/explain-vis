@@ -167,7 +167,9 @@ The BIN BY options are: year, month, week, day, weekday, quarter.
 GROUP BY and ORDER BY Clauses use only columns.
 No Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.
 Format: Generate the VQL in a single line, starting with the keyword visualize.
-please generate VQL to answer this question based on json table. Generate VQL in one line and begin with : visualize\n${JSON.stringify(dbPrompt)}${question}`;
+
+please generate VQL to answer this question based on json table. 
+\n${JSON.stringify(dbPrompt)}${question}`;
   return prompt;
 };
 
@@ -176,68 +178,113 @@ function validateVQL(vql, tableSchema) {
   const visualizeRegex = /^visualize\s+(pie|scatter|line|bar)/i;
 
   if (!visualizeRegex.test(vql)) {
-    console.error('Validation Failed: VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar).');
-    return false;
+    return 'VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar). default type is scatter';
+
   }
 
   const hasAlias = /\bAS\b/i.test(vql);
   if (hasAlias) {
-      console.error('Validation Failed: VQL uses aliasing (AS keyword).');
-      return false;
+    return 'Do not use the AS keyword for aliasing table names.';
+  }
+  const joinRegex = /join\s+\w+\s+on\s+([\w.]+)\s*=\s*([\w.]+)/gi;
+  let match;
+  const joinErrors = [];
+
+  // 验证 JOIN 子句中的 ON 条件
+  while ((match = joinRegex.exec(vql)) !== null) {
+    const leftSide = match[1];
+    const rightSide = match[2];
+
+    if (!/^\w+\.\w+$/.test(leftSide)) {
+      joinErrors.push(`Invalid ON condition: ${leftSide} must be in "table.column" format.`);
+    }
+    if (!/^\w+\.\w+$/.test(rightSide)) {
+      joinErrors.push(`Invalid ON condition: ${rightSide} must be in "table.column" format.`);
+    }
   }
 
-  const joinRegex = /join\s+\w+\.\w+/i;
+  if (joinErrors.length > 0) {
+    return `Validation failed: ${joinErrors.join(' ')}`;
+  }
+
   const nonJoinRegex = /(select|where|group\s+by|order\s+by|bin\s+by)\s+[^\s]+\.\w+/i;
 
   // Check for table.column outside of JOIN clauses
-  const match = vql.match(nonJoinRegex);
-  if (match) {
-      console.error('Error: Do not use table.column outside of JOIN clauses.');
-      return false;
+  const matchNonJoin = vql.match(nonJoinRegex);
+  if (matchNonJoin) {
+    return 'Do not use table.column outside of JOIN clauses.';
   }
 
-  // Extract SELECT, GROUP BY, BIN BY, and FROM clauses
-  const selectMatch = vql.match(/select\s+(.+?)\s+from/i);
-  const groupByMatch = vql.match(/group\s+by\s+(.+?)(\s+order\s+by|\s*$)/i);
-  const binByMatch = vql.match(/bin\s+by\s+(.+?)(\s+group\s+by|\s+order\s+by|\s*$)/i);
-  const fromMatch = vql.match(/from\s+(\w+)/i);
+ // 提取 SELECT 和 FROM 子句
+ const selectMatch = vql.match(/select\s+(.+?)\s+from/i);
+ const fromMatch = vql.match(/from\s+(\w+)/i);
 
-  if (!selectMatch || !groupByMatch || !fromMatch) {
-      console.error('Error: Unable to parse SELECT, GROUP BY, or FROM clauses.');
-      return false;
-  }
+ // 检查 SELECT 和 FROM 子句是否存在
+ if (!selectMatch || !fromMatch) {
+   return 'Unable to parse SELECT or FROM clauses. Both must be present.';
+ }
 
-  const selectElements = selectMatch[1].split(',').map(el => el.trim().split(' ')[0]);
-  const groupByElements = groupByMatch[1].split(',').map(el => el.trim());
-  const binByElements = binByMatch ? binByMatch[1].split(',').map(el => `binBy_${el.trim()}`) : [];
-  const fromTable = fromMatch[1].trim();
+ const selectElements = selectMatch[1].split(',').map(el => el.trim().split(' ')[0]);
+ const fromTable = fromMatch[1].trim();
 
-  // Validate each element in GROUP BY
-  for (const groupEl of groupByElements) {
-      if (!selectElements.includes(groupEl) && 
-          !binByElements.includes(groupEl) && 
-          !tableSchema[fromTable].includes(groupEl)) {
-          console.error(`Error: GROUP BY element "${groupEl}" is not valid. It must be in SELECT, BIN BY, or a column from the table "${fromTable}".`);
-          return false;
-      }
-  }
+ // 提取 GROUP BY 和 BIN BY 子句
+ const groupByMatch = vql.match(/group\s+by\s+(.+?)(\s+order\s+by|\s*$)/i);
+ const binByMatch = vql.match(/bin\s+by\s+(.+?)(\s+group\s+by|\s+order\s+by|\s*$)/i);
+
+ // 如果 GROUP BY 子句存在，则验证其内容
+ if (groupByMatch) {
+   const groupByElements = groupByMatch[1].split(',').map(el => el.trim());
+
+   for (const groupEl of groupByElements) {
+     if (!selectElements.includes(groupEl) && 
+         !(binByMatch && binByElements.includes(groupEl)) && 
+         !tableSchema[fromTable].includes(groupEl)) {
+       return `GROUP BY element "${groupEl}" is not valid. It must be in SELECT, BIN BY, or a column from the table "${fromTable}".`;
+     }
+   }
+ }
+
+ // 如果 BIN BY 子句存在，则验证其内容
+ if (binByMatch) {
+   const binByElements = binByMatch[1].split(',').map(el => `binBy_${el.trim()}`);
+
+   for (const binEl of binByElements) {
+     if (!selectElements.includes(binEl)) {
+       return `BIN BY element "${binEl}" is not valid. It must be in SELECT.`;
+     }
+   }
+ }
+
 
   const hasNestedQueries = /\(\s*SELECT\b/i.test(vql);
   if (hasNestedQueries) {
-      console.error('Validation Failed: VQL contains nested queries.');
-      return false;
+    return 'Avoid using nested queries.';
   }
 
-  console.log('Validation Passed: VQL is valid.');
-  return true;
+  return '';
 }
 
+function extractVisualizeVQL(vql) {
+  const visualizeIndex = vql.indexOf('visualize');
+  if (visualizeIndex !== -1) {
+    // 提取从 "visualize" 开始的部分
+    return vql.slice(visualizeIndex).trim();
+  } else {
+    throw new Error('VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar).');
+  }
+}
 
-async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, lastError = '') {
+async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, lastError = '', lastVQL = '') {
+  let generatedText = ''; // 确保 generatedText 变量被初始化
+
   try {
     if (lastError) {
-      prompt += `\nPlease note: ${lastError}`;
+      // 仅将当前VQL和错误信息附加到提示中
+      prompt += `\nFailed VQL: ${lastVQL}\nIssues: ${lastError}`;
     }
+    // 添加生成VQL的最终指示
+    prompt += "\nPlease generate VQL in one line and begin with visualize";
+    console.log('\nprompts',prompt)
 
     const response = await axios.post(
       openaiApiEndpoint,
@@ -258,39 +305,33 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, last
       }
     );
 
-    const generatedText = response.data.choices[0].text.trim();
+    generatedText = response.data.choices[0].text.trim(); // 确保 generatedText 被正确赋值
+    generatedText = extractVisualizeVQL(generatedText)
     console.log('Generated VQL:', generatedText);
 
-    if (validateVQL(generatedText, tableSchema)) {
-      return generatedText;
+    const validationError = validateVQL(generatedText, tableSchema);
+    if (!validationError) {
+      console.log('Validation Passed: VQL is valid.');
+      return generatedText.toLowerCase();
     } else {
-      throw new Error('Generated VQL does not meet the guidelines.');
+      throw new Error(validationError);
     }
   } catch (error) {
     console.error('Error during OpenAI API call:', error.message);
     if (retries > 0) {
-      let errorMessage = '';
-      if (error.message.includes('aliasing')) {
-        errorMessage = 'Do not use the AS keyword for aliasing table names.';
-      } else if (error.message.includes('table.column')) {
-        errorMessage = 'Make sure do not use table.column outside of JOIN clauses.';
-      } else if (error.message.includes('nested queries')) {
-        errorMessage = 'Avoid using nested queries.';
-      } else if (error.message.includes('visualize')) {
-        errorMessage = 'VQL must start with "visualization" followed by a valid type (e.g., pie, scatter, line, bar).';
-      } else if (error.message.includes('GROUP BY element')) {
-        errorMessage = 'Ensure that elements in GROUP BY are either in SELECT, BIN BY, or the table schema.';
-      } else {
-        errorMessage = 'Please adhere strictly to the provided guidelines.';
-      }
-
-      console.log(`Retrying with additional instruction: ${errorMessage} (${retries} attempts left)`);
-      return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, errorMessage);
+      // 仅附加当前生成的 VQL 和最新的错误信息
+      const newVQL = generatedText ? generatedText : lastVQL;
+      const newError = `${error.message}`; // 清理累积的错误信息
+      console.log(`Retrying with additional instruction: ${newError} (${retries} attempts left)`);
+      return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, newError, newVQL);
     } else {
       throw new Error('Failed to generate valid VQL from OpenAI after multiple attempts');
     }
   }
 }
+
+
+
 
 
 app.post('/api/generate-vegalite', async (req, res) => {

@@ -107,14 +107,14 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   const [conditions, setConditions] = useState([]);
   const [whereResults, setWhereResults] = useState([]);
   const [fromTable, setFromTable] = useState(null); 
-  const [joinfindTable1, setJoinfindTable1] = useState('price'); 
-  const [joinfindTable2, setJoinfindTable2] = useState('name'); 
-  const [joinfindColumn1, setJoinfindColumn1] = useState('id'); 
-  const [joinfindColumn2, setJoinfindColumn2] = useState('id'); 
+  const [joinfindTable1, setJoinfindTable1] = useState(null); 
+  const [joinfindTable2, setJoinfindTable2] = useState(null); 
+  const [joinfindColumn1, setJoinfindColumn1] = useState(null); 
+  const [joinfindColumn2, setJoinfindColumn2] = useState(null); 
   const [joinTableResults, setJoinTableResults] = useState(null);
   const [joinColumnResults, setJoinColumnResults] = useState(null);
   const [ErrorMessage, setErrorMessage] = useState(null);
-  const [groupcolumn, setGroupColumn] = useState('date')
+  const [groupcolumn, setGroupColumn] = useState(null);
   const [aggFunction, setAggFunction] = useState('');
   const [aggColumn, setAggColumn] = useState('');
   const [selectedColumnsOthers, setSelectedColumnsOthers] = useState('');
@@ -342,6 +342,25 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
       })));
     }
   }, [currentPage, explanation]);
+
+  useEffect(() => {
+    if (explanation[currentPage].operation === 'JOIN') {
+      // const description = explanation[currentPage].description;
+      const currentData = calculateCurrentData()
+      
+      setJoinfindTable1(currentData.tableName1)
+      setJoinfindTable2(currentData.tableName2)
+      setJoinfindColumn1(currentData.joinColumn1)
+      setJoinfindColumn2(currentData.joinColumn2)
+    }
+  }, [currentPage, explanation]);
+
+  useEffect(() => {
+    console.log('joinfindTable1', joinfindTable1);
+    console.log('joinfindTable2', joinfindTable2);
+    console.log('joinfindColumn1', joinfindColumn1);
+    console.log('joinfindColumn2', joinfindColumn2);
+  }, [joinfindTable1, joinfindTable2, joinfindColumn1, joinfindColumn2]); 
 
   useEffect(() => {
     if (!joinfindTable1 || !joinfindTable2 || !joinfindColumn1 || !joinfindColumn2) {
@@ -885,7 +904,9 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
 // 用于存储表名和列名的索引
 const tableIndices = [];
 const columnIndices = [];
-
+console.log('tables',dataTables)
+console.log('join table1',joinTable1)
+console.log('join table2',joinTable2)
 // 先找出表名和列名的索引
 description.split(' ').forEach((word, index) => {
   const cleanWord = word.replace(/[.,]/g, '');
@@ -931,13 +952,17 @@ return (
     if (columnIndices.includes(index)) {
       const columnIndex = columnIndices.indexOf(index);
       const columnOptions =
-        columnIndex === 0
-          ? joinfindTable1
+    columnIndex === 0
+        ? joinfindTable1 && Array.isArray(dataTables[joinfindTable1]) && dataTables[joinfindTable1].length > 0
             ? Object.keys(dataTables[joinfindTable1][0])
-            : Object.keys(dataTables[joinTable1][0])
-          : joinfindTable2
-          ? Object.keys(dataTables[joinfindTable2][0])
-          : Object.keys(dataTables[joinTable2][0]);
+            : joinTable1 && Array.isArray(dataTables[joinTable1]) && dataTables[joinTable1].length > 0
+            ? Object.keys(dataTables[joinTable1][0])
+            : []
+        : joinfindTable2 && Array.isArray(dataTables[joinfindTable2]) && dataTables[joinfindTable2].length > 0
+            ? Object.keys(dataTables[joinfindTable2][0])
+            : joinTable2 && Array.isArray(dataTables[joinTable2]) && dataTables[joinTable2].length > 0
+            ? Object.keys(dataTables[joinTable2][0])
+            : [];
           
       return (
         <HighlightWithDropdown
@@ -1537,16 +1562,19 @@ return (
     let data = {};
     let dataother = {};
     let options = {};
+
+    
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-    };
-    
-    const isNumeric = value => {
-      return !isNaN(parseFloat(value)) && isFinite(value);
-    };        
+  };
 
-    const firstValue_select = currentTable_now[0][selectedColumns[0]];
-    const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
+  const isNumeric = value => {
+      return !isNaN(parseFloat(value)) && isFinite(value);
+  };
+
+  const firstValue_select = currentTable_now[0][selectedColumns[0]];
+  const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
+  console.log('xAxistype', xAxisType_select);
 
     if (chart.toLowerCase() === 'pie') {
         // Pie chart specific logic
@@ -1609,14 +1637,19 @@ return (
 
         options = {
             scales: {
-                x: {
-                    type: isDate(currentTable_now[0][selectedColumns[0]]) ? 'time' : 'category',
-                    position: 'bottom',
-                    title: {
-                        display: true,
-                        text: selectedColumns[0],
-                    },
+              x: {
+                type: xAxisType_select,
+                position: 'bottom',
+                ...(xAxisType_select === 'time' && {
+                  time: {
+                    unit: 'month',
+                  },
+                }),
+                title: {
+                  display: true,
+                  text: selectedColumns[0],
                 },
+              },
                 y: {
                     title: {
                         display: true,
@@ -1625,6 +1658,8 @@ return (
                 },
             },
         };
+        console.log('data chart', dataother)
+        console.log('option chart', options)
         return (
           <Chart
               type={chart.toLowerCase()}
@@ -1700,10 +1735,10 @@ return (
           const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
           if (joinClauseParts) {
             tableName1 = joinClauseParts[2];
-            tableName2 = joinClauseParts[1];
+            tableName2 = joinClauseParts[4];
             joinColumn1 = joinClauseParts[3];
             joinColumn2 = joinClauseParts[5];
-
+            console.log(joinClauseParts)
             tableData1 = dataTables[tableName1];
             tableData2 = dataTables[tableName2];
 
@@ -1711,16 +1746,33 @@ return (
               columns1 = Object.keys(tableData1[0]);
               columns2 = Object.keys(tableData2[0]);
 
-              currentTable_join = tableData1.map(row1 => {
+        
+            // Check if join columns exist in respective tables
+            if (!columns1.includes(joinColumn1) || !columns2.includes(joinColumn2)) {
+                return { mergedData: [], columns:[], error: 'Join columns do not exist in the respective tables' };
+            }
+        
+            const merged = tableData1.map(row1 => {
                 const matchedRow2 = tableData2.find(row2 => row1[joinColumn1] === row2[joinColumn2]);
-                return matchedRow2 ? { ...row1, ...matchedRow2 } : row1;
-              }).map(row => ({
+                return matchedRow2 ? { ...row1, ...matchedRow2 } : null;
+            }).filter(row => row !== null);
+            
+            console.log('merged results', merged)
+        
+            if (merged.length === 0) {
+                return { mergedData: [], columns:[], error: 'No matching rows found for join operation' };
+            }
+        
+            const mergedWithDateHandling = merged.map(row => ({
                 ...row,
                 date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
-              }));
+            }));
+        
+            const mergedColumns = [...new Set([...columns1, ...columns2])];
 
-              currentColumns_join = [...new Set([...columns1, ...columns2])];
-              currentTable = currentTable_join
+              currentColumns_join = mergedColumns;
+              currentTable = mergedWithDateHandling
+              currentTable_join = currentTable
               currentColumns = currentColumns_join
             }
           }
@@ -1763,8 +1815,10 @@ return (
         case 'SELECT': {
           const columns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
           selectpredata = currentTable
+          
           selectedColumns_final = columns.map(col => {
             const match = col.match(/(SUM|AVG|COUNT|MIN|MAX)\((\w+)\)/i);
+            console.log('match agg',match)
             if (match) {
               hasAggregateFunction = true;
               const columnName = `${match[1].toUpperCase()}(${match[2]})`;
@@ -1776,6 +1830,7 @@ return (
           });
           
           // console.log('select col', selectedColumns_final)
+          if(hasAggregateFunction){
           if (hasAggregateFunction && groupByColumn) {
             const groupedData = {};
             currentTable.forEach(row => {
@@ -1844,6 +1899,10 @@ return (
           currentColumns_select = currentColumns
           currentTable = currentTable_select
           currentColumns=currentColumns_select
+        }else{
+          currentTable_select = currentTable
+          currentColumns_select=currentColumns
+        }
           break;
         }
         case 'ORDER BY': {
@@ -1906,7 +1965,7 @@ return (
           break;
       }
     });
-    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns,selectedColumns_final,selectpredata,groupByColumn,orderByColumn,orderDirection,binBy,currentTablebin_pre,ChartComponent,selectedColumns_bin};
+    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns,selectedColumns_final,selectpredata,groupByColumn,orderByColumn,orderDirection,binBy,currentTablebin_pre,ChartComponent,selectedColumns_bin,tableName1,tableName2,joinColumn1,joinColumn2};
   };
 
   const renderStepContent = (step, steps) => {
@@ -1945,6 +2004,10 @@ return (
       selectedColumns_bin,
       currentTablebin_pre
      } = calculateCurrentData();
+
+     console.log('Current Table:', currentTable);
+      console.log('Current Columns:', currentColumns);
+      console.log('Selected Columns:', selectedColumns_final);
 
      if (!currentTable || !currentColumns || !selectedColumns) {
       return <Typography variant="body2" color="error">Invalid table or column data</Typography>;
@@ -2089,7 +2152,7 @@ return (
             const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
             if (joinClauseParts) {
               tableName1 = joinClauseParts[2];
-              tableName2 = joinClauseParts[1];
+              tableName2 = joinClauseParts[4];
               joinColumn1 = joinClauseParts[3];
               joinColumn2 = joinClauseParts[5];
 
@@ -2108,7 +2171,8 @@ return (
     
         const table_data = joinTableResults ? joinTableResults : currentTable_join;
         const columns = selectedColumns
-        const firstValue_select = table_data[0][columns[0]];
+        console.log('jointable',table_data)
+        const firstValue_select = table_data?table_data[0][columns[0]]:null;
         const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
         return (
           <div className="step-container" key={step.step}>
@@ -2121,12 +2185,12 @@ return (
                 </div>
                 <div className="table-row">
                   <div className="table-column">
-                    <div className="step-label">{`Table: ${joinfindTable1 || tableName1}`}</div>
+                    <div className="step-label">{`Table: ${joinfindTable1? joinfindTable1:tableName1}`}</div>
                     {renderTable(joinfindTable1 ? dataTables[joinfindTable1] : tableData1, joinfindTable1 ? Object.keys(dataTables[joinfindTable1][0]) : Object.keys(tableData1[0]), joinfindTable1 || tableName1, [joinfindColumn1||joinColumn1], null, [joinfindColumn1||joinColumn1])}
                   </div>
                   <div className="arrow"></div>
                   <div className="table-column">
-                    <div className="step-label">{`Table: ${joinfindTable2 || tableName2}`}</div>
+                    <div className="step-label">{`Table: ${joinfindTable2? joinfindTable2: tableName2}`}</div>
                     {renderTable(joinfindTable2 ? dataTables[joinfindTable2] : tableData2, joinfindTable2 ? Object.keys(dataTables[joinfindTable2][0]) : Object.keys(tableData2[0]), joinfindTable2 || tableName2, [joinfindColumn2||joinColumn2], null, [joinfindColumn2||joinColumn2])}
                   </div>
                 </div>
@@ -2364,7 +2428,7 @@ return (
         const columns = selectTableResults?[selectedColumnsOthers?selectedColumnsOthers[0]:selectedColumns[0],aggFunction?`${aggFunction}(${aggColumn})`:selectedColumnsOthers[1]]:selectedColumns_final
         const firstValue_select = table_data[0][columns[0]];
         const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
-
+        console.log('currentTable_select',currentTable_select)
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">

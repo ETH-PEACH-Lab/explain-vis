@@ -10,7 +10,9 @@ import Alert from '@mui/material/Alert';
 
 
 const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
-
+  console.log('VQL',VQL)
+  console.log('explanation',explanation)
+  console.log('tableData',tableData)
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -24,7 +26,6 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       if (!tableData || Object.keys(tableData).length === 0) {
         throw new Error('Missing or invalid table data.');
       }
-      // Visualization logic can be placed here...
     } catch (err) {
       console.error('Error in FinalVis:', err);
       setError('An error occurred while generating the final visualization. Please try again.');
@@ -34,11 +35,22 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   if (error) {
     return <Alert severity="error">{error}</Alert>;
   }
+  if (!tableData || !tableData.tables) {
+    return <Typography variant="body2" color="error">No table data available</Typography>;
+  }
   const dataTables = Object.keys(tableData.tables).reduce((acc, key) => {
-    acc[key] = tableData.tables[key].map((row) => {
-      const date = new Date(row.date);
+    acc[key] = tableData.tables[key].map((row, index) => {
+      // let date = new Date(row.date);
+      // 调试信息，输出日期值和索引
+    // if (isNaN(date.getTime())) {
+    //   console.warn(`Invalid date value at row ${index} in table ${key}:`, row.date);
+    // } else {
+    //   // 在这里输出成功解析的日期
+    //   console.log(`Valid date value at row ${index} in table ${key}:`, date.toISOString());
+    // }
       return {
         ...row,
+        // date: !isNaN(date.getTime()) ? date.toISOString().split('T')[0] : row.date,
       };
     });
     return acc;
@@ -70,14 +82,17 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       return acc;
     }, {});
   
-    const isDate = (value) => {
-      const date = new Date(value);
-      return !isNaN(date.getTime());
+    const isDate = value => {
+      return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
-  
+    
+    const isNumeric = value => {
+      return !isNaN(parseFloat(value)) && isFinite(value);
+    };        
+
     const firstValue = data[0][selectedColumns[0]];
-    const xAxisType = isDate(firstValue) ? 'time' : (isNaN(firstValue) ? 'category' : 'linear');
-  
+    const xAxisType = isDate(firstValue) ? 'time' : 'category';
+
     const chartData = {
       datasets: Object.keys(groupedData).map((key, index) => ({
         label: key,
@@ -180,14 +195,16 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     let options = {};
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-    };
-    
-    const isNumeric = value => {
-      return !isNaN(parseFloat(value)) && isFinite(value);
-    };        
+  };
 
-    const firstValue_select = currentTable_now[0][selectedColumns[0]];
-    const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
+  const isNumeric = value => {
+      return !isNaN(parseFloat(value)) && isFinite(value);
+  };
+
+  const firstValue_select = currentTable_now[0][selectedColumns[0]];
+  const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
+  console.log('xAxistype', xAxisType_select);
+    
     console.log('chart',chart)
     if (chart.toLowerCase() === 'pie') {
         // Pie chart specific logic
@@ -250,14 +267,19 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
 
         options = {
             scales: {
-                x: {
-                    type: isDate(currentTable_now[0][selectedColumns[0]]) ? 'time' : 'category',
-                    position: 'bottom',
-                    title: {
-                        display: true,
-                        text: selectedColumns[0],
-                    },
+              x: {
+                type: xAxisType_select,
+                position: 'bottom',
+                ...(xAxisType_select === 'time' && {
+                  time: {
+                    unit: 'month',
+                  },
+                }),
+                title: {
+                  display: true,
+                  text: selectedColumns[0],
                 },
+              },
                 y: {
                     title: {
                         display: true,
@@ -339,10 +361,10 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
           const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
           if (joinClauseParts) {
             tableName1 = joinClauseParts[2];
-            tableName2 = joinClauseParts[1];
+            tableName2 = joinClauseParts[4];
             joinColumn1 = joinClauseParts[3];
             joinColumn2 = joinClauseParts[5];
-
+            console.log(joinClauseParts)
             tableData1 = dataTables[tableName1];
             tableData2 = dataTables[tableName2];
 
@@ -350,17 +372,34 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
               columns1 = Object.keys(tableData1[0]);
               columns2 = Object.keys(tableData2[0]);
 
-              currentTable_join = tableData1.map(row1 => {
+        
+            // Check if join columns exist in respective tables
+            if (!columns1.includes(joinColumn1) || !columns2.includes(joinColumn2)) {
+                return { mergedData: [], columns:[], error: 'Join columns do not exist in the respective tables' };
+            }
+        
+            const merged = tableData1.map(row1 => {
                 const matchedRow2 = tableData2.find(row2 => row1[joinColumn1] === row2[joinColumn2]);
-                return matchedRow2 ? { ...row1, ...matchedRow2 } : row1;
-              }).map(row => ({
+                return matchedRow2 ? { ...row1, ...matchedRow2 } : null;
+            }).filter(row => row !== null);
+            
+            console.log('merged results', merged)
+        
+            if (merged.length === 0) {
+                return { mergedData: [], columns:[], error: 'No matching rows found for join operation' };
+            }
+        
+            const mergedWithDateHandling = merged.map(row => ({
                 ...row,
                 date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
-              }));
+            }));
+        
+            const mergedColumns = [...new Set([...columns1, ...columns2])];
 
-              currentColumns_join = [...new Set([...columns1, ...columns2])];
-              currentTable = currentTable_join
+              currentColumns_join = mergedColumns;
+              currentTable = mergedWithDateHandling
               currentColumns = currentColumns_join
+              currentTable_join = currentTable
             }
           }
           break;
@@ -402,8 +441,10 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         case 'SELECT': {
           const columns = step.clause.replace('SELECT ', '').split(',').map(col => col.trim());
           selectpredata = currentTable
+          
           selectedColumns_final = columns.map(col => {
             const match = col.match(/(SUM|AVG|COUNT|MIN|MAX)\((\w+)\)/i);
+            console.log('match agg',match)
             if (match) {
               hasAggregateFunction = true;
               const columnName = `${match[1].toUpperCase()}(${match[2]})`;
@@ -413,7 +454,9 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
               return col;
             }
           });
+          
           // console.log('select col', selectedColumns_final)
+          if(hasAggregateFunction){
           if (hasAggregateFunction && groupByColumn) {
             const groupedData = {};
             currentTable.forEach(row => {
@@ -482,6 +525,10 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
           currentColumns_select = currentColumns
           currentTable = currentTable_select
           currentColumns=currentColumns_select
+        }else{
+          currentTable_select = currentTable
+          currentColumns_select=currentColumns
+        }
           break;
         }
         case 'ORDER BY': {

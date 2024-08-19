@@ -21,7 +21,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
     ];
 
     const operators = [
-        'AND', 'OR', 'NOT', 'BETWEEN', 'IN', 'LIKE', 'IS', '=', '!=', '<>', '<', '<=', '>', '>=',
+        'AND', 'OR', 'NOT','ON', 'BETWEEN', 'IN', 'LIKE', 'IS', '=', '!=', '<>', '<', '<=', '>', '>=',
         '\\+', '-', '\\*', '/', '%', '\\^', '&&', '\\|\\|', '!', 'ASC', 'DESC'
     ];
 
@@ -47,8 +47,10 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
 
   const handleGenerate = async () => {
     setIsLoading(true); // Start loading
+    const demoText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
+
     try {
-      if (query === placeholderText) {
+      if (query === demoText) {
         // 使用测试数据
         const VQL = 'VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price) DESC\\nBIN BY quarter'
 
