@@ -8,8 +8,7 @@ import Alert from '@mui/material/Alert';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
-function NaturalLanguageQuery({ onGenerate, tableData }) {
-  const placeholderText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
+function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
   const [query, setQuery] = useState(placeholderText);
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state

@@ -75,6 +75,7 @@ function TutorialPage() {
   const handleDataUpdate = (data) => {
     setTableData(data);
   };
+  const placeholderText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
 
   return (
     <div>
@@ -92,8 +93,8 @@ function TutorialPage() {
           <div key={iface.id} className="interface">
             <div className="first-row">
               <div className="left-column">
-                <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} />
-                <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
+              <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={placeholderText}/>
+              <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">
               {isLoading ? (

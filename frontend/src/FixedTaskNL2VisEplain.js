@@ -72,6 +72,7 @@ function FixedTaskNL2VisExplain() {
   const handleDataUpdate = (data) => {
     setTableData(data);
   };
+  const placeholderText = "Please show correlation between student_id and the corresponding amounts.";
 
   return (
     <div>
@@ -89,7 +90,7 @@ function FixedTaskNL2VisExplain() {
           <div key={iface.id} className="interface">
             <div className="first-row">
               <div className="left-column">
-                <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} />
+                <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={placeholderText}/>
                 <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">

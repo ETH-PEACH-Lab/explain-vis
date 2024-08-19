@@ -72,6 +72,7 @@ function OpenEndNL2VisExplain() {
   const handleDataUpdate = (data) => {
     setTableData(data);
   };
+  const placeholderText = "...";
 
   return (
     <div>
@@ -89,8 +90,8 @@ function OpenEndNL2VisExplain() {
           <div key={iface.id} className="interface">
             <div className="first-row">
               <div className="left-column">
-                <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} />
-                <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
+              <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={placeholderText}/>
+              <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">
               {isLoading ? (
