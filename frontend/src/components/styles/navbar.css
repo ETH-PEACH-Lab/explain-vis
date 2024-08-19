@@ -12,7 +12,9 @@
 }
 
 .menu-button {
+  border-radius: 10px;
   margin-bottom: 20px;
+  padding: 10px;
 }
 
 .add-button {
@@ -41,7 +43,7 @@
 }
 
 .content {
-  margin-left: 80px; /* Make sure the content is not hidden behind the sidebar */
+  margin-left: 40px; /* Make sure the content is not hidden behind the sidebar */
   padding: 20px;
 }
 

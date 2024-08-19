@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import StarIcon from '@mui/icons-material/Star';
 import './styles/navbar.css';
+import { Button } from '@mui/material';
 
 function Navbar({ fixedTaskOrder, openTaskOrder, onSelectPage }) {
   const [selectedLabel, setSelectedLabel] = useState(0);
@@ -14,21 +15,21 @@ function Navbar({ fixedTaskOrder, openTaskOrder, onSelectPage }) {
 
   return (
     <div className="sidebar">
-      <IconButton className="menu-button" color="inherit" aria-label="menu">
+      <Button className="menu-button" color="inherit" aria-label="menu">
         <MenuIcon />
-      </IconButton>
+      </Button>
       <div className="labels">
-        <IconButton 
+        <Button 
           className={`label-button ${selectedLabel === 0 ? 'selected' : ''}`} 
           color="inherit" 
           onClick={() => handleSelect(0)}
         >
           <StarIcon />
           <span className="label-text">Tutorial</span>
-        </IconButton>
+        </Button>
         
         {fixedTaskOrder.map((task, index) => (
-          <IconButton 
+          <Button 
             key={index} 
             className={`label-button ${selectedLabel === index + 1 ? 'selected' : ''}`} 
             color="inherit" 
@@ -36,11 +37,11 @@ function Navbar({ fixedTaskOrder, openTaskOrder, onSelectPage }) {
           >
             <StarIcon />
             <span className="label-text">{task.name}</span>
-          </IconButton>
+          </Button>
         ))}
         
         {openTaskOrder.map((task, index) => (
-          <IconButton 
+          <Button 
             key={index + fixedTaskOrder.length} 
             className={`label-button ${selectedLabel === index + fixedTaskOrder.length + 1 ? 'selected' : ''}`} 
             color="inherit" 
@@ -48,7 +49,7 @@ function Navbar({ fixedTaskOrder, openTaskOrder, onSelectPage }) {
           >
             <StarIcon />
             <span className="label-text">{task.name}</span>
-          </IconButton>
+          </Button>
         ))}
       </div>
     </div>
