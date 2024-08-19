@@ -7,6 +7,7 @@ import FinalVis from './components/FinalVis.js';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import Visualization from './components/Visualization.js';
+import CircularProgress from '@mui/material/CircularProgress';
 import './components/styles/styles.css';
 
 const defaultData = {
@@ -38,7 +39,9 @@ function FixedTaskNL2VisExplain() {
   const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', vegaLiteSpec: null, explanation: [] });
   const [tableData, setTableData] = useState(defaultData);
   const [showVQL, setShowVQL] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
   const [currentPage, setCurrentPage] = useState(0);
+  const [error, setError] = useState(null); // Error state
 
   const handleAddInterface = () => {
     const newInterface = { id: interfaces.length + 1 };
@@ -51,9 +54,19 @@ function FixedTaskNL2VisExplain() {
     }
   };
 
-  const handleGenerate = (generated) => {
-    setGeneratedVQL(generated);
-    setCurrentPage(0); // Reset to page 0 when new data is generated
+  const handleGenerate = async (generated) => {
+    setIsLoading(true); // Start loading
+    setError(null); // Clear any previous errors
+    try {
+      // Your generation logic here, wrapped in try-catch to catch unexpected errors
+      setGeneratedVQL(generated);
+      setCurrentPage(0); // Reset to page 0 when new data is generated
+    } catch (err) {
+      console.error('Error during generation:', err);
+      setError('An unexpected error occurred while generating the visualization. Please try again.');
+    } finally {
+      setIsLoading(false); // End loading
+    }
   };
 
   const handleDataUpdate = (data) => {
@@ -80,13 +93,20 @@ function FixedTaskNL2VisExplain() {
                 <DataTable onDataUpdate={handleDataUpdate} />
               </div>
               <div className="right-column">
-                {generatedVQL.explanation.length > 0 && (
-                  <FinalVis
-                    VQL={generatedVQL.VQL}
-                    explanation={generatedVQL.explanation}
-                    tableData={tableData}
-                    showVQL={showVQL}
-                  />
+              {isLoading ? (
+                  <div className="loading-container">
+                    <CircularProgress />
+                    <Typography variant="body2" color="textSecondary">Generating visualization...</Typography>
+                  </div>
+                ) : (
+                  generatedVQL.explanation.length > 0 && (
+                    <FinalVis
+                      VQL={generatedVQL.VQL}
+                      explanation={generatedVQL.explanation}
+                      tableData={tableData}
+                      showVQL={showVQL}
+                    />
+                  )
                 )}
               </div>
             </div>
