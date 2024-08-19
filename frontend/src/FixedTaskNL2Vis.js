@@ -12,27 +12,56 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const defaultData = {
   tables: {
-    price: [
-      { date: '1998-01-01', month: 1, year: 1998, price: 100, id: 'r1' },
-      { date: '2010-12-05', month: 12, year: 2010, price: 1000, id: 'r2' },
-      { date: '2020-03-15', month: 3, year: 2020, price: 150, id: 'r3' },
-      { date: '2022-10-10', month: 10, year: 2022, price: 2000, id: 'r4' },
+    employee: [
+      {
+        "EMPLOYEE_ID": 100,
+        "FIRST_NAME": "Steven",
+        "JOB_ID": "AD_PRES",
+        "SALARY": 24000,
+        "MANAGER_ID": 0,
+        "DEPARTMENT_ID": 90
+      },
+      {
+        "EMPLOYEE_ID": 101,
+        "FIRST_NAME": "Neena",
+        "JOB_ID": "AD_VP",
+        "SALARY": 17000,
+        "MANAGER_ID": 100,
+        "DEPARTMENT_ID": 90
+      },
+      {
+        "EMPLOYEE_ID": 102,
+        "FIRST_NAME": "Lex",
+        "JOB_ID": "AD_VP",
+        "SALARY": 17000,
+        "MANAGER_ID": 100,
+        "DEPARTMENT_ID": 90
+      }
     ],
-    name: [
-      { id: 'r1', name: 'apple' },
-      { id: 'r2', name: 'pear' },
-      { id: 'r3', name: 'banana' },
-      { id: 'r4', name: 'orange' },
-    ],
-    stock: [
-      { id: 'r1', quantity: 50 },
-      { id: 'r2', quantity: 30 },
-      { id: 'r3', quantity: 100 },
-      { id: 'r4', quantity: 25 },
+    departments: [
+      {
+        "DEPARTMENT_ID": 10,
+        "DEPARTMENT_NAME": "Administration",
+        "MANAGER_ID": 200,
+        "LOCATION_ID": 1700
+      },
+      {
+        "DEPARTMENT_ID": 20,
+        "DEPARTMENT_NAME": "Marketing",
+        "MANAGER_ID": 201,
+        "LOCATION_ID": 1800
+      },
+      {
+        "DEPARTMENT_ID": 90,
+        "DEPARTMENT_NAME": "Executive",
+        "MANAGER_ID": 100,
+        "LOCATION_ID": 1700
+      }
     ]
   },
-  tableNames: ['price', 'name', 'stock']
+  tableNames: ["employee", "departments"]
 };
+
 
 function FixedTaskNL2Vis() {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
@@ -90,7 +119,7 @@ function FixedTaskNL2Vis() {
             <div className="first-row">
               <div className="left-column">
                 <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} />
-                <DataTable onDataUpdate={handleDataUpdate} />
+                <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">
               {isLoading ? (

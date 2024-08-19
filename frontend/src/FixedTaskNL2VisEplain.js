@@ -90,7 +90,7 @@ function FixedTaskNL2VisExplain() {
             <div className="first-row">
               <div className="left-column">
                 <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} />
-                <DataTable onDataUpdate={handleDataUpdate} />
+                <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">
               {isLoading ? (

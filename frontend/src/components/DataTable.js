@@ -13,33 +13,9 @@ import Box from '@mui/material/Box';
 import * as XLSX from 'xlsx';
 import './styles/dataTable.css';
 
-const defaultData = {
-  tables: {
-    price: [
-      { date: '1998-01-01', month: 1, year: 1998, price: 100, id: 'r1' },
-      { date: '2010-12-05', month: 12, year: 2010, price: 1000, id: 'r2' },
-      { date: '2020-03-15', month: 3, year: 2020, price: 150, id: 'r3' },
-      { date: '2022-10-10', month: 10, year: 2022, price: 2000, id: 'r4' },
-    ],
-    name: [
-      { id: 'r1', name: 'apple' },
-      { id: 'r2', name: 'pear' },
-      { id: 'r3', name: 'banana' },
-      { id: 'r4', name: 'orange' },
-    ],
-    stock: [
-      { id: 'r1', quantity: 50 },
-      { id: 'r2', quantity: 30 },
-      { id: 'r3', quantity: 100 },
-      { id: 'r4', quantity: 25 },
-    ]
-  },
-  tableNames: ['price', 'name', 'stock']
-};
-
-function DataTable({ onDataUpdate }) {
+function DataTable({ onDataUpdate, tableData }) {
   const [tabValue, setTabValue] = useState(0);
-  const [data, setData] = useState(defaultData);
+  const [data, setData] = useState(tableData || { tables: {}, tableNames: [] });
 
   useEffect(() => {
     onDataUpdate(data);
