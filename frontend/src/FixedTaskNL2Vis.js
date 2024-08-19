@@ -162,7 +162,7 @@ function FixedTaskNL2Vis({data}) {
     <div>
       <div className="header">
         <Typography variant="h6" className="title">
-          NL2ViZ - Fixed Task 1 w/o Explanation
+          {`NL2ViZ - Fixed Task 1 w/o Explanation, ${data.scenario} Scenario`}
         </Typography>
         {/* <div className="vql-switch">
           <Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} />

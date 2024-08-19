@@ -23,6 +23,7 @@ function App() {
   const [openTaskOrder, setOpenTaskOrder] = useState([]);
 
   const dataScenarioFixed1 = {
+    scenario:"Hiring",
     data: {
       tables: {
         departments: [
@@ -162,6 +163,7 @@ function App() {
     }
   };
   const dataScenarioFixed2 = {
+    scenario:"Address",
       "data": {
           "tables": {
               "student_addresses": [
@@ -254,6 +256,7 @@ function App() {
     placeholderText: "Please show correlation between student_id and the corresponding amounts.",
   };
   const dataScenarioOpen1 = { 
+    scenario:"College",
     "data": {
         "tables": {
             "student": [
@@ -377,7 +380,8 @@ function App() {
     },
     placeholderText: "...",
  };
-  const dataScenarioOpen2 = { 
+  const dataScenarioOpen2 = {
+    scenario:"Cinema", 
       "data": {
           "tables": {
               "cinema": [
@@ -552,13 +556,13 @@ function App() {
 
   useEffect(() => {
     const fixedScenarios = shuffleArray([
-      { name: 'Fixed Task 1', component: FixedTaskNL2Vis, scenario: dataScenarioFixed1 },
-      { name: 'Fixed Task 2', component: FixedTaskNL2VisExplain, scenario: dataScenarioFixed2 }
+      { name: `Fixed Task - ${dataScenarioFixed1.scenario}`, component: FixedTaskNL2Vis, scenario: dataScenarioFixed1 },
+      { name: `Fixed Task - ${dataScenarioFixed2.scenario}`, component: FixedTaskNL2VisExplain, scenario: dataScenarioFixed2 }
     ]);
-
+  
     const openScenarios = shuffleArray([
-      { name: 'Open Task 1', component: OpenEndNL2Vis, scenario: dataScenarioOpen1 },
-      { name: 'Open Task 2', component: OpenEndNL2VisExplain, scenario: dataScenarioOpen2 }
+      { name: `Open Task - ${dataScenarioOpen1.scenario}`, component: OpenEndNL2Vis, scenario: dataScenarioOpen1 },
+      { name: `Open Task - ${dataScenarioOpen2.scenario}`, component: OpenEndNL2VisExplain, scenario: dataScenarioOpen2 }
     ]);
 
     setFixedTaskOrder(fixedScenarios);
