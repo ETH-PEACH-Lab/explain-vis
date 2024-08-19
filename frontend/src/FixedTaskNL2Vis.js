@@ -8,6 +8,7 @@ import FinalVis from './components/FinalVis.js';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import './components/styles/styles.css';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const defaultData = {
   tables: {

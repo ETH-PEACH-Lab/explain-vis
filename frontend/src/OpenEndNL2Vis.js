@@ -8,6 +8,7 @@ import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import Visualization from './components/Visualization.js';
 import './components/styles/styles.css';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const defaultData = {
   tables: {
