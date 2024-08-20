@@ -20,6 +20,9 @@ import 'chartjs-adapter-date-fns';
 import DraggableNumber from './DraggableNumber';
 import RangeSlider from './RangeSlider';
 import Alert from '@mui/material/Alert';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 const parseCondition = (condition) => {
   const range = [0, 3000];
@@ -103,6 +106,7 @@ const aggregateFunctions = Object.keys(aggregateFunctionAliases);
 const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, onPageChange }) => {
   const [editingText, setEditingText] = useState(null);
   const [editedText, setEditedText] = useState('');
+  const [editedVQL, setEditedVQL] = useState('');
   const [wordReplacements, setWordReplacements] = useState({});
   const [conditions, setConditions] = useState([]);
   const [whereResults, setWhereResults] = useState([]);
@@ -128,6 +132,8 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
   const [BinByResults, setBinByResults] = useState(['hi'])
   const [chart, setchart] = useState('scatter')
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  
   console.log('page', currentPage)
   console.log('opperation:',explanation[currentPage].operation)
 
@@ -143,8 +149,13 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
     } catch (err) {
       console.error('Error in StepByStepExplanation:', err);
       setError('An error occurred while generating the step-by-step explanation. Please try again.');
+      setIsModalOpen(true);
     }
   }, [explanation, tableData]);
+
+  useEffect(()=>{
+      setEditedVQL(explanation[currentPage].clause)
+  }, [currentPage, explanation])
 
   useEffect(()=>{
     if (explanation[currentPage].operation === 'VISUALIZE') {
@@ -522,9 +533,9 @@ const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, o
     console.log('orderchart', orderchart);
   }, [orderresults,orderchart]); 
 
-  if (error) {
-    return <Alert severity="error">{error}</Alert>;
-  }
+  // if (error) {
+  //   return <Alert severity="error">{error}</Alert>;
+  // }
   
   if (!tableData || !tableData.tables) {
     return <Typography variant="body2" color="error">No table data available</Typography>;
@@ -1239,8 +1250,32 @@ return (
 
   const handleBlur = () => {
     setEditingText(false);
+    setEditedVQL(editedText);
+    if (explanation[currentPage].operation === 'FROM') {
+      const fromMatch = editedText.match(/\bFROM\b/i);
+      if (fromMatch) {
+          const tableNameMatch = editedText.match(/\bFROM\b\s+(\S+)/i);
+          if (tableNameMatch) {
+              const tableName = tableNameMatch[1];
+              if (tableData.tableNames.includes(tableName)) {
+                  // 如果验证通过，设置表格名称
+                  setFromTable(tableName);
+              } else {
+                  setError(`The table name "${tableName}" is not valid.`);
+                  setIsModalOpen(true);
+              }
+          } else {
+              setError('No table name found after FROM.');
+              setIsModalOpen(true);
+          }
+      } else {
+          setError('The VQL does not include a FROM clause.');
+          setIsModalOpen(true);
+      }
+  }
     console.log('Edited text:', editedText);
   };
+
   const handleHighlighttableChange = (type, oldValue, newValue) => {
 
     console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
@@ -1250,6 +1285,7 @@ return (
       [oldValue]: newValue
     }));
   };
+
   const hilightorder = (type, originalValue, newValue) => {
     console.log(`Type: ${type}, Original: ${originalValue}, New: ${newValue}`);
     
@@ -2132,9 +2168,9 @@ return (
                     <Typography
                       variant="body2"
                       className="vql-line"
-                      onClick={() => handleEditClick(step.clause)}
+                      onClick={() => handleEditClick(editedVQL)}
                     >
-                      {formatVQLLine(step.clause)}
+                      {formatVQLLine(editedVQL)}
                     </Typography>
                   )}
                 </CardContent>
@@ -2733,17 +2769,42 @@ return (
     return <div className="pagination-button">{pageButtons}</div>;
   };
   return (
-    <div className="step-by-step-explanation">
+    <><div className="step-by-step-explanation">
       <div className="explanation-container">
         <Typography variant="h6" className="purple-text">/ Step-by-Step Explanations</Typography>
         <div className="pagination">
-        <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 0}>← Pre </button>
+          <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 0}>← Pre </button>
           {renderPagination()}
           <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === explanation.length - 1}>Next →</button>
         </div>
         {explanation && explanation.length > 0 ? renderStepContent(explanation[currentPage], currentSteps) : <Typography variant="body2">No explanations available</Typography>}
       </div>
-    </div>
+    </div><Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 300,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            textAlign: 'center'
+          }}
+        >
+          <Typography variant="h6" color="error">Error</Typography>
+          <Typography variant="body2" color="textSecondary">{error}</Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setIsModalOpen(false)}
+            style={{ marginTop: '20px' }}
+          >
+            OK
+          </Button>
+        </Box>
+      </Modal></>
   );
 };
 
