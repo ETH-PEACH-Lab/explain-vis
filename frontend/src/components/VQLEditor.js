@@ -154,7 +154,7 @@ import Box from '@mui/material/Box';
               onChange={handleVqlChange}
               onBlur={handleBlur}
               autoFocus
-              rows={calculateRows(editedText)}
+              rows={calculateRows(formatVQL(editedText))}
               style={{
                 width: '95%',
                 fontSize: '1rem',

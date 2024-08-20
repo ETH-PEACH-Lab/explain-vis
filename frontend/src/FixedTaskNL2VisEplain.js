@@ -1,5 +1,5 @@
 // src/components/FixedTaskNL2VisExplain.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NaturalLanguageQuery from './components/NaturalLanguageQuery';
 import DataTable from './components/DataTable';
 import StepByStepExplanation from './components/StepByStepExplanation';
@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Visualization from './components/Visualization.js';
 import CircularProgress from '@mui/material/CircularProgress';
 import './components/styles/styles.css';
+import VQLEditor from './components/VQLEditor.js'
 
 function FixedTaskNL2VisExplain({data}) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
@@ -45,10 +46,27 @@ function FixedTaskNL2VisExplain({data}) {
     }
   };
 
+  const handleExecuteVQL = async (edited) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      setGeneratedVQL(edited);
+      setCurrentPage(0); // Reset to page 0 when new data is generated
+    } catch (err) {
+      console.error('Error during VQL execution:', err);
+      setError('An error occurred while executing the VQL. Please refine your VQL.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleDataUpdate = (data) => {
     setTableData(data);
   };
-  const placeholderText = "Please show correlation between student_id and the corresponding amounts.";
+
+  useEffect(() => {
+    console.log('Generated VQL and explanation updated:', generatedVQL);
+}, [generatedVQL]);
 
   return (
     <div>
@@ -70,22 +88,26 @@ function FixedTaskNL2VisExplain({data}) {
                 <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">
-              {isLoading ? (
-                  <div className="loading-container">
-                    <CircularProgress />
-                    <Typography variant="body2" color="textSecondary">Generating visualization...</Typography>
+                {
+                  generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
+                    <div className="visualize">
+                      <Typography variant="h6" className="visualize-title">/ Visualization</Typography>
+                          <FinalVis
+                          VQL={generatedVQL.VQL}
+                          explanation={generatedVQL.explanation}
+                          tableData={tableData}
+                          showVQL={showVQL}
+                        />
+                      {showVQL && (
+                        <VQLEditor
+                          initialVQL={generatedVQL.VQL}
+                          onExecute={handleExecuteVQL}
+                          tableData={tableData}
+                        />
+                      )}
+                      </div>
+                  )}
                   </div>
-                ) : (
-                  generatedVQL.explanation.length > 0 && (
-                    <FinalVis
-                      VQL={generatedVQL.VQL}
-                      explanation={generatedVQL.explanation}
-                      tableData={tableData}
-                      showVQL={showVQL}
-                    />
-                  )
-                )}
-              </div>
             </div>
             <hr />
             <div className="second-row">
