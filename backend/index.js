@@ -173,7 +173,8 @@ please generate VQL to answer this question based on json table.
   return prompt;
 };
 
-function validateVQL(vql, tableSchema) {
+function validateVQL(vql_init, tableSchema) {
+  let vql = vql_init.replace(/\n/g, ' ');
   const validTypes = ['pie', 'scatter', 'line', 'bar'];
   const visualizeRegex = /^visualize\s+(pie|scatter|line|bar)/i;
 

@@ -125,14 +125,14 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   const [selectTableResults, setSelectTableResults] = useState(['hi']);
   const [highlightIndexes, setHighlightIndexes] = useState({});
   const [ordercolumn,setOrdercolumn] = useState({})
-  const [order,setOrder] = useState({})
+  const [order,setOrder] = useState('asc')
   const [orderresults,setOrderResults] = useState(['hi'])
   const [orderchart, setOrderchart] = useState(['hi'])
   const [BinByColumn, setBinByColumn] = useState('hi')
   const [BinByResults, setBinByResults] = useState(['hi'])
   const [chart, setchart] = useState('scatter')
   const [error, setError] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   
   console.log('page', currentPage)
   console.log('opperation:',explanation[currentPage].operation)
@@ -462,10 +462,16 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   }, [currentPage, explanation]);
 
   useEffect(() => {  
-    if (ordercolumn || order || orderresults ) {
+    if (ordercolumn || order ) {
       setOrderResults(sortData(orderresults,ordercolumn,order))
     }
   }, [ordercolumn, order]);
+
+  useEffect(() => {
+      console.log('ordercolumn',ordercolumn)
+      console.log('order',order)
+      console.log('orderresults',orderresults)
+  }, [ordercolumn, order,orderresults]);
 
   useEffect(() => {
     const calchart = (data) => {
@@ -1254,7 +1260,6 @@ return (
 
     const totalTables = [];
     const totalColumns = [];
-
     tableData.tableNames.forEach((tableName) => {
         const tableRegex = new RegExp(`\\b${tableName}\\b`, 'gi');
         if (VQL.match(tableRegex)) {
@@ -1344,6 +1349,44 @@ return (
         setIsModalOpen(true);
     }
   }
+  if (explanation[currentPage].operation === 'ORDER BY') {
+
+    const selectMatch = VQL.replace(/\n/g, ' ').match(/select\s+(.+?)\s+from/i);
+    if (selectMatch) {
+        const selectedColumns = selectMatch[1].split(',').map(col => col.trim());
+        totalColumns.push(...selectedColumns);
+    }
+
+    const orderByMatch = editedText.match(/\bORDER BY\b\s+(\S+)(\s+(ASC|DESC))?/i);
+    if (orderByMatch) {
+        const columnName = orderByMatch[1];
+        const orderDirection = orderByMatch[3]; 
+
+        if (totalColumns.includes(columnName)) {
+            setOrdercolumn(columnName);
+
+            if (orderDirection) {
+              const lowerCaseOrderDirection = orderDirection.toLowerCase();
+              if (lowerCaseOrderDirection === 'asc' || lowerCaseOrderDirection === 'desc') {
+                  setOrder(lowerCaseOrderDirection);
+                  console.log(`ORDER BY column "${columnName}" with order "${orderDirection.toUpperCase()}" is valid.`);
+              } else {
+                  setError(`The order "${orderDirection}" is not valid. It must be either 'ASC' or 'DESC'.`);
+                  setIsModalOpen(true);
+              }
+          } else {
+              console.log(`ORDER BY column "${columnName}" with no specified order is valid.`);
+          }
+        } else {
+            setError(`The column "${columnName}" in ORDER BY does not exist in the SELECT part.`);
+            setIsModalOpen(true);
+        }
+    } else {
+        setError('The ORDER BY clause must be followed by a valid column name, optionally with ASC or DESC.');
+        setIsModalOpen(true);
+    }
+}
+
   if (explanation[currentPage].operation === 'BIN BY') {
 
     const validBinByOptions = ['year', 'month', 'week', 'day', 'weekday', 'quarter'];
@@ -2719,9 +2762,9 @@ return (
                     <Typography
                       variant="body2"
                       className="vql-line"
-                      onClick={() => handleEditClick(step.clause)}
+                      onClick={() => handleEditClick(editedVQL)}
                     >
-                      {formatVQLLine(step.clause)}
+                      {formatVQLLine(editedVQL)}
                     </Typography>
                   )}
                 </CardContent>

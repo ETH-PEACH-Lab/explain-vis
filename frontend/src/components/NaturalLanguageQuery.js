@@ -134,7 +134,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
         const result = await response.json();
         let { VQL} = result;
       
-        VQL = formatVQL(VQL)
+        // VQL = formatVQL(VQL)
 
         const explanationApiUrl = `${baseUrl}/api/explain-vql`;
         console.log('API URL:', explanationApiUrl);
