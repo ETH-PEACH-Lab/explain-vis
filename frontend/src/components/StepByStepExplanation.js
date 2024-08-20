@@ -1364,6 +1364,26 @@ return (
         setIsModalOpen(true);
     }
   }
+  if (explanation[currentPage].operation === 'VISUALIZE') {
+
+    const validVisualizeTypes = ['scatter', 'line', 'pie', 'bar'];
+
+    const visualizeMatch = editedText.match(/\bVISUALIZE\b\s+(\S+)/i);
+    if (visualizeMatch) {
+        const visualizeType = visualizeMatch[1];
+
+        if (validVisualizeTypes.includes(visualizeType)) {
+            setchart(visualizeType)
+        } else {
+            setError(`The VISUALIZE type "${visualizeType}" is not valid. It must be one of ${validVisualizeTypes.join(', ')}.`);
+            setIsModalOpen(true);
+        }
+    } else {
+        setError('The VISUALIZE clause is missing or not followed by a valid type.');
+        setIsModalOpen(true);
+    }
+}
+
 
     console.log('Edited text:', editedText);
   };
@@ -2823,9 +2843,9 @@ return (
                       <Typography
                         variant="body2"
                         className="vql-line"
-                        onClick={() => handleEditClick(step.clause)}
+                        onClick={() => handleEditClick(editedVQL)}
                       >
-                        {formatVQLLine(step.clause)}
+                        {formatVQLLine(editedVQL)}
                       </Typography>
                     )}
                   </CardContent>
