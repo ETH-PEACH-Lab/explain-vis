@@ -109,7 +109,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   const [editedVQL, setEditedVQL] = useState('');
   const [wordReplacements, setWordReplacements] = useState({});
   const [conditions, setConditions] = useState([]);
-  const [whereResults, setWhereResults] = useState([]);
+  const [whereResults, setWhereResults] = useState('[]');
   const [fromTable, setFromTable] = useState(null); 
   const [joinfindTable1, setJoinfindTable1] = useState(null); 
   const [joinfindTable2, setJoinfindTable2] = useState(null); 
@@ -133,6 +133,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   const [chart, setchart] = useState('scatter')
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [CombinedCondition, setCombinedCondition] = useState('hi');
   
   console.log('page', currentPage)
   console.log('opperation:',explanation[currentPage].operation)
@@ -367,6 +368,17 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   }, [currentPage, explanation]);
 
   useEffect(() => {
+    if (explanation[currentPage].operation === 'WHERE') {      
+      const combinedCondition = explanation[currentPage].clause
+      setCombinedCondition(combinedCondition.replace(/^WHERE\s+/i, ''))
+    }
+  }, [currentPage, explanation]);
+
+  useEffect(() => {
+    console.log('combinedconditions', CombinedCondition)
+  }, [CombinedCondition]);
+
+  useEffect(() => {
     console.log('joinfindTable1', joinfindTable1);
     console.log('joinfindTable2', joinfindTable2);
     console.log('joinfindColumn1', joinfindColumn1);
@@ -415,37 +427,51 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   };
 
   useEffect(() => {
-    const combineConditionsAndFilter = (data) => {
-      if (!data || conditions.length === 0) return data;
-
       const combinedCondition = conditions.map((condition, index) => {
         if (index === 0) {
           return condition.condition;
         }
         return condition.condition.replace(/^\s*\b(?:AND|OR)\b\s*/, '');
       }).join(' || ');
+      setCombinedCondition(combinedCondition)
+  }, [conditions]);
 
-      const cleanedCondition = combinedCondition
+  useEffect(() => {
+    const combineConditionsAndFilter = (data) => {
+      if (!data || conditions.length === 0) return data;
+
+      const cleanedCondition = CombinedCondition
         .replace(/\bAND\b/g, '&&')
         .replace(/\bOR\b/g, '||')
         .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]');
-
-      const finalFilteredData = data.filter(row => {
-        try {
-          const conditionFunction = new Function('row', `return ${cleanedCondition};`);
-          return conditionFunction(row);
-        } catch (error) {
-          console.error(`Error evaluating condition: ${cleanedCondition}`, error);
-          return false;
-        }
-      });
-
-      return finalFilteredData;
+  
+      try {
+        const finalFilteredData = data.filter(row => {
+          try {
+            const conditionFunction = new Function('row', `return ${cleanedCondition};`);
+            return conditionFunction(row);
+          } catch (error) {
+            console.error(`Error evaluating condition: ${cleanedCondition}`, error);
+            throw new Error(`Invalid condition: ${CombinedCondition}`);
+          }
+        });
+  
+        return finalFilteredData;
+      } catch (error) {
+        setError(error.message);
+        setIsModalOpen(true);
+        return data; 
+      }
     };
-
+  
     const currentData = calculateCurrentData();
     setWhereResults(combineConditionsAndFilter(currentData.currentTable_where));
-  }, [conditions]);
+  }, [CombinedCondition]);
+
+  useEffect(() => {  
+    console.log(whereResults)
+  }, [whereResults]);
+  
 
   useEffect(() => {
     if (explanation[currentPage].operation === 'ORDER BY') {
@@ -1332,6 +1358,48 @@ return (
           setIsModalOpen(true);
       }
   }
+  if (explanation[currentPage].operation === 'WHERE') {
+    let whereClause = editedText.replace('WHERE ', '').trim();
+
+    const operators = ['=', '!=', '<>', '<', '>', '<=', '>=', 'LIKE', 'IN', 'BETWEEN'];
+    const logicalOperators = ['AND', 'OR', 'NOT'];
+    const allKeywords = [...operators, ...logicalOperators];
+
+    whereClause = whereClause.replace(/\(/g, ' ( ').replace(/\)/g, ' ) ');
+
+    const openParens = (whereClause.match(/\(/g) || []).length;
+    const closeParens = (whereClause.match(/\)/g) || []).length;
+    if (openParens !== closeParens) {
+        setError('Mismatched parentheses in WHERE clause.');
+        setIsModalOpen(true);
+        return;
+    }
+
+    const tokens = whereClause.split(/\s+/).filter(token => token.length > 0);
+
+    for (let token of tokens) {
+        token = token.trim();
+
+        if (token === '(' || token === ')' || !isNaN(token)) {
+            continue;
+        }
+
+        if (allKeywords.includes(token.toUpperCase())) {
+            continue;
+        }
+
+        if (!totalColumns.includes(token)) {
+            setError(`Invalid column or value in WHERE clause: "${token}".`);
+            setIsModalOpen(true);
+            return;
+        }
+    }
+
+    setCombinedCondition(whereClause);
+    console.log('WHERE clause is valid and set as combined condition:', whereClause);
+}
+
+
   if (explanation[currentPage].operation === 'GROUP BY') {
 
     const groupByMatch = editedText.match(/\bGROUP BY\b\s+(\S+)/i);
@@ -1458,7 +1526,6 @@ return (
         setIsModalOpen(true);
     }
 }
-
   if (explanation[currentPage].operation === 'BIN BY') {
 
     const validBinByOptions = ['year', 'month', 'week', 'day', 'weekday', 'quarter'];
