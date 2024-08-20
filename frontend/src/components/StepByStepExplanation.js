@@ -1349,6 +1349,78 @@ return (
         setIsModalOpen(true);
     }
   }
+  if (explanation[currentPage].operation === 'SELECT') {
+
+    const columns = editedText.toLowerCase().replace('select ', '').split(',').map(col => col.trim());
+    let othercolumns = []
+    if (columns.length == 2)  {
+        const [firstColumn, secondColumn] = columns;
+        const validAggFunctions = ['sum', 'avg', 'count', 'min', 'max'];
+
+        if (validAggFunctions.some(func => firstColumn.startsWith(func + '('))) {
+            const aggFunctionMatch = firstColumn.match(/(\w+)\((\w+)\)/);
+            if (aggFunctionMatch) {
+                const aggFunction = aggFunctionMatch[1];
+                const aggColumn = aggFunctionMatch[2];
+
+                if (validAggFunctions.includes(aggFunction) && totalColumns.includes(aggColumn)) {
+                    setAggFunction(aggFunction.toUpperCase());
+                    setAggColumn(aggColumn);
+                } else {
+                    setError(`Invalid aggregation function or column in "${firstColumn}".`);
+                    setIsModalOpen(true);
+                    return;
+                }
+            } else {
+                setError(`The format of "${firstColumn}" is incorrect.`);
+                setIsModalOpen(true);
+                return;
+            }
+        } else if (totalColumns.includes(firstColumn)) {
+            othercolumns.push(firstColumn)
+            setSelectedColumnsOthers(othercolumns)
+        } else {
+            setError(`The column of "${firstColumn}" does not exist in the table.`);
+            setIsModalOpen(true);
+            return;
+        }
+
+        if (validAggFunctions.some(func => secondColumn.startsWith(func + '('))) {
+            const aggFunctionMatch = secondColumn.match(/(\w+)\((\w+)\)/);
+            if (aggFunctionMatch) {
+                const aggFunction = aggFunctionMatch[1];
+                const aggColumn = aggFunctionMatch[2];
+
+                if (validAggFunctions.includes(aggFunction) && totalColumns.includes(aggColumn)) {
+                    setAggFunction(aggFunction.toUpperCase());
+                    setAggColumn(aggColumn);
+                } else {
+                    setError(`Invalid aggregation function or column in "${secondColumn}".`);
+                    setIsModalOpen(true);
+                    return;
+                }
+            } else {
+                setError(`The format of "${secondColumn}" is incorrect.`);
+                setIsModalOpen(true);
+                return;
+            }
+        } else if (totalColumns.includes(secondColumn)) {
+            othercolumns.push(secondColumn)
+            setSelectedColumnsOthers(othercolumns)
+            if (othercolumns.length==2){
+            setAggColumn(null)
+            setAggFunction(null)}
+        } else {
+            setError(`The column of "${secondColumn}" does not exist in the table.`);
+            setIsModalOpen(true);
+            return;
+        }
+
+    } else {
+        setError('The SELECT clause must be followed by two valid values.');
+        setIsModalOpen(true);
+    }
+}
   if (explanation[currentPage].operation === 'ORDER BY') {
 
     const selectMatch = VQL.replace(/\n/g, ' ').match(/select\s+(.+?)\s+from/i);
@@ -1393,7 +1465,7 @@ return (
 
     const binByMatch = editedText.match(/\bBIN BY\b\s+(\S+)/i);
     if (binByMatch) {
-        const binByColumn = binByMatch[1];
+        const binByColumn = binByMatch[1].toLowerCase();
 
         if (validBinByOptions.includes(binByColumn)) {
             setBinByColumn(binByColumn);
@@ -1413,7 +1485,7 @@ return (
 
     const visualizeMatch = editedText.match(/\bVISUALIZE\b\s+(\S+)/i);
     if (visualizeMatch) {
-        const visualizeType = visualizeMatch[1];
+        const visualizeType = visualizeMatch[1].toLowerCase();
 
         if (validVisualizeTypes.includes(visualizeType)) {
             setchart(visualizeType)
@@ -2680,9 +2752,9 @@ return (
                       <Typography
                         variant="body2"
                         className="vql-line"
-                        onClick={() => handleEditClick(step.clause)}
+                        onClick={() => handleEditClick(editedVQL)}
                       >
-                        {formatVQLLine(step.clause)}
+                        {formatVQLLine(editedVQL)}
                       </Typography>
                     )}
                   </CardContent>
