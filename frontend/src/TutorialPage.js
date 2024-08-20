@@ -153,6 +153,7 @@ function TutorialPage() {
             <div className="second-row">
               {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
                 <StepByStepExplanation
+                  VQL={generatedVQL.VQL}
                   explanation={generatedVQL.explanation}
                   tableData={tableData}
                   showVQL={showVQL}

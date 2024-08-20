@@ -103,7 +103,7 @@ const aggregateFunctionAliases = {
 };
 const aggregateFunctions = Object.keys(aggregateFunctionAliases);
 
-const StepByStepExplanation = ({ explanation, tableData, showVQL, currentPage, onPageChange }) => {
+const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPage, onPageChange }) => {
   const [editingText, setEditingText] = useState(null);
   const [editedText, setEditedText] = useState('');
   const [editedVQL, setEditedVQL] = useState('');
@@ -1251,6 +1251,19 @@ return (
   const handleBlur = () => {
     setEditingText(false);
     setEditedVQL(editedText);
+
+    const totalTables = [];
+    const totalColumns = [];
+
+    tableData.tableNames.forEach((tableName) => {
+        const tableRegex = new RegExp(`\\b${tableName}\\b`, 'gi');
+        if (VQL.match(tableRegex)) {
+            totalTables.push(tableName);
+            const columns = Object.keys(tableData.tables[tableName][0]);
+            totalColumns.push(...columns);
+        }
+    });
+
     if (explanation[currentPage].operation === 'FROM') {
       const fromMatch = editedText.match(/\bFROM\b/i);
       if (fromMatch) {
@@ -1317,6 +1330,24 @@ return (
           setIsModalOpen(true);
       }
   }
+  if (explanation[currentPage].operation === 'GROUP BY') {
+    // 验证 GROUP BY 子句
+    const groupByMatch = editedText.match(/\bGROUP BY\b\s+(\S+)/i);
+    if (groupByMatch) {
+        const columnName = groupByMatch[1];
+
+        // 验证列名是否存在于 totalColumns 中
+        if (totalColumns.includes(columnName)) {
+          setGroupColumn(columnName)
+        } else {
+            setError(`The column "${columnName}" in GROUP BY does not exist in the referenced tables.`);
+            setIsModalOpen(true);
+        }
+    } else {
+        setError('The GROUP BY clause must be followed by a single column name.');
+        setIsModalOpen(true);
+    }
+}
     console.log('Edited text:', editedText);
   };
 
@@ -2432,9 +2463,9 @@ return (
                       <Typography
                         variant="body2"
                         className="vql-line"
-                        onClick={() => handleEditClick(step.clause)}
+                        onClick={() => handleEditClick(editedVQL)}
                       >
-                        {formatVQLLine(step.clause)}
+                        {formatVQLLine(editedVQL)}
                       </Typography>
                     )}
                   </CardContent>
@@ -2483,9 +2514,9 @@ return (
                     <Typography
                       variant="body2"
                       className="vql-line"
-                      onClick={() => handleEditClick(step.clause)}
+                      onClick={() => handleEditClick(editedVQL)}
                     >
-                      {formatVQLLine(step.clause)}
+                      {formatVQLLine(editedVQL)}
                     </Typography>
                   )}
                 </CardContent>
