@@ -1,5 +1,5 @@
 // src/components/TutorialPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NaturalLanguageQuery from './components/NaturalLanguageQuery';
 import DataTable from './components/DataTable';
 import Visualization from './components/Visualization.js';
@@ -11,6 +11,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import './components/styles/styles.css';
 import Alert from '@mui/material/Alert';
 import Modal from '@mui/material/Modal';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import VQLEditor from './components/VQLEditor.js'
 
 const defaultData = {
   tables: {
@@ -38,7 +41,7 @@ const defaultData = {
 
 function TutorialPage() {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
-  const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', vegaLiteSpec: null, explanation: [] });
+  const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', explanation: [] });
   const [tableData, setTableData] = useState(defaultData);
   const [showVQL, setShowVQL] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -60,7 +63,6 @@ function TutorialPage() {
     setIsLoading(true); // Start loading
     setError(null); // Clear any previous errors
     try {
-      // Your generation logic here, wrapped in try-catch to catch unexpected errors
       setGeneratedVQL(generated);
       setCurrentPage(0); // Reset to page 0 when new data is generated
     } catch (err) {
@@ -71,11 +73,30 @@ function TutorialPage() {
     }
   };
 
+  const handleExecuteVQL = async (edited) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      setGeneratedVQL(edited);
+      setCurrentPage(0); // Reset to page 0 when new data is generated
+    } catch (err) {
+      console.error('Error during VQL execution:', err);
+      setError('An error occurred while executing the VQL. Please refine your VQL.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleDataUpdate = (data) => {
     setTableData(data);
   };
+  
+  useEffect(() => {
+    console.log('Generated VQL and explanation updated:', generatedVQL);
+}, [generatedVQL]);
+
   const placeholderText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
+
 
   return (
     <div>
@@ -97,26 +118,39 @@ function TutorialPage() {
               <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">
-              {isLoading ? (
+              {/* {
+              isLoading ? (
                   <div className="loading-container">
                     <CircularProgress />
                     <Typography variant="body2" color="textSecondary">Generating visualization...</Typography>
                   </div>
-                ) : (
-                  generatedVQL.explanation.length > 0 && (
-                    <FinalVis
-                      VQL={generatedVQL.VQL}
-                      explanation={generatedVQL.explanation}
-                      tableData={tableData}
-                      showVQL={showVQL}
-                    />
+                ) : ( */}
+                {
+                  generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
+                    <div className="visualize">
+                      <Typography variant="h6" className="visualize-title">/ Visualization</Typography>
+                          <FinalVis
+                          VQL={generatedVQL.VQL}
+                          explanation={generatedVQL.explanation}
+                          tableData={tableData}
+                          showVQL={showVQL}
+                        />
+                      {showVQL && (
+                        <VQLEditor
+                          initialVQL={generatedVQL.VQL}
+                          onExecute={handleExecuteVQL}
+                        />
+                      )}
+                  </div>
+                    
                   )
-                )}
+                // )
+              }
               </div>
             </div>
             <hr />
             <div className="second-row">
-              {generatedVQL.explanation.length > 0 && (
+              {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
                 <StepByStepExplanation
                   explanation={generatedVQL.explanation}
                   tableData={tableData}

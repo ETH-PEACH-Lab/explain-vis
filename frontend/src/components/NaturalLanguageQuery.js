@@ -38,7 +38,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
     // Replace the matched keywords, operators, and functions with uppercase, and insert the escaped newline for keywords
     return vql.replace(regex, (match) => {
         if (keywords.includes(match.toUpperCase())) {
-            return `\\n${match.toUpperCase()}`;
+            return `\n${match.toUpperCase()}`;
         } else {
             return match.toUpperCase();
         }
@@ -52,33 +52,8 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
     try {
       if (query === demoText) {
         // 使用测试数据
-        const VQL = 'VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY avg(price) DESC\\nBIN BY quarter'
+        const VQL = 'VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter'
 
-        const vegaLiteSpec= {
-          "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-          "data": {
-            "values": [
-              {"quarter":"2022-Q4","avg_price":2000},
-              {"quarter":"2010-Q4","avg_price":1000}
-            ]
-          },
-          "mark": "bar",
-          "encoding": {
-            "x": {"field": "quarter", "type": "ordinal", "title": "Quarter"},
-            "y": {"field": "avg_price", "type": "quantitative", "title": "Average Price"},
-            "color": {"field": "quarter", "type": "nominal", "title": "Quarter"},
-            "tooltip": [
-              {"field": "quarter", "type": "ordinal", "title": "Quarter"},
-              {"field": "avg_price", "type": "quantitative", "title": "Average Price"}
-            ]
-          },
-          "config": {
-            "axis": {
-              "labelFontSize": 12,
-              "titleFontSize": 14
-            }
-          }
-        }
         const explanation=[
             {
               "step": 1,
@@ -140,7 +115,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
             }]
         
 
-        onGenerate({ VQL, vegaLiteSpec, explanation });
+        onGenerate({ VQL, explanation });
       } else {
       const data = tableData;
       const baseUrl = process.env.REACT_APP_API_URL;
@@ -157,7 +132,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
 
       if (response.ok) {
         const result = await response.json();
-        let { VQL, vegaLiteSpec } = result;
+        let { VQL} = result;
       
         VQL = formatVQL(VQL)
 
@@ -178,7 +153,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
           console.log('result',explanationResult)
           const { explanation } = explanationResult;
           console.log('explanation:', explanation);
-          onGenerate({ VQL, vegaLiteSpec, explanation });
+          onGenerate({ VQL, explanation });
         } else {
           const { error } = await explanationResponse.json();
           throw new Error(error || 'Error fetching explanation');

@@ -925,22 +925,22 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   )) : null;
   return (
 
-    <div className="visualize">
-        <Typography variant="h6" className="visualize-title">/ Visualization</Typography>
+    // <div className="visualize">
+    //     <Typography variant="h6" className="visualize-title">/ Visualization</Typography>
         <div className="chart">
         {explanation && explanation.length > 0 ? renderStepContent(explanation[explanation.length-1], explanation) : <Typography variant="body2">No explanations available</Typography>}
         </div>
-        {showVQL && (
-        <><Typography variant="h6" className="vql-title">/ VQL</Typography>
-        <Card className="vql-card">
-          <CardContent>
-            <div className="vql-content">
-              {formattedVQL}
-            </div>
-          </CardContent>
-        </Card></>
-      )}
-    </div>
+      //   {showVQL && (
+      //   <><Typography variant="h6" className="vql-title">/ VQL</Typography>
+      //   <Card className="vql-card">
+      //     <CardContent>
+      //       <div className="vql-content">
+      //         {formattedVQL}
+      //       </div>
+      //     </CardContent>
+      //   </Card></>
+      // )}
+    // </div>
   );
 };
 
