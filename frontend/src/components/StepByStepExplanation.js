@@ -1273,6 +1273,50 @@ return (
           setIsModalOpen(true);
       }
   }
+    if (explanation[currentPage].operation === 'JOIN') {
+      // 验证 JOIN 子句
+      const joinMatch = editedText.match(/\bJOIN\b\s+(\S+)\s+\bON\b/i);
+      if (joinMatch) {
+          const joinTable = joinMatch[1];
+          if (tableData.tableNames.includes(joinTable)) {
+              // 验证 ON 子句
+              const onMatch = editedText.match(/\bON\b\s+(\S+)\.(\S+)\s*=\s*(\S+)\.(\S+)/i);
+              if (onMatch) {
+                  const table1 = onMatch[1];
+                  const column1 = onMatch[2];
+                  const table2 = onMatch[3];
+                  const column2 = onMatch[4];
+
+                  // 验证表和列的有效性
+                  const isValidTable1 = tableData.tableNames.includes(table1);
+                  const isValidTable2 = tableData.tableNames.includes(table2);
+                  const isValidColumn1 = isValidTable1 && tableData.tables[table1][0].hasOwnProperty(column1);
+                  const isValidColumn2 = isValidTable2 && tableData.tables[table2][0].hasOwnProperty(column2);
+
+                  if (isValidTable1 && isValidColumn1 && isValidTable2 && isValidColumn2) {
+                      // 如果验证通过，设置表和列的状态
+                      setJoinfindTable1(table1);
+                      setJoinfindColumn1(column1);
+                      setJoinfindTable2(table2);
+                      setJoinfindColumn2(column2);
+                      console.log(`JOIN is valid between ${table1}.${column1} and ${table2}.${column2}`);
+                  } else {
+                      setError('Invalid table or column in ON clause.');
+                      setIsModalOpen(true);
+                  }
+              } else {
+                  setError('The ON clause is not valid or missing.');
+                  setIsModalOpen(true);
+              }
+          } else {
+              setError(`The table name "${joinTable}" in JOIN is not valid.`);
+              setIsModalOpen(true);
+          }
+      } else {
+          setError('The JOIN clause is not valid or missing ON clause.');
+          setIsModalOpen(true);
+      }
+  }
     console.log('Edited text:', editedText);
   };
 
@@ -2288,9 +2332,9 @@ return (
                       <Typography
                         variant="body2"
                         className="vql-line"
-                        onClick={() => handleEditClick(step.clause)}
+                        onClick={() => handleEditClick(editedVQL)}
                       >
-                        {formatVQLLine(step.clause)}
+                        {formatVQLLine(editedVQL)}
                       </Typography>
                     )}
                   </CardContent>
