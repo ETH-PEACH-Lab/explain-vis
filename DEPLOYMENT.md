@@ -8,6 +8,7 @@ docker login ghcr.io --username github-account
 ```
 2. Build the image for the server
 ```
+rm -rf backend/node_modules
 docker-compose -f docker-compose.prod.yml build
 ```
 
