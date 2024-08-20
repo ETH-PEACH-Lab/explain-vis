@@ -139,6 +139,7 @@ function TutorialPage() {
                         <VQLEditor
                           initialVQL={generatedVQL.VQL}
                           onExecute={handleExecuteVQL}
+                          tableData={tableData}
                         />
                       )}
                   </div>

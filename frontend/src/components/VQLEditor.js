@@ -7,13 +7,46 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
-function VQLEditor({ initialVQL, onExecute }) {
-  const [vql, setVql] = useState(initialVQL);
-  const [isLoading, setIsLoading] = useState(false); // Loading state
-  const [error, setError] = useState(null); // Error state
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
-  const [editingText, setEditingText] = useState(false); // 是否处于编辑状态
-  const [editedText, setEditedText] = useState(''); // 编辑中的文本
+  function VQLEditor({ initialVQL, onExecute, tableData }) {
+    const [vql, setVql] = useState(initialVQL);
+    const [isLoading, setIsLoading] = useState(false); // Loading state
+    const [error, setError] = useState(null); // Error state
+    const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+    const [editingText, setEditingText] = useState(false); // 是否处于编辑状态
+    const [editedText, setEditedText] = useState(''); // 编辑中的文本
+
+    function formatVQL(vql) {
+      // Define the list of keywords, operators, and functions to insert a newline before and to uppercase
+      const keywords = [
+          'VISUALIZE', 'SELECT', 'FROM', 'JOIN', 'WHERE', 'GROUP BY', 'ORDER BY', 'BIN BY'
+      ];
+  
+      const operators = [
+          'AND', 'OR', 'NOT','ON', 'BETWEEN', 'IN', 'LIKE', 'IS', '=', '!=', '<>', '<', '<=', '>', '>=',
+          '\\+', '-', '\\*', '/', '%', '\\^', '&&', '\\|\\|', '!', 'ASC', 'DESC'
+      ];
+  
+      const functions = [
+          'SUM', 'AVG', 'COUNT', 'MIN', 'MAX'
+      ];
+  
+      // Combine all for the regex
+      const allTerms = [...keywords, ...operators, ...functions];
+  
+      // Regular expression to match keywords, operators, and functions, with word boundaries and case-insensitive flag
+      const regex = new RegExp(`\\b(${allTerms.join('|')})\\b`, 'gi');
+  
+      let VQL = vql.replace(/\n/g, ' ');
+      // Replace the matched keywords, operators, and functions with uppercase, and insert the escaped newline for keywords
+      return VQL.replace(regex, (match) => {
+          if (keywords.includes(match.toUpperCase())) {
+              return `\n${match.toUpperCase()}`;
+          } else {
+              return match.toUpperCase();
+          }
+      }).trim();
+  }
+  
 
   useEffect(() => {
     setVql(initialVQL);
@@ -40,14 +73,15 @@ function VQLEditor({ initialVQL, onExecute }) {
       const baseUrl = process.env.REACT_APP_API_URL;
       const explanationApiUrl = `${baseUrl}/api/explain-vql`;
       console.log('API URL:', explanationApiUrl);
-      console.log('edited VQL:', vql);
+      const VQL = formatVQL(vql)
+      console.log('edited VQL:', VQL);
 
       const explanationResponse = await fetch(explanationApiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ VQL: vql }),
+        body: JSON.stringify({ VQL: VQL, tableData }),
       });
 
       if (explanationResponse.ok) {
@@ -58,7 +92,7 @@ function VQLEditor({ initialVQL, onExecute }) {
           throw new Error('Invalid explanation received'); // 如果 explanation 不是数组，则抛出错误
         }
         console.log('explanation:', explanation);
-        const updatedGeneratedVQL = { VQL: vql, explanation };
+        const updatedGeneratedVQL = { VQL: VQL, explanation };
         onExecute(updatedGeneratedVQL);
       } else {
         const { error } = await explanationResponse.json();
@@ -74,7 +108,7 @@ function VQLEditor({ initialVQL, onExecute }) {
   };
 
   const formatVQLLine = (line) => {
-    return line.split('\\n').map((segment, i) => (
+    return line.split('\n').map((segment, i) => (
       <div key={i} style={{ marginBottom: '4px' }}>
         {segment.split('').map((char, index) => {
           if (char >= 'A' && char <= 'Z') {
@@ -139,7 +173,7 @@ function VQLEditor({ initialVQL, onExecute }) {
               onClick={() => handleEditClick(vql)}
               style={{ whiteSpace: 'pre-wrap', cursor: 'pointer' }} 
             >
-              {formatVQLLine(vql)}
+              {formatVQLLine(formatVQL(vql))}
             </Typography>
           )}
         </CardContent>

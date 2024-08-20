@@ -145,7 +145,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ VQL}),
+          body: JSON.stringify({ VQL, data}),
         });
                 
         if (explanationResponse.ok) {
