@@ -150,7 +150,7 @@ import Box from '@mui/material/Box';
         <CardContent>
           {editingText ? (
             <textarea
-              value={editedText}
+              value={formatVQL(editedText)}
               onChange={handleVqlChange}
               onBlur={handleBlur}
               autoFocus
