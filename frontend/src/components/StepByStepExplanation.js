@@ -1271,7 +1271,6 @@ return (
           if (tableNameMatch) {
               const tableName = tableNameMatch[1];
               if (tableData.tableNames.includes(tableName)) {
-                  // 如果验证通过，设置表格名称
                   setFromTable(tableName);
               } else {
                   setError(`The table name "${tableName}" is not valid.`);
@@ -1287,12 +1286,12 @@ return (
       }
   }
     if (explanation[currentPage].operation === 'JOIN') {
-      // 验证 JOIN 子句
+
       const joinMatch = editedText.match(/\bJOIN\b\s+(\S+)\s+\bON\b/i);
       if (joinMatch) {
           const joinTable = joinMatch[1];
           if (tableData.tableNames.includes(joinTable)) {
-              // 验证 ON 子句
+
               const onMatch = editedText.match(/\bON\b\s+(\S+)\.(\S+)\s*=\s*(\S+)\.(\S+)/i);
               if (onMatch) {
                   const table1 = onMatch[1];
@@ -1300,14 +1299,12 @@ return (
                   const table2 = onMatch[3];
                   const column2 = onMatch[4];
 
-                  // 验证表和列的有效性
                   const isValidTable1 = tableData.tableNames.includes(table1);
                   const isValidTable2 = tableData.tableNames.includes(table2);
                   const isValidColumn1 = isValidTable1 && tableData.tables[table1][0].hasOwnProperty(column1);
                   const isValidColumn2 = isValidTable2 && tableData.tables[table2][0].hasOwnProperty(column2);
 
                   if (isValidTable1 && isValidColumn1 && isValidTable2 && isValidColumn2) {
-                      // 如果验证通过，设置表和列的状态
                       setJoinfindTable1(table1);
                       setJoinfindColumn1(column1);
                       setJoinfindTable2(table2);
@@ -1331,12 +1328,11 @@ return (
       }
   }
   if (explanation[currentPage].operation === 'GROUP BY') {
-    // 验证 GROUP BY 子句
+
     const groupByMatch = editedText.match(/\bGROUP BY\b\s+(\S+)/i);
     if (groupByMatch) {
         const columnName = groupByMatch[1];
 
-        // 验证列名是否存在于 totalColumns 中
         if (totalColumns.includes(columnName)) {
           setGroupColumn(columnName)
         } else {
@@ -1347,7 +1343,28 @@ return (
         setError('The GROUP BY clause must be followed by a single column name.');
         setIsModalOpen(true);
     }
-}
+  }
+  if (explanation[currentPage].operation === 'BIN BY') {
+
+    const validBinByOptions = ['year', 'month', 'week', 'day', 'weekday', 'quarter'];
+
+    const binByMatch = editedText.match(/\bBIN BY\b\s+(\S+)/i);
+    if (binByMatch) {
+        const binByColumn = binByMatch[1];
+
+        if (validBinByOptions.includes(binByColumn)) {
+            setBinByColumn(binByColumn);
+            console.log(`BIN BY column "${binByColumn}" is valid.`);
+        } else {
+            setError(`The BIN BY option "${binByColumn}" is not valid. It must be one of ${validBinByOptions.join(', ')}.`);
+            setIsModalOpen(true);
+        }
+    } else {
+        setError('The BIN BY clause is missing or not followed by a valid option.');
+        setIsModalOpen(true);
+    }
+  }
+
     console.log('Edited text:', editedText);
   };
 
@@ -2755,9 +2772,9 @@ return (
                   <Typography
                     variant="body2"
                     className="vql-line"
-                    onClick={() => handleEditClick(step.clause)}
+                    onClick={() => handleEditClick(editedVQL)}
                   >
-                    {formatVQLLine(step.clause)}
+                    {formatVQLLine(editedVQL)}
                   </Typography>
                 )}
               </CardContent>
