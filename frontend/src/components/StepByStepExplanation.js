@@ -23,6 +23,7 @@ import Alert from '@mui/material/Alert';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { logEvent } from '../utils/logger'; 
 
 const parseCondition = (condition) => {
   const range = [0, 3000];
@@ -103,7 +104,7 @@ const aggregateFunctionAliases = {
 };
 const aggregateFunctions = Object.keys(aggregateFunctionAliases);
 
-const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPage, onPageChange }) => {
+const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPage, onPageChange, userId }) => {
   const [editingText, setEditingText] = useState(null);
   const [editedText, setEditedText] = useState('');
   const [editedVQL, setEditedVQL] = useState('');
@@ -1278,12 +1279,15 @@ return (
   const handleEditClick = (text) => {
     setEditingText(true);
     setEditedText(text);
+    logEvent(userId, `explanation current operation: ${explanation[currentPage].operation}`);
+    logEvent(userId, `explanation current vql: ${explanation[currentPage].operation}`);
+    logEvent(userId, `Editing VQL: ${editedVQL}`);
   };
 
   const handleBlur = () => {
     setEditingText(false);
     setEditedVQL(editedText);
-
+    logEvent(userId, `Editing VQL: ${editedVQL}`);
     const totalTables = [];
     const totalColumns = [];
     tableData.tableNames.forEach((tableName) => {
@@ -1303,16 +1307,20 @@ return (
               const tableName = tableNameMatch[1];
               if (tableData.tableNames.includes(tableName)) {
                   setFromTable(tableName);
+                  logEvent(userId, `Editing VQL success: Change table name from "${fromTable}" to "${tableName}".`);
               } else {
                   setError(`The table name "${tableName}" is not valid.`);
+                  logEvent(userId, `Editing VQL fail: The table name "${tableName}" is not valid.`);
                   setIsModalOpen(true);
               }
           } else {
               setError('No table name found after FROM.');
+              logEvent(userId, `Editing VQL fail: No table name found after FROM.`);
               setIsModalOpen(true);
           }
       } else {
           setError('The VQL does not include a FROM clause.');
+          logEvent(userId, `Editing VQL fail: The VQL does not include a FROM clause.`);
           setIsModalOpen(true);
       }
   }
@@ -1341,20 +1349,25 @@ return (
                       setJoinfindTable2(table2);
                       setJoinfindColumn2(column2);
                       console.log(`JOIN is valid between ${table1}.${column1} and ${table2}.${column2}`);
+                      logEvent(userId, `Editing VQL pass: JOIN is valid between ${table1}.${column1} and ${table2}.${column2}.`);
                   } else {
                       setError('Invalid table or column in ON clause.');
+                      logEvent(userId, `Editing VQL fail: Invalid table or column in ON clause.`);
                       setIsModalOpen(true);
                   }
               } else {
                   setError('The ON clause is not valid or missing.');
+                  logEvent(userId, `Editing VQL fail: The ON clause is not valid or missing.`);
                   setIsModalOpen(true);
               }
           } else {
               setError(`The table name "${joinTable}" in JOIN is not valid.`);
+              logEvent(userId, `Editing VQL fail: The table name "${joinTable}" in JOIN is not valid.`);
               setIsModalOpen(true);
           }
       } else {
           setError('The JOIN clause is not valid or missing ON clause.');
+          logEvent(userId, `Editing VQL fail: The JOIN clause is not valid or missing ON clause.`);
           setIsModalOpen(true);
       }
   }
@@ -1371,6 +1384,7 @@ return (
     const closeParens = (whereClause.match(/\)/g) || []).length;
     if (openParens !== closeParens) {
         setError('Mismatched parentheses in WHERE clause.');
+        logEvent(userId, `Editing VQL fail: Mismatched parentheses in WHERE clause.`);
         setIsModalOpen(true);
         return;
     }
@@ -1390,6 +1404,7 @@ return (
 
         if (!totalColumns.includes(token)) {
             setError(`Invalid column or value in WHERE clause: "${token}".`);
+            logEvent(userId, `Editing VQL fail: Invalid column or value in WHERE clause: "${token}".`);
             setIsModalOpen(true);
             return;
         }
@@ -1397,6 +1412,7 @@ return (
 
     setCombinedCondition(whereClause);
     console.log('WHERE clause is valid and set as combined condition:', whereClause);
+    logEvent(userId, `Editing VQL pass: WHERE clause is valid and set as combined condition: "${whereClause}".`);
 }
 
 
@@ -1408,12 +1424,15 @@ return (
 
         if (totalColumns.includes(columnName)) {
           setGroupColumn(columnName)
+          logEvent(userId, `Editing VQL pass: change group by from "${groupcolumn}" to "${columnName}".`);
         } else {
             setError(`The column "${columnName}" in GROUP BY does not exist in the referenced tables.`);
+            logEvent(userId, `Editing VQL fail: The column "${columnName}" in GROUP BY does not exist in the referenced tables.`);
             setIsModalOpen(true);
         }
     } else {
         setError('The GROUP BY clause must be followed by a single column name.');
+        logEvent(userId, `Editing VQL fail: The GROUP BY clause must be followed by a single column name.`);
         setIsModalOpen(true);
     }
   }
@@ -1434,21 +1453,26 @@ return (
                 if (validAggFunctions.includes(aggFunction) && totalColumns.includes(aggColumn)) {
                     setAggFunction(aggFunction.toUpperCase());
                     setAggColumn(aggColumn);
+                    logEvent(userId, `Editing VQL pass: agg-"${aggFunction.toUpperCase()}", column-"${aggColumn}".`);
                 } else {
                     setError(`Invalid aggregation function or column in "${firstColumn}".`);
+                    logEvent(userId, `Editing VQL fail: Invalid aggregation function or column in "${firstColumn}".`);
                     setIsModalOpen(true);
                     return;
                 }
             } else {
                 setError(`The format of "${firstColumn}" is incorrect.`);
+                logEvent(userId, `Editing VQL fail: The format of "${firstColumn}" is incorrect.`);
                 setIsModalOpen(true);
                 return;
             }
         } else if (totalColumns.includes(firstColumn)) {
             othercolumns.push(firstColumn)
             setSelectedColumnsOthers(othercolumns)
+            logEvent(userId, `Editing VQL pass: other-"${othercolumns}".`);
         } else {
             setError(`The column of "${firstColumn}" does not exist in the table.`);
+            logEvent(userId, `Editing VQL fail: The column of "${firstColumn}" does not exist in the table.`);
             setIsModalOpen(true);
             return;
         }

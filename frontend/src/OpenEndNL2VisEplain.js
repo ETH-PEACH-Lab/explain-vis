@@ -126,11 +126,13 @@ function OpenEndNL2VisExplain({data, userId }) {
             <div className="second-row">
               {generatedVQL.explanation.length > 0 && (
                 <StepByStepExplanation
+                VQL={generatedVQL.VQL}
                   explanation={generatedVQL.explanation}
                   tableData={tableData}
                   showVQL={showVQL}
                   currentPage={currentPage}
                   onPageChange={handlePageChange}
+                  userId={userId}
                 />
               )}
             </div>
