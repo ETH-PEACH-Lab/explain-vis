@@ -1,3 +1,6 @@
+// src/utils/logger.js
+
+// Function to log events by sending them to the backend server
 export const logEvent = (sessionId, message) => {
   const baseUrl = process.env.REACT_APP_API_URL;
   fetch(`${baseUrl}/log`, { 

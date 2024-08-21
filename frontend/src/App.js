@@ -381,177 +381,129 @@ function App() {
     },
     placeholderText: "...",
  };
-  const dataScenarioOpen2 = {
-    scenario:"Cinema", 
-      "data": {
-          "tables": {
-              "cinema": [
-                  {
-                      "cinema_id": 1,
-                      "name": "Codling",
-                      "openning_year": 2010,
-                      "capacity": 1100,
-                      "location": "County Wicklow"
-                  },
-                  {
-                      "cinema_id": 2,
-                      "name": "Carrowleagh",
-                      "openning_year": 2012,
-                      "capacity": 368,
-                      "location": "County Cork"
-                  },
-                  {
-                      "cinema_id": 3,
-                      "name": "Dublin Array",
-                      "openning_year": 2015,
-                      "capacity": 364,
-                      "location": "County Dublin"
-                  },
-                  {
-                      "cinema_id": 4,
-                      "name": "Glenmore",
-                      "openning_year": 2009,
-                      "capacity": 305,
-                      "location": "County Clare"
-                  },
-                  {
-                      "cinema_id": 5,
-                      "name": "Glenough",
-                      "openning_year": 2010,
-                      "capacity": 325,
-                      "location": "County Tipperary"
-                  },
-                  {
-                      "cinema_id": 6,
-                      "name": "Gortahile",
-                      "openning_year": 2010,
-                      "capacity": 208,
-                      "location": "County Laois"
-                  },
-                  {
-                      "cinema_id": 7,
-                      "name": "Grouse Lodge",
-                      "openning_year": 2011,
-                      "capacity": 203,
-                      "location": "County Tipperary"
-                  },
-                  {
-                      "cinema_id": 8,
-                      "name": "Moneypoint",
-                      "openning_year": 2011,
-                      "capacity": 225,
-                      "location": "County Clare"
-                  },
-                  {
-                      "cinema_id": 9,
-                      "name": "Mount Callan",
-                      "openning_year": 2011,
-                      "capacity": 908,
-                      "location": "County Clare"
-                  },
-                  {
-                      "cinema_id": 10,
-                      "name": "Oriel",
-                      "openning_year": 2013,
-                      "capacity": 330,
-                      "location": "County Louth"
-                  }
-              ],
-              "film": [
-                  {
-                      "film_id": 1,
-                      "rank_in_series": 26,
-                      "number_in_season": 1,
-                      "title": "The Case of the Mystery Weekend",
-                      "directed_by": "Bill Schreiner",
-                  },
-                  {
-                      "film_id": 2,
-                      "rank_in_series": 27,
-                      "number_in_season": 2,
-                      "title": "The Case of the Smart Dummy",
-                      "directed_by": "Bill Schreiner",
-                  },
-                  {
-                      "film_id": 3,
-                      "rank_in_series": 28,
-                      "number_in_season": 3,
-                      "title": "The Case: Off the Record",
-                      "directed_by": "Bill Schreiner",
-                  },
-                  {
-                      "film_id": 4,
-                      "rank_in_series": 29,
-                      "number_in_season": 4,
-                      "title": "The Case of the Bermuda Triangle",
-                      "directed_by": "Jesus Salvador Trevi\u00f1o",
-                  },
-                  {
-                      "film_id": 5,
-                      "rank_in_series": 30,
-                      "number_in_season": 5,
-                      "title": "The Case of the Piggy Banker",
-                      "directed_by": "Bill Schreiner",
-                  }
-              ],
-              "schedule": [
-                  {
-                      "cinema_id": 1,
-                      "film_id": 1,
-                      "date": "21 May",
-                      "show_times_per_day": 5,
-                      "price": 12.99
-                  },
-                  {
-                      "cinema_id": 1,
-                      "film_id": 2,
-                      "date": "21 May",
-                      "show_times_per_day": 3,
-                      "price": 12.99
-                  },
-                  {
-                      "cinema_id": 1,
-                      "film_id": 3,
-                      "date": "21 Jun",
-                      "show_times_per_day": 2,
-                      "price": 8.99
-                  },
-                  {
-                      "cinema_id": 2,
-                      "film_id": 1,
-                      "date": "11 July",
-                      "show_times_per_day": 5,
-                      "price": 9.99
-                  },
-                  {
-                      "cinema_id": 6,
-                      "film_id": 5,
-                      "date": "2 Aug",
-                      "show_times_per_day": 4,
-                      "price": 12.99
-                  },
-                  {
-                      "cinema_id": 9,
-                      "film_id": 4,
-                      "date": "20 May",
-                      "show_times_per_day": 5,
-                      "price": 9.99
-                  },
-                  {
-                      "cinema_id": 10,
-                      "film_id": 1,
-                      "date": "19 May",
-                      "show_times_per_day": 5,
-                      "price": 15.99
-                  }
-              ]
-          },
-          "tableNames": [
-              "cinema",
-              "film",
-              "schedule"
-          ]
-      },
+  const dataScenarioOpen2 = { 
+    scenario:"College",
+    "data": {
+        "tables": {
+            "student": [
+                {
+                    "stu_num": 324299,
+                    "stu_fname": "John",
+                    "stu_class": "Fr",
+                    "stu_gpa": 2.92,
+                    "stu_transfer": 0,
+                    "dept_code": "ACCT"
+                },
+                {
+                    "stu_num": 324257,
+                    "stu_fname": "Anne",
+                    "stu_class": "Jr",
+                    "stu_gpa": 3.27,
+                    "stu_transfer": 1,
+                    "dept_code": "CIS"
+                },
+                {
+                    "stu_num": 324269,
+                    "stu_fname": "Walter",
+                    "stu_class": "Jr",
+                    "stu_gpa": 3.09,
+                    "stu_transfer": 0,
+                    "dept_code": "CIS"
+                },
+                {
+                    "stu_num": 321452,
+                    "stu_fname": "William",
+                    "stu_class": "So",
+                    "stu_gpa": 2.84,
+                    "stu_transfer": 0,
+                    "dept_code": "BIOL"
+                },
+                {
+                    "stu_num": 324258,
+                    "stu_fname": "Juliette",
+                    "stu_class": "So",
+                    "stu_gpa": 2.26,
+                    "stu_transfer": 1,
+                    "dept_code": "ACCT"
+                },
+                {
+                    "stu_num": 324291,
+                    "stu_fname": "Gerald",
+                    "stu_class": "Sr",
+                    "stu_gpa": 3.87,
+                    "stu_transfer": 0,
+                    "dept_code": "EDU"
+                },
+                {
+                    "stu_num": 324274,
+                    "stu_fname": "Raphael",
+                    "stu_class": "Sr",
+                    "stu_gpa": 3.15,
+                    "stu_transfer": 0,
+                    "dept_code": "ACCT"
+                },
+                {
+                    "stu_num": 324273,
+                    "stu_fname": "John",
+                    "stu_class": "Sr",
+                    "stu_gpa": 2.11,
+                    "stu_transfer": 1,
+                    "dept_code": "ENGL"
+                }
+            ],
+            "enroll": [
+                {
+                    "class_code": "10014",
+                    "stu_num": 321452,
+                    "enroll_grade": "C"
+                },
+                {
+                    "class_code": "10014",
+                    "stu_num": 324257,
+                    "enroll_grade": "B"
+                },
+                {
+                    "class_code": "10018",
+                    "stu_num": 321452,
+                    "enroll_grade": "A"
+                },
+                {
+                    "class_code": "10018",
+                    "stu_num": 324257,
+                    "enroll_grade": "B"
+                },
+                {
+                    "class_code": "10021",
+                    "stu_num": 321452,
+                    "enroll_grade": "C"
+                },
+                {
+                    "class_code": "10021",
+                    "stu_num": 324257,
+                    "enroll_grade": "C"
+                }
+            ],
+            "department": [
+                {
+                    "dept_code": "ACCT",
+                    "dept_name": "Accounting"
+                },
+                {
+                    "dept_code": "BIOL",
+                    "dept_name": "Biology"
+                },
+                {
+                    "dept_code": "CIS",
+                    "dept_name": "Computer Info. Systems"
+                }
+            ]
+        },
+        "tableNames": [
+            "student",
+            "enroll",
+            "department"
+        ]
+    },
     placeholderText: "...",
  };
 

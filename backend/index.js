@@ -275,7 +275,7 @@ function extractVisualizeVQL(vql) {
   }
 }
 
-async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, lastError = '', lastVQL = '') {
+async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, lastError = '', lastVQL = '', userId) {
   let generatedText = ''; // 确保 generatedText 变量被初始化
 
   try {
@@ -286,7 +286,8 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, last
     // 添加生成VQL的最终指示
     prompt += "\nPlease generate VQL in one line and begin with visualize";
     console.log('\nprompts',prompt)
-
+    console.log('\nretries',retries)
+    appendLogToFile(userId, `Prompt sent to OpenAI: ${prompt}`);
     const response = await axios.post(
       openaiApiEndpoint,
       {
@@ -309,12 +310,14 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, last
     generatedText = response.data.choices[0].text.trim(); // 确保 generatedText 被正确赋值
     generatedText = extractVisualizeVQL(generatedText)
     console.log('Generated VQL:', generatedText);
-
+    appendLogToFile(userId, `Attempt ${10 - retries + 1} Generated VQL: ${generatedText}`);
     const validationError = validateVQL(generatedText, tableSchema);
     if (!validationError) {
       console.log('Validation Passed: VQL is valid.');
+      appendLogToFile(userId, `Validation Passed: VQL is valid.`);
       return generatedText.toLowerCase();
     } else {
+      appendLogToFile(userId, `Attempt ${10 - retries + 1}: Validation Failed: ${validationError}`);
       throw new Error(validationError);
     }
   } catch (error) {
@@ -324,8 +327,10 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, last
       const newVQL = generatedText ? generatedText : lastVQL;
       const newError = `${error.message}`; // 清理累积的错误信息
       console.log(`Retrying with additional instruction: ${newError} (${retries} attempts left)`);
+      appendLogToFile(userId, `Retrying with additional instruction: ${newError} (${retries} attempts left)`);
       return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, newError, newVQL);
     } else {
+      appendLogToFile(userId, 'Failed to generate valid VQL from OpenAI after multiple attempts');
       throw new Error('Failed to generate valid VQL from OpenAI after multiple attempts');
     }
   }
@@ -348,6 +353,32 @@ const appendLogToFile = (sessionId, logEntry) => {
     logs = JSON.parse(existingLogs);
   }
 
+  if (typeof logEntry === 'string') {
+    logEntry = { message: logEntry };
+  }
+  
+  // Append the new log entry
+  logs.push({
+    serverTimestamp: new Date().toISOString(),  // Backend timestamp
+    ...logEntry
+  });
+
+  // Write the updated logs back to the file
+  fs.writeFileSync(logFilePath, JSON.stringify(logs, null, 2));  // Pretty print with 2-space indentation
+};
+
+const appendFrontLogToFile = (sessionId, logEntry) => {
+  const logFilePath = path.join(logsDirectory, `${sessionId}.json`);
+
+  let logs = [];
+
+  // Check if the log file already exists
+  if (fs.existsSync(logFilePath)) {
+    // Read the existing logs
+    const existingLogs = fs.readFileSync(logFilePath, 'utf-8');
+    logs = JSON.parse(existingLogs);
+  }
+
   // Append the new log entry
   logs.push(logEntry);
 
@@ -359,11 +390,11 @@ app.post('/log', (req, res) => {
   const { sessionId, message } = req.body;
 
   const logEntry = {
-    timestamp: new Date().toISOString(),
+    serverTimestamp: new Date().toISOString(),  // Add server timestamp here
     message,
   };
 
-  appendLogToFile(sessionId, logEntry);
+  appendFrontLogToFile(sessionId, logEntry);
 
   res.send('Log saved');
 });
@@ -371,76 +402,39 @@ app.post('/log', (req, res) => {
 
 app.post('/api/generate-vegalite', async (req, res) => {
   console.time('GET * VQL Request Duration');
-  const { query, data } = req.body;
+  const { query, data, userId } = req.body;
   // console.log('Received POST request');
   // console.log('Query:', query);
   // console.log('Data:', data);
-
+  appendLogToFile(userId, `API Received query: ${query}`)
   const db_id = './utils/data/database'; // Set the db_id based on your directory structure
   const exampleEncoderQuestions = fs.readFileSync('./utils/data/train/train_encode.txt', 'utf-8').split('\n');
   const exampleDecoderAnswers = fs.readFileSync('./utils/data/train/train_decode_db.txt', 'utf-8').split('\n');
   const limitTable = 0;
   const nshot = 10;
 
-  // try {
-  //   const prompt = await composePrompt(data, query, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
-
-  //   // console.log('api', openaiApiKey);
-  //   console.log('prompt', prompt);
-
-  //   const response = await axios.post(
-  //     openaiApiEndpoint,
-  //     {
-  //       model: "gpt-3.5-turbo-instruct",
-  //       prompt: prompt,
-  //       temperature: 1,
-  //       max_tokens: 1000,
-  //       top_p: 1,
-  //       frequency_penalty: 0,
-  //       presence_penalty: 0,
-  //     },
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${openaiApiKey}`,
-  //       },
-  //       // proxy: {
-  //       //   protocol: "http",
-  //       //   host: "127.0.0.1",
-  //       //   port: 7890,
-  //       // },
-  //     }
-  //   );
-
-  //   const generatedText = response.data.choices[0].text;
-  //   console.timeEnd('GET * VQL Request Duration');
-  //   console.log(generatedText)
-  //   res.json({ VQL: generatedText });
-  // } catch (error) {
-  //   console.error('Error:', error.message);
-  //   if (error.response) {
-  //     console.error('Status:', error.response.status);
-  //     console.error('Headers:', error.response.headers);
-  //     console.error('Data:', error.response.data);
-  //   }
-  //   res.status(500).json({ error: error.message });
-  // }
   try {
     const prompt = await composePrompt(data, query, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
 
     console.log('Generated Prompt:', prompt);
+    appendLogToFile(userId, `API Generated Prompt: ${prompt}`)
 
-    const generatedText = await callOpenAIWithRetryforVQL(prompt,data);
+    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,10,userId);
 
     console.timeEnd('GET * VQL Request Duration');
     console.log('Generated VQL:', generatedText);
+    appendLogToFile(userId, `API Generated VQL: ${generatedText}`);
     res.json({ VQL: generatedText });
   } catch (error) {
     console.error('Error:', error.message);
+    appendLogToFile(userId, `Error: ${error.message}`);
     if (error.response) {
       console.error('Status:', error.response.status);
       console.error('Headers:', error.response.headers);
       console.error('Data:', error.response.data);
+      appendLogToFile(userId, `API Error Status: ${error.response.status}`);
+      appendLogToFile(userId, `API Error Headers: ${JSON.stringify(error.response.headers)}`);
+      appendLogToFile(userId, `API Error Data: ${JSON.stringify(error.response.data)}`);
     }
     res.status(500).json({ error: error.message });
   }
@@ -503,7 +497,9 @@ async function callOpenAIWithRetry(prompt, retries = 10) {
 
 app.post('/api/explain-vql', async (req, res) => {
   console.time('POST /api/explain-vql Duration');
-  const { VQL, tableSchema } = req.body;
+  const { VQL, tableSchema, userId } = req.body;
+
+  appendLogToFile(userId, `API Received VQL: ${VQL}`);
 
   const VQL_exp = 'VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter'
 
@@ -602,72 +598,31 @@ app.post('/api/explain-vql', async (req, res) => {
   JSON:
   `
 
-//   try {
-//     const response = await axios.post(
-//         `${openaiApiEndpoint}`,
-//         {
-//           model: "gpt-3.5-turbo-instruct",
-//           prompt: prompt,
-//           temperature: 1,
-//           max_tokens: 2000,
-//           top_p: 1,
-//           frequency_penalty: 0,
-//           presence_penalty: 0,
-//         },
-//         // {
-//         //   model: "gpt-3.5-turbo",
-//         //   messages: [
-//         //     {
-//         //       role: "system",
-//         //       content: "You are a helpful assistant that formats explanations for VQL queries."
-//         //     },
-//         //     {
-//         //       role: "user",
-//         //       content: prompt
-//         //     }
-//         //   ],
-//         //   temperature: 1,
-//         //   max_tokens: 2000,
-//         //   top_p: 1,
-//         //   frequency_penalty: 0,
-//         //   presence_penalty: 0,
-//         // },
-//         {
-//           // proxy: {
-//           //   protocol: "http",
-//           //   host: "127.0.0.1",
-//           //   port: 7890,
-//           // },
-//           headers: {
-//             "Content-Type": "application/json",
-//             Authorization: `Bearer ${openaiApiKey}`,
-//           },
-//       }
-//     );
-//   // console.log("Response explanation from OpenAI:", response.data.choices[0].text.trim());
-
-//   const explanation = await parseJSONWithRetry(response.data.choices[0].text.trim());
-//   console.timeEnd('POST /api/explain-vql Duration');
-//   console.log("Parsed JSON Explanation:", explanation);
-  
-//   res.json(explanation);
-// } catch (error) {
-//   console.error('Error parsing JSON:', error.message);
-//   res.status(500).json({ error: error.message });
-// }
   try {
         const validationError = validateVQL(VQL, tableSchema);
         if (!validationError) {
           console.log('Validation Passed: VQL is valid.');
+          appendLogToFile(userId, `API Input VQL is valid.`);
+          
           const explanation = await callOpenAIWithRetry(prompt);
           console.timeEnd('POST /api/explain-vql Duration');
           console.log("Parsed JSON Explanation:", explanation);
+          appendLogToFile(userId, `API Generated Explanation: ${JSON.stringify(explanation)}`);
+
           res.json(explanation);
         } else {
+          appendLogToFile(userId, `API Input VQL Validation Failed: ${validationError}`);
           throw new Error(validationError);
         }
   } catch (error) {
     console.error('Final error after retries:', error.message);
+    appendLogToFile(userId, `Final error after retries: ${error.message}`);
+
+    if (error.response) {
+      appendLogToFile(userId, `API Error Status: ${error.response.status}`);
+      appendLogToFile(userId, `API Error Headers: ${JSON.stringify(error.response.headers)}`);
+      appendLogToFile(userId, `API Error Data: ${JSON.stringify(error.response.data)}`);
+    }
     res.status(500).json({ error: error.message });
   }
 });

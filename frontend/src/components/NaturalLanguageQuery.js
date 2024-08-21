@@ -7,48 +7,21 @@ import './styles/naturalLanguageQuery.css';
 import Alert from '@mui/material/Alert';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import { logEvent } from '../utils/logger'; 
 
-function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
+function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }) {
   const [query, setQuery] = useState(placeholderText);
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
-  function formatVQL(vql) {
-    // Define the list of keywords, operators, and functions to insert a newline before and to uppercase
-    const keywords = [
-        'VISUALIZE', 'SELECT', 'FROM', 'JOIN', 'WHERE', 'GROUP BY', 'ORDER BY', 'BIN BY'
-    ];
-
-    const operators = [
-        'AND', 'OR', 'NOT','ON', 'BETWEEN', 'IN', 'LIKE', 'IS', '=', '!=', '<>', '<', '<=', '>', '>=',
-        '\\+', '-', '\\*', '/', '%', '\\^', '&&', '\\|\\|', '!', 'ASC', 'DESC'
-    ];
-
-    const functions = [
-        'SUM', 'AVG', 'COUNT', 'MIN', 'MAX'
-    ];
-
-    // Combine all for the regex
-    const allTerms = [...keywords, ...operators, ...functions];
-
-    // Regular expression to match keywords, operators, and functions, with word boundaries and case-insensitive flag
-    const regex = new RegExp(`\\b(${allTerms.join('|')})\\b`, 'gi');
-
-    // Replace the matched keywords, operators, and functions with uppercase, and insert the escaped newline for keywords
-    return vql.replace(regex, (match) => {
-        if (keywords.includes(match.toUpperCase())) {
-            return `\n${match.toUpperCase()}`;
-        } else {
-            return match.toUpperCase();
-        }
-    }).trim();
-}
-
   const handleGenerate = async () => {
     setIsLoading(true); // Start loading
+    console.log('Start handleGenerate');
+    logEvent(userId, 'Generate button clicked');
+    
     const demoText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
-
+  
     try {
       if (query === demoText) {
         // 使用测试数据
@@ -114,62 +87,69 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText}) {
               "clause": "VISUALIZE bar"
             }]
         
+        logEvent(userId, `Generated VQL: ${VQL}`);
+        logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
 
         onGenerate({ VQL, explanation });
       } else {
-      const data = tableData;
-      const baseUrl = process.env.REACT_APP_API_URL;
-      const apiUrl = `${baseUrl}/api/generate-vegalite`;
-      console.log('Incoming Data:', JSON.stringify({ query, data }));
-      console.log('API URL:', apiUrl);
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ query, data }),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        let { VQL} = result;
-      
-        // VQL = formatVQL(VQL)
-
-        const explanationApiUrl = `${baseUrl}/api/explain-vql`;
-        console.log('API URL:', explanationApiUrl);
-        console.log('VQL',VQL)
         
-        const explanationResponse = await fetch(explanationApiUrl, {
+        console.log('userid',userId)
+        logEvent(userId, `Natural Language Query Input: ${query}`);
+        logEvent(userId, `ask api/generate-vegalite`);
+        const data = tableData;
+        const baseUrl = process.env.REACT_APP_API_URL;
+        const apiUrl = `${baseUrl}/api/generate-vegalite`;
+        console.log('Incoming Data:', JSON.stringify({ query, data }));
+        console.log('API URL:', apiUrl);
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ VQL, data}),
+          body: JSON.stringify({ query, data, userId }),
         });
-                
-        if (explanationResponse.ok) {
-          const explanationResult = await explanationResponse.json();
-          console.log('result',explanationResult)
-          const { explanation } = explanationResult;
-          console.log('explanation:', explanation);
-          onGenerate({ VQL, explanation });
+
+        if (response.ok) {
+          const result = await response.json();
+          let { VQL} = result;
+        
+          // VQL = formatVQL(VQL)
+          logEvent(userId, `Generated VQL: ${VQL}`);
+          const explanationApiUrl = `${baseUrl}/api/explain-vql`;
+          console.log('API URL:', explanationApiUrl);
+          console.log('VQL',VQL)
+          
+          const explanationResponse = await fetch(explanationApiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ VQL, data, userId}),
+          });
+                  
+          if (explanationResponse.ok) {
+            const explanationResult = await explanationResponse.json();
+            console.log('result',explanationResult)
+            const { explanation } = explanationResult;
+            console.log('explanation:', explanation);
+            logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
+            onGenerate({ VQL, explanation });
+          } else {
+            const { error } = await explanationResponse.json();
+            throw new Error(error || 'Error fetching explanation');
+          }
         } else {
-          const { error } = await explanationResponse.json();
-          throw new Error(error || 'Error fetching explanation');
+          const { error } = await response.json();
+          throw new Error(error || 'Error generating VQL spec');
         }
-      } else {
-        const { error } = await response.json();
-        throw new Error(error || 'Error generating VQL spec');
       }
-    }
-    } catch (error) {
-      console.error('Error generating VQL spec:', error);
-      setError(error.message);
-      setIsModalOpen(true); // Open the modal to show the error
-    } finally {
-      setIsLoading(false); // End loading
-    }
+      } catch (error) {
+        console.error('Error generating VQL spec:', error);
+        setError(error.message);
+        setIsModalOpen(true); // Open the modal to show the error
+      } finally {
+        setIsLoading(false); // End loading
+      }
   };
 
   return (

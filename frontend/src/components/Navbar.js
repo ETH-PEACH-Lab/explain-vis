@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
+import StarIcon from '@mui/icons-material/Star';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -79,6 +80,7 @@ function Navbar({ fixedTaskOrder, openTaskOrder, onSelectPage, setUserId }) {  /
           color="inherit" 
           onClick={() => handleSelect(0, 'Tutorial')}
         >
+          <StarIcon />
           <span className="label-text">Tutorial</span>
         </Button>
         
@@ -89,6 +91,7 @@ function Navbar({ fixedTaskOrder, openTaskOrder, onSelectPage, setUserId }) {  /
             color="inherit" 
             onClick={() => handleSelect(index + 1, task.name)}
           >
+            <StarIcon />
             <span className="label-text">{task.name}</span>
           </Button>
         ))}
@@ -100,6 +103,7 @@ function Navbar({ fixedTaskOrder, openTaskOrder, onSelectPage, setUserId }) {  /
             color="inherit" 
             onClick={() => handleSelect(index + fixedTaskOrder.length + 1, task.name)}
           >
+            <StarIcon />
             <span className="label-text">{task.name}</span>
           </Button>
         ))}
