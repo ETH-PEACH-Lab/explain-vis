@@ -54,12 +54,12 @@ function OpenEndNL2Vis({data, userId }) {
   const handleDataUpdate = (data) => {
     setTableData(data);
   };
-
+  const placeholderText='...'
   return (
     <div>
       <div className="header">
         <Typography variant="h6" className="title">
-          {`NL2ViZ - Open-ended Task 1 w/o Explanation, ${data.scenario} Scenario`}
+          {`NL2ViZ w/o Explanation - ${data.scenario} Scenario, Open-ended Task 2`}
         </Typography>
         {/* <div className="vql-switch">
           <Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} />
@@ -71,7 +71,7 @@ function OpenEndNL2Vis({data, userId }) {
           <div key={iface.id} className="interface">
             <div className="first-row">
               <div className="left-column">
-              <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={data.placeholderText} userId={userId}/>
+              <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={placeholderText} userId={userId}/>
               <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">

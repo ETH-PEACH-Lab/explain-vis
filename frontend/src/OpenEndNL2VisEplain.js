@@ -74,11 +74,13 @@ function OpenEndNL2VisExplain({data, userId }) {
     console.log('Generated VQL and explanation updated:', generatedVQL);
 }, [generatedVQL]);
 
+  const placeholderText='...'
+
   return (
     <div>
       <div className="header">
         <Typography variant="h6" className="title">
-        {`NL2ViZ - Open-ended Task 2 with Explanation, ${data.scenario} Scenario`}
+        {`NL2ViZ with Explanation - ${data.scenario} Scenario, Open-ended Task 2`}
         </Typography>
         <div className="vql-switch">
           <Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} />
@@ -90,7 +92,7 @@ function OpenEndNL2VisExplain({data, userId }) {
           <div key={iface.id} className="interface">
             <div className="first-row">
               <div className="left-column">
-              <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={data.placeholderText} userId={userId}/>
+              <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={placeholderText} userId={userId}/>
               <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">

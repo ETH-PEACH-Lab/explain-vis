@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import './styles/navbar.css';
 import { logEvent } from '../utils/logger';  // Import the logEvent function
 
-function Navbar({ fixedTaskOrder, openTaskOrder, onSelectPage, setUserId }) {  // Accept setUserId as a prop
+function Navbar({ taskOrder, onSelectPage, setUserId }) {  // Accept taskOrder instead of fixedTaskOrder and openTaskOrder
   const [selectedLabel, setSelectedLabel] = useState(0);
   const [startDialogOpen, setStartDialogOpen] = useState(false);
   const [endDialogOpen, setEndDialogOpen] = useState(false);
@@ -84,24 +84,12 @@ function Navbar({ fixedTaskOrder, openTaskOrder, onSelectPage, setUserId }) {  /
           <span className="label-text">Tutorial</span>
         </Button>
         
-        {fixedTaskOrder.map((task, index) => (
+        {taskOrder.map((task, index) => (
           <Button 
             key={index} 
             className={`label-button ${selectedLabel === index + 1 ? 'selected' : ''}`} 
             color="inherit" 
             onClick={() => handleSelect(index + 1, task.name)}
-          >
-            <StarIcon />
-            <span className="label-text">{task.name}</span>
-          </Button>
-        ))}
-        
-        {openTaskOrder.map((task, index) => (
-          <Button 
-            key={index + fixedTaskOrder.length} 
-            className={`label-button ${selectedLabel === index + fixedTaskOrder.length + 1 ? 'selected' : ''}`} 
-            color="inherit" 
-            onClick={() => handleSelect(index + fixedTaskOrder.length + 1, task.name)}
           >
             <StarIcon />
             <span className="label-text">{task.name}</span>

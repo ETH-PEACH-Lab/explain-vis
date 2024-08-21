@@ -60,7 +60,7 @@ function FixedTaskNL2Vis({data, userId }) {
     <div>
       <div className="header">
         <Typography variant="h6" className="title">
-          {`NL2ViZ - Fixed Task 1 w/o Explanation, ${data.scenario} Scenario`}
+          {`NL2ViZ w/o Explanation - ${data.scenario} Scenario, Fixed Task 1`}
         </Typography>
       </div>
       <div className="content">
