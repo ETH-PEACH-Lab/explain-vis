@@ -19,7 +19,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
     setIsLoading(true); // Start loading
     console.log('Start handleGenerate');
     logEvent(userId, 'Generate button clicked');
-    
+
     const demoText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
   
     try {
@@ -182,7 +182,10 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
         placeholder={placeholderText}
         value={query}
         style={{ border: 'none' }}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => {
+          setQuery(e.target.value);
+          logEvent(userId, `Query text changed to: ${e.target.value}`);
+        }}
       />
 
       {/* Modal for error handling */}

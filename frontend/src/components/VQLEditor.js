@@ -6,8 +6,9 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import { logEvent } from '../utils/logger'; 
 
-  function VQLEditor({ initialVQL, onExecute, tableData }) {
+  function VQLEditor({ initialVQL, onExecute, tableData, userId }) {
     const [vql, setVql] = useState(initialVQL);
     const [isLoading, setIsLoading] = useState(false); // Loading state
     const [error, setError] = useState(null); // Error state
@@ -59,14 +60,17 @@ import Box from '@mui/material/Box';
 
   const handleBlur = () => {
     setEditingText(false);
-    setVql(editedText);
+    setVql(formatVQL(editedText));
   };
 
   const handleVqlChange = (e) => {
-    setEditedText(e.target.value);
+    const newVql = e.target.value;
+    setEditedText(newVql);
+    logEvent(userId, `VQL Edited: ${newVql}`);
   };
 
   const handleExecuteVQL = async () => {
+    logEvent(userId, 'Execute button clicked');
     setIsLoading(true);
     setError(null);
     try {
@@ -75,7 +79,7 @@ import Box from '@mui/material/Box';
       console.log('API URL:', explanationApiUrl);
       const VQL = formatVQL(vql)
       console.log('edited VQL:', VQL);
-
+      logEvent(userId, `Executing VQL: ${VQL}`);
       const explanationResponse = await fetch(explanationApiUrl, {
         method: 'POST',
         headers: {
@@ -92,6 +96,7 @@ import Box from '@mui/material/Box';
           throw new Error('Invalid explanation received'); // 如果 explanation 不是数组，则抛出错误
         }
         console.log('explanation:', explanation);
+        logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
         const updatedGeneratedVQL = { VQL: VQL, explanation };
         onExecute(updatedGeneratedVQL);
       } else {
@@ -101,6 +106,7 @@ import Box from '@mui/material/Box';
     } catch (err) {
       console.error('Error during VQL execution:', err);
       setError('An error occurred while executing the VQL. Please refine your VQL.');
+      logEvent(userId, `Error during VQL execution: ${err.message}`);
       setIsModalOpen(true); // Show error modal
     } finally {
       setIsLoading(false);
@@ -150,7 +156,7 @@ import Box from '@mui/material/Box';
         <CardContent>
           {editingText ? (
             <textarea
-              value={formatVQL(editedText)}
+              value={editedText}
               onChange={handleVqlChange}
               onBlur={handleBlur}
               autoFocus

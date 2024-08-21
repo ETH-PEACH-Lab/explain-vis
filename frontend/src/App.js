@@ -290,7 +290,7 @@ function App() {
             "department"
         ]
     },
-    placeholderText: "Show me the count of students in each class.",
+    placeholderText: "Please show me the students in each class.",
  };
 
  useEffect(() => {

@@ -83,7 +83,11 @@ function OpenEndNL2VisExplain({data, userId }) {
         {`NL2ViZ with Explanation - ${data.scenario} Scenario, Open-ended Task 2`}
         </Typography>
         <div className="vql-switch">
-          <Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} />
+          <Switch color="default" checked={showVQL} onChange={(e) => {
+            const isChecked = e.target.checked;
+            setShowVQL(isChecked);
+            logEvent(userId, `VQL Switch toggled: ${isChecked ? 'ON' : 'OFF'}`);
+          }} />
           <Typography variant="body1" component="span">Show VQL</Typography>
         </div>
       </div>
@@ -111,6 +115,7 @@ function OpenEndNL2VisExplain({data, userId }) {
                           initialVQL={generatedVQL.VQL}
                           onExecute={handleExecuteVQL}
                           tableData={tableData}
+                          userId={userId}
                         />
                       )}
                       </div>
