@@ -331,8 +331,42 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, last
   }
 }
 
+const logsDirectory = path.join(__dirname, 'logs');
+if (!fs.existsSync(logsDirectory)) {
+  fs.mkdirSync(logsDirectory);
+}
 
+const appendLogToFile = (sessionId, logEntry) => {
+  const logFilePath = path.join(logsDirectory, `${sessionId}.json`);
 
+  let logs = [];
+
+  // Check if the log file already exists
+  if (fs.existsSync(logFilePath)) {
+    // Read the existing logs
+    const existingLogs = fs.readFileSync(logFilePath, 'utf-8');
+    logs = JSON.parse(existingLogs);
+  }
+
+  // Append the new log entry
+  logs.push(logEntry);
+
+  // Write the updated logs back to the file
+  fs.writeFileSync(logFilePath, JSON.stringify(logs, null, 2));  // Pretty print with 2-space indentation
+};
+
+app.post('/log', (req, res) => {
+  const { sessionId, message } = req.body;
+
+  const logEntry = {
+    timestamp: new Date().toISOString(),
+    message,
+  };
+
+  appendLogToFile(sessionId, logEntry);
+
+  res.send('Log saved');
+});
 
 
 app.post('/api/generate-vegalite', async (req, res) => {

@@ -21,6 +21,7 @@ function App() {
   const [selectedPage, setSelectedPage] = useState(0); // 0 for home page, 1 for NL2ViZ, 2 for second page
   const [fixedTaskOrder, setFixedTaskOrder] = useState([]);
   const [openTaskOrder, setOpenTaskOrder] = useState([]);
+  const [userId, setUserId] = useState(''); 
 
   const dataScenarioFixed1 = {
     scenario:"Hiring",
@@ -170,80 +171,80 @@ function App() {
                   {
                       "student_id": 6,
                       "address_id": 12,
-                      "date_from": "2017-10-16 13:56:34",
-                      "date_to": "2018-03-15 10:37:19",
+                      "date_address_from": "2017-10-16 13:56:34",
+                      "date_address_to": "2018-03-15 10:37:19",
                       "monthly_rental": 826.4319,
                       "other_details": "house"
                   },
                   {
                       "student_id": 12,
                       "address_id": 10,
-                      "date_from": "2017-09-23 05:16:17",
-                      "date_to": "2018-03-05 21:12:37",
+                      "date_address_from": "2017-09-23 05:16:17",
+                      "date_address_to": "2018-03-05 21:12:37",
                       "monthly_rental": 1032.9782,
                       "other_details": "apartment"
                   },
                   {
                       "student_id": 13,
                       "address_id": 19,
-                      "date_from": "2017-08-17 11:51:00",
-                      "date_to": "2018-03-04 13:24:28",
+                      "date_address_from": "2017-08-17 11:51:00",
+                      "date_address_to": "2018-03-04 13:24:28",
                       "monthly_rental": 644.9306,
                       "other_details": "apartment"
                   },
                   {
                       "student_id": 3,
                       "address_id": 18,
-                      "date_from": "2017-06-19 12:39:39",
-                      "date_to": "2018-03-02 00:19:57",
+                      "date_address_from": "2017-06-19 12:39:39",
+                      "date_address_to": "2018-03-02 00:19:57",
                       "monthly_rental": 1113.0996,
                       "other_details": "house"
                   },
                   {
                       "student_id": 7,
                       "address_id": 13,
-                      "date_from": "2018-01-13 22:56:06",
-                      "date_to": "2018-03-22 17:56:20",
+                      "date_address_from": "2018-01-13 22:56:06",
+                      "date_address_to": "2018-03-22 17:56:20",
                       "monthly_rental": 1067.8383,
                       "other_details": "house"
                   },
                   {
                       "student_id": 11,
                       "address_id": 12,
-                      "date_from": "2018-02-18 06:58:49",
-                      "date_to": "2018-02-27 04:45:57",
+                      "date_address_from": "2018-02-18 06:58:49",
+                      "date_address_to": "2018-02-27 04:45:57",
                       "monthly_rental": 747.5312,
                       "other_details": "house"
                   },
                   {
                       "student_id": 5,
                       "address_id": 13,
-                      "date_from": "2017-03-29 18:22:55",
-                      "date_to": "2018-03-14 09:12:05",
+                      "date_address_from": "2017-03-29 18:22:55",
+                      "date_address_to": "2018-03-14 09:12:05",
                       "monthly_rental": 1036.8462,
                       "other_details": "apartment"
                   },
                   {
                       "student_id": 7,
                       "address_id": 3,
-                      "date_from": "2017-04-28 06:27:14",
-                      "date_to": "2018-03-23 09:52:56",
+                      "date_address_from": "2017-04-28 06:27:14",
+                      "date_address_to": "2018-03-23 09:52:56",
                       "monthly_rental": 894.0958,
                       "other_details": "house"
                   },
                   {
                       "student_id": 1,
                       "address_id": 5,
-                      "date_from": "2017-11-12 04:24:02",
-                      "date_to": "2018-03-14 17:00:44",
+                      "date_address_from": "2017-11-12 04:24:02",
+                      "date_address_to": "2018-03-14 17:00:44",
                       "monthly_rental": 1007.2597,
                       "other_details": "apartment"
                   },
                   {
                       "student_id": 15,
                       "address_id": 1,
-                      "date_from": "2018-03-05 19:28:26",
-                      "date_to": "2018-03-15 04:44:58",
+                      "date_address_from": "2018-03-05 19:28:26",
+                      "date_address_to": "2018-03-15 04:44:58",
                       "monthly_rental": 1032.8717,
                       "other_details": "apartment"
                   }
@@ -578,10 +579,10 @@ function App() {
       return <TutorialPage />;
     } else if (selectedPage <= fixedTaskOrder.length) {
       const TaskComponent = fixedTaskOrder[selectedPage - 1].component;
-      return <TaskComponent data={fixedTaskOrder[selectedPage - 1].scenario} />;
+      return <TaskComponent data={fixedTaskOrder[selectedPage - 1].scenario} userId={userId} />;  // Pass userId as a prop
     } else {
       const TaskComponent = openTaskOrder[selectedPage - fixedTaskOrder.length - 1].component;
-      return <TaskComponent data={openTaskOrder[selectedPage - fixedTaskOrder.length - 1].scenario} />;
+      return <TaskComponent data={openTaskOrder[selectedPage - fixedTaskOrder.length - 1].scenario} userId={userId} />;  // Pass userId as a prop
     }
   };
 
@@ -591,6 +592,7 @@ function App() {
         fixedTaskOrder={fixedTaskOrder} 
         openTaskOrder={openTaskOrder} 
         onSelectPage={handleSelectPage} 
+        setUserId={setUserId} 
       />
       <div className="main-content">
         {renderTask()}
