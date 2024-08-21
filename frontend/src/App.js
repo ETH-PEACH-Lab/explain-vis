@@ -70,65 +70,101 @@ function App() {
             "first_name": "steven",
             "job_id": "ad_pres",
             "salary": 24000,
+            "hire_date": "2001-06-17"
           },
           {
             "employee_id": 201,
             "first_name": "neena",
             "job_id": "ad_vp",
             "salary": 17000,
+            "hire_date": "2005-09-21"
           },
           {
             "employee_id": 102,
             "first_name": "lex",
             "job_id": "ad_vp",
             "salary": 17000,
+            "hire_date": "2006-01-13"
           },
           {
             "employee_id": 114,
             "first_name": "alexander",
             "job_id": "it_prog",
             "salary": 9000,
+            "hire_date": "2007-03-15"
           },
           {
             "employee_id": 203,
             "first_name": "bruce",
             "job_id": "it_prog",
             "salary": 6000,
+            "hire_date": "2008-07-11"
           },
           {
             "employee_id": 103,
             "first_name": "david",
             "job_id": "it_prog",
             "salary": 4800,
+            "hire_date": "2010-02-23"
           },
           {
             "employee_id": 121,
             "first_name": "valli",
             "job_id": "sa_rep",
             "salary": 4500,
+            "hire_date": "2012-04-10"
           },
           {
             "employee_id": 107,
             "first_name": "diana",
             "job_id": "sa_rep",
             "salary": 4200,
+            "hire_date": "2013-06-01"
           },
           {
             "employee_id": 108,
             "first_name": "nancy",
             "job_id": "sa_rep",
             "salary": 4000,
+            "hire_date": "2014-08-18"
           },
           {
             "employee_id": 109,
             "first_name": "daniel",
             "job_id": "sa_rep",
             "salary": 3900,
+            "hire_date": "2015-11-30"
           }
         ],
+        jobs: [
+          {
+            "job_id": "ad_pres",
+            "job_title": "President",
+            "min_salary": 20000,
+            "max_salary": 40000
+          },
+          {
+            "job_id": "ad_vp",
+            "job_title": "Vice President",
+            "min_salary": 15000,
+            "max_salary": 30000
+          },
+          {
+            "job_id": "it_prog",
+            "job_title": "Programmer",
+            "min_salary": 4000,
+            "max_salary": 12000
+          },
+          {
+            "job_id": "sa_rep",
+            "job_title": "Sales Representative",
+            "min_salary": 3000,
+            "max_salary": 10000
+          }
+        ]
       },
-      tableNames: ["departments", "employee"]
-    },
+      tableNames: ["departments", "employee", "jobs"]
+    },    
     placeholderText: "Please display the relationship between departments and the salaries of their respective managers.",
   };
   const dataScenario2 = { 
