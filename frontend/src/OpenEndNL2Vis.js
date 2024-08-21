@@ -1,5 +1,5 @@
 // src/components/OpenEndNL2Vis.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NaturalLanguageQuery from './components/NaturalLanguageQuery';
 import DataTable from './components/DataTable';
 import StepByStepExplanation from './components/StepByStepExplanation';
