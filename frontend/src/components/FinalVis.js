@@ -559,7 +559,12 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
 
           const xData = currentTable.map(row => row[selectedColumns[0]]);
           const shuffledXData = shuffleArray([...xData]);
-          const stringXData = shuffledXData.map(date => new Date(date).toISOString().split('T')[0]);
+          // const stringXData = shuffledXData.map(date => new Date(date).toISOString().split('T')[0]);
+          // const stringXData = shuffledXData.map(date => {
+          //   const parsedDate = new Date(date);
+          //   return isNaN(parsedDate) ? String(date) : parsedDate.toISOString().split('T')[0];
+          // });
+          const stringXData = shuffledXData.map(date => String(date));
 
           currentTable_order = currentTable.map((row, index) => ({
             x: stringXData[index],

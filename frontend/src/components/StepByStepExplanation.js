@@ -2381,7 +2381,8 @@ return (
       const date = new Date(value);
       return !isNaN(date.getTime());
     };
-
+    console.log('error test', currentTable_from[0])
+    console.log('error test', selectedColumns[0])
     const firstValue = currentTable_from[0][selectedColumns[0]];
     const xAxisType = isDate(firstValue) ? 'time' : 'category';
 

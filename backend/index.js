@@ -160,12 +160,15 @@ const composePrompt = async (data, question, exampleEncoderQuestions, exampleDec
   let prompt = `${preText} This is an example: \n${exampleData} Now, 
   You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:
 
-JOIN Clause: When performing joins, use the table.column format. Do not rename or alias the table names (i.e., do not use the AS keyword).
+JOIN Clause: Use only the JOIN ... ON format without specifying INNER, LEFT, RIGHT, or other types of joins.
+When performing joins, use the table.column format. Do not rename or alias the table names (i.e., do not use the AS keyword).
 Other Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.
 SELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).
 The BIN BY options are: year, month, week, day, weekday, quarter.
 GROUP BY and ORDER BY Clauses use only columns.
 No Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.
+No * Symbol: We avoid using * in VQL.
+No inner ou
 Format: Generate the VQL in a single line, starting with the keyword visualize.
 
 please generate VQL to answer this question based on json table. 
@@ -178,6 +181,11 @@ function validateVQL(vql_init, tableSchema) {
   const validTypes = ['pie', 'scatter', 'line', 'bar'];
   const visualizeRegex = /^visualize\s+(pie|scatter|line|bar)/i;
 
+  const hasAsterisk = /\*/.test(vql);
+  if (hasAsterisk) {
+    return 'Do not use the * symbol in VQL queries.';
+  }
+
   if (!visualizeRegex.test(vql)) {
     return 'VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar). default type is scatter';
 
@@ -187,6 +195,12 @@ function validateVQL(vql_init, tableSchema) {
   if (hasAlias) {
     return 'Do not use the AS keyword for aliasing table names.';
   }
+
+  const invalidJoinTypes = /\b(INNER|LEFT|RIGHT|FULL|OUTER|CROSS)\s+JOIN\b/i;
+  if (invalidJoinTypes.test(vql)) {
+    return 'Do not specify JOIN types (e.g., INNER, LEFT, RIGHT, FULL). Use only "JOIN ... ON".';
+  }
+
   const joinRegex = /join\s+\w+\s+on\s+([\w.]+)\s*=\s*([\w.]+)/gi;
   let match;
   const joinErrors = [];
@@ -267,13 +281,19 @@ function validateVQL(vql_init, tableSchema) {
 
 function extractVisualizeVQL(vql) {
   const visualizeIndex = vql.indexOf('visualize');
-  if (visualizeIndex !== -1) {
-    // 提取从 "visualize" 开始的部分
-    return vql.slice(visualizeIndex).trim();
+  const issueIndex = vql.indexOf('issue');
+
+  if (visualizeIndex !== -1 && issueIndex !== -1 && visualizeIndex < issueIndex) {
+    // 提取从 "visualize" 开始到 "issue" 之前的部分，不包括前导空格
+    return vql.slice(visualizeIndex, issueIndex).trimEnd();
+  } else if (visualizeIndex !== -1 && (issueIndex === -1 || visualizeIndex < issueIndex)) {
+    // 如果没有 "issue" 或 "visualize" 出现在 "issue" 之前，只提取从 "visualize" 开始的部分
+    return vql.slice(visualizeIndex).trimEnd();
   } else {
     throw new Error('VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar).');
   }
 }
+
 
 async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, lastError = '', lastVQL = '', userId) {
   let generatedText = ''; // 确保 generatedText 变量被初始化
@@ -356,7 +376,7 @@ const appendLogToFile = (sessionId, logEntry) => {
   if (typeof logEntry === 'string') {
     logEntry = { message: logEntry };
   }
-  
+
   // Append the new log entry
   logs.push({
     serverTimestamp: new Date().toISOString(),  // Backend timestamp
@@ -568,9 +588,11 @@ app.post('/api/explain-vql', async (req, res) => {
 
   Example VQL:
   ${VQL_exp}
-
+    
   Example Explanation in JSON:
   ${JSON.stringify(explanation_exp, null, 2)}
+
+  Note you should better generate the explanation referred with this order of operations and the description format for each operation.
 
   Expected JSON Format:
   {
