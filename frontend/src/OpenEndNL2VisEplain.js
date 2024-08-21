@@ -10,8 +10,9 @@ import Typography from '@mui/material/Typography';
 import './components/styles/styles.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import VQLEditor from './components/VQLEditor.js'
+import { logEvent } from './utils/logger'; 
 
-function OpenEndNL2VisExplain({data}) {
+function OpenEndNL2VisExplain({data, userId }) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
   const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', vegaLiteSpec: null, explanation: [] });
   const [tableData, setTableData] = useState(data.data);
@@ -19,6 +20,11 @@ function OpenEndNL2VisExplain({data}) {
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
+
+  useEffect(() => {
+    const taskTitle = `NL2ViZ - Open-ended Task 2 with Explanation, ${data.scenario} Scenario`;
+    logEvent(userId, `Task started: ${taskTitle}`);
+  }, [data.scenario, userId]);
 
   const handleAddInterface = () => {
     const newInterface = { id: interfaces.length + 1 };

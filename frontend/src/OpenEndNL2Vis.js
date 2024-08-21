@@ -9,8 +9,9 @@ import Typography from '@mui/material/Typography';
 import Visualization from './components/Visualization.js';
 import './components/styles/styles.css';
 import CircularProgress from '@mui/material/CircularProgress';
+import { logEvent } from './utils/logger'; 
 
-function OpenEndNL2Vis({data}) {
+function OpenEndNL2Vis({data, userId }) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
   const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', vegaLiteSpec: null, explanation: [] });
   const [tableData, setTableData] = useState(data.data);
@@ -18,6 +19,11 @@ function OpenEndNL2Vis({data}) {
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
+
+  useEffect(() => {
+    const taskTitle = `NL2ViZ - Fixed Task 2 with Explanation, ${data.scenario} Scenario`;
+    logEvent(userId, `Task started: ${taskTitle}`);
+  }, [data.scenario, userId]);
 
   const handleAddInterface = () => {
     const newInterface = { id: interfaces.length + 1 };
