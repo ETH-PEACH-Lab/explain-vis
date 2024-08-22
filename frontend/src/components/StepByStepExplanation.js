@@ -1037,10 +1037,13 @@ return (
   const handleSelectChange = (type, oldVal, newVal) => {
     if (type === 'aggregate') {
       setAggFunction(newVal);
+      logEvent(userId, `select agg feature: ${newVal}`);
     } else if (type === 'agg-column') {
       setAggColumn(newVal);
+      logEvent(userId, `select agg column feature: ${newVal}`);
     } else {
       console.log('other',selectedColumnsOthers)
+      logEvent(userId, `select other column feature: old ${selectedColumnsOthers}`);
       setSelectedColumnsOthers(prevColumns => {
         // 创建一个新的数组副本
         const updatedColumns = [...prevColumns];
@@ -1053,6 +1056,7 @@ return (
         console.log('other update', updatedColumns);
         return updatedColumns;
       });
+      logEvent(userId, `select other column feature: new ${selectedColumnsOthers}`);
     }
   };
   const highlightSelect = (description, tableNames = [], currentTableColumns = [], onChange) => {
@@ -1307,8 +1311,8 @@ return (
           if (tableNameMatch) {
               const tableName = tableNameMatch[1];
               if (tableData.tableNames.includes(tableName)) {
-                  setFromTable(tableName);
                   logEvent(userId, `Editing VQL success: Change table name from "${fromTable}" to "${tableName}".`);
+                  setFromTable(tableName);    
               } else {
                   setError(`The table name "${tableName}" is not valid.`);
                   logEvent(userId, `Editing VQL fail: The table name "${tableName}" is not valid.`);
@@ -1424,8 +1428,8 @@ return (
         const columnName = groupByMatch[1];
 
         if (totalColumns.includes(columnName)) {
-          setGroupColumn(columnName)
           logEvent(userId, `Editing VQL pass: change group by from "${groupcolumn}" to "${columnName}".`);
+          setGroupColumn(columnName)
         } else {
             setError(`The column "${columnName}" in GROUP BY does not exist in the referenced tables.`);
             logEvent(userId, `Editing VQL fail: The column "${columnName}" in GROUP BY does not exist in the referenced tables.`);
