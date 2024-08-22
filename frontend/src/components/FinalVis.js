@@ -46,7 +46,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     return <Alert severity="error">{error}</Alert>;
   }
   if (!tableData || !tableData.tables) {
-    return <Typography variant="body2" color="error">No table data available</Typography>;
+    return <Typography variant="body2" color="error"></Typography>;
   }
   const dataTables = Object.keys(tableData.tables).reduce((acc, key) => {
     acc[key] = tableData.tables[key].map((row, index) => {
@@ -218,7 +218,9 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     let dataother = {};
     let options = {};
 
-    
+    if(!chart){
+      return <Typography variant="body2" color="error"></Typography>;
+    }
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
@@ -230,13 +232,13 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     const firstValue_select = currentTable_now[0][selectedColumns[0]];
   } else {
     // setError('Selected Column does not exist in the table.');
-    return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+    return <Typography variant="body2" color="error"></Typography>;
   }
   if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
     const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   } else {
     // setError('Selected Column does not exist in the table.');
-    return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+    return <Typography variant="body2" color="error"></Typography>;
   }
   const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
@@ -631,7 +633,20 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
           selectedColumns_bin=[binColumnName, selectedColumns_final[1]];
         }
         case 'VISUALIZE': {
-          chartType = step.clause.split(' ')[1].toLowerCase(); // 从 VISUALIZE 子句中提取图表类型
+          const clauseParts = step.clause.split(' ');
+
+          if (clauseParts.length < 2) {
+            chartType = ''
+          }
+        
+          chartType = clauseParts[1].toLowerCase();
+        
+          // Validate the chart type
+          const validChartTypes = ['scatter', 'bar', 'line', 'pie'];
+          if (!validChartTypes.includes(chartType)) {
+            chartType = ''
+          }
+          // chartType = step.clause.split(' ')[1].toLowerCase(); // 从 VISUALIZE 子句中提取图表类型
           console.log('charttype init', chartType);
           switch (chartType) {
             case 'bar':
@@ -646,8 +661,8 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
             case 'pie':
               ChartComponent = 'Pie';
               break;
-            default:
-              ChartComponent = 'Scatter';
+            // default:
+            //   ChartComponent = 'Scatter';
           }
         }
         default:
@@ -659,7 +674,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
 
   const renderStepContent = (step, steps) => {
     if (!step) {
-      return <Typography variant="body2" color="error">No step data available</Typography>;
+      return <Typography variant="body2" color="error"></Typography>;
     }
 
     const {
@@ -738,7 +753,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         firstValue_select = currentTable_new[0][selectedColumns[0]];
       } else {
           // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
-          return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+          return <Typography variant="body2" color="error"></Typography>;
       }
       const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
       console.log('xAxistype', xAxisType_select);
@@ -748,7 +763,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         firstValue_select1 = currentTable_new[0][selectedColumns[1]];
       } else {
           // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
-          return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+          return <Typography variant="body2" color="error"></Typography>;
       }
 
       const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
@@ -795,7 +810,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         firstValue = currentTable_from[0][selectedColumns[0]];
     } else {
         // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
-        return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+        return <Typography variant="body2" color="error"></Typography>;
     }
     const xAxisType = isDate(firstValue) ? 'time' : 'category';
     const defaultcolor = 'rgba(75, 192, 192, 0.6)';
@@ -929,7 +944,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
           );
         }
       default:
-        return <Typography variant="body2" color="error">Unsupported operation: {step.operation}</Typography>;
+        return <Typography variant="body2" color="error"></Typography>;
     }
   };
 

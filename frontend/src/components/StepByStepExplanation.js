@@ -28,31 +28,38 @@ import { logEvent } from '../utils/logger';
 const parseCondition = (condition) => {
   const range = [0, 3000];
 
-  const combinedMatch = condition.match(/>\s*(\d+)\s*AND\s*<\s*(\d+)/i);
-  if (combinedMatch) {
-    console.log("Matched combined condition:", combinedMatch);
-    range[0] = parseInt(combinedMatch[1], 10);
-    range[1] = parseInt(combinedMatch[2], 10);
-  } else {
-    const match = condition.match(/(\d+)\s*-\s*(\d+)/);
-    if (match) {
-      console.log("Matched range:", match);
-      range[0] = parseInt(match[1], 10);
-      range[1] = parseInt(match[2], 10);
+    const combinedMatch = condition.match(/>\s*(\d+)\s*AND\s*<\s*(\d+)/i);
+    if (combinedMatch) {
+      console.log("Matched combined condition:", combinedMatch);
+      range[0] = parseInt(combinedMatch[1], 10);
+      range[1] = parseInt(combinedMatch[2], 10);
     } else {
-      const lowerMatch = condition.match(/>\s*(\d+)/);
-      const upperMatch = condition.match(/<\s*(\d+)/);
-
-      if (lowerMatch) {
-        console.log("Matched lower condition:", lowerMatch);
-        range[0] = parseInt(lowerMatch[1], 10);
-      }
-      if (upperMatch) {
-        console.log("Matched upper condition:", upperMatch);
-        range[1] = parseInt(upperMatch[1], 10);
+      const match = condition.match(/(\d+)\s*-\s*(\d+)/);
+      if (match) {
+        console.log("Matched range:", match);
+        range[0] = parseInt(match[1], 10);
+        range[1] = parseInt(match[2], 10);
+      } else {
+        const lowerMatch = condition.match(/>\s*(\d+)/);
+        const upperMatch = condition.match(/<\s*(\d+)/);
+        const equalMatch = condition.match(/=\s*(\d+)/);
+  
+        if (lowerMatch) {
+          console.log("Matched lower condition:", lowerMatch);
+          range[0] = parseInt(lowerMatch[1], 10);
+        }
+        if (upperMatch) {
+          console.log("Matched upper condition:", upperMatch);
+          range[1] = parseInt(upperMatch[1], 10);
+        }
+        if (equalMatch) {
+          console.log("Matched equal condition:", equalMatch);
+          range[0] = parseInt(equalMatch[1], 10);
+          range[1] = parseInt(equalMatch[1], 10); // Both range[0] and range[1] are the same for equality
+        }
       }
     }
-  }
+  
 
   console.log("Parsed range:", range);
   return range;
@@ -526,7 +533,9 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       const jsCondition = condition
         .replace(/\bAND\b/g, '&&')
         .replace(/\bOR\b/g, '||')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]');
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]')
+        .replace(/=\s*(\d+)/g, '=== $1');
+
       const conditionFunction = new Function('row', `return ${jsCondition};`);
       return conditionFunction(row);
     } catch (error) {
@@ -554,7 +563,8 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       const cleanedCondition = CombinedCondition
         .replace(/\bAND\b/g, '&&')
         .replace(/\bOR\b/g, '||')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]');
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]')
+        .replace(/=\s*(\d+)/g, '=== $1');
       console.log('condition', CombinedCondition)
       try {
         const finalFilteredData = data.filter(row => {
@@ -872,7 +882,8 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       'LineGraph': 'Line',
       'BarChart': 'Bar',
       'PieChart': 'Pie',
-      'histogram': 'Bar'
+      'histogram': 'Bar',
+      'default':'Scatter'
     };
   
     const optionsForType = (type) => {
@@ -2060,7 +2071,7 @@ return (
     }
   });
 
-  const generateChart = (currentTable_now, chart, selectedColumns,color) => {
+  const generateChart = (currentTable_now, chart='scatter', selectedColumns,color) => {
     let data = {};
     let dataother = {};
     let options = {};
@@ -2302,7 +2313,8 @@ return (
         const cleanedCondition = combinedCondition
           .replace(/\bAND\b/g, '&&')
           .replace(/\bOR\b/g, '||')
-          .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]');
+          .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]')
+          .replace(/=\s*(\d+)/g, '=== $1');
 
         const finalFilteredData = currentTable.filter(row => {
           try {
@@ -2553,7 +2565,18 @@ return (
           selectedColumns_bin=[binColumnName, selectedColumns_final[1]];
         }
         case 'VISUALIZE': {
-          chartType = step.clause.split(' ')[1].toLowerCase(); // 从 VISUALIZE 子句中提取图表类型
+          const clauseParts = step.clause.split(' ');
+
+          if (clauseParts.length < 2) {
+            chartType = 'scatter'
+          }
+        
+          // Validate the chart type
+          const validChartTypes = ['scatter', 'bar', 'line', 'pie'];
+          if (!validChartTypes.includes(clauseParts[1].toLowerCase())) {
+            chartType = 'scatter'
+          }
+          // chartType = step.clause.split(' ')[1].toLowerCase(); // 从 VISUALIZE 子句中提取图表类型
           console.log('charttype init', chartType);
           switch (chartType) {
             case 'bar':

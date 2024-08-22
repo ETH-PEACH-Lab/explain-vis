@@ -380,7 +380,7 @@ function extractVisualizeVQL(vql) {
     // 如果没有 "issue" 或 "visualize" 出现在 "issue" 之前，只提取从 "visualize" 开始的部分
     return vql.slice(visualizeIndex).trimEnd();
   } else {
-    throw new Error('VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar).');
+    throw new Error('VQL must start with "visualize".');
   }
 }
 
@@ -700,7 +700,7 @@ app.post('/api/explain-vql', async (req, res) => {
   Make sure that the returned JSON is correctly formatted and that each field is properly filled in. 
   Please generate explanation based on the keyword and in logical order.
   valid clauses using the valid operations: SELECT, FROM, JOIN, WHERE, GROUP BY, ORDER BY, BIN BY, VISUALIZE.
-  Each clause typically begins with a specific operation name. 
+  Each clause typically begins with a specific operation name. Note From should seperate from JOIN
   When describing statement, include the specific column names involved.
   Only need to return the json and no other words additinally. 
 
