@@ -204,6 +204,10 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
   console.log('xAxistype', xAxisType_select);
+
+  const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
+  const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
+  console.log('yAxistype', yAxisType_select);
     
     console.log('chart',chart)
     if (chart.toLowerCase() === 'pie') {
@@ -281,6 +285,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
                 },
               },
                 y: {
+                  type: yAxisType_select,
                     title: {
                         display: true,
                         text: selectedColumns[1],

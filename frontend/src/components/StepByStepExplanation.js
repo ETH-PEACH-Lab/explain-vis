@@ -135,7 +135,16 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [CombinedCondition, setCombinedCondition] = useState('hi');
-  
+  const totalTables = [];
+  const totalColumns = [];
+  tableData.tableNames.forEach((tableName) => {
+      const tableRegex = new RegExp(`\\b${tableName}\\b`, 'gi');
+      if (VQL.match(tableRegex)) {
+          totalTables.push(tableName);
+          const columns = Object.keys(tableData.tables[tableName][0]);
+          totalColumns.push(...columns);
+      }
+  });
   console.log('page', currentPage)
   console.log('opperation:',explanation[currentPage].operation)
 
@@ -367,6 +376,91 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       setJoinfindColumn2(currentData.joinColumn2)
     }
   }, [currentPage, explanation]);
+  useEffect(() => {
+  if (explanation[currentPage].operation === 'SELECT') {
+    
+    const columns = explanation[currentPage].clause.toLowerCase().replace('select ', '').split(',').map(col => col.trim());
+    let othercolumns = []
+    if (columns.length == 2)  {
+        const [firstColumn, secondColumn] = columns;
+        const validAggFunctions = ['sum', 'avg', 'count', 'min', 'max'];
+
+        if (validAggFunctions.some(func => firstColumn.startsWith(func + '('))) {
+            const aggFunctionMatch = firstColumn.match(/(\w+)\((\w+)\)/);
+            if (aggFunctionMatch) {
+                const aggFunction = aggFunctionMatch[1];
+                const aggColumn = aggFunctionMatch[2];
+
+                if (validAggFunctions.includes(aggFunction) && totalColumns.includes(aggColumn)) {
+                    setAggFunction(aggFunction.toUpperCase());
+                    setAggColumn(aggColumn);
+                    // logEvent(userId, `Editing VQL pass: agg-"${aggFunction.toUpperCase()}", column-"${aggColumn}".`);
+                } else {
+                    setError(`Invalid aggregation function or column in "${firstColumn}".`);
+                    // logEvent(userId, `Editing VQL fail: Invalid aggregation function or column in "${firstColumn}".`);
+                    setIsModalOpen(true);
+                    return;
+                }
+            } else {
+                setError(`The format of "${firstColumn}" is incorrect.`);
+                // logEvent(userId, `Editing VQL fail: The format of "${firstColumn}" is incorrect.`);
+                setIsModalOpen(true);
+                return;
+            }
+        } else if (totalColumns.includes(firstColumn)) {
+            othercolumns.push(firstColumn)
+            setSelectedColumnsOthers(othercolumns)
+            // logEvent(userId, `Editing VQL pass: other-"${othercolumns}".`);
+        } else {
+            setError(`The column of "${firstColumn}" does not exist in the table.`);
+            // logEvent(userId, `Editing VQL fail: The column of "${firstColumn}" does not exist in the table.`);
+            setIsModalOpen(true);
+            return;
+        }
+
+        if (validAggFunctions.some(func => secondColumn.startsWith(func + '('))) {
+            const aggFunctionMatch = secondColumn.match(/(\w+)\((\w+)\)/);
+            if (aggFunctionMatch) {
+                const aggFunction = aggFunctionMatch[1];
+                const aggColumn = aggFunctionMatch[2];
+
+                if (validAggFunctions.includes(aggFunction) && totalColumns.includes(aggColumn)) {
+                    setAggFunction(aggFunction.toUpperCase());
+                    setAggColumn(aggColumn);
+                    // logEvent(userId, `Editing VQL pass: agg-"${aggFunction.toUpperCase()}", column-"${aggColumn}".`);
+                } else {
+                    setError(`Invalid aggregation function or column in "${secondColumn}".`);
+                    // logEvent(userId, `Editing VQL fail: Invalid aggregation function or column in "${secondColumn}".`);
+                    setIsModalOpen(true);
+                    return;
+                }
+            } else {
+                setError(`The format of "${secondColumn}" is incorrect.`);
+                // logEvent(userId, `Editing VQL fail: The format of "${secondColumn}" is incorrect.`);
+                setIsModalOpen(true);
+                return;
+            }
+        } else if (totalColumns.includes(secondColumn)) {
+            othercolumns.push(secondColumn)
+            setSelectedColumnsOthers(othercolumns)
+            if (othercolumns.length==2){
+            setAggColumn(null)
+            setAggFunction(null)}
+            // logEvent(userId, `Editing VQL pass: no agg.`);
+        } else {
+            setError(`The column of "${secondColumn}" does not exist in the table.`);
+            // logEvent(userId, `Editing VQL fail: Editing VQL fail: The column of "${secondColumn}" does not exist in the table.`);
+            setIsModalOpen(true);
+            return;
+        }
+
+    } else {
+        setError('The SELECT clause must be followed by two valid values.');
+        // logEvent(userId, `Editing VQL fail: The SELECT clause must be followed by two valid values.`);
+        setIsModalOpen(true);
+    }
+}
+}, [currentPage, explanation]);
 
   useEffect(() => {
     if (explanation[currentPage].operation === 'WHERE') {      
@@ -1937,7 +2031,7 @@ return (
   };
   
 
-  const generateChart = (currentTable_now, chart, selectedColumns) => {
+  const generateChart = (currentTable_now, chart, selectedColumns,color) => {
     let data = {};
     let dataother = {};
     let options = {};
@@ -1954,6 +2048,11 @@ return (
   const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
   console.log('xAxistype', xAxisType_select);
+
+  const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
+  const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
+  console.log('yAxistype', yAxisType_select);
+
 
     if (chart.toLowerCase() === 'pie') {
         // Pie chart specific logic
@@ -2010,7 +2109,7 @@ return (
                     x: row[selectedColumns[0]],
                     y: row[selectedColumns[1]],
                 })),
-                backgroundColor: '#f0eea3',
+                backgroundColor: color,
             }],
         };
 
@@ -2030,6 +2129,7 @@ return (
                 },
               },
                 y: {
+                  type: yAxisType_select,
                     title: {
                         display: true,
                         text: selectedColumns[1],
@@ -2402,7 +2502,7 @@ return (
           datasets: [],
         };
       }
-      
+      console.log('test selectcolumn results', selectedColumns);
       const data =  {
         datasets: [
           {
@@ -2413,7 +2513,7 @@ return (
                 return { x: null, y: null };
               }
               // 将 x 值转换为字符串
-              let xValue = String(row[selectedColumns[0]]);
+              let xValue = row[selectedColumns[0]];
               let yValue = row[selectedColumns[1]];
               return {
                 x: xValue,
@@ -2436,7 +2536,8 @@ return (
     console.log('error test', selectedColumns[0])
     const firstValue = currentTable_from[0][selectedColumns[0]];
     const xAxisType = isDate(firstValue) ? 'time' : 'category';
-
+    const defaultcolor = 'rgba(75, 192, 192, 0.6)';
+    const chartcolor = '#f0eea3';
     switch (step.operation) {
       case 'FROM': {
         console.log('from column',selectedColumns)
@@ -2455,6 +2556,11 @@ return (
         const columns = selectedColumns
         const firstValue_select = table_data[0][columns[0]];
         const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
+        
+        const firstValue_select1 = table_data[0][columns[1]];
+        const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
+        console.log('yAxistype', yAxisType_select);
+
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -2472,31 +2578,7 @@ return (
             <div className="right-column1">
               <div className="step-label">{`viz::step${step.step}`}</div>
               <div className="chart">
-                <Scatter
-                  data={generateScatterData(fromTable? dataTables[fromTable]:currentTable_from,selectedColumns)}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType_select,
-                        position: 'bottom',
-                        ...(xAxisType_select === 'time' && {
-                          time: {
-                            unit: 'month',
-                          },
-                        }),
-                        title: {
-                          display: true,
-                          text: selectedColumns[0],
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: selectedColumns[1]},
-                      },
-                    },
-                  }}
-                />
+              {generateChart(fromTable? dataTables[fromTable]:currentTable_from,'scatter',selectedColumns, defaultcolor)}
               </div>
               {showVQL && (
                 <Card className="vql-card">
@@ -2828,32 +2910,7 @@ return (
             <div className="right-column1">
               <div className="step-label">{`viz::step${step.step}`}</div>
               <div className="chart">
-                <Scatter
-                  data={generateScatterData(selectTableResults?selectTableResults:currentTable_select, selectTableResults?[selectedColumnsOthers?selectedColumnsOthers[0]:selectedColumns[0],aggFunction?`${aggFunction}(${aggColumn})`:selectedColumnsOthers[1]]:selectedColumns_final)}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType_select,
-                        position: 'bottom',
-                        ...(xAxisType_select === 'time' && {
-                          time: {
-                            unit: 'month',
-                          },
-                        }),
-                        title: {
-                          display: true,
-                          text: selectedColumnsOthers?selectedColumnsOthers[0]:selectedColumns[0],
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: aggFunction?`${aggFunction}(${aggColumn})`:selectedColumnsOthers[1],
-                        },
-                      },
-                    },
-                  }}
-                />
+              {generateChart(selectTableResults?selectTableResults:currentTable_select,'scatter',selectTableResults?[selectedColumnsOthers?selectedColumnsOthers[0]:selectedColumns[0],aggFunction?`${aggFunction}(${aggColumn})`:selectedColumnsOthers[1]]:selectedColumns_final, defaultcolor)}
               </div>
               {showVQL && (
                 <Card className="vql-card">
@@ -3057,7 +3114,7 @@ return (
                 <div className="right-column1">
                   <div className="step-label">{`viz::step${step.step}`}</div>
                   <div className="chart">
-                      {generateChart(currentTable, chart, binBy?selectedColumns_bin:selectedColumns_final)}
+                      {generateChart(currentTable, chart, binBy?selectedColumns_bin:selectedColumns_final,chartcolor)}
                   </div>
                   {showVQL && (
                     <>

@@ -160,10 +160,12 @@ const composePrompt = async (data, question, exampleEncoderQuestions, exampleDec
   let prompt = `${preText} This is an example: \n${exampleData} Now, 
   You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:
 
+Form Clause: Make sure that the FROM clause contains only one table.
 JOIN Clause: Use only the JOIN ... ON format without specifying INNER, LEFT, RIGHT, or other types of joins.
 When performing joins, use the table.column format. Do not rename or alias the table names (i.e., do not use the AS keyword).
 Other Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.
 SELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).
+In a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.
 The BIN BY options are: year, month, week, day, weekday, quarter.
 GROUP BY and ORDER BY Clauses use only columns.
 No Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.
@@ -187,8 +189,7 @@ function validateVQL(vql_init, tableSchema) {
   }
 
   if (!visualizeRegex.test(vql)) {
-    return 'VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar). default type is scatter';
-
+    return 'VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar). Default type is scatter.';
   }
 
   const hasAlias = /\bAS\b/i.test(vql);
@@ -205,7 +206,7 @@ function validateVQL(vql_init, tableSchema) {
   let match;
   const joinErrors = [];
 
-  // 验证 JOIN 子句中的 ON 条件
+  // Validate ON conditions in JOIN clauses
   while ((match = joinRegex.exec(vql)) !== null) {
     const leftSide = match[1];
     const rightSide = match[2];
@@ -224,64 +225,72 @@ function validateVQL(vql_init, tableSchema) {
 
   const nonJoinRegex = /(select|where|group\s+by|order\s+by|bin\s+by)\s+[^\s]+\.\w+/i;
 
-  // Check for table.column outside of JOIN clauses
+  // Check for table.column usage outside of JOIN clauses
   const matchNonJoin = vql.match(nonJoinRegex);
   if (matchNonJoin) {
     return 'Do not use table.column outside of JOIN clauses.';
   }
 
- // 提取 SELECT 和 FROM 子句
- const selectMatch = vql.match(/select\s+(.+?)\s+from/i);
- const fromMatch = vql.match(/from\s+(\w+)/i);
+  // Extract and validate SELECT and FROM clauses
+  const selectMatch = vql.match(/select\s+(.+?)\s+from/i);
+  const fromMatch = vql.match(/from\s+(.+?)(\s+|$)/i);
 
- // 检查 SELECT 和 FROM 子句是否存在
- if (!selectMatch || !fromMatch) {
-   return 'Unable to parse SELECT or FROM clauses. Both must be present.';
- }
+  // Ensure SELECT and FROM clauses exist
+  if (!selectMatch || !fromMatch) {
+    return 'Unable to parse SELECT or FROM clauses. Both must be present.';
+  }
 
- const selectElements = selectMatch[1].split(',').map(el => el.trim().split(' ')[0]);
- const fromTable = fromMatch[1].trim();
+  const selectElements = selectMatch[1].split(',').map(el => el.trim().split(' ')[0]);
+  const fromTables = fromMatch[1].split(',').map(table => table.trim());
 
- // 提取 GROUP BY 和 BIN BY 子句
- const groupByMatch = vql.match(/group\s+by\s+(.+?)(\s+order\s+by|\s*$)/i);
- const binByMatch = vql.match(/bin\s+by\s+(.+?)(\s+group\s+by|\s+order\s+by|\s*$)/i);
+  // Check if more than one table is present in the FROM clause
+  if (fromTables.length > 1) {
+    return 'The FROM clause can only contain one table. Use JOIN to include multiple tables.';
+  }
 
- // 如果 GROUP BY 子句存在，则验证其内容
- if (groupByMatch) {
-   const groupByElements = groupByMatch[1].split(',').map(el => el.trim());
+  const fromTable = fromTables[0];
 
-   for (const groupEl of groupByElements) {
-     if (!selectElements.includes(groupEl) && 
-         !(binByMatch && binByElements.includes(groupEl)) && 
-         !tableSchema[fromTable].includes(groupEl)) {
-       return `GROUP BY element "${groupEl}" is not valid. It must be in SELECT, BIN BY, or a column from the table "${fromTable}".`;
-     }
-   }
- }
+  // Extract GROUP BY and BIN BY clauses
+  const groupByMatch = vql.match(/group\s+by\s+(.+?)(\s+order\s+by|\s*$)/i);
+  const binByMatch = vql.match(/bin\s+by\s+(.+?)(\s+group\s+by|\s+order\s+by|\s*$)/i);
 
- // 如果 BIN BY 子句存在，则验证其内容
- if (binByMatch) {
-   const binByElements = binByMatch[1].split(',').map(el => `binBy_${el.trim()}`);
+  // Validate GROUP BY clause elements
+  if (groupByMatch) {
+    const groupByElements = groupByMatch[1].split(',').map(el => el.trim());
 
-   for (const binEl of binByElements) {
-     if (!selectElements.includes(binEl)) {
-       return `BIN BY element "${binEl}" is not valid. It must be in SELECT.`;
-     }
-   }
- }
+    for (const groupEl of groupByElements) {
+      if (!selectElements.includes(groupEl) && 
+          !(binByMatch && binByMatch[1].split(',').map(el => `binBy_${el.trim()}`).includes(groupEl)) && 
+          !tableSchema[fromTable].includes(groupEl)) {
+        return `GROUP BY element "${groupEl}" is not valid. It must be in SELECT, BIN BY, or a column from the table "${fromTable}".`;
+      }
+    }
+  }
 
+  // Validate BIN BY clause elements
+  if (binByMatch) {
+    const binByElements = binByMatch[1].split(',').map(el => `binBy_${el.trim()}`);
 
+    for (const binEl of binByElements) {
+      if (!selectElements.includes(binEl)) {
+        return `BIN BY element "${binEl}" is not valid. It must be in SELECT.`;
+      }
+    }
+  }
+
+  // Check for nested queries
   const hasNestedQueries = /\(\s*SELECT\b/i.test(vql);
   if (hasNestedQueries) {
     return 'Avoid using nested queries.';
   }
 
-  return '';
+  return ''; // Validation passed
 }
+
 
 function extractVisualizeVQL(vql) {
   const visualizeIndex = vql.indexOf('visualize');
-  const issueIndex = vql.indexOf('issue');
+  const issueIndex = vql.indexOf('issues');
 
   if (visualizeIndex !== -1 && issueIndex !== -1 && visualizeIndex < issueIndex) {
     // 提取从 "visualize" 开始到 "issue" 之前的部分，不包括前导空格
@@ -609,6 +618,7 @@ app.post('/api/explain-vql', async (req, res) => {
 
   Make sure that the returned JSON is correctly formatted and that each field is properly filled in. 
   Please generate explanation based on the keyword and in logical order.
+  When describing statement, include the specific column names involved,
   Only need to return the json and no other words additinally. 
 
   Your Task:
