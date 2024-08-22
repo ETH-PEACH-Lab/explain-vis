@@ -535,7 +535,8 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       if (isXDataDate) {
         // 如果 xData 是日期类型
         const shuffledXData = shuffleArray([...xData]);
-        const stringXData = shuffledXData.map(date => new Date(date).toISOString().split('T')[0]);
+        // const stringXData = shuffledXData.map(date => new Date(date).toISOString().split('T')[0]);
+        const stringXData = shuffledXData.map(date => String(date));
         scatterData_order = orderresults.map((row, index) => ({
           x: stringXData[index],
           y: row[`${aggFunction}(${aggColumn})`],
@@ -1613,7 +1614,7 @@ return (
   const handleHighlighttableChange = (type, oldValue, newValue) => {
 
     console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
-
+    logEvent(userId, `table feature: Changed ${type} from ${oldValue} to ${newValue}`);
     setWordReplacements((prev) => ({
       ...prev,
       [oldValue]: newValue
@@ -1622,7 +1623,7 @@ return (
 
   const hilightorder = (type, originalValue, newValue) => {
     console.log(`Type: ${type}, Original: ${originalValue}, New: ${newValue}`);
-    
+    logEvent(userId, `order feature: Changed Type: ${type}, Original: ${originalValue}, New: ${newValue}`);
     // Add your logic here to handle the change
     // For example, update state, make an API call, etc.
     setWordReplacements((prev) => ({
@@ -1632,18 +1633,21 @@ return (
     if (type === 'column') {
       // Handle column change
       console.log(`Column changed from ${originalValue} to ${newValue}`);
+      logEvent(userId, `order feature: Changed Column changed from ${originalValue} to ${newValue}`);
       setOrdercolumn(newValue)
       setOrderResults(sortData(orderresults,ordercolumn,order))
     } else if (type === 'order') {
       // Handle order change
       console.log(`Order changed from ${originalValue} to ${newValue}`);
+      logEvent(userId, `order feature: Changed Order changed from ${originalValue} to ${newValue}`);
       setOrder(newValue)
       setOrderResults(sortData(orderresults,ordercolumn,order))
     }
   };
   const handleHighlightChange = (type, oldValue, newValue) => {
+    logEvent(userId, `explanation current operation: ${explanation[currentPage].operation}`);
     console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
-
+    logEvent(userId, `feature: Changed ${type} from ${oldValue} to ${newValue}`);
     if (type === 'column') {
       setConditions((prevConditions) =>
         prevConditions.map((condition) => ({
@@ -1660,7 +1664,7 @@ return (
   };
   const handlebinbyChange = (type, oldValue, newValue) => {
     console.log(`Changed ${type} from ${oldValue} to ${newValue}`);
-
+    logEvent(userId, `binby feature: Changed ${type} from ${oldValue} to ${newValue}`);
     setWordReplacements((prev) => ({
       ...prev,
       [oldValue]: newValue
@@ -1671,6 +1675,7 @@ return (
       const newConditions = [...prev];
       newConditions[index] = { ...newConditions[index], range: newRange };
       newConditions[index].condition = updateConditionWithRange(newConditions[index].condition, newRange);
+      logEvent(userId, `binby feature: Changed range to ${newRange}`);
       return newConditions;
     });
   };
