@@ -438,7 +438,7 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
       const newError = `${error.message}`; // 清理累积的错误信息
       console.log(`Retrying with additional instruction: ${newError} (${retries} attempts left)`);
       appendLogToFile(userId, `Retrying with additional instruction: ${newError} (${retries} attempts left)`);
-      return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, newError, newVQL);
+      return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, newError, newVQL, userId);
     } else {
       appendLogToFile(userId, 'Failed to generate valid VQL from OpenAI after multiple attempts');
       throw new Error(`Failed to generate valid VQL from OpenAI after 5 attempts.`);
@@ -529,7 +529,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
     console.log('Generated Prompt:', prompt);
     appendLogToFile(userId, `API Generated Prompt: ${prompt}`)
 
-    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,5,userId);
+    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,5,'','',userId);
 
     console.timeEnd('GET * VQL Request Duration');
     console.log('Generated VQL:', generatedText);
