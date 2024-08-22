@@ -20,7 +20,7 @@ import './components/styles/styles.css';
 function App() {
   const [selectedPage, setSelectedPage] = useState(0); // 0 for tutorial page
   const [taskOrder, setTaskOrder] = useState([]);
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState('default');
 
   const dataScenario1 = {
     scenario:"Hiring",

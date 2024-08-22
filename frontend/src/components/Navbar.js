@@ -14,7 +14,7 @@ function Navbar({ taskOrder, onSelectPage, setUserId }) {  // Accept taskOrder i
   const [startDialogOpen, setStartDialogOpen] = useState(false);
   const [endDialogOpen, setEndDialogOpen] = useState(false);
   const [logFileName, setLogFileName] = useState('');
-  const [userId, setLocalUserId] = useState('');  // Define userId in local state
+  const [userId, setLocalUserId] = useState('default');  // Define userId in local state
 
   // Function to generate a session ID based on the current timestamp
   const generateSessionId = () => {

@@ -1486,13 +1486,16 @@ return (
                 if (validAggFunctions.includes(aggFunction) && totalColumns.includes(aggColumn)) {
                     setAggFunction(aggFunction.toUpperCase());
                     setAggColumn(aggColumn);
+                    logEvent(userId, `Editing VQL pass: agg-"${aggFunction.toUpperCase()}", column-"${aggColumn}".`);
                 } else {
                     setError(`Invalid aggregation function or column in "${secondColumn}".`);
+                    logEvent(userId, `Editing VQL fail: Invalid aggregation function or column in "${secondColumn}".`);
                     setIsModalOpen(true);
                     return;
                 }
             } else {
                 setError(`The format of "${secondColumn}" is incorrect.`);
+                logEvent(userId, `Editing VQL fail: The format of "${secondColumn}" is incorrect.`);
                 setIsModalOpen(true);
                 return;
             }
@@ -1502,14 +1505,17 @@ return (
             if (othercolumns.length==2){
             setAggColumn(null)
             setAggFunction(null)}
+            logEvent(userId, `Editing VQL pass: no agg.`);
         } else {
             setError(`The column of "${secondColumn}" does not exist in the table.`);
+            logEvent(userId, `Editing VQL fail: Editing VQL fail: The column of "${secondColumn}" does not exist in the table.`);
             setIsModalOpen(true);
             return;
         }
 
     } else {
         setError('The SELECT clause must be followed by two valid values.');
+        logEvent(userId, `Editing VQL fail: The SELECT clause must be followed by two valid values.`);
         setIsModalOpen(true);
     }
 }
@@ -1528,25 +1534,30 @@ return (
 
         if (totalColumns.includes(columnName)) {
             setOrdercolumn(columnName);
-
+            logEvent(userId, `Editing VQL pass: set ordercolumn "${orderDirection}".`);
             if (orderDirection) {
               const lowerCaseOrderDirection = orderDirection.toLowerCase();
               if (lowerCaseOrderDirection === 'asc' || lowerCaseOrderDirection === 'desc') {
                   setOrder(lowerCaseOrderDirection);
+                  logEvent(userId, `Editing VQL pass: ORDER BY column "${columnName}" with order "${orderDirection.toUpperCase()}" is valid.`);
                   console.log(`ORDER BY column "${columnName}" with order "${orderDirection.toUpperCase()}" is valid.`);
               } else {
                   setError(`The order "${orderDirection}" is not valid. It must be either 'ASC' or 'DESC'.`);
+                  logEvent(userId, `Editing VQL fail: The order "${orderDirection}" is not valid. It must be either 'ASC' or 'DESC'.`);
                   setIsModalOpen(true);
               }
           } else {
               console.log(`ORDER BY column "${columnName}" with no specified order is valid.`);
+              logEvent(userId, `Editing VQL pass: ORDER BY column "${columnName}" with no specified order is valid.`);
           }
         } else {
             setError(`The column "${columnName}" in ORDER BY does not exist in the SELECT part.`);
+            logEvent(userId, `Editing VQL fail: The column "${columnName}" in ORDER BY does not exist in the SELECT part.`);
             setIsModalOpen(true);
         }
     } else {
         setError('The ORDER BY clause must be followed by a valid column name, optionally with ASC or DESC.');
+        logEvent(userId, `Editing VQL fail: The ORDER BY clause must be followed by a valid column name, optionally with ASC or DESC.`);
         setIsModalOpen(true);
     }
 }
@@ -1560,13 +1571,16 @@ return (
 
         if (validBinByOptions.includes(binByColumn)) {
             setBinByColumn(binByColumn);
+            logEvent(userId, `Editing VQL pass: BIN BY column "${binByColumn}" is valid.`);
             console.log(`BIN BY column "${binByColumn}" is valid.`);
         } else {
             setError(`The BIN BY option "${binByColumn}" is not valid. It must be one of ${validBinByOptions.join(', ')}.`);
+            logEvent(userId, `Editing VQL fail: The BIN BY option "${binByColumn}" is not valid. It must be one of ${validBinByOptions.join(', ')}.`);
             setIsModalOpen(true);
         }
     } else {
         setError('The BIN BY clause is missing or not followed by a valid option.');
+        logEvent(userId, `Editing VQL fail: The BIN BY clause is missing or not followed by a valid option.`);
         setIsModalOpen(true);
     }
   }
@@ -1580,17 +1594,19 @@ return (
 
         if (validVisualizeTypes.includes(visualizeType)) {
             setchart(visualizeType)
+            logEvent(userId, `Editing VQL pass: The VISUALIZE type "${visualizeType}" is valid.`);
+
         } else {
             setError(`The VISUALIZE type "${visualizeType}" is not valid. It must be one of ${validVisualizeTypes.join(', ')}.`);
+            logEvent(userId, `Editing VQL fail: The VISUALIZE type "${visualizeType}" is not valid. It must be one of ${validVisualizeTypes.join(', ')}.`);
             setIsModalOpen(true);
         }
     } else {
         setError('The VISUALIZE clause is missing or not followed by a valid type.');
+        logEvent(userId, `Editing VQL fail: The VISUALIZE clause is missing or not followed by a valid type.`);
         setIsModalOpen(true);
     }
 }
-
-
     console.log('Edited text:', editedText);
   };
 
