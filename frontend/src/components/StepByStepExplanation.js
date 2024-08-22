@@ -2348,11 +2348,13 @@ return (
   };
 
   const renderStepContent = (step, steps) => {
+    
     if (!step) {
       return <Typography variant="body2" color="error">No step data available</Typography>;
     }
     
-    
+    logEvent(userId, `explanation current operation: ${step.operation}`);
+
     const tableNames = Object.keys(dataTables);
 
     const {
@@ -3119,7 +3121,9 @@ return (
         <div className="pagination">
           <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 0}>← Pre </button>
           {renderPagination()}
-          <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === explanation.length - 1}>Next →</button>
+          <button onClick={() => {
+            onPageChange(currentPage + 1)
+          }} disabled={currentPage === explanation.length - 1}>Next →</button>
         </div>
         {explanation && explanation.length > 0 ? renderStepContent(explanation[currentPage], currentSteps) : <Typography variant="body2">No explanations available</Typography>}
       </div>

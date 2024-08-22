@@ -14,6 +14,8 @@ import Modal from '@mui/material/Modal';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import VQLEditor from './components/VQLEditor.js'
+import { logEvent } from './utils/logger'; 
+
 
 const defaultData = {
   tables: {
@@ -39,7 +41,7 @@ const defaultData = {
   tableNames: ['price', 'name', 'stock']
 };
 
-function TutorialPage() {
+function TutorialPage({userId}) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
   const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', explanation: [] });
   const [tableData, setTableData] = useState(defaultData);
@@ -56,6 +58,7 @@ function TutorialPage() {
   const handlePageChange = (page) => {
     if (page >= 0 && page < generatedVQL.explanation.length) {
       setCurrentPage(page);
+      logEvent(userId, `Clicked 'Next' button, moving from page ${currentPage} to ${currentPage + 1}`);
     }
   };
 
@@ -105,7 +108,11 @@ function TutorialPage() {
           NL2ViZ - Tutorial
         </Typography>
         <div className="vql-switch">
-          <Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} />
+        <Switch color="default" checked={showVQL} onChange={(e) => {
+            const isChecked = e.target.checked;
+            setShowVQL(isChecked);
+            logEvent(userId, `VQL Switch toggled: ${isChecked ? 'ON' : 'OFF'}`);
+          }} />
           <Typography variant="body1" component="span">Show VQL</Typography>
         </div>
       </div>
@@ -114,7 +121,7 @@ function TutorialPage() {
           <div key={iface.id} className="interface">
             <div className="first-row">
               <div className="left-column">
-              <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={placeholderText}/>
+              <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={placeholderText} userId={userId}/>
               <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
               </div>
               <div className="right-column">
@@ -140,6 +147,7 @@ function TutorialPage() {
                           initialVQL={generatedVQL.VQL}
                           onExecute={handleExecuteVQL}
                           tableData={tableData}
+                          userId={userId}
                         />
                       )}
                   </div>
@@ -159,6 +167,7 @@ function TutorialPage() {
                   showVQL={showVQL}
                   currentPage={currentPage}
                   onPageChange={handlePageChange}
+                  userId={userId}
                 />
               )}
             </div>

@@ -320,7 +320,7 @@ const handleSelectPage = (page) => {
 
 const renderTask = () => {
   if (selectedPage === 0) {
-    return <TutorialPage />;
+    return <TutorialPage userId={userId} />;
   } else if (selectedPage <= taskOrder.length) {
     const TaskComponent = taskOrder[selectedPage - 1].component;
     return <TaskComponent data={taskOrder[selectedPage - 1].scenario} userId={userId} />;  // Pass userId as a prop
