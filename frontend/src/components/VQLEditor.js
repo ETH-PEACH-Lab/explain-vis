@@ -80,12 +80,13 @@ import { logEvent } from '../utils/logger';
       const VQL = formatVQL(vql)
       console.log('edited VQL:', VQL);
       logEvent(userId, `Executing VQL: ${VQL}`);
+      
       const explanationResponse = await fetch(explanationApiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ VQL: VQL, tableData }),
+        body: JSON.stringify({ VQL: VQL, tableData, userId }),
       });
 
       if (explanationResponse.ok) {
@@ -105,7 +106,7 @@ import { logEvent } from '../utils/logger';
       }
     } catch (err) {
       console.error('Error during VQL execution:', err);
-      setError('An error occurred while executing the VQL. Please refine your VQL.');
+      setError(`An error occurred while executing the VQL. Please refine your VQL. Try simple query, ${err.message}`);
       logEvent(userId, `Error during VQL execution: ${err.message}`);
       setIsModalOpen(true); // Show error modal
     } finally {

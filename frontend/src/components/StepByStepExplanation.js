@@ -110,7 +110,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   const [editedVQL, setEditedVQL] = useState('');
   const [wordReplacements, setWordReplacements] = useState({});
   const [conditions, setConditions] = useState([]);
-  const [whereResults, setWhereResults] = useState('[]');
+  const [whereResults, setWhereResults] = useState(null);
   const [fromTable, setFromTable] = useState(null); 
   const [joinfindTable1, setJoinfindTable1] = useState(null); 
   const [joinfindTable2, setJoinfindTable2] = useState(null); 
@@ -376,6 +376,15 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       setJoinfindColumn2(currentData.joinColumn2)
     }
   }, [currentPage, explanation]);
+
+  useEffect(() => {
+    if (explanation[currentPage].operation === 'WHERE') {
+      // const description = explanation[currentPage].description;
+      const currentData = calculateCurrentData()
+      setWhereResults(currentData.currentTable_where)
+    }
+  }, [currentPage, explanation]);
+
   useEffect(() => {
   if (explanation[currentPage].operation === 'SELECT') {
     
@@ -474,6 +483,10 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   }, [CombinedCondition]);
 
   useEffect(() => {
+    console.log('conditions', conditions)
+  }, [conditions]);
+
+  useEffect(() => {
     console.log('joinfindTable1', joinfindTable1);
     console.log('joinfindTable2', joinfindTable2);
     console.log('joinfindColumn1', joinfindColumn1);
@@ -485,6 +498,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       setJoinTableResults(null);
       setJoinColumnResults(null);
       setErrorMessage('Please select valid tables and columns for merging.');
+      // setIsModalOpen(true);
       return; 
     }
 
@@ -522,13 +536,15 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   };
 
   useEffect(() => {
+    if(conditions && conditions.length > 0){
       const combinedCondition = conditions.map((condition, index) => {
         if (index === 0) {
           return condition.condition;
         }
         return condition.condition.replace(/^\s*\b(?:AND|OR)\b\s*/, '');
       }).join(' || ');
-      setCombinedCondition(combinedCondition)
+      console.log('condition', combinedCondition)
+      setCombinedCondition(combinedCondition)}
   }, [conditions]);
 
   useEffect(() => {
@@ -539,7 +555,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
         .replace(/\bAND\b/g, '&&')
         .replace(/\bOR\b/g, '||')
         .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]');
-  
+      console.log('condition', CombinedCondition)
       try {
         const finalFilteredData = data.filter(row => {
           try {
@@ -564,7 +580,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   }, [CombinedCondition]);
 
   useEffect(() => {  
-    console.log(whereResults)
+    console.log('whereresults',whereResults)
   }, [whereResults]);
   
 
@@ -1513,8 +1529,6 @@ return (
     console.log('WHERE clause is valid and set as combined condition:', whereClause);
     logEvent(userId, `Editing VQL pass: WHERE clause is valid and set as combined condition: "${whereClause}".`);
 }
-
-
   if (explanation[currentPage].operation === 'GROUP BY') {
 
     const groupByMatch = editedText.match(/\bGROUP BY\b\s+(\S+)/i);
@@ -1880,13 +1894,20 @@ return (
       return acc;
     }, {});
   
-    const isDate = (value) => {
-      const date = new Date(value);
-      return !isNaN(date.getTime());
+    const isDate = value => {
+      return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
-  
+
+    const isNumeric = value => {
+        return !isNaN(parseFloat(value)) && isFinite(value);
+    };
     const firstValue = data[0][selectedColumns[0]];
-    const xAxisType = isDate(firstValue) ? 'time' : (isNaN(firstValue) ? 'category' : 'linear');
+    const xAxisType = isDate(firstValue) ? 'time' : isNumeric(firstValue) ? 'linear' : 'category';
+
+    const firstValue_select1 = data[0][selectedColumns[1]];
+    const yAxisType = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
+
+    
   
     const chartData = {
       datasets: Object.keys(groupedData).map((key, index) => ({
@@ -1921,6 +1942,7 @@ return (
           }),
         },
         y: {
+          type: yAxisType,
           title: {
             display: true,
             text: selectedColumns[1],
@@ -2025,11 +2047,18 @@ return (
   
     return updatedData;
   };
-  const isDate = value => {
-    const date = new Date(value);
-    return !isNaN(date.getTime());
-  };
+
   
+  let selectedColumns = [];
+
+  explanation.forEach(step => {
+    if (step.operation === 'SELECT') {
+      selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => {
+        const match = col.match(/(SUM|AVG|COUNT|MIN|MAX)\((\w+)\)/i);
+        return match ? match[2] : col.trim();
+      });
+    }
+  });
 
   const generateChart = (currentTable_now, chart, selectedColumns,color) => {
     let data = {};
@@ -2039,12 +2068,26 @@ return (
     
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-  };
+    };
 
-  const isNumeric = value => {
-      return !isNaN(parseFloat(value)) && isFinite(value);
-  };
-
+    const isNumeric = value => {
+        return !isNaN(parseFloat(value)) && isFinite(value);
+    };
+  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
+    const firstValue_select = currentTable_now[0][selectedColumns[0]];
+  } else {
+    console.log(explanation[currentPage].operation)
+    console.log(currentTable_now)
+    console.log(selectedColumns)
+    // setError('Selected Column does not exist in the table.');
+    return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+  }
+  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
+    const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
+  } else {
+    // setError('Selected Column does not exist in the table.');
+    return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+  }
   const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
   console.log('xAxistype', xAxisType_select);
@@ -2148,18 +2191,6 @@ return (
       );
     }    
 };
-
-
-  let selectedColumns = [];
-
-  explanation.forEach(step => {
-    if (step.operation === 'SELECT') {
-      selectedColumns = step.clause.replace('SELECT ', '').split(',').map(col => {
-        const match = col.match(/(SUM|AVG|COUNT|MIN|MAX)\((\w+)\)/i);
-        return match ? match[2] : col.trim();
-      });
-    }
-  });
 
   const calculateCurrentData = () => {
     let currentTable = [];
@@ -2382,6 +2413,107 @@ return (
           currentTable_select = currentTable
           currentColumns_select=currentColumns
         }
+
+          let aggFunction = null;
+          let aggColumn = null;
+          currentTable = selectpredata
+          selectedColumns_final = columns.map(col => {
+            const match = col.match(/(SUM|AVG|COUNT|MIN|MAX)\((\w+)\)/i);
+            
+            if (match) {
+              hasAggregateFunction = true;
+              aggFunction = match[1].toUpperCase(); // 提取聚合函数
+              aggColumn = match[2];                 // 提取聚合列
+              const columnName = `${aggFunction}(${aggColumn})`;
+              aggregateColumns.push({ function: aggFunction, column: aggColumn, alias: columnName });
+              return columnName;
+            } else {
+              return col;
+            }
+          });
+
+          if (aggFunction && aggColumn) {
+            const columnName = `${aggFunction}(${aggColumn})`;
+            let newTable = currentTable.map(row => ({ ...row }));
+            
+            if (groupByColumn) {
+              const groupedData = currentTable.reduce((acc, row) => {
+                const key = row[groupByColumn];
+                if (!acc[key]) {
+                  acc[key] = [];
+                }
+                acc[key].push(row);
+                return acc;
+              }, {});
+              console.log('groupdata', groupedData);
+              const aggregatedData = Object.keys(groupedData).map(group => {
+                const rows = groupedData[group];
+                let aggregatedValue;
+    
+                switch (aggFunction) {
+                  case 'SUM':
+                    aggregatedValue = rows.reduce((sum, r) => sum + r[aggColumn], 0);
+                    break;
+                  case 'AVG':
+                    aggregatedValue = rows.reduce((sum, r) => sum + r[aggColumn], 0) / rows.length;
+                    break;
+                  case 'COUNT':
+                    aggregatedValue = rows.length;
+                    break;
+                  case 'MIN':
+                    aggregatedValue = Math.min(...rows.map(r => r[aggColumn]));
+                    break;
+                  case 'MAX':
+                    aggregatedValue = Math.max(...rows.map(r => r[aggColumn]));
+                    break;
+                  default:
+                    break;
+                }
+                // console.log('agg',aggregatedValue)
+                rows.forEach(row => {
+                  row[columnName] = aggregatedValue;
+                });
+    
+                return rows;
+              }).flat();
+    
+              newTable = aggregatedData;
+              // console.log('newselectdata',newTable)
+            } else {
+              let aggregatedValue;
+    
+              switch (aggFunction) {
+                case 'SUM':
+                  aggregatedValue = currentTable.reduce((sum, r) => sum + r[aggColumn], 0);
+                  break;
+                case 'AVG':
+                  aggregatedValue = currentTable.reduce((sum, r) => sum + r[aggColumn], 0) / currentTable.length;
+                  break;
+                case 'COUNT':
+                  aggregatedValue = currentTable.length;
+                  break;
+                case 'MIN':
+                  aggregatedValue = Math.min(...currentTable.map(r => r[aggColumn]));
+                  break;
+                case 'MAX':
+                  aggregatedValue = Math.max(...currentTable.map(r => r[aggColumn]));
+                  break;
+                default:
+                  break;
+              }
+    
+              newTable = currentTable.map(row => ({
+                ...row,
+                [columnName]: aggregatedValue
+              }));
+            }
+    
+            currentTable = newTable;
+            currentTable_select=newTable
+          } else {
+            currentTable = currentTable;
+            currentTable_select=currentTable
+          }
           break;
         }
         case 'ORDER BY': {
@@ -2390,19 +2522,19 @@ return (
           // orderDirection = orderByParts[3] ? orderByParts[3].toLowerCase() : 'asc';
           orderByParts = step.clause.split(' ');
     
-    if (orderByParts.length === 3) {
-        // Case: ORDER BY x
-        orderByColumn = orderByParts[2];
-        orderDirection = 'asc'; // Default direction
-    } else if (orderByParts.length === 4) {
-        // Case: ORDER x BY a
-        orderByColumn = orderByParts[2];
-        orderDirection = orderByParts[3].toLowerCase();
-    } else {
-        // Default to handle any unexpected cases
-        orderByColumn = orderByParts[2] || '';
-        orderDirection = 'asc';
-    }
+          if (orderByParts.length === 3) {
+              // Case: ORDER BY x
+              orderByColumn = orderByParts[2];
+              orderDirection = 'asc'; // Default direction
+          } else if (orderByParts.length === 4) {
+              // Case: ORDER x BY a
+              orderByColumn = orderByParts[2];
+              orderDirection = orderByParts[3].toLowerCase();
+          } else {
+              // Default to handle any unexpected cases
+              orderByColumn = orderByParts[2] || '';
+              orderDirection = 'asc';
+          }
           currentTable_order = sortData(currentTable ,orderByColumn,orderDirection)
           currentTable = currentTable_order
           break;
@@ -2486,11 +2618,11 @@ return (
       currentTablebin_pre
      } = calculateCurrentData();
 
-     console.log('Current Table:', currentTable);
-      console.log('Current Columns:', currentColumns);
-      console.log('Selected Columns:', selectedColumns_final);
+    console.log('Current Table:', currentTable);
+    console.log('Current Columns:', currentColumns);
+    console.log('Selected Columns:', selectedColumns_final);
 
-     if (!currentTable || !currentColumns || !selectedColumns) {
+    if (!currentTable || !currentColumns || !selectedColumns) {
       return <Typography variant="body2" color="error">Invalid table or column data</Typography>;
     }
 
@@ -2499,7 +2631,10 @@ return (
       if (!currentTable_new || currentTable_new.length === 0 || !selectedColumns || selectedColumns.length < 2) {
         console.error('Invalid input data or selected columns');
         return {
-          datasets: [],
+          data: {
+            datasets:[]
+          },
+          options: {},
         };
       }
       console.log('test selectcolumn results', selectedColumns);
@@ -2525,17 +2660,82 @@ return (
         ],
       };
       console.log('data',data)
-      return data
+      const isDate = value => {
+        return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+      };
+  
+      const isNumeric = value => {
+          return !isNaN(parseFloat(value)) && isFinite(value);
+      };
+
+      let firstValue_select;
+      if (currentTable_new.length > 0 && selectedColumns.length > 0 && selectedColumns[0] in currentTable_new[0]) {
+        firstValue_select = currentTable_new[0][selectedColumns[0]];
+      } else {
+          // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
+          return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+      }
+      const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
+      console.log('xAxistype', xAxisType_select);
+
+      let firstValue_select1;
+      if (currentTable_new.length > 0 && selectedColumns.length > 0 && selectedColumns[1] in currentTable_new[0]) {
+        firstValue_select1 = currentTable_new[0][selectedColumns[1]];
+      } else {
+          // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
+          return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+      }
+
+      const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
+      console.log('yAxistype', yAxisType_select);
+
+      const options = {
+            scales: {
+              x: {
+                type: xAxisType_select,
+                position: 'bottom',
+                ...(xAxisType_select === 'time' && {
+                  time: {
+                    unit: 'month',
+                  },
+                }),
+                title: {
+                  display: true,
+                  text: selectedColumns[0],
+                },
+              },
+                y: {
+                  type: yAxisType_select,
+                    title: {
+                        display: true,
+                        text: selectedColumns[1],
+                    },
+                },
+            },
+        };
+        const result = {
+          data: data,
+          options: options,
+        };
+      return result
     };
 
     const isDate = value => {
       const date = new Date(value);
       return !isNaN(date.getTime());
     };
-    console.log('error test', currentTable_from[0])
-    console.log('error test', selectedColumns[0])
-    const firstValue = currentTable_from[0][selectedColumns[0]];
+
+    let firstValue;
+    if (currentTable_from.length > 0 && selectedColumns.length > 0 && selectedColumns[0] in currentTable_from[0]) {
+        firstValue = currentTable_from[0][selectedColumns[0]];
+    } else {
+        // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
+        return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+    }
+
     const xAxisType = isDate(firstValue) ? 'time' : 'category';
+
+
     const defaultcolor = 'rgba(75, 192, 192, 0.6)';
     const chartcolor = '#f0eea3';
     switch (step.operation) {
@@ -2625,19 +2825,9 @@ return (
             }
           }
         });
-        const isDate = value => {
-          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-        };
         
-        const isNumeric = value => {
-          return !isNaN(parseFloat(value)) && isFinite(value);
-        };        
-    
-        const table_data = joinTableResults ? joinTableResults : currentTable_join;
-        const columns = selectedColumns
-        console.log('jointable',table_data)
-        const firstValue_select = table_data?table_data[0][columns[0]]:null;
-        const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
+        const { data, options } = generateScatterData(joinTableResults?joinTableResults : currentTable_join,selectedColumns)
+        
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -2675,29 +2865,8 @@ return (
               <div className="step-label">{`viz::step${step.step}`}</div>
               <div className="chart">
                 <Scatter
-                  data={generateScatterData(joinTableResults?joinTableResults : currentTable_join,selectedColumns)}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType_select,
-                        position: 'bottom',
-                        ...(xAxisType_select === 'time' && {
-                          time: {
-                            unit: 'month',
-                          },
-                        }),
-                        title: {
-                          display: true,
-                          text: selectedColumns[0],
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: selectedColumns[1]},
-                      },
-                    },
-                  }}
+                  data={data}
+                  options={options}
                 />
               </div>
               {showVQL && (
@@ -2732,6 +2901,7 @@ return (
         const columnNames = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g)))];
         const numbers = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b\d+\b/g)))];
         const eligibleColumns = getConditionEligibleColumns(currentTable_where);
+        const { data, options } = generateScatterData(whereResults,selectedColumns)
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -2767,7 +2937,7 @@ return (
                 ))}
                 <div>
                   <div className="step-label" style={{ marginTop: '20px' }}>{`data::step${step.step}`}</div>
-                  {renderTable(whereResults, currentColumns_where, 'Filtered')}
+                  {renderTable(whereResults?whereResults:currentTable_where, currentColumns_where, 'Filtered')}
                 </div>
               </Paper>
             </div>
@@ -2775,31 +2945,10 @@ return (
               <div className="step-label">{`viz::step${step.step}`}</div>
               <div className="chart">
                 <Scatter
-                  data={generateScatterData(whereResults,selectedColumns)}
-                  options={{
-                    scales: {
-                      x: {
-                        type: xAxisType,
-                        position: 'bottom',
-                        ...(xAxisType === 'time' && {
-                          time: {
-                            unit: 'month',
-                          },
-                        }),
-                        title: {
-                          display: true,
-                          text: selectedColumns[0],
-                        },
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: selectedColumns[1]},
-                      },
-                    },
-                  }}
-                />
-              </div>
+                  data={data}
+                  options={options}
+                />              
+                </div>
               {showVQL && (
                 <Card className="vql-card">
                   <CardContent>
@@ -3043,27 +3192,7 @@ return (
             <div className="step-label">{`viz::step${step.step}`}</div>
             {/* <Typography variant="h6" className="visualize-title">/ Visualization</Typography> */}
             <div className="chart">
-              <Scatter
-                data={generateScatterData(BinByResults,[`binBy_${BinByColumn}`,selectedColumns_final[1]])}
-                options={{
-                  scales: {
-                    x: {
-                      type: 'category',
-                      position: 'bottom',
-                      title: {
-                        display: true,
-                        text: `binBy_${BinByColumn}`,
-                      },
-                    },
-                    y: {
-                      title: {
-                        display: true,
-                        text: selectedColumns_final[1],
-                      },
-                    },
-                  },
-                }}
-              />
+            {generateChart(BinByResults, 'scatter', [`binBy_${BinByColumn}`,selectedColumns_final[1]],defaultcolor)}
               </div>
               {showVQL && (
                 <>

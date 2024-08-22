@@ -188,8 +188,10 @@ function validateVQL(vql_init, tableSchema) {
     return 'Do not use the * symbol in VQL queries.';
   }
 
-  if (!visualizeRegex.test(vql)) {
-    return 'VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar). Default type is scatter.';
+  // Check for nested queries
+  const hasNestedQueries = /\(\s*SELECT\b/i.test(vql);
+  if (hasNestedQueries) {
+    return 'Avoid using nested queries.';
   }
 
   const hasAlias = /\bAS\b/i.test(vql);
@@ -197,25 +199,52 @@ function validateVQL(vql_init, tableSchema) {
     return 'Do not use the AS keyword for aliasing table names.';
   }
 
-  const invalidJoinTypes = /\b(INNER|LEFT|RIGHT|FULL|OUTER|CROSS)\s+JOIN\b/i;
-  if (invalidJoinTypes.test(vql)) {
-    return 'Do not specify JOIN types (e.g., INNER, LEFT, RIGHT, FULL). Use only "JOIN ... ON".';
-  }
+  // 提取 JOIN ... ON ... 直到下一个关键字
+  const joinOnRegex = /join\s+(.*?)\s+on\s+(.*?)(?=\b(select|from|where|group|order|bin|visualize)\b|$)/gi;
+  let joinErrors = [];
+  const tableNames = tableSchema.tableNames || []; // 提取 schema 中的 tableNames
 
-  const joinRegex = /join\s+\w+\s+on\s+([\w.]+)\s*=\s*([\w.]+)/gi;
   let match;
-  const joinErrors = [];
+  while ((match = joinOnRegex.exec(vql)) !== null) {
+    const joinPart = match[1].trim(); // 提取 JOIN 和 ON 之间的部分
+    const onCondition = match[2].trim(); // 提取 ON 条件部分
 
-  // Validate ON conditions in JOIN clauses
-  while ((match = joinRegex.exec(vql)) !== null) {
-    const leftSide = match[1];
-    const rightSide = match[2];
-
-    if (!/^\w+\.\w+$/.test(leftSide)) {
-      joinErrors.push(`Invalid ON condition: ${leftSide} must be in "table.column" format.`);
+    // 确保 JOIN 后只有一个表
+    const joinTables = joinPart.split(/[\s,]+/);
+    if (joinTables.length !== 1) {
+      joinErrors.push(`Invalid JOIN clause: Only one table should be specified after JOIN. Found: ${joinTables.join(' ')}`);
+      continue;
     }
-    if (!/^\w+\.\w+$/.test(rightSide)) {
-      joinErrors.push(`Invalid ON condition: ${rightSide} must be in "table.column" format.`);
+
+    // 确保 ON 存在
+    if (!onCondition) {
+      joinErrors.push('Invalid ON condition: ON condition is missing or undefined.');
+      continue;
+    }
+
+    // 确保 ON 条件中存在 "="
+    if (!onCondition.includes('=')) {
+      joinErrors.push('Invalid ON condition: ON condition must include an "=" sign.');
+      continue;
+    }
+
+    // 验证 ON 条件是否符合 "table.column = table.column" 格式
+    const [leftSide, rightSide] = onCondition.split('=').map(part => part.trim());
+
+    if (!/^\w+\.\w+$/.test(leftSide) || !/^\w+\.\w+$/.test(rightSide)) {
+      joinErrors.push(`Invalid ON condition: ${onCondition} must be in "table.column = table.column" format.`);
+      continue;
+    }
+
+    // 验证表名是否在 tableSchema 中
+    const leftTable = leftSide.split('.')[0];
+    const rightTable = rightSide.split('.')[0];
+
+    if (!tableNames.includes(leftTable)) {
+      joinErrors.push(`Invalid table name in ON condition: ${leftTable} is not in the schema.`);
+    }
+    if (!tableNames.includes(rightTable)) {
+      joinErrors.push(`Invalid table name in ON condition: ${rightTable} is not in the schema.`);
     }
   }
 
@@ -223,17 +252,72 @@ function validateVQL(vql_init, tableSchema) {
     return `Validation failed: ${joinErrors.join(' ')}`;
   }
 
-  const nonJoinRegex = /(select|where|group\s+by|order\s+by|bin\s+by)\s+[^\s]+\.\w+/i;
+  // 移除 JOIN 子句
+  const vqlWithoutJoins = vql.replace(joinOnRegex, '');
 
-  // Check for table.column usage outside of JOIN clauses
-  const matchNonJoin = vql.match(nonJoinRegex);
+  // 验证 JOIN 之外的 table.column 使用
+  const nonJoinRegex = /(\w+)\.(\w+)/g;
+  const matchNonJoin = vqlWithoutJoins.match(nonJoinRegex);
+
   if (matchNonJoin) {
-    return 'Do not use table.column outside of JOIN clauses.';
+    return 'Invalid usage of table.column detected outside of JOIN ... ON clause. Detected: ' + matchNonJoin.join(', ');
   }
+
+
+  // 提取 FROM 子句，直到下一个关键字
+  const fromRegex = /from\s+(.*?)(?=\b(select|group|where|join|order|bin|visualize)\b|$)/i;
+  const fromMatch = vql.match(fromRegex);
+
+  if (fromMatch) {
+    const fromPart = fromMatch[1].trim();
+
+    // 确保 FROM 后只有一个表
+    const fromTables = fromPart.split(/[\s,]+/);
+    if (fromTables.length !== 1) {
+      return `Invalid FROM clause: Only one table should be specified after FROM. Found: ${fromTables.join(' ')}`;
+    }
+
+    const fromTable = fromTables[0].trim();
+
+    // 验证 FROM 子句中的表名是否在 tableSchema 中
+    if (!tableNames.includes(fromTable)) {
+      return `Invalid table name in FROM clause: ${fromTable} is not in the schema.`;
+    }
+  } else {
+    return 'Unable to parse FROM clause. It must be present.';
+  }
+
+  const validBinByOptions = ['year', 'month', 'week', 'day', 'weekday', 'quarter'];
+  const validSortingOrders = ['asc', 'desc'];
+
+  // Validate BIN BY clause
+  const binByRegex = /\bbin\s+by\s+(\w+)(?=\b(select|from|where|join|order\s+by|group\s+by|visualize)\b|$)/i;
+  const binByMatch = vql.match(binByRegex);
+
+  if (binByMatch) {
+    const binByValue = binByMatch[1].trim();
+    if (!validBinByOptions.includes(binByValue)) {
+      return `Invalid BIN BY clause: "${binByValue}" is not a valid option. Allowed options are: ${validBinByOptions.join(', ')}.`;
+    }
+  } else {
+    const invalidBinByRegex = /\bbin\s*[^b]*\s*by\b/i;
+    if (invalidBinByRegex.test(vql)) {
+      return 'Invalid BIN BY clause format: BIN BY should be a continuous clause with one valid option (e.g., BIN BY month).';
+    }
+  }
+
+  const orderIndex = vql.indexOf('order');
+    if (orderIndex !== -1) {
+        const wordsAfterOrder = vql.slice(orderIndex).trim().split(/\s+/);
+
+        // Check if the word immediately after 'order' is 'by'
+        if (wordsAfterOrder[1] !== 'by') {
+            return 'Invalid ORDER BY clause format: "BY" is missing after "ORDER".';
+        }
+    }
 
   // Extract and validate SELECT and FROM clauses
   const selectMatch = vql.match(/select\s+(.+?)\s+from/i);
-  const fromMatch = vql.match(/from\s+(.+?)(\s+|$)/i);
 
   // Ensure SELECT and FROM clauses exist
   if (!selectMatch || !fromMatch) {
@@ -243,46 +327,43 @@ function validateVQL(vql_init, tableSchema) {
   const selectElements = selectMatch[1].split(',').map(el => el.trim().split(' ')[0]);
   const fromTables = fromMatch[1].split(',').map(table => table.trim());
 
-  // Check if more than one table is present in the FROM clause
-  if (fromTables.length > 1) {
-    return 'The FROM clause can only contain one table. Use JOIN to include multiple tables.';
-  }
-
+  
   const fromTable = fromTables[0];
 
-  // Extract GROUP BY and BIN BY clauses
-  const groupByMatch = vql.match(/group\s+by\s+(.+?)(\s+order\s+by|\s*$)/i);
-  const binByMatch = vql.match(/bin\s+by\s+(.+?)(\s+group\s+by|\s+order\s+by|\s*$)/i);
+  // // Extract GROUP BY and BIN BY clauses
+  // const groupByMatch = vql.match(/group\s+by\s+(.+?)(\s+order\s+by|\s*$)/i);
+  // const binByMatch = vql.match(/bin\s+by\s+(.+?)(\s+group\s+by|\s+order\s+by|\s*$)/i);
 
-  // Validate GROUP BY clause elements
-  if (groupByMatch) {
-    const groupByElements = groupByMatch[1].split(',').map(el => el.trim());
+  // // Validate GROUP BY clause elements
+  // if (groupByMatch) {
+  //   const groupByElements = groupByMatch[1].split(',').map(el => el.trim());
 
-    for (const groupEl of groupByElements) {
-      if (!selectElements.includes(groupEl) && 
-          !(binByMatch && binByMatch[1].split(',').map(el => `binBy_${el.trim()}`).includes(groupEl)) && 
-          !tableSchema[fromTable].includes(groupEl)) {
-        return `GROUP BY element "${groupEl}" is not valid. It must be in SELECT, BIN BY, or a column from the table "${fromTable}".`;
-      }
-    }
-  }
+  //   for (const groupEl of groupByElements) {
+  //     if (!selectElements.includes(groupEl) && 
+  //         !(binByMatch && binByMatch[1].split(',').map(el => `binBy_${el.trim()}`).includes(groupEl)) && 
+  //         !tableSchema[fromTable].includes(groupEl)) {
+  //       return `GROUP BY element "${groupEl}" is not valid. It must be in SELECT, or a column from the table "${fromTable}".`;
+  //     }
+  //   }
+  // }
 
-  // Validate BIN BY clause elements
-  if (binByMatch) {
-    const binByElements = binByMatch[1].split(',').map(el => `binBy_${el.trim()}`);
+  // // Validate BIN BY clause elements
+  // const validBinByOptions = ['year', 'month', 'week', 'day', 'weekday', 'quarter'];
 
-    for (const binEl of binByElements) {
-      if (!selectElements.includes(binEl)) {
-        return `BIN BY element "${binEl}" is not valid. It must be in SELECT.`;
-      }
-    }
-  }
+  // if (binByMatch) {
+  //   const binByElements = binByMatch[1].split(',').map(el => `${el.trim()}`);
 
-  // Check for nested queries
-  const hasNestedQueries = /\(\s*SELECT\b/i.test(vql);
-  if (hasNestedQueries) {
-    return 'Avoid using nested queries.';
-  }
+  //   for (const binEl of binByElements) {
+  //     if (!validBinByOptions.includes(binEl)) {
+  //       return `BIN BY element "${binEl}" is not valid. It must be in .`;
+  //     }
+  //   }
+  // }
+
+
+  // if (!visualizeRegex.test(vql)) {
+  //   return 'VQL must start with "visualize" followed by a valid type (e.g., pie, scatter, line, bar). Default type is scatter.';
+  // }
 
   return ''; // Validation passed
 }
@@ -290,7 +371,7 @@ function validateVQL(vql_init, tableSchema) {
 
 function extractVisualizeVQL(vql) {
   const visualizeIndex = vql.indexOf('visualize');
-  const issueIndex = vql.indexOf('issues');
+  const issueIndex = vql.indexOf('Issues');
 
   if (visualizeIndex !== -1 && issueIndex !== -1 && visualizeIndex < issueIndex) {
     // 提取从 "visualize" 开始到 "issue" 之前的部分，不包括前导空格
@@ -304,11 +385,11 @@ function extractVisualizeVQL(vql) {
 }
 
 
-async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, lastError = '', lastVQL = '', userId) {
+async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastError = '', lastVQL = '', userId) {
   let generatedText = ''; // 确保 generatedText 变量被初始化
 
   try {
-    if (lastError) {
+    if (retries < 5) {
       // 仅将当前VQL和错误信息附加到提示中
       prompt += `\nFailed VQL: ${lastVQL}\nIssues: ${lastError}`;
     }
@@ -339,14 +420,14 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, last
     generatedText = response.data.choices[0].text.trim(); // 确保 generatedText 被正确赋值
     generatedText = extractVisualizeVQL(generatedText)
     console.log('Generated VQL:', generatedText);
-    appendLogToFile(userId, `Attempt ${10 - retries + 1} Generated VQL: ${generatedText}`);
+    appendLogToFile(userId, `Attempt ${5 - retries + 1} Generated VQL: ${generatedText}`);
     const validationError = validateVQL(generatedText, tableSchema);
     if (!validationError) {
       console.log('Validation Passed: VQL is valid.');
       appendLogToFile(userId, `Validation Passed: VQL is valid.`);
       return generatedText.toLowerCase();
     } else {
-      appendLogToFile(userId, `Attempt ${10 - retries + 1}: Validation Failed: ${validationError}`);
+      appendLogToFile(userId, `Attempt ${5 - retries + 1}: Validation Failed: ${validationError}`);
       throw new Error(validationError);
     }
   } catch (error) {
@@ -360,7 +441,7 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 10, last
       return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, newError, newVQL);
     } else {
       appendLogToFile(userId, 'Failed to generate valid VQL from OpenAI after multiple attempts');
-      throw new Error('Failed to generate valid VQL from OpenAI after multiple attempts');
+      throw new Error(`Failed to generate valid VQL from OpenAI after 5 attempts.`);
     }
   }
 }
@@ -440,7 +521,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
   const exampleEncoderQuestions = fs.readFileSync('./utils/data/train/train_encode.txt', 'utf-8').split('\n');
   const exampleDecoderAnswers = fs.readFileSync('./utils/data/train/train_decode_db.txt', 'utf-8').split('\n');
   const limitTable = 0;
-  const nshot = 10;
+  const nshot = 5;
 
   try {
     const prompt = await composePrompt(data, query, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
@@ -448,7 +529,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
     console.log('Generated Prompt:', prompt);
     appendLogToFile(userId, `API Generated Prompt: ${prompt}`)
 
-    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,10,userId);
+    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,5,userId);
 
     console.timeEnd('GET * VQL Request Duration');
     console.log('Generated VQL:', generatedText);
@@ -526,8 +607,8 @@ async function callOpenAIWithRetry(prompt, retries = 10) {
 
 app.post('/api/explain-vql', async (req, res) => {
   console.time('POST /api/explain-vql Duration');
-  const { VQL, tableSchema, userId } = req.body;
-
+  const { VQL, tableData, userId } = req.body;
+  // console.log('111',`${tableData}`)
   appendLogToFile(userId, `API Received VQL: ${VQL}`);
 
   const VQL_exp = 'VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter'
@@ -612,13 +693,15 @@ app.post('/api/explain-vql', async (req, res) => {
         "description": "A detailed description of the operation.",
         "clause": "The corresponding VQL clause"
       },
-      // ... other steps
+      // ... other steps, where steps must include conditions
     ]
   }
 
   Make sure that the returned JSON is correctly formatted and that each field is properly filled in. 
   Please generate explanation based on the keyword and in logical order.
-  When describing statement, include the specific column names involved,
+  valid clauses using the valid operations: SELECT, FROM, JOIN, WHERE, GROUP BY, ORDER BY, BIN BY, VISUALIZE.
+  Each clause typically begins with a specific operation name. 
+  When describing statement, include the specific column names involved.
   Only need to return the json and no other words additinally. 
 
   Your Task:
@@ -631,7 +714,7 @@ app.post('/api/explain-vql', async (req, res) => {
   `
 
   try {
-        const validationError = validateVQL(VQL, tableSchema);
+        const validationError = validateVQL(VQL, tableData);
         if (!validationError) {
           console.log('Validation Passed: VQL is valid.');
           appendLogToFile(userId, `API Input VQL is valid.`);
