@@ -2589,19 +2589,17 @@ return (
           currentColumns=[...currentColumns, binColumnName];
           currentColumns_bin=currentColumns
           selectedColumns_bin=[binColumnName, selectedColumns_final[1]];
+          break;
         }
         case 'VISUALIZE': {
           const clauseParts = step.clause.split(' ');
-
+          console.log('charttype clause 111', clauseParts);
           if (clauseParts.length < 2) {
             chartType = 'scatter'
+          }else{
+            chartType = clauseParts[1].toLowerCase()
           }
         
-          // Validate the chart type
-          const validChartTypes = ['scatter', 'bar', 'line', 'pie'];
-          if (!validChartTypes.includes(clauseParts[1].toLowerCase())) {
-            chartType = 'scatter'
-          }
           // chartType = step.clause.split(' ')[1].toLowerCase(); // 从 VISUALIZE 子句中提取图表类型
           console.log('charttype init', chartType);
           switch (chartType) {
