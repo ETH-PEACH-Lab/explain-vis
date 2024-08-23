@@ -12,6 +12,7 @@ export const logEvent = (sessionId, message) => {
       sessionId,
       message,
     }),
+    mode: 'cors', // Explicitly set CORS mode
   })
   .then(response => response.text())
   .then(data => console.log('Log response:', data))

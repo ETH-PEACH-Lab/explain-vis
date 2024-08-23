@@ -107,6 +107,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ query, data, userId }),
+          mode: 'cors', // Explicitly set CORS mode
         });
 
         if (response.ok) {
@@ -125,6 +126,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ VQL, tableData: data, userId}),
+            mode: 'cors', // Explicitly set CORS mode
           });
                   
           if (explanationResponse.ok) {

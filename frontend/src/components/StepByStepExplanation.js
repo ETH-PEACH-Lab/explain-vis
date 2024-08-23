@@ -2075,8 +2075,24 @@ return (
     let data = {};
     let dataother = {};
     let options = {};
-
-    
+    let firstValue_select = ''
+    let firstValue_select1=''
+    const defaultoptions = {
+      x: {
+        position: 'bottom',
+        title: {
+          display: true,
+          text: selectedColumns[0],
+        },
+      },
+        y: {
+            title: {
+                display: true,
+                text: selectedColumns[1],
+            },
+        },
+    }
+    const defaultdata={datasets: []}
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
@@ -2085,29 +2101,39 @@ return (
         return !isNaN(parseFloat(value)) && isFinite(value);
     };
   if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
-    const firstValue_select = currentTable_now[0][selectedColumns[0]];
+    firstValue_select = currentTable_now[0][selectedColumns[0]];
   } else {
     console.log(explanation[currentPage].operation)
     console.log(currentTable_now)
     console.log(selectedColumns)
-    // setError('Selected Column does not exist in the table.');
-    return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+    return (
+      <Chart
+          type={chart.toLowerCase()}
+          data={defaultdata}
+          options={defaultoptions}
+      />
+  );
   }
   if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
-    const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
+    firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   } else {
-    // setError('Selected Column does not exist in the table.');
-    return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+    return (
+      <Chart
+          type={chart.toLowerCase()}
+          data={defaultdata}
+          options={defaultoptions}
+      />
+  );
   }
-  const firstValue_select = currentTable_now[0][selectedColumns[0]];
+  // const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
   console.log('xAxistype', xAxisType_select);
 
-  const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
+  // const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
   console.log('yAxistype', yAxisType_select);
 
-
+  
     if (chart.toLowerCase() === 'pie') {
         // Pie chart specific logic
         const aggregatedData = currentTable_now.reduce((acc, row) => {
@@ -2651,16 +2677,73 @@ return (
 
      const generateScatterData = (currentTable_new, selectedColumns) => {
       console.log('table join results', currentTable_new);
+      const defaultoptions = {
+        data: {datasets:[]},
+        options: {
+          x: {
+            position: 'bottom',
+            title: {
+              display: true,
+              text: selectedColumns[0],
+            },
+          },
+            y: {
+                title: {
+                    display: true,
+                    text: selectedColumns[1],
+                },
+            },
+        },
+      }
       if (!currentTable_new || currentTable_new.length === 0 || !selectedColumns || selectedColumns.length < 2) {
         console.error('Invalid input data or selected columns');
         return {
           data: {
             datasets:[]
           },
-          options: {},
+          options: defaultoptions,
         };
       }
       console.log('test selectcolumn results', selectedColumns);
+      
+      const isDate = value => {
+        return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+      };
+  
+      const isNumeric = value => {
+          return !isNaN(parseFloat(value)) && isFinite(value);
+      };
+
+      let firstValue_select;
+      if (currentTable_new.length > 0 && selectedColumns.length > 0 && selectedColumns[0] in currentTable_new[0]) {
+        firstValue_select = currentTable_new[0][selectedColumns[0]];
+      } else {
+          // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
+          return {
+            data: {datasets:[]},
+            options: defaultoptions,
+          }
+          // <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+      }
+      const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
+      console.log('xAxistype', xAxisType_select);
+
+      let firstValue_select1;
+      if (currentTable_new.length > 0 && selectedColumns.length > 0 && selectedColumns[1] in currentTable_new[0]) {
+        firstValue_select1 = currentTable_new[0][selectedColumns[1]];
+      } else {
+        return {
+          data: {datasets:[]},
+          options: defaultoptions,
+        }
+        }
+          // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
+          // return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
+      
+
+      const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
+      console.log('yAxistype', yAxisType_select);
+
       const data =  {
         datasets: [
           {
@@ -2683,35 +2766,6 @@ return (
         ],
       };
       console.log('data',data)
-      const isDate = value => {
-        return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-      };
-  
-      const isNumeric = value => {
-          return !isNaN(parseFloat(value)) && isFinite(value);
-      };
-
-      let firstValue_select;
-      if (currentTable_new.length > 0 && selectedColumns.length > 0 && selectedColumns[0] in currentTable_new[0]) {
-        firstValue_select = currentTable_new[0][selectedColumns[0]];
-      } else {
-          // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
-          return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
-      }
-      const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
-      console.log('xAxistype', xAxisType_select);
-
-      let firstValue_select1;
-      if (currentTable_new.length > 0 && selectedColumns.length > 0 && selectedColumns[1] in currentTable_new[0]) {
-        firstValue_select1 = currentTable_new[0][selectedColumns[1]];
-      } else {
-          // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
-          return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
-      }
-
-      const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
-      console.log('yAxistype', yAxisType_select);
-
       const options = {
             scales: {
               x: {
