@@ -2797,47 +2797,10 @@ return (
       return result
     };
 
-    const isDate = value => {
-      const date = new Date(value);
-      return !isNaN(date.getTime());
-    };
-
-    let firstValue;
-    if (currentTable_from.length > 0 && selectedColumns.length > 0 && selectedColumns[0] in currentTable_from[0]) {
-        firstValue = currentTable_from[0][selectedColumns[0]];
-    } else {
-        // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
-        return <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
-    }
-
-    const xAxisType = isDate(firstValue) ? 'time' : 'category';
-
-
     const defaultcolor = 'rgba(75, 192, 192, 0.6)';
     const chartcolor = '#f0eea3';
     switch (step.operation) {
       case 'FROM': {
-        console.log('from column',selectedColumns)
-        console.log('current table', currentTable)
-        console.log('current from table', currentTable_from)
-        console.log('from chart data',generateScatterData(fromTable? dataTables[fromTable]:currentTable_from,selectedColumns)      )
-        const isDate = value => {
-          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-        };
-        
-        const isNumeric = value => {
-          return !isNaN(parseFloat(value)) && isFinite(value);
-        };        
-    
-        const table_data = fromTable? dataTables[fromTable]:currentTable_from;
-        const columns = selectedColumns
-        const firstValue_select = table_data[0][columns[0]];
-        const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
-        
-        const firstValue_select1 = table_data[0][columns[1]];
-        const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
-        console.log('yAxistype', yAxisType_select);
-
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -2975,8 +2938,6 @@ return (
         );
       }
       case 'WHERE': {
-        const columnNames = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g)))];
-        const numbers = [...new Set(step.conditions.flatMap(cond => cond.condition.match(/\b\d+\b/g)))];
         const eligibleColumns = getConditionEligibleColumns(currentTable_where);
         const { data, options } = generateScatterData(whereResults,selectedColumns)
         return (
@@ -3106,18 +3067,6 @@ return (
         );
       }
       case 'SELECT': {  
-        const isDate = value => {
-          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-        };
-        
-        const isNumeric = value => {
-          return !isNaN(parseFloat(value)) && isFinite(value);
-        };        
-    
-        const table_data = selectTableResults?selectTableResults:currentTable_select;
-        const columns = selectTableResults?[selectedColumnsOthers?selectedColumnsOthers[0]:selectedColumns[0],aggFunction?`${aggFunction}(${aggColumn})`:selectedColumnsOthers[1]]:selectedColumns_final
-        const firstValue_select = table_data[0][columns[0]];
-        const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
         console.log('currentTable_select',currentTable_select)
         return (
           <div className="step-container" key={step.step}>
@@ -3167,7 +3116,6 @@ return (
         );
       }
       case 'ORDER BY': {
-        
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
