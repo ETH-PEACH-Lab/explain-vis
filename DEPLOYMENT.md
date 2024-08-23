@@ -14,6 +14,9 @@ docker-compose -f docker-compose.prod.yml build
 
 2. Tag and push your Docker images
 ```
-docker tag explain-vis-server ghcr.io/eth-peach-lab/explain-vis/explain-vis-server-amd64:latest
-docker push ghcr.io/eth-peach-lab/explain-vis/explain-vis-server-amd64:latest
+<!-- docker tag explain-vis-server ghcr.io/eth-peach-lab/explain-vis/explain-vis-server-amd64:latest
+docker push ghcr.io/eth-peach-lab/explain-vis/explain-vis-server-amd64:latest -->
+
+docker tag explain-vis_server:latest ghcr.io/eth-peach-lab/explain-vis/test-server-image:latest
+docker push ghcr.io/eth-peach-lab/explain-vis/test-server-image:latest
 ```
