@@ -20,6 +20,7 @@ function OpenEndNL2VisExplain({data, userId }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
+  const [showExplanation, setShowExplanation] = useState(false); // New state to control explanation visibility
 
   useEffect(() => {
     const taskTitle = `NL2ViZ - Open-ended Task 2 with Explanation, ${data.scenario} Scenario`;
@@ -83,62 +84,73 @@ function OpenEndNL2VisExplain({data, userId }) {
         {`NL2ViZ with Explanation - ${data.scenario} Scenario, Open-ended Task 2`}
         </Typography>
         <div className="vql-switch">
-          <Switch color="default" checked={showVQL} onChange={(e) => {
-            const isChecked = e.target.checked;
-            setShowVQL(isChecked);
-            logEvent(userId, `VQL Switch toggled: ${isChecked ? 'ON' : 'OFF'}`);
-          }} />
-          <Typography variant="body1" component="span">Show VQL</Typography>
+          <Switch color="default" checked={showExplanation} onChange={(e) => setShowExplanation(e.target.checked)} />
+          <Typography variant="body1" component="span">Show Explanation</Typography>
+          {showExplanation&&
+            <><Switch color="default" checked={showVQL} onChange={(e) => setShowVQL(e.target.checked)} /><Typography variant="body1" component="span">Show VQL</Typography></>}
         </div>
       </div>
       <div className="content">
-        {interfaces.map((iface) => (
-          <div key={iface.id} className="interface">
-            <div className="first-row">
-              <div className="left-column">
-              <NaturalLanguageQuery onGenerate={handleGenerate} tableData={tableData} placeholderText={placeholderText} userId={userId}/>
-              <DataTable onDataUpdate={handleDataUpdate} tableData={tableData}/>
-              </div>
-              <div className="right-column">
-              {
-                  generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
-                    <div className="visualize">
-                      <Typography variant="h6" className="visualize-title">/ Visualization</Typography>
-                          <FinalVis
-                          VQL={generatedVQL.VQL}
-                          explanation={generatedVQL.explanation}
-                          tableData={tableData}
-                          showVQL={showVQL}
-                        />
-                      {showVQL && (
-                        <VQLEditor
-                          initialVQL={generatedVQL.VQL}
-                          onExecute={handleExecuteVQL}
-                          tableData={tableData}
-                          userId={userId}
-                        />
-                      )}
-                      </div>
-                  )}
-              </div>
+      {interfaces.map((iface) => (
+        <div key={iface.id} className="interface">
+          <div className="first-row">
+            <div className="left-column">
+              <NaturalLanguageQuery 
+                onGenerate={handleGenerate} 
+                tableData={tableData} 
+                placeholderText={'...'} 
+                userId={userId}
+              />
+              <DataTable 
+                onDataUpdate={handleDataUpdate} 
+                tableData={tableData}
+              />
             </div>
-            <hr />
-            <div className="second-row">
-              {generatedVQL.explanation.length > 0 && (
-                <StepByStepExplanation
-                VQL={generatedVQL.VQL}
-                  explanation={generatedVQL.explanation}
-                  tableData={tableData}
-                  showVQL={showVQL}
-                  currentPage={currentPage}
-                  onPageChange={handlePageChange}
-                  userId={userId}
-                />
-              )}
+            <div className="right-column">
+              <Typography variant="h6" className="visualize-title">Visualization</Typography>
+              <div className="visualize">
+                <div className="chart">
+                  {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
+                    <FinalVis
+                      VQL={generatedVQL.VQL}
+                      explanation={generatedVQL.explanation}
+                      tableData={tableData}
+                      showVQL={showVQL}
+                    />
+                  )}
+                </div>
+                {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
+                  <div>
+                    {showVQL && (
+                      <VQLEditor
+                        initialVQL={generatedVQL.VQL}
+                        onExecute={handleExecuteVQL}
+                        tableData={tableData}
+                        userId={userId}
+                      />
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        ))}
-      </div>
+          <hr />
+          <div className="second-row">
+            {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
+              <StepByStepExplanation
+                VQL={generatedVQL.VQL}
+                explanation={generatedVQL.explanation}
+                tableData={tableData}
+                showVQL={showVQL}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+                userId={userId}
+              />
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
     </div>
   );
 }

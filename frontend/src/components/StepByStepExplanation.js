@@ -2075,24 +2075,24 @@ return (
     let data = {};
     let dataother = {};
     let options = {};
-    let firstValue_select = ''
-    let firstValue_select1=''
-    const defaultoptions = {
-      x: {
-        position: 'bottom',
-        title: {
-          display: true,
-          text: selectedColumns[0],
-        },
-      },
-        y: {
-            title: {
-                display: true,
-                text: selectedColumns[1],
-            },
-        },
-    }
-    const defaultdata={datasets: []}
+    // let firstValue_select = ''
+    // let firstValue_select1=''
+  //   const defaultoptions = {
+  //     x: {
+  //       position: 'bottom',
+  //       title: {
+  //         display: true,
+  //         text: selectedColumns[0],
+  //       },
+  //     },
+  //       y: {
+  //           title: {
+  //               display: true,
+  //               text: selectedColumns[1],
+  //           },
+  //       },
+  //   }
+  //   const defaultdata={datasets: []}
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
@@ -2100,36 +2100,38 @@ return (
     const isNumeric = value => {
         return !isNaN(parseFloat(value)) && isFinite(value);
     };
-  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
-    firstValue_select = currentTable_now[0][selectedColumns[0]];
-  } else {
-    console.log(explanation[currentPage].operation)
-    console.log(currentTable_now)
-    console.log(selectedColumns)
-    return (
-      <Chart
-          type={chart.toLowerCase()}
-          data={defaultdata}
-          options={defaultoptions}
-      />
-  );
-  }
-  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
-    firstValue_select1 = currentTable_now[0][selectedColumns[1]];
-  } else {
-    return (
-      <Chart
-          type={chart.toLowerCase()}
-          data={defaultdata}
-          options={defaultoptions}
-      />
-  );
-  }
-  // const firstValue_select = currentTable_now[0][selectedColumns[0]];
+  // if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
+  //   firstValue_select = currentTable_now[0][selectedColumns[0]];
+  //   console.log('wwwwwww',firstValue_select)
+  // } else {
+  //   console.log(explanation[currentPage].operation)
+  //   console.log(currentTable_now)
+  //   console.log(selectedColumns)
+  //   return (
+  //     <Chart
+  //         type={chart.toLowerCase()}
+  //         data={defaultdata}
+  //         options={defaultoptions}
+  //     />
+  // );
+  // }
+  // if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
+  //   firstValue_select1 = currentTable_now[0][selectedColumns[1]];
+  //   console.log('hhhhhhhh',firstValue_select1)
+  // } else {
+  //   return (
+  //     <Chart
+  //         type={chart.toLowerCase()}
+  //         data={defaultdata}
+  //         options={defaultoptions}
+  //     />
+  // );
+  // }
+  const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
   console.log('xAxistype', xAxisType_select);
 
-  // const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
+  const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
   console.log('yAxistype', yAxisType_select);
 
@@ -2219,6 +2221,7 @@ return (
         };
         console.log('data chart', dataother)
         console.log('option chart', options)
+        console.log('yyyyyyyyyy',chart.toLowerCase())
         return (
           <Chart
               type={chart.toLowerCase()}

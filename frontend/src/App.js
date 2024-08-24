@@ -31,7 +31,7 @@ function App() {
             "department_id": 10,
             "department_name": "administration",
             "manager_id": 200,
-            "location_id": 1700
+            "location_id": 1700,
           },
           {
             "department_id": 20,
@@ -67,6 +67,7 @@ function App() {
         employee: [
           {
             "employee_id": 200,
+            "department_id": 10,
             "first_name": "steven",
             "job_id": "ad_pres",
             "salary": 24000,
@@ -74,6 +75,7 @@ function App() {
           },
           {
             "employee_id": 201,
+            "department_id": 20,
             "first_name": "neena",
             "job_id": "ad_vp",
             "salary": 17000,
@@ -81,6 +83,7 @@ function App() {
           },
           {
             "employee_id": 102,
+            "department_id": 90,
             "first_name": "lex",
             "job_id": "ad_vp",
             "salary": 17000,
@@ -88,6 +91,7 @@ function App() {
           },
           {
             "employee_id": 114,
+            "department_id": 30,
             "first_name": "alexander",
             "job_id": "it_prog",
             "salary": 9000,
@@ -95,6 +99,7 @@ function App() {
           },
           {
             "employee_id": 203,
+            "department_id": 40,
             "first_name": "bruce",
             "job_id": "it_prog",
             "salary": 6000,
@@ -102,6 +107,7 @@ function App() {
           },
           {
             "employee_id": 103,
+            "department_id": 60,
             "first_name": "david",
             "job_id": "it_prog",
             "salary": 4800,
@@ -109,6 +115,7 @@ function App() {
           },
           {
             "employee_id": 121,
+            "department_id": 50,
             "first_name": "valli",
             "job_id": "sa_rep",
             "salary": 4500,
@@ -116,6 +123,7 @@ function App() {
           },
           {
             "employee_id": 107,
+            "department_id": 60,
             "first_name": "diana",
             "job_id": "sa_rep",
             "salary": 4200,
@@ -123,6 +131,7 @@ function App() {
           },
           {
             "employee_id": 108,
+            "department_id": 100,
             "first_name": "nancy",
             "job_id": "sa_rep",
             "salary": 4000,
@@ -130,6 +139,7 @@ function App() {
           },
           {
             "employee_id": 109,
+            "department_id": 100,
             "first_name": "daniel",
             "job_id": "sa_rep",
             "salary": 3900,
@@ -295,7 +305,8 @@ function App() {
 
  useEffect(() => {
   // Shuffle the data scenarios
-  const scenarioOrder = shuffleArray([dataScenario1, dataScenario2]);
+  // const scenarioOrder = shuffleArray([dataScenario1, dataScenario2]);
+  const scenarioOrder = [dataScenario1, dataScenario2];
 
   // Define the vis and expl groups
   const visGroup = [
@@ -309,7 +320,8 @@ function App() {
   ];
 
   // Shuffle the group order (vis/expl)
-  const finalTaskOrder = shuffleArray([visGroup, explGroup]).flat();
+  // const finalTaskOrder = shuffleArray([visGroup, explGroup]).flat();
+  const finalTaskOrder = [visGroup, explGroup].flat();
 
   setTaskOrder(finalTaskOrder);
 }, []);

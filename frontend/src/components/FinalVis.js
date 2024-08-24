@@ -6,14 +6,16 @@ import { Scatter, Bar, Line, Pie, Chart } from 'react-chartjs-2';
 import './styles/stepByStepExplanation.css';
 import 'chartjs-adapter-date-fns';
 import Alert from '@mui/material/Alert';
-
-
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   console.log('VQL',VQL)
   console.log('explanation',explanation)
   console.log('tableData',tableData)
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   const totalTables = [];
   const totalColumns = [];
   tableData.tableNames.forEach((tableName) => {
@@ -39,6 +41,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     } catch (err) {
       console.error('Error in FinalVis:', err);
       setError('An error occurred while generating the final visualization. Please try again.');
+      setIsModalOpen(true);
     }
   }, [VQL, explanation, tableData]);
 
@@ -217,9 +220,25 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     let data = {};
     let dataother = {};
     let options = {};
-
+    const defaultoptions = {
+      x: {
+        position: 'bottom',
+        title: {
+          display: true,
+          text: selectedColumns[0],
+        },
+      },
+        y: {
+            title: {
+                display: true,
+                text: selectedColumns[1],
+            },
+        },
+    }
+    const defaultdata={datasets: []}
     if(!chart){
       return <Typography variant="body2" color="error"></Typography>;
+      
     }
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
@@ -231,14 +250,23 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
     const firstValue_select = currentTable_now[0][selectedColumns[0]];
   } else {
-    // setError('Selected Column does not exist in the table.');
-    return <Typography variant="body2" color="error"></Typography>;
+    setError('Selected Column does not exist in the table.');
+    setIsModalOpen(true);
+    return (
+          <Chart
+              type={chart.toLowerCase()}
+              data={defaultdata}
+              options={defaultoptions}
+          />
+      );
+    // return <Typography variant="body2" color="error"></Typography>;
   }
   if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
     const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   } else {
-    // setError('Selected Column does not exist in the table.');
-    return <Typography variant="body2" color="error"></Typography>;
+    setError('Selected Column does not exist in the table.');
+    setIsModalOpen(true);
+    // return <Typography variant="body2" color="error"></Typography>;
   }
   const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
@@ -636,15 +664,17 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
           const clauseParts = step.clause.split(' ');
 
           if (clauseParts.length < 2) {
-            chartType = ''
+            chartType = 'default'
+          }else{
+            chartType = clauseParts[1].toLowerCase();
           }
         
-          chartType = clauseParts[1].toLowerCase();
+          
         
           // Validate the chart type
           const validChartTypes = ['scatter', 'bar', 'line', 'pie'];
           if (!validChartTypes.includes(chartType)) {
-            chartType = ''
+            chartType = 'default'
           }
           // chartType = step.clause.split(' ')[1].toLowerCase(); // 从 VISUALIZE 子句中提取图表类型
           console.log('charttype init', chartType);
@@ -982,9 +1012,38 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
 
     // <div className="visualize">
     //     <Typography variant="h6" className="visualize-title">/ Visualization</Typography>
-        <div className="chart">
-        {explanation && explanation.length > 0 ? renderStepContent(explanation[explanation.length-1], explanation) : <Typography variant="body2">No explanations available</Typography>}
-        </div>
+  
+      // <div className="visualize">
+      //     <Typography variant="h6" className="visualize-title">/ Visualization</Typography>
+      <>
+        {explanation && explanation.length > 0 ? renderStepContent(explanation[explanation.length - 1], explanation) : <Typography variant="body2">No explanations available</Typography>}
+  
+      <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 300,
+            bgcolor: 'background.paper',
+            boxShadow: 24,
+            p: 4,
+            textAlign: 'center'
+          }}
+        >
+          <Typography variant="h6" color="error">Error</Typography>
+          <Typography variant="body2" color="textSecondary">{error}</Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setIsModalOpen(false)}
+            style={{ marginTop: '20px' }}
+          >
+            OK
+          </Button>
+        </Box>
+      </Modal></>
       //   {showVQL && (
       //   <><Typography variant="h6" className="vql-title">/ VQL</Typography>
       //   <Card className="vql-card">
