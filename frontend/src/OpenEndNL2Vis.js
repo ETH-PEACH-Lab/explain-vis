@@ -73,7 +73,7 @@ function OpenEndNL2Vis({data, userId }) {
     <div>
       <div className="header">
         <Typography variant="h6" className="title">
-          {`NL2ViZ w/o Explanation - ${data.scenario} Scenario, Open-ended Task 2`}
+          {`NL2ViZ - ${data.scenario} Scenario, Open-ended Task`}
         </Typography>
         <div className="vql-switch">
           <Switch color="default" checked={showExplanation} onChange={(e) => setShowExplanation(e.target.checked)} />
