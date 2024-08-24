@@ -333,7 +333,7 @@ function App() {
             "department"
         ]
     },
-    placeholderText: "Please show me the students in each class.",
+    placeholderText: "Please show me the non-transferred students in each department.",
  };
 
  useEffect(() => {

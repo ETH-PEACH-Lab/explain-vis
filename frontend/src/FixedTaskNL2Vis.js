@@ -1,5 +1,6 @@
 // src/components/FixedTaskNL2Vis.js
 import React, { useState, useEffect } from 'react';
+import { Scatter } from 'react-chartjs-2';
 import NaturalLanguageQuery from './components/NaturalLanguageQuery';
 import DataTable from './components/DataTable';
 import Visualization from './components/Visualization.js';
@@ -72,6 +73,51 @@ function FixedTaskNL2Vis({data, userId }) {
     setTableData(data);
   };
 
+  const FailedScatterChart = () => {
+    return (
+      <Scatter 
+        data={{
+          labels: [''], // 强制显示
+          datasets: [{
+            backgroundColor: '#f0eea3',
+            label: 'Empty Chart',
+            data: [] // 空数据
+          }]
+        }} 
+        options={{
+          scales: {
+            x: {
+              position: 'bottom',
+              title: {
+                display: true,
+                text: 'manager_id',
+              },
+              ticks: {
+                display: true,
+              },
+              grid: {
+                display: true,
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'avg(salary)',
+              },
+              ticks: {
+                display: true,
+              },
+              grid: {
+                display: true,
+              }
+            }
+          },
+          responsive: true,
+        }}
+      />
+    );
+  };
+
   return (
     <div>
       <div className="header">
@@ -104,16 +150,18 @@ function FixedTaskNL2Vis({data, userId }) {
             <div className="right-column">
               <Typography variant="h6" className="visualize-title">Visualization</Typography>
               <div className="visualize">
-                <div className="chart">
-                  {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
-                    <FinalVis
-                      VQL={generatedVQL.VQL}
-                      explanation={generatedVQL.explanation}
-                      tableData={tableData}
-                      showVQL={showVQL}
-                    />
-                  )}
-                </div>
+              <div className="chart">
+                    {generatedVQL.explanation && generatedVQL.explanation.length > 0 ? (
+                      <FinalVis
+                        VQL={generatedVQL.VQL}
+                        explanation={generatedVQL.explanation}
+                        tableData={tableData}
+                        showVQL={showVQL}
+                      />
+                    ) : (
+                      <FailedScatterChart /> 
+                    )}
+                  </div>
                 {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
                   <div>
                     {showVQL && (

@@ -11,6 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import './components/styles/styles.css';
 import VQLEditor from './components/VQLEditor.js'
 import { logEvent } from './utils/logger'; 
+import { Scatter } from 'react-chartjs-2';
 
 function FixedTaskNL2VisExplain({data, userId }) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
@@ -77,6 +78,51 @@ function FixedTaskNL2VisExplain({data, userId }) {
     console.log('Generated VQL and explanation updated:', generatedVQL);
 }, [generatedVQL]);
 
+const FailedScatterChart = () => {
+  return (
+    <Scatter 
+      data={{
+        labels: [''], // 强制显示
+        datasets: [{
+          backgroundColor: '#f0eea3',
+          label: 'Empty Chart',
+          data: [] // 空数据
+        }]
+      }} 
+      options={{
+        scales: {
+          x: {
+            position: 'bottom',
+            title: {
+              display: true,
+              text: 'dept_name',
+            },
+            ticks: {
+              display: true,
+            },
+            grid: {
+              display: true,
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'COUNT(stu_num)',
+            },
+            ticks: {
+              display: true,
+            },
+            grid: {
+              display: true,
+            }
+          }
+        },
+        responsive: true,
+      }}
+    />
+  );
+};
+
   return (
     <div>
       <div className="header">
@@ -109,16 +155,18 @@ function FixedTaskNL2VisExplain({data, userId }) {
             <div className="right-column">
               <Typography variant="h6" className="visualize-title">Visualization</Typography>
               <div className="visualize">
-                <div className="chart">
-                  {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
-                    <FinalVis
-                      VQL={generatedVQL.VQL}
-                      explanation={generatedVQL.explanation}
-                      tableData={tableData}
-                      showVQL={showVQL}
-                    />
-                  )}
-                </div>
+              <div className="chart">
+                    {generatedVQL.explanation && generatedVQL.explanation.length > 0 ? (
+                      <FinalVis
+                        VQL={generatedVQL.VQL}
+                        explanation={generatedVQL.explanation}
+                        tableData={tableData}
+                        showVQL={showVQL}
+                      />
+                    ) : (
+                      <FailedScatterChart /> 
+                    )}
+                  </div>
                 {/* {generatedVQL.explanation && generatedVQL.explanation.length > 0 && ( */}
                   <div>
                     {showVQL && (

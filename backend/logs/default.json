@@ -32034,5 +32034,437 @@
   {
     "serverTimestamp": "2024-08-24T18:04:49.509Z",
     "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:24.447Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:24.535Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:24.674Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:25.054Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:25.164Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:25.403Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:26.477Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:26.554Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:27.293Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:27.470Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:27.617Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:09:27.711Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:36.604Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:36.677Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:36.748Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:38.084Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:38.171Z",
+    "message": "Natural Language Query Input: Please display the relationship between departments and the salaries of their respective managers."
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:38.244Z",
+    "message": "ask api/generate-vegalite"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:38.572Z",
+    "message": "API Received query: Please display the relationship between departments and the salaries of their respective managers."
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:40.289Z",
+    "message": "API Generated Prompt: Please generate VQL based on DDL table and question. This is an example: \ncreate table instructor\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t salary\t\t\tnumeric(8,2) check (salary > 29000),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t) \nQuestion: display a bar chart for what are the names and average salaries for departments with average salary higher than 42000 ?, \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name \n \nQuestion: find the names and average salaries of all departments whose average salary is greater than 42000 , and show in ascending by the y please ., \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by avg(salary) asc \n \nQuestion: display a bar chart for what are the names and average salaries for departments with average salary higher than 42000 ? , could you list names from low to high order ?, \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by dept_name asc \n \nQuestion: what are the names and average salaries for departments with average salary higher than 42000 plot them as bar chart , and display from high to low by the x ., \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by dept_name desc \n \nQuestion: display a bar chart for what are the names and average salaries for departments with average salary higher than 42000 ? , list in ascending by the y axis ., \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by avg(salary) asc \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the JOIN ... ON format without specifying INNER, LEFT, RIGHT, or other types of joins.\nWhen performing joins, use the table.column format. Do not rename or alias the table names (i.e., do not use the AS keyword).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\nNo inner ou\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n{\"tables\":{\"departments\":[{\"department_id\":10,\"department_name\":\"administration\",\"manager_id\":200,\"location_id\":1700},{\"department_id\":20,\"department_name\":\"marketing\",\"manager_id\":201,\"location_id\":1800},{\"department_id\":30,\"department_name\":\"purchasing\",\"manager_id\":114,\"location_id\":1700},{\"department_id\":40,\"department_name\":\"human resources\",\"manager_id\":203,\"location_id\":2400},{\"department_id\":50,\"department_name\":\"shipping\",\"manager_id\":121,\"location_id\":1500},{\"department_id\":60,\"department_name\":\"it\",\"manager_id\":103,\"location_id\":1400}],\"employee\":[{\"employee_id\":200,\"department_id\":10,\"first_name\":\"steven\",\"job_id\":\"ad_pres\",\"salary\":24000,\"hire_date\":\"2001-06-17\"},{\"employee_id\":201,\"department_id\":20,\"first_name\":\"neena\",\"job_id\":\"ad_vp\",\"salary\":17000,\"hire_date\":\"2005-09-21\"},{\"employee_id\":102,\"department_id\":90,\"first_name\":\"lex\",\"job_id\":\"ad_vp\",\"salary\":17000,\"hire_date\":\"2006-01-13\"},{\"employee_id\":114,\"department_id\":30,\"first_name\":\"alexander\",\"job_id\":\"it_prog\",\"salary\":9000,\"hire_date\":\"2007-03-15\"},{\"employee_id\":203,\"department_id\":40,\"first_name\":\"bruce\",\"job_id\":\"it_prog\",\"salary\":6000,\"hire_date\":\"2008-07-11\"},{\"employee_id\":103,\"department_id\":60,\"first_name\":\"david\",\"job_id\":\"it_prog\",\"salary\":4800,\"hire_date\":\"2010-02-23\"},{\"employee_id\":121,\"department_id\":50,\"first_name\":\"valli\",\"job_id\":\"sa_rep\",\"salary\":4500,\"hire_date\":\"2012-04-10\"},{\"employee_id\":107,\"department_id\":60,\"first_name\":\"diana\",\"job_id\":\"sa_rep\",\"salary\":4200,\"hire_date\":\"2013-06-01\"},{\"employee_id\":108,\"department_id\":100,\"first_name\":\"nancy\",\"job_id\":\"sa_rep\",\"salary\":4000,\"hire_date\":\"2014-08-18\"},{\"employee_id\":109,\"department_id\":100,\"first_name\":\"daniel\",\"job_id\":\"sa_rep\",\"salary\":3900,\"hire_date\":\"2015-11-30\"}],\"jobs\":[{\"job_id\":\"ad_pres\",\"job_title\":\"President\",\"min_salary\":20000,\"max_salary\":40000},{\"job_id\":\"ad_vp\",\"job_title\":\"Vice President\",\"min_salary\":15000,\"max_salary\":30000},{\"job_id\":\"it_prog\",\"job_title\":\"Programmer\",\"min_salary\":4000,\"max_salary\":12000},{\"job_id\":\"sa_rep\",\"job_title\":\"Sales Representative\",\"min_salary\":3000,\"max_salary\":10000}]},\"tableNames\":[\"departments\",\"employee\",\"jobs\"]}\nQuestion: Please display the relationship between departments and the salaries of their respective managers.\nVQL:"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:40.423Z",
+    "message": "Prompt sent to OpenAI: Please generate VQL based on DDL table and question. This is an example: \ncreate table instructor\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t salary\t\t\tnumeric(8,2) check (salary > 29000),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t) \nQuestion: display a bar chart for what are the names and average salaries for departments with average salary higher than 42000 ?, \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name \n \nQuestion: find the names and average salaries of all departments whose average salary is greater than 42000 , and show in ascending by the y please ., \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by avg(salary) asc \n \nQuestion: display a bar chart for what are the names and average salaries for departments with average salary higher than 42000 ? , could you list names from low to high order ?, \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by dept_name asc \n \nQuestion: what are the names and average salaries for departments with average salary higher than 42000 plot them as bar chart , and display from high to low by the x ., \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by dept_name desc \n \nQuestion: display a bar chart for what are the names and average salaries for departments with average salary higher than 42000 ? , list in ascending by the y axis ., \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by avg(salary) asc \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the JOIN ... ON format without specifying INNER, LEFT, RIGHT, or other types of joins.\nWhen performing joins, use the table.column format. Do not rename or alias the table names (i.e., do not use the AS keyword).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\nNo inner ou\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n{\"tables\":{\"departments\":[{\"department_id\":10,\"department_name\":\"administration\",\"manager_id\":200,\"location_id\":1700},{\"department_id\":20,\"department_name\":\"marketing\",\"manager_id\":201,\"location_id\":1800},{\"department_id\":30,\"department_name\":\"purchasing\",\"manager_id\":114,\"location_id\":1700},{\"department_id\":40,\"department_name\":\"human resources\",\"manager_id\":203,\"location_id\":2400},{\"department_id\":50,\"department_name\":\"shipping\",\"manager_id\":121,\"location_id\":1500},{\"department_id\":60,\"department_name\":\"it\",\"manager_id\":103,\"location_id\":1400}],\"employee\":[{\"employee_id\":200,\"department_id\":10,\"first_name\":\"steven\",\"job_id\":\"ad_pres\",\"salary\":24000,\"hire_date\":\"2001-06-17\"},{\"employee_id\":201,\"department_id\":20,\"first_name\":\"neena\",\"job_id\":\"ad_vp\",\"salary\":17000,\"hire_date\":\"2005-09-21\"},{\"employee_id\":102,\"department_id\":90,\"first_name\":\"lex\",\"job_id\":\"ad_vp\",\"salary\":17000,\"hire_date\":\"2006-01-13\"},{\"employee_id\":114,\"department_id\":30,\"first_name\":\"alexander\",\"job_id\":\"it_prog\",\"salary\":9000,\"hire_date\":\"2007-03-15\"},{\"employee_id\":203,\"department_id\":40,\"first_name\":\"bruce\",\"job_id\":\"it_prog\",\"salary\":6000,\"hire_date\":\"2008-07-11\"},{\"employee_id\":103,\"department_id\":60,\"first_name\":\"david\",\"job_id\":\"it_prog\",\"salary\":4800,\"hire_date\":\"2010-02-23\"},{\"employee_id\":121,\"department_id\":50,\"first_name\":\"valli\",\"job_id\":\"sa_rep\",\"salary\":4500,\"hire_date\":\"2012-04-10\"},{\"employee_id\":107,\"department_id\":60,\"first_name\":\"diana\",\"job_id\":\"sa_rep\",\"salary\":4200,\"hire_date\":\"2013-06-01\"},{\"employee_id\":108,\"department_id\":100,\"first_name\":\"nancy\",\"job_id\":\"sa_rep\",\"salary\":4000,\"hire_date\":\"2014-08-18\"},{\"employee_id\":109,\"department_id\":100,\"first_name\":\"daniel\",\"job_id\":\"sa_rep\",\"salary\":3900,\"hire_date\":\"2015-11-30\"}],\"jobs\":[{\"job_id\":\"ad_pres\",\"job_title\":\"President\",\"min_salary\":20000,\"max_salary\":40000},{\"job_id\":\"ad_vp\",\"job_title\":\"Vice President\",\"min_salary\":15000,\"max_salary\":30000},{\"job_id\":\"it_prog\",\"job_title\":\"Programmer\",\"min_salary\":4000,\"max_salary\":12000},{\"job_id\":\"sa_rep\",\"job_title\":\"Sales Representative\",\"min_salary\":3000,\"max_salary\":10000}]},\"tableNames\":[\"departments\",\"employee\",\"jobs\"]}\nQuestion: Please display the relationship between departments and the salaries of their respective managers.\nVQL:\nPlease generate VQL in one line and begin with visualize"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:41.628Z",
+    "message": "Attempt 1 Generated VQL: visualize scatter select departments.manager_id, employee.salary from departments inner join employee on departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:41.684Z",
+    "message": "Attempt 1: Validation Failed: Invalid usage of table.column detected outside of JOIN ... ON clause. Detected: departments.manager_id, employee.salary"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:41.746Z",
+    "message": "Retrying with additional instruction: Invalid usage of table.column detected outside of JOIN ... ON clause. Detected: departments.manager_id, employee.salary (10 attempts left)"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:41.862Z",
+    "message": "Prompt sent to OpenAI: Please generate VQL based on DDL table and question. This is an example: \ncreate table instructor\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t salary\t\t\tnumeric(8,2) check (salary > 29000),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t) \nQuestion: display a bar chart for what are the names and average salaries for departments with average salary higher than 42000 ?, \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name \n \nQuestion: find the names and average salaries of all departments whose average salary is greater than 42000 , and show in ascending by the y please ., \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by avg(salary) asc \n \nQuestion: display a bar chart for what are the names and average salaries for departments with average salary higher than 42000 ? , could you list names from low to high order ?, \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by dept_name asc \n \nQuestion: what are the names and average salaries for departments with average salary higher than 42000 plot them as bar chart , and display from high to low by the x ., \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by dept_name desc \n \nQuestion: display a bar chart for what are the names and average salaries for departments with average salary higher than 42000 ? , list in ascending by the y axis ., \nVQL: visualize bar select dept_name , avg(salary) from instructor group by dept_name order by avg(salary) asc \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the JOIN ... ON format without specifying INNER, LEFT, RIGHT, or other types of joins.\nWhen performing joins, use the table.column format. Do not rename or alias the table names (i.e., do not use the AS keyword).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\nNo inner ou\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n{\"tables\":{\"departments\":[{\"department_id\":10,\"department_name\":\"administration\",\"manager_id\":200,\"location_id\":1700},{\"department_id\":20,\"department_name\":\"marketing\",\"manager_id\":201,\"location_id\":1800},{\"department_id\":30,\"department_name\":\"purchasing\",\"manager_id\":114,\"location_id\":1700},{\"department_id\":40,\"department_name\":\"human resources\",\"manager_id\":203,\"location_id\":2400},{\"department_id\":50,\"department_name\":\"shipping\",\"manager_id\":121,\"location_id\":1500},{\"department_id\":60,\"department_name\":\"it\",\"manager_id\":103,\"location_id\":1400}],\"employee\":[{\"employee_id\":200,\"department_id\":10,\"first_name\":\"steven\",\"job_id\":\"ad_pres\",\"salary\":24000,\"hire_date\":\"2001-06-17\"},{\"employee_id\":201,\"department_id\":20,\"first_name\":\"neena\",\"job_id\":\"ad_vp\",\"salary\":17000,\"hire_date\":\"2005-09-21\"},{\"employee_id\":102,\"department_id\":90,\"first_name\":\"lex\",\"job_id\":\"ad_vp\",\"salary\":17000,\"hire_date\":\"2006-01-13\"},{\"employee_id\":114,\"department_id\":30,\"first_name\":\"alexander\",\"job_id\":\"it_prog\",\"salary\":9000,\"hire_date\":\"2007-03-15\"},{\"employee_id\":203,\"department_id\":40,\"first_name\":\"bruce\",\"job_id\":\"it_prog\",\"salary\":6000,\"hire_date\":\"2008-07-11\"},{\"employee_id\":103,\"department_id\":60,\"first_name\":\"david\",\"job_id\":\"it_prog\",\"salary\":4800,\"hire_date\":\"2010-02-23\"},{\"employee_id\":121,\"department_id\":50,\"first_name\":\"valli\",\"job_id\":\"sa_rep\",\"salary\":4500,\"hire_date\":\"2012-04-10\"},{\"employee_id\":107,\"department_id\":60,\"first_name\":\"diana\",\"job_id\":\"sa_rep\",\"salary\":4200,\"hire_date\":\"2013-06-01\"},{\"employee_id\":108,\"department_id\":100,\"first_name\":\"nancy\",\"job_id\":\"sa_rep\",\"salary\":4000,\"hire_date\":\"2014-08-18\"},{\"employee_id\":109,\"department_id\":100,\"first_name\":\"daniel\",\"job_id\":\"sa_rep\",\"salary\":3900,\"hire_date\":\"2015-11-30\"}],\"jobs\":[{\"job_id\":\"ad_pres\",\"job_title\":\"President\",\"min_salary\":20000,\"max_salary\":40000},{\"job_id\":\"ad_vp\",\"job_title\":\"Vice President\",\"min_salary\":15000,\"max_salary\":30000},{\"job_id\":\"it_prog\",\"job_title\":\"Programmer\",\"min_salary\":4000,\"max_salary\":12000},{\"job_id\":\"sa_rep\",\"job_title\":\"Sales Representative\",\"min_salary\":3000,\"max_salary\":10000}]},\"tableNames\":[\"departments\",\"employee\",\"jobs\"]}\nQuestion: Please display the relationship between departments and the salaries of their respective managers.\nVQL:\nPlease generate VQL in one line and begin with visualize\nFailed VQL: visualize scatter select departments.manager_id, employee.salary from departments inner join employee on departments.manager_id = employee.employee_id\nIssues: Invalid usage of table.column detected outside of JOIN ... ON clause. Detected: departments.manager_id, employee.salary\nPlease generate VQL in one line and begin with visualize"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:43.168Z",
+    "message": "Attempt 2 Generated VQL: visualize scatter select manager_id, avg(salary) from employee group by manager_id order by manager_id asc"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:43.238Z",
+    "message": "Validation Passed: VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:43.295Z",
+    "message": "API Generated VQL: visualize scatter select manager_id, avg(salary) from employee group by manager_id order by manager_id asc"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:43.428Z",
+    "message": "Generated VQL: visualize scatter select manager_id, avg(salary) from employee group by manager_id order by manager_id asc"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:43.538Z",
+    "message": "API Received VQL: visualize scatter select manager_id, avg(salary) from employee group by manager_id order by manager_id asc"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:43.613Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:46.725Z",
+    "message": "API Generated Explanation: {\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by manager_id.\",\"clause\":\"GROUP BY manager_id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":4,\"operation\":\"ORDER BY\",\"description\":\"Order the results by manager_id in ascending order.\",\"clause\":\"ORDER BY manager_id ASC\"},{\"step\":5,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter chart.\",\"clause\":\"VISUALIZE scatter\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:46.840Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by manager_id.\",\"clause\":\"GROUP BY manager_id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":4,\"operation\":\"ORDER BY\",\"description\":\"Order the results by manager_id in ascending order.\",\"clause\":\"ORDER BY manager_id ASC\"},{\"step\":5,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter chart.\",\"clause\":\"VISUALIZE scatter\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:46.938Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:47.037Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:47.391Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:47.706Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:47.758Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:47.802Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:49.832Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:49.896Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:51.659Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:12:51.733Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:51.294Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:51.389Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:51.568Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:52.169Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:52.273Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:52.339Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:52.409Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:52.472Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:52.534Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:52.599Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:52.751Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:20:53.029Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:13.608Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:13.851Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:13.962Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:15.827Z",
+    "message": "Navigated to page 0: Tutorial"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:18.653Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:18.772Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:19.000Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:21.353Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:21.456Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:21.545Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:22.467Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:22.765Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:22.868Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:31.098Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:31.174Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:31.245Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:34.045Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:34.136Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:21:34.242Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:22:17.140Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:46.937Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:47.027Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:47.130Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:48.778Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:48.875Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:49.056Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:50.701Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:50.785Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:50.867Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:52.559Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:52.625Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:52.687Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:54.349Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:54.438Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:54.531Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:55.829Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:55.901Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:55.966Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:57.793Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:57.879Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:57.963Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:59.007Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:59.112Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:23:59.178Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:24:03.292Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:24:03.384Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:24:03.471Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:24:04.042Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:24:04.119Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:24:04.189Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:24:05.571Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:24:05.633Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T18:24:05.702Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
   }
 ]
