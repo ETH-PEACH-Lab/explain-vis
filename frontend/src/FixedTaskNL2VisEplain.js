@@ -15,8 +15,19 @@ import { Scatter } from 'react-chartjs-2';
 
 function FixedTaskNL2VisExplain({data, userId }) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
-  const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', vegaLiteSpec: null, explanation: [] });
-  const [tableData, setTableData] = useState(data.data);
+  const [generatedVQL, setGeneratedVQL] = useState({
+    VQL: 'VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_transfer = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC',
+    vegaLiteSpec: null,
+    explanation: [
+      { step: 1, operation: 'FROM', description: 'Specify the source table student.', clause: 'FROM student' },
+      { step: 2, operation: 'WHERE', description: 'Filter data to include only the items where stu_transfer column equals 0.', conditions: [{ condition: 'stu_transfer = 0', explanation: 'Select records where stu_transfer equals 0.' }], clause: 'WHERE stu_transfer = 0' },
+      { step: 3, operation: 'GROUP BY', description: 'Group data by dept_name.', clause: 'GROUP BY dept_name' },
+      { step: 4, operation: 'SELECT', description: 'Select the dept_name and the count of stu_num.', clause: 'SELECT dept_name, COUNT(stu_num)' },
+      { step: 5, operation: 'ORDER BY', description: 'Order the results by the count of stu_num in ascending order.', clause: 'ORDER BY COUNT(stu_num) ASC' },
+      { step: 6, operation: 'VISUALIZE', description: 'Visualize the results as a bar chart.', clause: 'VISUALIZE bar' }
+    ]
+  });
+    const [tableData, setTableData] = useState(data.data);
   const [showVQL, setShowVQL] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [currentPage, setCurrentPage] = useState(0);
@@ -167,18 +178,18 @@ const FailedScatterChart = () => {
                       <FailedScatterChart /> 
                     )}
                   </div>
-                {/* {generatedVQL.explanation && generatedVQL.explanation.length > 0 && ( */}
+                {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
                   <div>
                     {showVQL && (
                       <VQLEditor
-                        initialVQL={'...'}
+                        initialVQL={generatedVQL.VQL}
                         onExecute={handleExecuteVQL}
                         tableData={tableData}
                         userId={userId}
                       />
                     )}
                   </div>
-                {/* )} */}
+                )}
               </div>
             </div>
           </div>

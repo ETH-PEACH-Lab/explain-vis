@@ -16,7 +16,17 @@ import VQLEditor from './components/VQLEditor.js'
 
 function FixedTaskNL2Vis({data, userId }) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
-  const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', vegaLiteSpec: null, explanation: [] });
+  const [generatedVQL, setGeneratedVQL] = useState({
+    VQL: 'visualize scatter select manager_id, avg(salary) from employee group by manager_id order by manager_id asc',
+    vegaLiteSpec: null,
+    explanation: [
+      { step: 1, operation: 'FROM', description: 'Specify the source table employee.', clause: 'FROM employee' },
+      { step: 2, operation: 'GROUP BY', description: 'Group data by manager_id.', clause: 'GROUP BY manager_id' },
+      { step: 3, operation: 'SELECT', description: 'Select the manager_id and the average of salary columns.', clause: 'SELECT manager_id, AVG(salary)' },
+      { step: 4, operation: 'ORDER BY', description: 'Order the results by manager_id in ascending order.', clause: 'ORDER BY manager_id ASC' },
+      { step: 5, operation: 'VISUALIZE', description: 'Visualize the results as a scatter plot (default type).', clause: 'VISUALIZE scatter' }
+    ]
+  });
   const [tableData, setTableData] = useState(data.data);
   const [showVQL, setShowVQL] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Loading state

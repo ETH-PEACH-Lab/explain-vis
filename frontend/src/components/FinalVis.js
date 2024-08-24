@@ -360,11 +360,17 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   };
   
     console.log('error here',chart)
-    if(!chart){
+    if(chart==='default'){
       // return <Typography variant="body2" color="error"></Typography>;
-      setError(`An error occurred while generating the final visualization. Please try again.`);
-        setIsModalOpen(true)
-      
+      // setError(`An error occurred while generating the final visualization. Please try again.`);
+      //   setIsModalOpen(true)
+      return (
+        <Chart
+            type={'scatter'}
+            data={defaultdata}
+            options={defaultoptions}
+        />
+    );
     }
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
@@ -373,7 +379,10 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     const isNumeric = value => {
         return !isNaN(parseFloat(value)) && isFinite(value);
     };
-  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
+  if (currentTable_now &&
+    currentTable_now.length > 0 &&
+    selectedColumns.length > 0 &&
+    currentTable_now[0].hasOwnProperty(selectedColumns[0])) {
     const firstValue_select = currentTable_now[0][selectedColumns[0]];
   } else {
     console.log('error table',currentTable_now)
@@ -389,7 +398,10 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       );
     // return <Typography variant="body2" color="error"></Typography>;
   }
-  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
+  if (currentTable_now &&
+    currentTable_now.length > 0 &&
+    selectedColumns.length > 0 &&
+    currentTable_now[0].hasOwnProperty(selectedColumns[1])) {
     const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   } else {
     console.log('error table',currentTable_now)
@@ -801,7 +813,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         }
         case 'VISUALIZE': {
           const clauseParts = step.clause.split(' ');
-
+          console.log('error here', clauseParts)
           if (clauseParts.length < 2) {
             chartType = 'default'
           }else{
@@ -830,15 +842,15 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
             case 'pie':
               ChartComponent = 'Pie';
               break;
-            // default:
-            //   ChartComponent = 'Scatter';
+            default:
+              ChartComponent = 'Scatter';
           }
         }
         default:
           break;
       }
     });
-    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns,selectedColumns_final,selectpredata,groupByColumn,orderByColumn,orderDirection,binBy,currentTablebin_pre,ChartComponent,selectedColumns_bin};
+    return {currentTable_from,currentColumns_from,currentTable_join,currentColumns_join,currentTable_where,currentColumns_where,currentTable_group,currentColumns_group,currentTable_select,currentColumns_select,currentTable_order,currentColumns_order,currentTable_bin,currentColumns_bin,currentTable,currentColumns,previousTable,previousColumns,selectedColumns_final,selectpredata,groupByColumn,orderByColumn,orderDirection,binBy,currentTablebin_pre,chartType,selectedColumns_bin};
   };
 
   const renderStepContent = (step, steps) => {
@@ -874,7 +886,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       orderDirection,
       binBy,
       selectedColumns_bin,
-      ChartComponent
+      chartType
      } = calculateCurrentData();
     
      const generateScatterData = (currentTable_new, selectedColumns) => {
@@ -1161,7 +1173,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       }
       case 'VISUALIZE': {
         return (
-              generateChart(currentTable, ChartComponent, binBy?selectedColumns_bin:selectedColumns_final,chartcolor)
+              generateChart(currentTable, chartType, binBy?selectedColumns_bin:selectedColumns_final,chartcolor)
           );
         }
       default:

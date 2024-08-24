@@ -2208,8 +2208,11 @@ return (
       });
     }
   });
+  console.log(selectedColumns,'general x/y-axis')
 
   const generateChart = (currentTable_now, chart='scatter', selectedColumns,color) => {
+    console.log('current table for chart', currentTable_now)
+    console.log('current column for chart', selectedColumns)
     let data = {};
     let dataother = {};
     let options = {};
@@ -2261,9 +2264,10 @@ return (
     const isNumeric = value => {
         return !isNaN(parseFloat(value)) && isFinite(value);
     };
-    console.log('bug here', selectedColumns)
-    console.log('bug here', currentTable_now[0])
-  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
+  if (  currentTable_now &&
+    currentTable_now.length > 0 &&
+    selectedColumns.length > 0 &&
+    currentTable_now[0].hasOwnProperty(selectedColumns[0])) {
     firstValue_select = currentTable_now[0][selectedColumns[0]];
     // console.log('wwwwwww',firstValue_select)
   } else {
@@ -2278,7 +2282,11 @@ return (
       />
   );
   }
-  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
+  
+  if (currentTable_now &&
+    currentTable_now.length > 0 &&
+    selectedColumns.length > 0 &&
+    currentTable_now[0].hasOwnProperty(selectedColumns[1])) {
     firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   } else {
     return (
@@ -2298,52 +2306,52 @@ return (
   console.log('yAxistype', yAxisType_select);
 
   
-    // if (chart.toLowerCase() === 'pie') {
-    //     // Pie chart specific logic
-    //     const aggregatedData = currentTable_now.reduce((acc, row) => {
-    //         const xValue = row[selectedColumns[0]];
-    //         const yValue = row[selectedColumns[1]];
+    if (chart.toLowerCase() === 'pie') {
+        // Pie chart specific logic
+        const aggregatedData = currentTable_now.reduce((acc, row) => {
+            const xValue = row[selectedColumns[0]];
+            const yValue = row[selectedColumns[1]];
 
-    //         const existing = acc.find(item => item.x === xValue);
+            const existing = acc.find(item => item.x === xValue);
 
-    //         if (existing) {
-    //             existing.y += yValue;
-    //         } else {
-    //             acc.push({ x: xValue, y: yValue });
-    //         }
+            if (existing) {
+                existing.y += yValue;
+            } else {
+                acc.push({ x: xValue, y: yValue });
+            }
 
-    //         return acc;
-    //     }, []);
+            return acc;
+        }, []);
 
-    //     const labels = aggregatedData.map(item => String(item.x));
-    //     const datasetData = aggregatedData.map(item => item.y);
+        const labels = aggregatedData.map(item => String(item.x));
+        const datasetData = aggregatedData.map(item => item.y);
 
-    //     console.log('Labels:', labels);
-    //     console.log('Dataset data:', datasetData);
+        console.log('Labels:', labels);
+        console.log('Dataset data:', datasetData);
 
-    //     if (labels.length === datasetData.length) {
-    //         data = {
-    //             labels: labels,  // Ensure labels are added only for Pie chart
-    //             datasets: [{
-    //                 data: datasetData,
-    //                 backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
-    //             }],
-    //         };
+        if (labels.length === datasetData.length) {
+            data = {
+                labels: labels,  // Ensure labels are added only for Pie chart
+                datasets: [{
+                    data: datasetData,
+                    backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
+                }],
+            };
 
-    //         options = {
-    //             plugins: {
-    //                 legend: {
-    //                     display: true,
-    //                     position: 'right',
-    //                 },
-    //             },
-    //         };
-    //     } else {
-    //         console.error('Labels and data arrays do not match in length!');
-    //     }
-    //     return <Pie data={data} options={options} />;
-    // } 
-    // else {
+            options = {
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right',
+                    },
+                },
+            };
+        } else {
+            console.error('Labels and data arrays do not match in length!');
+        }
+        return <Pie data={data} options={options} />;
+    } 
+    else {
         // Other chart types logic
         
         dataother = {
@@ -2386,7 +2394,7 @@ return (
               options={options}
           />
       );
-    // }    
+    }    
 };
 
   const calculateCurrentData = () => {
@@ -2970,7 +2978,7 @@ return (
       const options = {
             scales: {
               x: {
-                type: xAxisType_select,
+                // type: xAxisType_select,
                 position: 'bottom',
                 // ...(xAxisType_select === 'time' && {
                 //   time: {
@@ -2982,13 +2990,13 @@ return (
                   text: selectedColumns[0],
                 },
               },
-                y: {
-                  // type: yAxisType_select,
-                    title: {
-                        display: true,
-                        text: selectedColumns[1],
-                    },
-                },
+              y: {
+                // type: yAxisType_select,
+                  title: {
+                      display: true,
+                      text: selectedColumns[1],
+                  },
+              },
             },
         };
         const result = {

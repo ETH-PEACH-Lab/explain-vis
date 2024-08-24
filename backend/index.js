@@ -704,6 +704,9 @@ app.post('/api/explain-vql', async (req, res) => {
   When describing statement, include the specific column names involved.
   Only need to return the json and no other words additinally. 
   Please not change the VQL, each clause should be align with VQL.
+  When the VQL is broken just break it dowm based on operation, don't change the pattern and value in VQL.
+  If the visualize type missed, must keep the same in clause and only in description mention default type.
+  
   Your Task:
   Now please provide a detailed explanation in the same JSON format for the following specific VQL. begin with: JSON
 
