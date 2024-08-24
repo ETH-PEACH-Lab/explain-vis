@@ -99,7 +99,7 @@ function OpenEndNL2Vis({data, userId }) {
               />
             </div>
             <div className="right-column">
-              <Typography variant="h6" className="visualize-title">Visualization</Typography>
+            <Typography variant="h6" className="visualize-title">/ Visualization</Typography>
               <div className="visualize">
                 <div className="chart">
                   {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
