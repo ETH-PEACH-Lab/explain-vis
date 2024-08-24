@@ -49,7 +49,9 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     return <Alert severity="error">{error}</Alert>;
   }
   if (!tableData || !tableData.tables) {
-    return <Typography variant="body2" color="error"></Typography>;
+    // return <Typography variant="body2" color="error"></Typography>;
+    setError(`An error occurred while generating the final visualization. Please try again.`);
+        setIsModalOpen(true)
   }
   const dataTables = Object.keys(tableData.tables).reduce((acc, key) => {
     acc[key] = tableData.tables[key].map((row, index) => {
@@ -84,36 +86,133 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
 
   const renderGroupedChart = (data, groupByColumn, selectedColumns) => {
     if (!data || data.length === 0 || !selectedColumns || selectedColumns.length < 2) {
-      return <div>No data available</div>;
+      // 如果数据为空或列选择无效，返回一个显示“Empty Chart”的空图表
+      return (
+        <Scatter 
+          data={{
+            labels: [''], // 强制显示
+            datasets: [{
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              label: 'Empty Chart',
+              data: [] // 添加一个空数据点以强制显示
+            }]
+          }} 
+          options={{
+            scales: {
+              x: {
+                position: 'bottom',
+                title: {
+                  display: true,
+                  text: selectedColumns[0] || 'X-Axis',
+                },
+                ticks: {
+                  display: true,
+                },
+                grid: {
+                  display: true,
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: selectedColumns[1] || 'Y-Axis',
+                },
+                ticks: {
+                  display: true,
+                },
+                grid: {
+                  display: true,
+                }
+              }
+            },
+          }}
+        />
+      );
     }
-    const groupedData = data.reduce((acc, row) => {
-      const key = row[groupByColumn];
-      if (!acc[key]) {
-        acc[key] = [];
-      }
-      acc[key].push(row);
-      return acc;
-    }, {});
+  
+    const columnNames = Object.keys(data[0]); // 获取表的列名
+  
+    // 检查 selectedColumns 是否都在表的列名里
+    const areSelectedColumnsValid = selectedColumns.every(column => columnNames.includes(column));
+  
+    if (!areSelectedColumnsValid) {
+      // 如果 selectedColumns 无效，返回空图表
+      return (
+        <Scatter 
+          data={{
+            labels: [''], // 强制显示
+            datasets: [{
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              label: 'Empty Chart',
+              data: [] // 添加一个空数据点以强制显示
+            }]
+          }} 
+          options={{
+            scales: {
+              x: {
+                position: 'bottom',
+                title: {
+                  display: true,
+                  text: selectedColumns[0] || 'X-Axis',
+                },
+                ticks: {
+                  display: true,
+                },
+                grid: {
+                  display: true,
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: selectedColumns[1] || 'Y-Axis',
+                },
+                ticks: {
+                  display: true,
+                },
+                grid: {
+                  display: true,
+                }
+              }
+            },
+          }}
+        />
+      );
+    }
+  
+    // 检查 groupByColumn 是否在表的列名里
+    const isGroupByColumnValid = columnNames.includes(groupByColumn);
+  
+    const groupedData = isGroupByColumnValid
+      ? data.reduce((acc, row) => {
+          const key = row[groupByColumn];
+          if (!acc[key]) {
+            acc[key] = [];
+          }
+          acc[key].push(row);
+          return acc;
+        }, {})
+      : { '': data };
   
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
-    
+  
     const isNumeric = value => {
       return !isNaN(parseFloat(value)) && isFinite(value);
-    };        
-
+    };
+  
     const firstValue = data[0][selectedColumns[0]];
     const xAxisType = isDate(firstValue) ? 'time' : isNumeric(firstValue) ? 'linear' : 'category';
-
+  
     const firstValue_select1 = data[0][selectedColumns[1]];
     const yAxisType = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
-
+  
     const chartData = {
-      datasets: Object.keys(groupedData).map((key, index) => ({
-        label: key,
+      datasets: Object.keys(groupedData).map((key) => ({
+        label: key || 'Ungrouped',
         data: groupedData[key].map(row => ({ x: row[selectedColumns[0]], y: row[selectedColumns[1]] })),
-        backgroundColor: `hsla(${index * 360 / Object.keys(groupedData).length}, 100%, 75%, 0.5)`,
+        backgroundColor: isGroupByColumnValid ? `hsla(${Math.random() * 360}, 100%, 75%, 0.5)` : 'rgba(75, 192, 192, 0.6)',
         pointRadius: 5,
       })),
     };
@@ -126,6 +225,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         },
         title: {
           display: true,
+          text: isGroupByColumnValid ? 'Grouped Chart' : 'Ungrouped Chart',
         },
       },
       scales: {
@@ -221,23 +321,49 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     let dataother = {};
     let options = {};
     const defaultoptions = {
-      x: {
-        position: 'bottom',
-        title: {
-          display: true,
-          text: selectedColumns[0],
-        },
-      },
-        y: {
-            title: {
-                display: true,
-                text: selectedColumns[1],
-            },
-        },
-    }
-    const defaultdata={datasets: []}
+      scales: {
+          x: {
+              position: 'bottom',
+              title: {
+                  display: true,
+                  text: selectedColumns[0] || 'X-Axis',
+              },
+              ticks: {
+                  display: true,
+              },
+              grid: {
+                  display: true,
+              }
+          },
+          y: {
+              title: {
+                  display: true,
+                  text: selectedColumns[1] || 'Y-Axis',
+              },
+              ticks: {
+                  display: true,
+              },
+              grid: {
+                  display: true,
+              }
+          }
+      }
+  }
+  
+  const defaultdata = {
+      labels: [''], // Adding a single empty label to force the display
+      datasets: [{
+        backgroundColor: color,
+        label: `Empty Chart`,
+          data: [] // Adding a single data point to force the display
+      }]
+  };
+  
+    console.log('error here',chart)
     if(!chart){
-      return <Typography variant="body2" color="error"></Typography>;
+      // return <Typography variant="body2" color="error"></Typography>;
+      setError(`An error occurred while generating the final visualization. Please try again.`);
+        setIsModalOpen(true)
       
     }
     const isDate = value => {
@@ -252,8 +378,8 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   } else {
     console.log('error table',currentTable_now)
     console.log('error col',selectedColumns)
-    setError('An error occurred while generating the final visualization. Please try again.');
-    setIsModalOpen(true);
+    // setError('An error occurred while generating the final visualization. Please try again.');
+    // setIsModalOpen(true);
     return (
           <Chart
               type={chart.toLowerCase()}
@@ -268,8 +394,15 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   } else {
     console.log('error table',currentTable_now)
     console.log('error col',selectedColumns)
-    setError('An error occurred while generating the final visualization. Please try again.');
-    setIsModalOpen(true);
+    // setError('An error occurred while generating the final visualization. Please try again.');
+    // setIsModalOpen(true);
+    return (
+      <Chart
+          type={chart.toLowerCase()}
+          data={defaultdata}
+          options={defaultoptions}
+      />
+  );
     // return <Typography variant="body2" color="error"></Typography>;
   }
   const firstValue_select = currentTable_now[0][selectedColumns[0]];
@@ -710,7 +843,9 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
 
   const renderStepContent = (step, steps) => {
     if (!step) {
-      return <Typography variant="body2" color="error"></Typography>;
+      // return <Typography variant="body2" color="error"></Typography>;
+      setError(`An error occurred while generating the final visualization. Please try again.`);
+        setIsModalOpen(true)
     }
 
     const {
@@ -745,26 +880,45 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
      const generateScatterData = (currentTable_new, selectedColumns) => {
       console.log('table join results', currentTable_new);
       const defaultoptions = {
-          x: {
-            position: 'bottom',
-            title: {
-              display: true,
-              text: selectedColumns[0],
+        scales: {
+            x: {
+                position: 'bottom',
+                title: {
+                    display: true,
+                    text: selectedColumns[0] || 'X-Axis',
+                },
+                ticks: {
+                    display: true,
+                },
+                grid: {
+                    display: true,
+                }
             },
-          },
             y: {
                 title: {
                     display: true,
-                    text: selectedColumns[1],
+                    text: selectedColumns[1] || 'Y-Axis',
                 },
-            },
-      }
+                ticks: {
+                    display: true,
+                },
+                grid: {
+                    display: true,
+                }
+            }
+        }
+    }
       if (!currentTable_new || currentTable_new.length === 0 || !selectedColumns || selectedColumns.length < 2) {
         console.error('Invalid input data or selected columns');
         return {
           data: {
-            datasets:[]
-          },
+            labels: [''], // Adding a single empty label to force the display
+            datasets: [{
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              label: `Empty Chart`,
+                data: [] // Adding a single data point to force the display
+            }]
+        },
           options: defaultoptions,
         };
       }
@@ -784,7 +938,14 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       } else {
           // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
           return {
-            data: {datasets:[]},
+            data: {
+              labels: [''], // Adding a single empty label to force the display
+              datasets: [{
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                label: `Empty Chart`,
+                  data: [] // Adding a single data point to force the display
+              }]
+          },
             options: defaultoptions,
           }
           // <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
@@ -797,7 +958,14 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         firstValue_select1 = currentTable_new[0][selectedColumns[1]];
       } else {
         return {
-          data: {datasets:[]},
+          data: {
+            labels: [''], // Adding a single empty label to force the display
+            datasets: [{
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              label: `Empty Chart`,
+                data: [] // Adding a single data point to force the display
+            }]
+        },
           options: defaultoptions,
         }
         }
@@ -818,8 +986,8 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
                 return { x: null, y: null };
               }
               // 将 x 值转换为字符串
-              let xValue = row[selectedColumns[0]];
-              let yValue = row[selectedColumns[1]];
+              let xValue = String(row[selectedColumns[0]]);
+              let yValue = String(row[selectedColumns[1]]);
               return {
                 x: xValue,
                 y: yValue,
@@ -835,18 +1003,18 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
               x: {
                 type: xAxisType_select,
                 position: 'bottom',
-                ...(xAxisType_select === 'time' && {
-                  time: {
-                    unit: 'month',
-                  },
-                }),
+                // ...(xAxisType_select === 'time' && {
+                //   time: {
+                //     unit: 'month',
+                //   },
+                // }),
                 title: {
                   display: true,
                   text: selectedColumns[0],
                 },
               },
                 y: {
-                  type: yAxisType_select,
+                  // type: yAxisType_select,
                     title: {
                         display: true,
                         text: selectedColumns[1],
@@ -866,15 +1034,6 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       return !isNaN(date.getTime());
     };
 
-    let firstValue;
-    if (currentTable_from.length > 0 && selectedColumns.length > 0 && selectedColumns[0] in currentTable_from[0]) {
-        firstValue = currentTable_from[0][selectedColumns[0]];
-    } else {
-        setError(`An error occurred while generating the final visualization. Please try again.`);
-        setIsModalOpen(true)
-        // return <Typography variant="body2" color="error"></Typography>;
-    }
-    const xAxisType = isDate(firstValue) ? 'time' : 'category';
     const defaultcolor = 'rgba(75, 192, 192, 0.6)';
     const chartcolor = '#f0eea3';
     switch (step.operation) {
@@ -1006,7 +1165,9 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
           );
         }
       default:
-        return <Typography variant="body2" color="error"></Typography>;
+        // return <Typography variant="body2" color="error"></Typography>;
+        setError(`An error occurred while generating the final visualization. Please try again.`);
+        setIsModalOpen(true)
     }
   };
 
@@ -1023,7 +1184,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       // <div className="visualize">
       //     <Typography variant="h6" className="visualize-title">/ Visualization</Typography>
       <>
-        {explanation && explanation.length > 0 ? renderStepContent(explanation[explanation.length - 1], explanation) : <Typography variant="body2">No explanations available</Typography>}
+        {explanation && explanation.length > 0 ? renderStepContent(explanation[explanation.length - 1], explanation) : <Typography variant="body2">Try again, nothing generated</Typography>}
   
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Box

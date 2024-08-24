@@ -63,6 +63,7 @@ function FixedTaskNL2VisExplain({data, userId }) {
     } catch (err) {
       console.error('Error during VQL execution:', err);
       setError('An error occurred while executing the VQL. Please refine your VQL.');
+    
     } finally {
       setIsLoading(false);
     }
@@ -118,18 +119,18 @@ function FixedTaskNL2VisExplain({data, userId }) {
                     />
                   )}
                 </div>
-                {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
+                {/* {generatedVQL.explanation && generatedVQL.explanation.length > 0 && ( */}
                   <div>
                     {showVQL && (
                       <VQLEditor
-                        initialVQL={generatedVQL.VQL}
+                        initialVQL={'...'}
                         onExecute={handleExecuteVQL}
                         tableData={tableData}
                         userId={userId}
                       />
                     )}
                   </div>
-                )}
+                {/* )} */}
               </div>
             </div>
           </div>

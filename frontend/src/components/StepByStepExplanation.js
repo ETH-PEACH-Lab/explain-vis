@@ -531,10 +531,18 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   const evaluateCondition = (row, condition) => {
     try {
       const jsCondition = condition
-        .replace(/\bAND\b/g, '&&')
-        .replace(/\bOR\b/g, '||')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]')
-        .replace(/=\s*(\d+)/g, '=== $1');
+      .replace(/\bAND\b/g, '&&')
+      .replace(/\bOR\b/g, '||')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*'([^']*)'/g, 'row["$1"] === "$2"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*'([^']*)'/g, 'row["$1"].includes("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*'([^']*)'/g, 'row["$1"].startsWith("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*'([^']*)'/g, 'row["$1"].endsWith("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*'([^']*)'/g, 'row["$1"] !== "$2"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
 
       const conditionFunction = new Function('row', `return ${jsCondition};`);
       return conditionFunction(row);
@@ -561,10 +569,18 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       if (!data || conditions.length === 0) return data;
 
       const cleanedCondition = CombinedCondition
-        .replace(/\bAND\b/g, '&&')
-        .replace(/\bOR\b/g, '||')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]')
-        .replace(/=\s*(\d+)/g, '=== $1');
+      .replace(/\bAND\b/g, '&&')
+      .replace(/\bOR\b/g, '||')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*'([^']*)'/g, 'row["$1"] === "$2"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*'([^']*)'/g, 'row["$1"].includes("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*'([^']*)'/g, 'row["$1"].startsWith("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*'([^']*)'/g, 'row["$1"].endsWith("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*'([^']*)'/g, 'row["$1"] !== "$2"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
       console.log('condition', CombinedCondition)
       try {
         const finalFilteredData = data.filter(row => {
@@ -1067,22 +1083,36 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
     if (typeof description !== 'string') {
         return description;
     }
-// 用于存储表名和列名的索引
+// Used to store indices of table names and column names
 const tableIndices = [];
 const columnIndices = [];
-console.log('tables',dataTables)
-console.log('join table1',joinTable1)
-console.log('join table2',joinTable2)
-// 先找出表名和列名的索引
+
+// Debugging outputs
+console.log('tables', dataTables);
+console.log('join table1', joinTable1);
+console.log('join table2', joinTable2);
+
+// Check for undefined or missing data
+if (!joinTable1 || !dataTables[joinTable1] || !dataTables[joinTable1][0]) {
+    console.warn(`Missing or undefined joinTable1: ${joinTable1}`);
+}
+
+if (!joinTable2 || !dataTables[joinTable2] || !dataTables[joinTable2][0]) {
+    console.warn(`Missing or undefined joinTable2: ${joinTable2}`);
+}
+
+// Find indices of table names and column names
 description.split(' ').forEach((word, index) => {
-  const cleanWord = word.replace(/[.,]/g, '');
-  if (tableNames.includes(cleanWord)) {
-    tableIndices.push(index);
-  } else if (Object.keys(dataTables[joinTable1][0]).includes(cleanWord)) {
-    columnIndices.push(index);
-  } else if (Object.keys(dataTables[joinTable2][0]).includes(cleanWord)) {
-    columnIndices.push(index);
-  }
+    const cleanWord = word.replace(/[.,]/g, '');
+    if (tableNames.includes(cleanWord)) {
+        tableIndices.push(index);
+    } else if (dataTables[joinTable1] && dataTables[joinTable1][0] &&
+               Object.keys(dataTables[joinTable1][0]).includes(cleanWord)) {
+        columnIndices.push(index);
+    } else if (dataTables[joinTable2] && dataTables[joinTable2][0] &&
+               Object.keys(dataTables[joinTable2][0]).includes(cleanWord)) {
+        columnIndices.push(index);
+    }
 });
 
 // 根据索引生成对应的下拉菜单组件
@@ -1894,37 +1924,133 @@ return (
   };
   const renderGroupedChart = (data, groupByColumn, selectedColumns) => {
     if (!data || data.length === 0 || !selectedColumns || selectedColumns.length < 2) {
-      return <div>No data available</div>;
+      // 如果数据为空或列选择无效，返回一个显示“Empty Chart”的空图表
+      return (
+        <Scatter 
+          data={{
+            labels: [''], // 强制显示
+            datasets: [{
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              label: 'Empty Chart',
+              data: [] // 添加一个空数据点以强制显示
+            }]
+          }} 
+          options={{
+            scales: {
+              x: {
+                position: 'bottom',
+                title: {
+                  display: true,
+                  text: selectedColumns[0] || 'X-Axis',
+                },
+                ticks: {
+                  display: true,
+                },
+                grid: {
+                  display: true,
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: selectedColumns[1] || 'Y-Axis',
+                },
+                ticks: {
+                  display: true,
+                },
+                grid: {
+                  display: true,
+                }
+              }
+            },
+          }}
+        />
+      );
     }
-    const groupedData = data.reduce((acc, row) => {
-      const key = row[groupByColumn];
-      if (!acc[key]) {
-        acc[key] = [];
-      }
-      acc[key].push(row);
-      return acc;
-    }, {});
+  
+    const columnNames = Object.keys(data[0]); // 获取表的列名
+  
+    // 检查 selectedColumns 是否都在表的列名里
+    const areSelectedColumnsValid = selectedColumns.every(column => columnNames.includes(column));
+  
+    if (!areSelectedColumnsValid) {
+      // 如果 selectedColumns 无效，返回空图表
+      return (
+        <Scatter 
+          data={{
+            labels: [''], // 强制显示
+            datasets: [{
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              label: 'Empty Chart',
+              data: [] // 添加一个空数据点以强制显示
+            }]
+          }} 
+          options={{
+            scales: {
+              x: {
+                position: 'bottom',
+                title: {
+                  display: true,
+                  text: selectedColumns[0] || 'X-Axis',
+                },
+                ticks: {
+                  display: true,
+                },
+                grid: {
+                  display: true,
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: selectedColumns[1] || 'Y-Axis',
+                },
+                ticks: {
+                  display: true,
+                },
+                grid: {
+                  display: true,
+                }
+              }
+            },
+          }}
+        />
+      );
+    }
+  
+    // 检查 groupByColumn 是否在表的列名里
+    const isGroupByColumnValid = columnNames.includes(groupByColumn);
+  
+    const groupedData = isGroupByColumnValid
+      ? data.reduce((acc, row) => {
+          const key = row[groupByColumn];
+          if (!acc[key]) {
+            acc[key] = [];
+          }
+          acc[key].push(row);
+          return acc;
+        }, {})
+      : { '': data };
   
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
-
+  
     const isNumeric = value => {
-        return !isNaN(parseFloat(value)) && isFinite(value);
+      return !isNaN(parseFloat(value)) && isFinite(value);
     };
+  
     const firstValue = data[0][selectedColumns[0]];
     const xAxisType = isDate(firstValue) ? 'time' : isNumeric(firstValue) ? 'linear' : 'category';
-
+  
     const firstValue_select1 = data[0][selectedColumns[1]];
     const yAxisType = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
-
-    
   
     const chartData = {
-      datasets: Object.keys(groupedData).map((key, index) => ({
-        label: key,
+      datasets: Object.keys(groupedData).map((key,index) => ({
+        label: key || 'Ungrouped',
         data: groupedData[key].map(row => ({ x: row[selectedColumns[0]], y: row[selectedColumns[1]] })),
-        backgroundColor: `hsla(${index * 360 / Object.keys(groupedData).length}, 100%, 75%, 0.5)`,
+        backgroundColor: isGroupByColumnValid ? `hsla(${index * 360 / Object.keys(groupedData).length}, 100%, 75%, 0.5)` : 'rgba(75, 192, 192, 0.6)',
         pointRadius: 5,
       })),
     };
@@ -1937,6 +2063,7 @@ return (
         },
         title: {
           display: true,
+          text: isGroupByColumnValid ? 'Grouped Chart' : 'Ungrouped Chart',
         },
       },
       scales: {
@@ -1964,13 +2091,21 @@ return (
   
     return <Scatter data={chartData} options={chartOptions} />;
   };
+  
   const renderGroupedTable = (data, columns, groupByColumn) => {
-    // 计算每个组的颜色
+    // 检查 groupByColumn 是否在 columns 中
+    const isGroupByColumnValid = columns.includes(groupByColumn);
+  
+    // 如果 groupByColumn 有效，则计算每个组的颜色
     const groupColors = {};
-    const uniqueGroups = Array.from(new Set(data.map(row => row[groupByColumn])));
-    uniqueGroups.forEach((key, index) => {
-      groupColors[key] = `hsla(${index * 360 / uniqueGroups.length}, 100%, 75%, 0.3)`;
-    });
+    let uniqueGroups = [];
+  
+    if (isGroupByColumnValid) {
+      uniqueGroups = Array.from(new Set(data.map(row => row[groupByColumn])));
+      uniqueGroups.forEach((key, index) => {
+        groupColors[key] = `hsla(${index * 360 / uniqueGroups.length}, 100%, 75%, 0.3)`;
+      });
+    }
   
     return (
       <TableContainer component={Paper} className="table-container">
@@ -1997,7 +2132,9 @@ return (
               <TableRow
                 key={rowIndex}
                 style={{
-                  backgroundColor: groupColors[row[groupByColumn]],
+                  backgroundColor: isGroupByColumnValid
+                    ? groupColors[row[groupByColumn]]
+                    : "transparent",
                 }}
               >
                 {columns.map((column) => (
@@ -2012,6 +2149,7 @@ return (
       </TableContainer>
     );
   };
+  
   const sortData = (data, orderByColumn, orderDirection = 'asc') => {
     return data.slice().sort((a, b) => {
       if (a[orderByColumn] < b[orderByColumn]) return orderDirection === 'asc' ? -1 : 1;
@@ -2078,21 +2216,44 @@ return (
     let firstValue_select = ''
     let firstValue_select1=''
     const defaultoptions = {
-      x: {
-        position: 'bottom',
-        title: {
-          display: true,
-          text: selectedColumns[0],
-        },
-      },
-        y: {
-            title: {
-                display: true,
-                text: selectedColumns[1],
-            },
-        },
-    }
-    const defaultdata={datasets: []}
+      scales: {
+          x: {
+              position: 'bottom',
+              title: {
+                  display: true,
+                  text: selectedColumns[0] || 'X-Axis',
+              },
+              ticks: {
+                  display: true,
+              },
+              grid: {
+                  display: true,
+              }
+          },
+          y: {
+              title: {
+                  display: true,
+                  text: selectedColumns[1] || 'Y-Axis',
+              },
+              ticks: {
+                  display: true,
+              },
+              grid: {
+                  display: true,
+              }
+          }
+      }
+  }
+  
+  const defaultdata = {
+      labels: [''], // Adding a single empty label to force the display
+      datasets: [{
+        backgroundColor: color,
+          label: `Empty Chart`,
+          data: [] // Adding a single data point to force the display
+      }]
+  };
+  
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
@@ -2100,6 +2261,8 @@ return (
     const isNumeric = value => {
         return !isNaN(parseFloat(value)) && isFinite(value);
     };
+    console.log('bug here', selectedColumns)
+    console.log('bug here', currentTable_now[0])
   if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
     firstValue_select = currentTable_now[0][selectedColumns[0]];
     // console.log('wwwwwww',firstValue_select)
@@ -2117,7 +2280,6 @@ return (
   }
   if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
     firstValue_select1 = currentTable_now[0][selectedColumns[1]];
-    // console.log('hhhhhhhh',firstValue_select1)
   } else {
     return (
       <Chart
@@ -2335,10 +2497,18 @@ return (
         }).join(' || ');
 
         const cleanedCondition = combinedCondition
-          .replace(/\bAND\b/g, '&&')
-          .replace(/\bOR\b/g, '||')
-          .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]')
-          .replace(/=\s*(\d+)/g, '=== $1');
+        .replace(/\bAND\b/g, '&&')
+      .replace(/\bOR\b/g, '||')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*'([^']*)'/g, 'row["$1"] === "$2"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*'([^']*)'/g, 'row["$1"].includes("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*'([^']*)'/g, 'row["$1"].startsWith("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*'([^']*)'/g, 'row["$1"].endsWith("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*'([^']*)'/g, 'row["$1"] !== "$2"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
 
         const finalFilteredData = currentTable.filter(row => {
           try {
@@ -2440,7 +2610,11 @@ return (
             currentTable = [newAggregatedRow];
           }
           
-          currentColumns = [...new Set([...Object.keys(currentTable[0]), ...aggregateColumns.map(agg => agg.alias)])];
+          if (currentTable && currentTable.length > 0) {
+              currentColumns = [...new Set([...Object.keys(currentTable[0]), ...aggregateColumns.map(agg => agg.alias)])];
+          } else {
+              console.warn("currentTable is undefined or empty");
+          }          
           currentTable_select = currentTable
           currentColumns_select = currentColumns
           currentTable = currentTable_select
@@ -2576,6 +2750,7 @@ return (
           break;
         }
         case 'BIN BY': {
+          console.log('binbyinit',currentTable)
           currentTablebin_pre = currentTable
           const match = step.clause.split(' ')[2];
           binBy = match;
@@ -2674,29 +2849,45 @@ return (
      const generateScatterData = (currentTable_new, selectedColumns) => {
       console.log('table join results', currentTable_new);
       const defaultoptions = {
-        data: {datasets:[]},
-        options: {
-          x: {
-            position: 'bottom',
-            title: {
-              display: true,
-              text: selectedColumns[0],
+        scales: {
+            x: {
+                position: 'bottom',
+                title: {
+                    display: true,
+                    text: selectedColumns[0] || 'X-Axis',
+                },
+                ticks: {
+                    display: true,
+                },
+                grid: {
+                    display: true,
+                }
             },
-          },
             y: {
                 title: {
                     display: true,
-                    text: selectedColumns[1],
+                    text: selectedColumns[1] || 'Y-Axis',
                 },
-            },
-        },
-      }
+                ticks: {
+                    display: true,
+                },
+                grid: {
+                    display: true,
+                }
+            }
+        }
+    }
       if (!currentTable_new || currentTable_new.length === 0 || !selectedColumns || selectedColumns.length < 2) {
         console.error('Invalid input data or selected columns');
         return {
           data: {
-            datasets:[]
-          },
+            labels: [''], // Adding a single empty label to force the display
+            datasets: [{
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              label: `Empty Chart`,
+                data: [] // Adding a single data point to force the display
+            }]
+        },
           options: defaultoptions,
         };
       }
@@ -2716,7 +2907,14 @@ return (
       } else {
           // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
           return {
-            data: {datasets:[]},
+            data: {
+              labels: [''], // Adding a single empty label to force the display
+              datasets: [{
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                label: `Empty Chart`,
+                  data: [] // Adding a single data point to force the display
+              }]
+          },
             options: defaultoptions,
           }
           // <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
@@ -2729,7 +2927,14 @@ return (
         firstValue_select1 = currentTable_new[0][selectedColumns[1]];
       } else {
         return {
-          data: {datasets:[]},
+          data: {
+            labels: [''], // Adding a single empty label to force the display
+            datasets: [{
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              label: `Empty Chart`,
+                data: [] // Adding a single data point to force the display
+            }]
+        },
           options: defaultoptions,
         }
         }
@@ -2750,8 +2955,8 @@ return (
                 return { x: null, y: null };
               }
               // 将 x 值转换为字符串
-              let xValue = row[selectedColumns[0]];
-              let yValue = row[selectedColumns[1]];
+              let xValue = String(row[selectedColumns[0]]);
+              let yValue = String(row[selectedColumns[1]]);
               return {
                 x: xValue,
                 y: yValue,
@@ -2767,18 +2972,18 @@ return (
               x: {
                 type: xAxisType_select,
                 position: 'bottom',
-                ...(xAxisType_select === 'time' && {
-                  time: {
-                    unit: 'month',
-                  },
-                }),
+                // ...(xAxisType_select === 'time' && {
+                //   time: {
+                //     unit: 'month',
+                //   },
+                // }),
                 title: {
                   display: true,
                   text: selectedColumns[0],
                 },
               },
                 y: {
-                  type: yAxisType_select,
+                  // type: yAxisType_select,
                     title: {
                         display: true,
                         text: selectedColumns[1],

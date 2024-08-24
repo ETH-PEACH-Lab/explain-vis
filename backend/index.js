@@ -389,7 +389,7 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
   let generatedText = ''; // 确保 generatedText 变量被初始化
 
   try {
-    if (retries < 5) {
+    if (retries < 10) {
       // 仅将当前VQL和错误信息附加到提示中
       prompt += `\nFailed VQL: ${lastVQL}\nIssues: ${lastError}`;
     }
@@ -420,14 +420,14 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
     generatedText = response.data.choices[0].text.trim(); // 确保 generatedText 被正确赋值
     generatedText = extractVisualizeVQL(generatedText)
     console.log('Generated VQL:', generatedText);
-    appendLogToFile(userId, `Attempt ${5 - retries + 1} Generated VQL: ${generatedText}`);
+    appendLogToFile(userId, `Attempt ${10 - retries + 1} Generated VQL: ${generatedText}`);
     const validationError = validateVQL(generatedText, tableSchema);
     if (!validationError) {
       console.log('Validation Passed: VQL is valid.');
       appendLogToFile(userId, `Validation Passed: VQL is valid.`);
       return generatedText.toLowerCase();
     } else {
-      appendLogToFile(userId, `Attempt ${5 - retries + 1}: Validation Failed: ${validationError}`);
+      appendLogToFile(userId, `Attempt ${10 - retries + 1}: Validation Failed: ${validationError}`);
       throw new Error(validationError);
     }
   } catch (error) {
@@ -441,7 +441,7 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
       return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, newError, newVQL, userId);
     } else {
       appendLogToFile(userId, 'Failed to generate valid VQL from OpenAI after multiple attempts');
-      throw new Error(`Failed to generate valid VQL from OpenAI after 5 attempts.`);
+      throw new Error(`Failed to generate valid VQL from OpenAI after 10 attempts.`);
     }
   }
 }
@@ -529,7 +529,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
     console.log('Generated Prompt:', prompt);
     appendLogToFile(userId, `API Generated Prompt: ${prompt}`)
 
-    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,5,'','',userId);
+    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,10,'','',userId);
 
     console.timeEnd('GET * VQL Request Duration');
     console.log('Generated VQL:', generatedText);
@@ -693,7 +693,7 @@ app.post('/api/explain-vql', async (req, res) => {
         "description": "A detailed description of the operation.",
         "clause": "The corresponding VQL clause"
       },
-      // ... other steps, where steps must include conditions
+      // ... other steps, where steps must include conditions[{}]
     ]
   }
 
@@ -703,7 +703,7 @@ app.post('/api/explain-vql', async (req, res) => {
   Each clause typically begins with a specific operation name. Note From should seperate from JOIN
   When describing statement, include the specific column names involved.
   Only need to return the json and no other words additinally. 
-
+  Please not change the VQL, each clause should be align with VQL.
   Your Task:
   Now please provide a detailed explanation in the same JSON format for the following specific VQL. begin with: JSON
 
@@ -716,7 +716,7 @@ app.post('/api/explain-vql', async (req, res) => {
   try {
         const validationError = validateVQL(VQL, tableData);
         if (!validationError) {
-          console.log('Validation Passed: VQL is valid.');
+          console.log('Validation Passed: VQL is valid.',VQL);
           appendLogToFile(userId, `API Input VQL is valid.`);
           
           const explanation = await callOpenAIWithRetry(prompt);

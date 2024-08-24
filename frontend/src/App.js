@@ -228,7 +228,7 @@ function App() {
                     "stu_class": "Sr",
                     "stu_gpa": 3.87,
                     "stu_transfer": 0,
-                    "dept_code": "EDU"
+                    "dept_code": "HIST"
                 },
                 {
                     "stu_num": 324274,
@@ -244,7 +244,7 @@ function App() {
                     "stu_class": "Sr",
                     "stu_gpa": 2.11,
                     "stu_transfer": 1,
-                    "dept_code": "ENGL"
+                    "dept_code": "ENG"
                 }
             ],
             "enroll": [
@@ -280,19 +280,52 @@ function App() {
                 }
             ],
             "department": [
-                {
-                    "dept_code": "ACCT",
-                    "dept_name": "Accounting"
-                },
-                {
-                    "dept_code": "BIOL",
-                    "dept_name": "Biology"
-                },
-                {
-                    "dept_code": "CIS",
-                    "dept_name": "Computer Info. Systems"
-                }
-            ]
+    {
+        "dept_code": "ACCT",
+        "dept_name": "Accounting"
+    },
+    {
+        "dept_code": "ART",
+        "dept_name": "Fine Arts"
+    },
+    {
+        "dept_code": "BIOL",
+        "dept_name": "Biology"
+    },
+    {
+        "dept_code": "CIS",
+        "dept_name": "Computer Info. Systems"
+    },
+    {
+        "dept_code": "ECON/FIN",
+        "dept_name": "Economics/Finance"
+    },
+    {
+        "dept_code": "ENG",
+        "dept_name": "English"
+    },
+    {
+        "dept_code": "HIST",
+        "dept_name": "History"
+    },
+    {
+        "dept_code": "MATH",
+        "dept_name": "Mathematics"
+    },
+    {
+        "dept_code": "MKT/MGT",
+        "dept_name": "Marketing/Management"
+    },
+    {
+        "dept_code": "PSYCH",
+        "dept_name": "Psychology"
+    },
+    {
+        "dept_code": "SOC",
+        "dept_name": "Sociology"
+    }
+]
+
         },
         "tableNames": [
             "student",
