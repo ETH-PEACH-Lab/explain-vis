@@ -388,7 +388,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
     if (explanation[currentPage].operation === 'WHERE') {
       // const description = explanation[currentPage].description;
       const currentData = calculateCurrentData()
-      setWhereResults(currentData.currentTable_where)
+      setWhereResults(currentData.currentTable)
     }
   }, [currentPage, explanation]);
 
@@ -586,7 +586,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
     };
   
     const currentData = calculateCurrentData();
-    setWhereResults(combineConditionsAndFilter(currentData.currentTable_where));
+    setWhereResults(combineConditionsAndFilter(currentData.currentTable));
   }, [CombinedCondition]);
 
   useEffect(() => {  
@@ -2075,24 +2075,24 @@ return (
     let data = {};
     let dataother = {};
     let options = {};
-    // let firstValue_select = ''
-    // let firstValue_select1=''
-  //   const defaultoptions = {
-  //     x: {
-  //       position: 'bottom',
-  //       title: {
-  //         display: true,
-  //         text: selectedColumns[0],
-  //       },
-  //     },
-  //       y: {
-  //           title: {
-  //               display: true,
-  //               text: selectedColumns[1],
-  //           },
-  //       },
-  //   }
-  //   const defaultdata={datasets: []}
+    let firstValue_select = ''
+    let firstValue_select1=''
+    const defaultoptions = {
+      x: {
+        position: 'bottom',
+        title: {
+          display: true,
+          text: selectedColumns[0],
+        },
+      },
+        y: {
+            title: {
+                display: true,
+                text: selectedColumns[1],
+            },
+        },
+    }
+    const defaultdata={datasets: []}
     const isDate = value => {
       return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
     };
@@ -2100,96 +2100,96 @@ return (
     const isNumeric = value => {
         return !isNaN(parseFloat(value)) && isFinite(value);
     };
-  // if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
-  //   firstValue_select = currentTable_now[0][selectedColumns[0]];
-  //   console.log('wwwwwww',firstValue_select)
-  // } else {
-  //   console.log(explanation[currentPage].operation)
-  //   console.log(currentTable_now)
-  //   console.log(selectedColumns)
-  //   return (
-  //     <Chart
-  //         type={chart.toLowerCase()}
-  //         data={defaultdata}
-  //         options={defaultoptions}
-  //     />
-  // );
-  // }
-  // if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
-  //   firstValue_select1 = currentTable_now[0][selectedColumns[1]];
-  //   console.log('hhhhhhhh',firstValue_select1)
-  // } else {
-  //   return (
-  //     <Chart
-  //         type={chart.toLowerCase()}
-  //         data={defaultdata}
-  //         options={defaultoptions}
-  //     />
-  // );
-  // }
-  const firstValue_select = currentTable_now[0][selectedColumns[0]];
+  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
+    firstValue_select = currentTable_now[0][selectedColumns[0]];
+    // console.log('wwwwwww',firstValue_select)
+  } else {
+    console.log(explanation[currentPage].operation)
+    console.log(currentTable_now)
+    console.log(selectedColumns)
+    return (
+      <Chart
+          type={chart.toLowerCase()}
+          data={defaultdata}
+          options={defaultoptions}
+      />
+  );
+  }
+  if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
+    firstValue_select1 = currentTable_now[0][selectedColumns[1]];
+    // console.log('hhhhhhhh',firstValue_select1)
+  } else {
+    return (
+      <Chart
+          type={chart.toLowerCase()}
+          data={defaultdata}
+          options={defaultoptions}
+      />
+  );
+  }
+  // const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
   console.log('xAxistype', xAxisType_select);
 
-  const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
+  // const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
   console.log('yAxistype', yAxisType_select);
 
   
-    if (chart.toLowerCase() === 'pie') {
-        // Pie chart specific logic
-        const aggregatedData = currentTable_now.reduce((acc, row) => {
-            const xValue = row[selectedColumns[0]];
-            const yValue = row[selectedColumns[1]];
+    // if (chart.toLowerCase() === 'pie') {
+    //     // Pie chart specific logic
+    //     const aggregatedData = currentTable_now.reduce((acc, row) => {
+    //         const xValue = row[selectedColumns[0]];
+    //         const yValue = row[selectedColumns[1]];
 
-            const existing = acc.find(item => item.x === xValue);
+    //         const existing = acc.find(item => item.x === xValue);
 
-            if (existing) {
-                existing.y += yValue;
-            } else {
-                acc.push({ x: xValue, y: yValue });
-            }
+    //         if (existing) {
+    //             existing.y += yValue;
+    //         } else {
+    //             acc.push({ x: xValue, y: yValue });
+    //         }
 
-            return acc;
-        }, []);
+    //         return acc;
+    //     }, []);
 
-        const labels = aggregatedData.map(item => String(item.x));
-        const datasetData = aggregatedData.map(item => item.y);
+    //     const labels = aggregatedData.map(item => String(item.x));
+    //     const datasetData = aggregatedData.map(item => item.y);
 
-        console.log('Labels:', labels);
-        console.log('Dataset data:', datasetData);
+    //     console.log('Labels:', labels);
+    //     console.log('Dataset data:', datasetData);
 
-        if (labels.length === datasetData.length) {
-            data = {
-                labels: labels,  // Ensure labels are added only for Pie chart
-                datasets: [{
-                    data: datasetData,
-                    backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
-                }],
-            };
+    //     if (labels.length === datasetData.length) {
+    //         data = {
+    //             labels: labels,  // Ensure labels are added only for Pie chart
+    //             datasets: [{
+    //                 data: datasetData,
+    //                 backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
+    //             }],
+    //         };
 
-            options = {
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'right',
-                    },
-                },
-            };
-        } else {
-            console.error('Labels and data arrays do not match in length!');
-        }
-        return <Pie data={data} options={options} />;
-    } 
-    else {
+    //         options = {
+    //             plugins: {
+    //                 legend: {
+    //                     display: true,
+    //                     position: 'right',
+    //                 },
+    //             },
+    //         };
+    //     } else {
+    //         console.error('Labels and data arrays do not match in length!');
+    //     }
+    //     return <Pie data={data} options={options} />;
+    // } 
+    // else {
         // Other chart types logic
         
         dataother = {
             datasets: [{
                 label: `${chart} Chart`,
                 data: currentTable_now.map(row => ({
-                    x: row[selectedColumns[0]],
-                    y: row[selectedColumns[1]],
+                    x: String(row[selectedColumns[0]]),
+                    y: String(row[selectedColumns[1]]),
                 })),
                 backgroundColor: color,
             }],
@@ -2198,20 +2198,15 @@ return (
         options = {
             scales: {
               x: {
-                type: xAxisType_select,
+                type: 'category',
                 position: 'bottom',
-                ...(xAxisType_select === 'time' && {
-                  time: {
-                    unit: 'month',
-                  },
-                }),
                 title: {
                   display: true,
                   text: selectedColumns[0],
                 },
               },
                 y: {
-                  type: yAxisType_select,
+                  // type: 'category',
                     title: {
                         display: true,
                         text: selectedColumns[1],
@@ -2229,7 +2224,7 @@ return (
               options={options}
           />
       );
-    }    
+    // }    
 };
 
   const calculateCurrentData = () => {
@@ -2976,7 +2971,7 @@ return (
                 ))}
                 <div>
                   <div className="step-label" style={{ marginTop: '20px' }}>{`data::step${step.step}`}</div>
-                  {renderTable(whereResults?whereResults:currentTable_where, currentColumns_where, 'Filtered')}
+                  {renderTable(whereResults?whereResults:currentTable, currentColumns, 'Filtered')}
                 </div>
               </Paper>
             </div>
@@ -3116,7 +3111,33 @@ return (
           </div>
         );
       }
-      case 'ORDER BY': {
+      case 'ORDER BY': {    
+        const orderdata = orderchart.map(point => {
+          return {
+            x: String(point.x),
+            y: String(point.y)
+          };
+        });
+        
+        // 配置图表选项，设置 x 轴类型为 'category' 并设置轴标题
+        const options = {
+          scales: {
+            x: {
+              type: 'category', // 设置 x 轴类型为 'category'
+              position: 'bottom',
+              title: {
+                display: true,
+                text: selectedColumns_final[0] // x 轴标题
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: selectedColumns_final[1] // y 轴标题
+              }
+            }
+          }
+        };
         return (
           <div className="step-container" key={step.step}>
             <div className="left-column1">
@@ -3136,38 +3157,18 @@ return (
             <div className="right-column1">
               <div className="step-label">{`viz::step${step.step}`}</div>
               <div className="chart">
-                <Scatter
-                  data={{
-                    datasets: [
-                      {
-                        label: `Scatter Plot`,
-                        data: orderchart,
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                      },
-                    ],
-                  }}
-                  options={{
-                    scales: {
-                      x: {
-                        type: 'category', 
-                        position: 'bottom',
-                        title: {
-                          display: true,
-                          text: selectedColumns_final[0],
-                        },
-  
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: selectedColumns_final[1],
-  
-                        },
-                      
-                      },
+              <Scatter
+                data={{
+                  datasets: [
+                    {
+                      label: 'Scatter Plot',
+                      data: orderdata,
+                      backgroundColor: 'rgba(75, 192, 192, 0.6)',
                     },
-                  }}
-                />
+                  ],
+                }}
+                options={options}
+              />
               </div>
               {showVQL && (
                 <Card className="vql-card">
@@ -3251,7 +3252,7 @@ return (
           </div>
         );
       }
-      case 'VISUALIZE': {
+      case 'VISUALIZE': {      
         return (
               <div className="step-container" key={step.step}>
                 <div className="left-column1">
@@ -3269,7 +3270,7 @@ return (
                 <div className="right-column1">
                   <div className="step-label">{`viz::step${step.step}`}</div>
                   <div className="chart">
-                      {generateChart(currentTable, chart, binBy?selectedColumns_bin:selectedColumns_final,chartcolor)}
+                  {generateChart(currentTable, chart, binBy?selectedColumns_bin:selectedColumns_final,chartcolor)}
                   </div>
                   {showVQL && (
                     <>

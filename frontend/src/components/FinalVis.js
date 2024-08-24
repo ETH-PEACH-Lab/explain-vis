@@ -250,7 +250,9 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[0]]) {
     const firstValue_select = currentTable_now[0][selectedColumns[0]];
   } else {
-    setError('Selected Column does not exist in the table.');
+    console.log('error table',currentTable_now)
+    console.log('error col',selectedColumns)
+    setError('An error occurred while generating the final visualization. Please try again.');
     setIsModalOpen(true);
     return (
           <Chart
@@ -264,7 +266,9 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   if (currentTable_now && currentTable_now[0] && currentTable_now[0][selectedColumns[1]]) {
     const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   } else {
-    setError('Selected Column does not exist in the table.');
+    console.log('error table',currentTable_now)
+    console.log('error col',selectedColumns)
+    setError('An error occurred while generating the final visualization. Please try again.');
     setIsModalOpen(true);
     // return <Typography variant="body2" color="error"></Typography>;
   }
@@ -329,8 +333,8 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
             datasets: [{
                 label: `${chart} Chart`,
                 data: currentTable_now.map(row => ({
-                    x: row[selectedColumns[0]],
-                    y: row[selectedColumns[1]],
+                    x: String(row[selectedColumns[0]]),
+                    y: String(row[selectedColumns[1]]),
                 })),
                 backgroundColor: color,
             }],
@@ -339,20 +343,20 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         options = {
             scales: {
               x: {
-                type: xAxisType_select,
+                type: 'category',
                 position: 'bottom',
-                ...(xAxisType_select === 'time' && {
-                  time: {
-                    unit: 'month',
-                  },
-                }),
+                // ...(xAxisType_select === 'time' && {
+                //   time: {
+                //     unit: 'month',
+                //   },
+                // }),
                 title: {
                   display: true,
                   text: selectedColumns[0],
                 },
               },
                 y: {
-                  type: yAxisType_select,
+                  // type: yAxisType_select,
                     title: {
                         display: true,
                         text: selectedColumns[1],
@@ -483,7 +487,8 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         const cleanedCondition = combinedCondition
           .replace(/\bAND\b/g, '&&')
           .replace(/\bOR\b/g, '||')
-          .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]');
+          .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]')
+          .replace(/=\s*(\d+)/g, '=== $1');
 
         const finalFilteredData = currentTable.filter(row => {
           try {
@@ -659,6 +664,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
           currentColumns=[...currentColumns, binColumnName];
           currentColumns_bin=currentColumns
           selectedColumns_bin=[binColumnName, selectedColumns_final[1]];
+          break;
         }
         case 'VISUALIZE': {
           const clauseParts = step.clause.split(' ');
@@ -864,8 +870,9 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     if (currentTable_from.length > 0 && selectedColumns.length > 0 && selectedColumns[0] in currentTable_from[0]) {
         firstValue = currentTable_from[0][selectedColumns[0]];
     } else {
-        // setError(`Column "${selectedColumns[0]}" does not exist in the table.`);
-        return <Typography variant="body2" color="error"></Typography>;
+        setError(`An error occurred while generating the final visualization. Please try again.`);
+        setIsModalOpen(true)
+        // return <Typography variant="body2" color="error"></Typography>;
     }
     const xAxisType = isDate(firstValue) ? 'time' : 'category';
     const defaultcolor = 'rgba(75, 192, 192, 0.6)';
