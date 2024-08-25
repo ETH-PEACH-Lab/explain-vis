@@ -83,7 +83,7 @@ function App() {
           },
           {
             "employee_id": 102,
-            "department_id": 90,
+            "department_id": 20,
             "first_name": "lex",
             "job_id": "ad_vp",
             "salary": 17000,
@@ -131,7 +131,7 @@ function App() {
           },
           {
             "employee_id": 108,
-            "department_id": 100,
+            "department_id": 60,
             "first_name": "nancy",
             "job_id": "sa_rep",
             "salary": 4000,
@@ -139,7 +139,7 @@ function App() {
           },
           {
             "employee_id": 109,
-            "department_id": 100,
+            "department_id": 60,
             "first_name": "daniel",
             "job_id": "sa_rep",
             "salary": 3900,

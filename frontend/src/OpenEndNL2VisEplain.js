@@ -22,45 +22,57 @@ function OpenEndNL2VisExplain({data, userId, pageKey  }) {
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
   const [showExplanation, setShowExplanation] = useState(false); // New state to control explanation visibility
+  const [startTime, setStartTime] = useState(null); // Store the start time
   const [elapsedTime, setElapsedTime] = useState(0); // Timer state in seconds
   const [isRunning, setIsRunning] = useState(false); // Timer running state
   const [hasEnded, setHasEnded] = useState(false); // Track if the timer has ended
 
   const timeKey = `${pageKey}_elapsedTime`; // Unique key for elapsed time in localStorage
+  const startTimeKey = `${pageKey}_startTime`; // Key for start time in localStorage
   const runningKey = `${pageKey}_isRunning`; // Unique key for running state in localStorage
 
   // Load the timer state from localStorage on component mount
   useEffect(() => {
-    const savedTime = parseFloat(localStorage.getItem(timeKey));
+    const savedElapsedTime = parseFloat(localStorage.getItem(timeKey)) || 0;
+    const savedStartTime = parseFloat(localStorage.getItem(startTimeKey)) || null;
     const savedIsRunning = localStorage.getItem(runningKey) === 'true';
 
-    if (!isNaN(savedTime)) {
-      setElapsedTime(savedTime);
+    if (savedStartTime && savedIsRunning) {
+      // If the timer was running, calculate the new elapsed time
+      const currentTime = Date.now();
+      const additionalTime = (currentTime - savedStartTime) / 1000;
+      setElapsedTime(savedElapsedTime + additionalTime);
+    } else {
+      setElapsedTime(savedElapsedTime);
     }
+
+    setStartTime(savedIsRunning ? Date.now() : null);
     setIsRunning(savedIsRunning);
-  }, [timeKey, runningKey]);
+  }, [timeKey, startTimeKey, runningKey]);
 
   useEffect(() => {
     let timer;
 
     if (isRunning) {
       timer = setInterval(() => {
-        setElapsedTime(prevTime => {
-          const newTime = prevTime + 0.01;
-          localStorage.setItem(timeKey, newTime.toFixed(2)); // Save the updated time
-          return newTime;
-        });
-      }, 10); // Update every 10 milliseconds for 2 decimal places
+        const currentTime = Date.now();
+        const newElapsedTime = (currentTime - startTime) / 1000;
+        setElapsedTime(newElapsedTime);
+        localStorage.setItem(timeKey, newElapsedTime.toFixed(2)); // Save the updated time
+      }, 100); // Update every 100 milliseconds for better accuracy
     }
 
     return () => {
       clearInterval(timer);
     };
-  }, [isRunning, timeKey]);
+  }, [isRunning, startTime, timeKey]);
 
   const handleStartTimer = () => {
+    const currentTime = Date.now();
+    setStartTime(currentTime);
     setIsRunning(true);
     setHasEnded(false); // Reset the end state
+    localStorage.setItem(startTimeKey, currentTime); // Save start time
     localStorage.setItem(runningKey, 'true'); // Save running state
   };
 
@@ -71,16 +83,20 @@ function OpenEndNL2VisExplain({data, userId, pageKey  }) {
   };
 
   const handleRestartTimer = () => {
+    const currentTime = Date.now();
     setElapsedTime(0);
+    setStartTime(currentTime);
     setIsRunning(true);
     setHasEnded(false); // Reset the end state
     localStorage.setItem(timeKey, '0'); // Reset time
+    localStorage.setItem(startTimeKey, currentTime); // Save new start time
     localStorage.setItem(runningKey, 'true'); // Start running again
   };
 
   // Calculate minutes and seconds from elapsedTime
   const minutes = Math.floor(elapsedTime / 60);
   const seconds = (elapsedTime % 60).toFixed(2);
+
 
   useEffect(() => {
     const taskTitle = `NL2ViZ - Open-ended Task 2 with Explanation, ${data.scenario} Scenario`;
@@ -298,7 +314,7 @@ function OpenEndNL2VisExplain({data, userId, pageKey  }) {
                 </div>
                 {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
                   <div>
-                    {showVQL && (
+                    {showExplanation&&showVQL && (
                       <VQLEditor
                         initialVQL={generatedVQL.VQL}
                         onExecute={handleExecuteVQL}

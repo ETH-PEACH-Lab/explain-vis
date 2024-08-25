@@ -247,9 +247,17 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         }, {})
       : { '': data };
   
-    const isDate = value => {
-      return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-    };
+      const isDate = value => {
+        if (Object.prototype.toString.call(value) === '[object Date]') {
+          // Check if it's a valid Date object
+          return !isNaN(value.getTime());
+        } else if (typeof value === 'string') {
+          // Attempt to parse the string as a date
+          const parsedDate = new Date(value);
+          return !isNaN(parsedDate.getTime());
+        }
+        return false; // Not a Date object or a valid date string
+      };
   
     const isNumeric = value => {
       return !isNaN(parseFloat(value)) && isFinite(value);
@@ -354,8 +362,15 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     return updatedData;
   };
   const isDate = value => {
-    const date = new Date(value);
-    return !isNaN(date.getTime());
+    if (Object.prototype.toString.call(value) === '[object Date]') {
+      // Check if it's a valid Date object
+      return !isNaN(value.getTime());
+    } else if (typeof value === 'string') {
+      // Attempt to parse the string as a date
+      const parsedDate = new Date(value);
+      return !isNaN(parsedDate.getTime());
+    }
+    return false; // Not a Date object or a valid date string
   };
   
   let selectedColumns = [];
@@ -426,8 +441,18 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     );
     }
     const isDate = value => {
-      return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+      if (Object.prototype.toString.call(value) === '[object Date]') {
+        // Check if it's a valid Date object
+        return !isNaN(value.getTime());
+      } else if (typeof value === 'string') {
+        // Attempt to parse the string as a date
+        const parsedDate = new Date(value);
+        return !isNaN(parsedDate.getTime());
+      }
+      return false; // Not a Date object or a valid date string
     };
+    
+    
 
     const isNumeric = value => {
         return !isNaN(parseFloat(value)) && isFinite(value);
@@ -472,12 +497,17 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   }
   const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
-  console.log('xAxistype', xAxisType_select);
+  console.log('xAxistype final', xAxisType_select);
+
+
 
   const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
-  console.log('yAxistype', yAxisType_select);
+  console.log('yAxistype final', yAxisType_select);
 
+  console.log('firstValue_select1:', firstValue_select1);
+console.log('isDate(firstValue_select1):', isDate(firstValue_select1));
+console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
 
     if (chart.toLowerCase() === 'pie') {
         // Pie chart specific logic
@@ -531,8 +561,8 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
             datasets: [{
                 label: `${chart} Chart`,
                 data: currentTable_now.map(row => ({
-                    x: String(row[selectedColumns[0]]),
-                    y: String(row[selectedColumns[1]]),
+                    x: row[selectedColumns[0]],
+                    y: row[selectedColumns[1]],
                 })),
                 backgroundColor: color,
             }],
@@ -542,6 +572,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
             scales: {
               x: {
                 type: xAxisType_select,
+                // type: 'category',
                 position: 'bottom',
                 // ...(xAxisType_select === 'time' && {
                 //   time: {
@@ -554,7 +585,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
                 },
               },
                 y: {
-                  // type: yAxisType_select,
+                  type: yAxisType_select,
                     title: {
                         display: true,
                         text: selectedColumns[1],
@@ -1009,7 +1040,15 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       console.log('test selectcolumn results', selectedColumns);
       
       const isDate = value => {
-        return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+        if (Object.prototype.toString.call(value) === '[object Date]') {
+          // Check if it's a valid Date object
+          return !isNaN(value.getTime());
+        } else if (typeof value === 'string') {
+          // Attempt to parse the string as a date
+          const parsedDate = new Date(value);
+          return !isNaN(parsedDate.getTime());
+        }
+        return false; // Not a Date object or a valid date string
       };
   
       const isNumeric = value => {
@@ -1070,8 +1109,8 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
                 return { x: null, y: null };
               }
               // 将 x 值转换为字符串
-              let xValue = String(row[selectedColumns[0]]);
-              let yValue = String(row[selectedColumns[1]]);
+              let xValue = row[selectedColumns[0]];
+              let yValue = row[selectedColumns[1]];
               return {
                 x: xValue,
                 y: yValue,
@@ -1114,8 +1153,15 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     };
 
     const isDate = value => {
-      const date = new Date(value);
-      return !isNaN(date.getTime());
+      if (Object.prototype.toString.call(value) === '[object Date]') {
+        // Check if it's a valid Date object
+        return !isNaN(value.getTime());
+      } else if (typeof value === 'string') {
+        // Attempt to parse the string as a date
+        const parsedDate = new Date(value);
+        return !isNaN(parsedDate.getTime());
+      }
+      return false; // Not a Date object or a valid date string
     };
 
     const defaultcolor = 'rgba(75, 192, 192, 0.6)';
@@ -1123,7 +1169,15 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     switch (step.operation) {
       case 'FROM': {
         const isDate = value => {
-          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+          if (Object.prototype.toString.call(value) === '[object Date]') {
+            // Check if it's a valid Date object
+            return !isNaN(value.getTime());
+          } else if (typeof value === 'string') {
+            // Attempt to parse the string as a date
+            const parsedDate = new Date(value);
+            return !isNaN(parsedDate.getTime());
+          }
+          return false; // Not a Date object or a valid date string
         };
         
         const isNumeric = value => {
@@ -1158,7 +1212,15 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
           }
         });
         const isDate = value => {
-          return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+          if (Object.prototype.toString.call(value) === '[object Date]') {
+            // Check if it's a valid Date object
+            return !isNaN(value.getTime());
+          } else if (typeof value === 'string') {
+            // Attempt to parse the string as a date
+            const parsedDate = new Date(value);
+            return !isNaN(parsedDate.getTime());
+          }
+          return false; // Not a Date object or a valid date string
         };
         
         const isNumeric = value => {

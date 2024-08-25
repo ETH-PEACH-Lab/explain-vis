@@ -533,16 +533,18 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       const jsCondition = condition
       .replace(/\bAND\b/g, '&&')
       .replace(/\bOR\b/g, '||')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] === "$3"')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'“”‘’]?)(\d+)\2/g, 'row["$1"] === $3')  // Handle numeric equality without quotes
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"] === "$3"')  // Handle string equality with quotes
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] !== "$3"')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'“”‘’]?)(\d+)\2/g, 'row["$1"] !== $3')  // Handle numeric inequality without quotes
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"] !== "$3"'); // Handle string inequality with quotes
+
 
 
 
@@ -573,16 +575,18 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       const cleanedCondition = CombinedCondition
       .replace(/\bAND\b/g, '&&')
       .replace(/\bOR\b/g, '||')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] === "$3"')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'“”‘’]?)(\d+)\2/g, 'row["$1"] === $3')  // Handle numeric equality without quotes
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"] === "$3"')  // Handle string equality with quotes
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] !== "$3"')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'“”‘’]?)(\d+)\2/g, 'row["$1"] !== $3')  // Handle numeric inequality without quotes
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"] !== "$3"'); // Handle string inequality with quotes
+
 
 
       console.log('condition', CombinedCondition)
@@ -2041,9 +2045,17 @@ return (
         }, {})
       : { '': data };
   
-    const isDate = value => {
-      return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-    };
+      const isDate = value => {
+        if (Object.prototype.toString.call(value) === '[object Date]') {
+          // Check if it's a valid Date object
+          return !isNaN(value.getTime());
+        } else if (typeof value === 'string') {
+          // Attempt to parse the string as a date
+          const parsedDate = new Date(value);
+          return !isNaN(parsedDate.getTime());
+        }
+        return false; // Not a Date object or a valid date string
+      };
   
     const isNumeric = value => {
       return !isNaN(parseFloat(value)) && isFinite(value);
@@ -2266,9 +2278,17 @@ return (
       }]
   };
   
-    const isDate = value => {
-      return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
-    };
+  const isDate = value => {
+    if (Object.prototype.toString.call(value) === '[object Date]') {
+      // Check if it's a valid Date object
+      return !isNaN(value.getTime());
+    } else if (typeof value === 'string') {
+      // Attempt to parse the string as a date
+      const parsedDate = new Date(value);
+      return !isNaN(parsedDate.getTime());
+    }
+    return false; // Not a Date object or a valid date string
+  };
 
     const isNumeric = value => {
         return !isNaN(parseFloat(value)) && isFinite(value);
@@ -2308,11 +2328,11 @@ return (
   }
   // const firstValue_select = currentTable_now[0][selectedColumns[0]];
   const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
-  console.log('xAxistype', xAxisType_select);
+  console.log('xAxistype step', xAxisType_select);
 
   // const firstValue_select1 = currentTable_now[0][selectedColumns[1]];
   const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
-  console.log('yAxistype', yAxisType_select);
+  console.log('yAxistype step', yAxisType_select);
 
   
     if (chart.toLowerCase() === 'pie') {
@@ -2367,8 +2387,8 @@ return (
             datasets: [{
                 label: `${chart} Chart`,
                 data: currentTable_now.map(row => ({
-                    x: String(row[selectedColumns[0]]),
-                    y: String(row[selectedColumns[1]]),
+                    x: row[selectedColumns[0]],
+                    y: row[selectedColumns[1]],
                 })),
                 backgroundColor: color,
             }],
@@ -2378,6 +2398,7 @@ return (
             scales: {
               x: {
                 type: xAxisType_select,
+                // type: 'category',
                 position: 'bottom',
                 title: {
                   display: true,
@@ -2385,7 +2406,8 @@ return (
                 },
               },
                 y: {
-                  // type: 'category',
+                  type: yAxisType_select,
+                  // type: 'category',            
                     title: {
                         display: true,
                         text: selectedColumns[1],
@@ -2515,17 +2537,19 @@ return (
 
         const cleanedCondition = combinedCondition
         .replace(/\bAND\b/g, '&&')
-        .replace(/\bOR\b/g, '||')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] === "$3"')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] !== "$3"')
-        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
+      .replace(/\bOR\b/g, '||')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'“”‘’]?)(\d+)\2/g, 'row["$1"] === $3')  // Handle numeric equality without quotes
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"] === "$3"')  // Handle string equality with quotes
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'“”‘’]?)(\d+)\2/g, 'row["$1"] !== $3')  // Handle numeric inequality without quotes
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"] !== "$3"'); // Handle string inequality with quotes
+
        
 
         const finalFilteredData = currentTable.filter(row => {
@@ -2912,7 +2936,15 @@ return (
       console.log('test selectcolumn results', selectedColumns);
       
       const isDate = value => {
-        return Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime());
+        if (Object.prototype.toString.call(value) === '[object Date]') {
+          // Check if it's a valid Date object
+          return !isNaN(value.getTime());
+        } else if (typeof value === 'string') {
+          // Attempt to parse the string as a date
+          const parsedDate = new Date(value);
+          return !isNaN(parsedDate.getTime());
+        }
+        return false; // Not a Date object or a valid date string
       };
   
       const isNumeric = value => {
@@ -2961,7 +2993,7 @@ return (
       
 
       const yAxisType_select = isDate(firstValue_select1) ? 'time' : isNumeric(firstValue_select1) ? 'linear' : 'category';
-      console.log('yAxistype', yAxisType_select);
+      console.log('yAxistype where/join', yAxisType_select);
 
       const data =  {
         datasets: [
@@ -2973,8 +3005,8 @@ return (
                 return { x: null, y: null };
               }
               // 将 x 值转换为字符串
-              let xValue = String(row[selectedColumns[0]]);
-              let yValue = String(row[selectedColumns[1]]);
+              let xValue = row[selectedColumns[0]];
+              let yValue = row[selectedColumns[1]];
               return {
                 x: xValue,
                 y: yValue,
@@ -2989,6 +3021,7 @@ return (
             scales: {
               x: {
                 type: xAxisType_select,
+                // type: 'category',
                 position: 'bottom',
                 // ...(xAxisType_select === 'time' && {
                 //   time: {
@@ -3001,7 +3034,7 @@ return (
                 },
               },
               y: {
-                // type: yAxisType_select,
+                type: yAxisType_select,
                   title: {
                       display: true,
                       text: selectedColumns[1],

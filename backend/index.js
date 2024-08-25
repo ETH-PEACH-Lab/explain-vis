@@ -183,10 +183,7 @@ function validateVQL(vql_init, tableSchema) {
   const validTypes = ['pie', 'scatter', 'line', 'bar'];
   const visualizeRegex = /^visualize\s+(pie|scatter|line|bar)/i;
 
-  const hasAsterisk = /\*/.test(vql);
-  if (hasAsterisk) {
-    return 'Do not use the * symbol in VQL queries.';
-  }
+  
 
   // Check for nested queries
   const hasNestedQueries = /\(\s*SELECT\b/i.test(vql);
@@ -194,10 +191,6 @@ function validateVQL(vql_init, tableSchema) {
     return 'Avoid using nested queries.';
   }
 
-  const hasAlias = /\bAS\b/i.test(vql);
-  if (hasAlias) {
-    return 'Do not use the AS keyword for aliasing table names.';
-  }
 
   // 提取 JOIN ... ON ... 直到下一个关键字
   const joinOnRegex = /join\s+(.*?)\s+on\s+(.*?)(?=\b(select|from|where|group|order|bin|visualize)\b|$)/gi;
@@ -263,6 +256,16 @@ function validateVQL(vql_init, tableSchema) {
     return 'Invalid usage of table.column detected outside of JOIN ... ON clause. Detected: ' + matchNonJoin.join(', ');
   }
 
+
+  const hasAsterisk = /\*/.test(vql);
+  if (hasAsterisk) {
+    return 'Do not use the * symbol in VQL queries.';
+  }
+
+  const hasAlias = /\bAS\b/i.test(vql);
+  if (hasAlias) {
+    return 'Do not use the AS keyword for aliasing table names.';
+  }
 
   // 提取 FROM 子句，直到下一个关键字
   const fromRegex = /from\s+(.*?)(?=\b(select|group|where|join|order|bin|visualize)\b|$)/i;
@@ -389,7 +392,7 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
   let generatedText = ''; // 确保 generatedText 变量被初始化
 
   try {
-    if (retries < 10) {
+    if (retries < 5) {
       // 仅将当前VQL和错误信息附加到提示中
       prompt += `\nFailed VQL: ${lastVQL}\nIssues: ${lastError}`;
     }
@@ -420,14 +423,14 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
     generatedText = response.data.choices[0].text.trim(); // 确保 generatedText 被正确赋值
     generatedText = extractVisualizeVQL(generatedText)
     console.log('Generated VQL:', generatedText);
-    appendLogToFile(userId, `Attempt ${10 - retries + 1} Generated VQL: ${generatedText}`);
+    appendLogToFile(userId, `Attempt ${5 - retries + 1} Generated VQL: ${generatedText}`);
     const validationError = validateVQL(generatedText, tableSchema);
     if (!validationError) {
       console.log('Validation Passed: VQL is valid.');
       appendLogToFile(userId, `Validation Passed: VQL is valid.`);
       return generatedText.toLowerCase();
     } else {
-      appendLogToFile(userId, `Attempt ${10 - retries + 1}: Validation Failed: ${validationError}`);
+      appendLogToFile(userId, `Attempt ${5 - retries + 1}: Validation Failed: ${validationError}`);
       throw new Error(validationError);
     }
   } catch (error) {
@@ -441,7 +444,7 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
       return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, newError, newVQL, userId);
     } else {
       appendLogToFile(userId, 'Failed to generate valid VQL from OpenAI after multiple attempts');
-      throw new Error(`Failed to generate valid VQL from OpenAI after 10 attempts.`);
+      throw new Error(`Failed to generate valid VQL from OpenAI after 5 attempts.`);
     }
   }
 }
@@ -529,7 +532,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
     console.log('Generated Prompt:', prompt);
     appendLogToFile(userId, `API Generated Prompt: ${prompt}`)
 
-    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,10,'','',userId);
+    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,5,'','',userId);
 
     console.timeEnd('GET * VQL Request Duration');
     console.log('Generated VQL:', generatedText);
@@ -565,7 +568,7 @@ function extractJSON(text) {
   return null;
 }
 
-async function callOpenAIWithRetry(prompt, retries = 10) {
+async function callOpenAIWithRetry(prompt, retries = 5) {
   try {
     const response = await axios.post(
       `${openaiApiEndpoint}`,
@@ -695,17 +698,18 @@ app.post('/api/explain-vql', async (req, res) => {
         "description": "A detailed description of the operation.",
         "clause": "The corresponding VQL clause"
       },
-      // ... other steps, where steps must include conditions[{}]
+      // ... other steps, where steps must include conditions[{}] enven if it is one condition
     ]
   }
 
   Make sure that the returned JSON is correctly formatted and that each field is properly filled in. 
   Please generate explanation based on the keyword and in logical order.
   valid clauses using the valid operations: SELECT, FROM, JOIN, WHERE, GROUP BY, ORDER BY, BIN BY, VISUALIZE.
-  Each clause typically begins with a specific operation name. Note From should seperate from JOIN
+  Each clause typically begins with a specific operation name. Note From operation should seperate from JOIN operation
+  Operations that aren't involved in whole VQL, don't need to be included in json.
   When describing statement, include the specific column names involved.
   Only need to return the json and no other words additinally. 
-  Please not change the VQL, each clause should be align with VQL.
+  Please not change the whole VQL, add up all clause should be the same with VQL.
   When the VQL is broken just break it dowm based on its operation, don't change the pattern and value in VQL.
   If the visualize type missed, must keep the same in visualize operation clause 'visualize' or just empty '' and only in description mention 'default type'.
   
