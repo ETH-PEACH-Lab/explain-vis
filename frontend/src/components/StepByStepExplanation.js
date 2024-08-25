@@ -533,16 +533,18 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       const jsCondition = condition
       .replace(/\bAND\b/g, '&&')
       .replace(/\bOR\b/g, '||')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*'([^']*)'/g, 'row["$1"] === "$2"')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*'([^']*)'/g, 'row["$1"].includes("$2")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*'([^']*)'/g, 'row["$1"].startsWith("$2")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*'([^']*)'/g, 'row["$1"].endsWith("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] === "$3"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*'([^']*)'/g, 'row["$1"] !== "$2"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] !== "$3"')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
+
+
 
       const conditionFunction = new Function('row', `return ${jsCondition};`);
       return conditionFunction(row);
@@ -571,16 +573,18 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
       const cleanedCondition = CombinedCondition
       .replace(/\bAND\b/g, '&&')
       .replace(/\bOR\b/g, '||')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*'([^']*)'/g, 'row["$1"] === "$2"')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*'([^']*)'/g, 'row["$1"].includes("$2")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*'([^']*)'/g, 'row["$1"].startsWith("$2")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*'([^']*)'/g, 'row["$1"].endsWith("$2")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] === "$3"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*'([^']*)'/g, 'row["$1"] !== "$2"')
+      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] !== "$3"')
       .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
+
+
       console.log('condition', CombinedCondition)
       try {
         const finalFilteredData = data.filter(row => {
@@ -602,7 +606,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
     };
   
     const currentData = calculateCurrentData();
-    setWhereResults(combineConditionsAndFilter(currentData.currentTable));
+    setWhereResults(combineConditionsAndFilter(currentData.currentTable_where));
   }, [CombinedCondition]);
 
   useEffect(() => {  
@@ -1545,7 +1549,12 @@ return (
         return;
     }
 
-    const tokens = whereClause.split(/\s+/).filter(token => token.length > 0);
+    // const tokens = whereClause.split(/\s+/).filter(token => token.length > 0);
+    // Step 1: Remove quoted parts from the whereClause
+    let cleanedWhereClause = whereClause.replace(/(['"'“”‘’]).*?\1/g, '');
+
+    // Step 2: Split the cleanedWhereClause into tokens
+    const tokens = cleanedWhereClause.split(/\s+/).filter(token => token.length > 0);
 
     for (let token of tokens) {
         token = token.trim();
@@ -2506,17 +2515,18 @@ return (
 
         const cleanedCondition = combinedCondition
         .replace(/\bAND\b/g, '&&')
-      .replace(/\bOR\b/g, '||')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*'([^']*)'/g, 'row["$1"] === "$2"')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*'([^']*)'/g, 'row["$1"].includes("$2")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*'([^']*)'/g, 'row["$1"].startsWith("$2")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*'([^']*)'/g, 'row["$1"].endsWith("$2")')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*'([^']*)'/g, 'row["$1"] !== "$2"')
-      .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
+        .replace(/\bOR\b/g, '||')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] === "$3"')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'”“‘’])(.*?)\2/g, 'row["$1"] !== "$3"')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(\d+)/g, 'row["$1"] === $2');
+       
 
         const finalFilteredData = currentTable.filter(row => {
           try {

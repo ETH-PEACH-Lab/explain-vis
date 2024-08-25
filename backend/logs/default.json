@@ -44290,5 +44290,2769 @@
   {
     "serverTimestamp": "2024-08-25T08:42:09.547Z",
     "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:29.520Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:29.786Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:29.934Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:42.750Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:42.902Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:43.049Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:46.057Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:46.304Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:46.429Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:48.197Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:48.278Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:48.418Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:48.503Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:48.565Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:48.624Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:49.446Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:49.585Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:49.677Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:51.127Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:51.221Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:51.317Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:51.399Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:51.488Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:51.680Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:52.503Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:33:52.576Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:01.491Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_cr = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:01.752Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_c'lr = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:02.641Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_c'lar = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:03.017Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_c'la'sr = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:03.196Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_classr = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:03.912Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_class = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:05.454Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_class =  GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:06.266Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_class = \" GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:08.886Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_class = \"F GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:09.270Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_class = \"Fr GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:10.400Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_class = \"Fr\" GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:13.189Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:13.289Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:13.421Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:13.612Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:19.028Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = \\\"Fr\\\"\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the records where the student class is freshman.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the student class is freshman.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"BIN BY\",\"description\":\"\",\"clause\":\"\"},{\"step\":7,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:19.088Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the records where the student class is freshman.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the student class is freshman.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"BIN BY\",\"description\":\"\",\"clause\":\"\"},{\"step\":7,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:19.178Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:19.307Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:23.736Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:23.787Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:23.856Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:23.913Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:24.979Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:25.031Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:25.146Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:25.219Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:25.285Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:25.376Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:37.527Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:38.336Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = Fr\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:39.167Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:39.236Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = Fr  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:39.336Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = Fr  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:39.470Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:44.314Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = Fr\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = Fr\",\"explanation\":\"Select records where the class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = Fr\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and count of student number columns.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by count of student number in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type).\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:44.488Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = Fr\",\"explanation\":\"Select records where the class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = Fr\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and count of student number columns.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by count of student number in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type).\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:44.568Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:44.637Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:44.732Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:44.842Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:46.355Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:46.403Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:46.494Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:46.651Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:46.837Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:46.882Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:52.584Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = `Fr\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:53.618Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = `Fr`\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:55.150Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:55.246Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = `Fr`  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:55.364Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = `Fr`  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:34:55.540Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:00.051Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = `Fr`\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the stu_class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = `Fr`\",\"explanation\":\"Select records where the stu_class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = `Fr`\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by dept_name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the dept_name and the count of stu_num columns.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of stu_num in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type) for the count of stu_num per dept_name.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:00.180Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the stu_class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = `Fr`\",\"explanation\":\"Select records where the stu_class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = `Fr`\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by dept_name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the dept_name and the count of stu_num columns.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of stu_num in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type) for the count of stu_num per dept_name.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:00.270Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:00.354Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:00.549Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:00.744Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:02.373Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:02.422Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:02.493Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:02.572Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:02.653Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:02.756Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:10.787Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = Fr`\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:12.846Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr`\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:14.678Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:15.443Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr\"\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:17.650Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:17.745Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:17.863Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:17.955Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:22.305Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = \\\"Fr\\\"\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where stu_class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where stu_class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by dept_name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the dept_name and the count of stu_num.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by count of stu_num in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart. (Default type)\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:22.415Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where stu_class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where stu_class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by dept_name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the dept_name and the count of stu_num.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by count of stu_num in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart. (Default type)\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:22.515Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:22.599Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:22.700Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:22.821Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:24.435Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:24.487Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:24.563Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:24.707Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:24.882Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:24.926Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:27.892Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:28.009Z",
+    "message": "Executing VQL: VISUALIZE bar \nSELECT dept_name, COUNT(stu_num) \nFROM student \nWHERE stu_class = \"Fr\" \nGROUP BY dept_name \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:28.143Z",
+    "message": "API Received VQL: VISUALIZE bar \nSELECT dept_name, COUNT(stu_num) \nFROM student \nWHERE stu_class = \"Fr\" \nGROUP BY dept_name \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:28.222Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:32.869Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = \\\"Fr\\\"\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only students in their first year.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the stu_class is equal to \\\"Fr\\\", indicating first year students.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of students in their first year.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of students in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type).\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:32.996Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only students in their first year.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the stu_class is equal to \\\"Fr\\\", indicating first year students.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of students in their first year.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of students in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type).\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:33.070Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:33.151Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:33.282Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:33.361Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:35.135Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:35.203Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:35.311Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:35.399Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:35.471Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:35.556Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:40.734Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Sr\"\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:42.003Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:42.105Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Sr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:42.218Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Sr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:42.449Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:48.009Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = 'Sr'\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":\"1\",\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":\"2\",\"operation\":\"WHERE\",\"description\":\"Filter data to include only students in their senior year.\",\"conditions\":[{\"condition\":\"stu_class = 'Sr'\",\"explanation\":\"Select records where the stu_class column is equal to Sr.\"}],\"clause\":\"WHERE stu_class = 'Sr'\"},{\"step\":\"3\",\"operation\":\"GROUP BY\",\"description\":\"Group data by the department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":\"4\",\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":\"5\",\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":\"6\",\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:48.121Z",
+    "message": "Generated Explanation: [{\"step\":\"1\",\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":\"2\",\"operation\":\"WHERE\",\"description\":\"Filter data to include only students in their senior year.\",\"conditions\":[{\"condition\":\"stu_class = 'Sr'\",\"explanation\":\"Select records where the stu_class column is equal to Sr.\"}],\"clause\":\"WHERE stu_class = 'Sr'\"},{\"step\":\"3\",\"operation\":\"GROUP BY\",\"description\":\"Group data by the department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":\"4\",\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":\"5\",\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":\"6\",\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:48.219Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:48.411Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:48.657Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:48.726Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:50.378Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:50.457Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:50.566Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:50.738Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:50.919Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:50.960Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:59.019Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = 'S'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:35:59.306Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = 'So'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:01.100Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:01.186Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = 'So'  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:01.387Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = 'So'  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:01.469Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:08.001Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = 'So'\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the student class is 'So'.\",\"conditions\":[{\"condition\":\"stu_class = 'So'\",\"explanation\":\"Select records where the student class is 'So'.\"}],\"clause\":\"WHERE stu_class = 'So'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:08.120Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the student class is 'So'.\",\"conditions\":[{\"condition\":\"stu_class = 'So'\",\"explanation\":\"Select records where the student class is 'So'.\"}],\"clause\":\"WHERE stu_class = 'So'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:08.199Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:08.277Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:08.369Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:08.475Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:10.604Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:10.675Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:10.766Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:10.864Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:10.945Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:11.056Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:14.654Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = 'S'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:14.810Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = ''\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:15.447Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = 'J'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:15.774Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = 'Jr'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:17.759Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:17.838Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = 'Jr'  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:17.944Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = 'Jr'  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:18.080Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:22.448Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = 'Jr'\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only students with the stu_class as 'Jr'.\",\"conditions\":[{\"condition\":\"stu_class = 'Jr'\",\"explanation\":\"Select records where the stu_class column is equal to 'Jr'.\"}],\"clause\":\"WHERE stu_class = 'Jr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and count of student number columns.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student number column in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type) showing department names and the count of students in each department.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:22.574Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only students with the stu_class as 'Jr'.\",\"conditions\":[{\"condition\":\"stu_class = 'Jr'\",\"explanation\":\"Select records where the stu_class column is equal to 'Jr'.\"}],\"clause\":\"WHERE stu_class = 'Jr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and count of student number columns.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student number column in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type) showing department names and the count of students in each department.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:22.657Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:22.756Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:22.839Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:22.959Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:24.632Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:24.704Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:24.787Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:24.883Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:25.014Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:25.240Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:28.444Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = 'F'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:28.814Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = 'Fr'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:30.038Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:30.121Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = 'Fr'  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:30.219Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = 'Fr'  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:30.434Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:39.557Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = 'Fr'\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Select the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only records where the student class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = 'Fr'\",\"explanation\":\"Select records where the student class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = 'Fr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group the data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with the default type.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:39.673Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Select the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only records where the student class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = 'Fr'\",\"explanation\":\"Select records where the student class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = 'Fr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group the data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with the default type.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:39.751Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:39.831Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:39.961Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:40.210Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:41.158Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:41.233Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:41.312Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:41.462Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:41.613Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:41.692Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:42.761Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:42.846Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:42.955Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:43.025Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:59.012Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:59.157Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:36:59.359Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:01.210Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:01.301Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:01.422Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:01.541Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:01.682Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:01.776Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:02.136Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:02.229Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:06.836Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = 'Fr'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:08.474Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:08.564Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = 'Fr'  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:08.673Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = 'Fr'  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:08.759Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:14.061Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = 'Fr'\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the stu_class value is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = 'Fr'\",\"explanation\":\"Select records where the stu_class value is 'Fr'.\"}],\"clause\":\"WHERE stu_class = 'Fr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name column and the count of student number column.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student number in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with the default type.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:14.172Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the stu_class value is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = 'Fr'\",\"explanation\":\"Select records where the stu_class value is 'Fr'.\"}],\"clause\":\"WHERE stu_class = 'Fr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name column and the count of student number column.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student number in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with the default type.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:14.246Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:14.330Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:16.569Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:16.632Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:16.759Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:16.913Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:17.066Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:17.108Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:23.943Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = Fr'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:24.228Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = 'Fr'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:26.248Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = Fr'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:26.854Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:28.498Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:29.192Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr\"\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:30.985Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:31.094Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:31.244Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:31.443Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:36.951Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = \\\"Fr\\\"\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only students in the 'Fr' class.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the student class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student number.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the number of students in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:37.080Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only students in the 'Fr' class.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the student class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student number.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the number of students in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:37.187Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:37.283Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:37.405Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:37.633Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:39.172Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:39.235Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:39.376Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:39.465Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:39.534Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:37:39.619Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:40:54.117Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:40:54.209Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:40:54.399Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:40:54.616Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:40:54.683Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:40:54.732Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:49.138Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:49.279Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:49.590Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:50.208Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:50.299Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:50.355Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:59.524Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:59.619Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:59.702Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:41:59.761Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:05.016Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = \\\"Fr\\\"\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to only include students in the Freshman (Fr) class.\",\"conditions\":[{\"condition\":\"WHERE stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where stu_class is equal to Freshman.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by dept_name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the dept_name and the count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with default type.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:05.196Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to only include students in the Freshman (Fr) class.\",\"conditions\":[{\"condition\":\"WHERE stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where stu_class is equal to Freshman.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by dept_name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the dept_name and the count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with default type.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:05.296Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:05.380Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:05.479Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:05.548Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:07.643Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:07.690Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:07.904Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:07.979Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:08.066Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:08.130Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:08.213Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:08.352Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:09.740Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:09.812Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:09.919Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:10.014Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:10.807Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:10.895Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:10.993Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:11.103Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:11.161Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:11.249Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:11.352Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:11.441Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:13.351Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:13.464Z",
+    "message": "Executing VQL: VISUALIZE bar   \nSELECT dept_name, COUNT(stu_num)   \nFROM student   \nWHERE stu_class = \"Fr\"   \nGROUP BY dept_name   \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:13.613Z",
+    "message": "API Received VQL: VISUALIZE bar   \nSELECT dept_name, COUNT(stu_num)   \nFROM student   \nWHERE stu_class = \"Fr\"   \nGROUP BY dept_name   \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:13.812Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:18.682Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = \\\"Fr\\\"\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the rows where the student's class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the student's class is Fr.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:18.815Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the rows where the student's class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the student's class is Fr.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:18.911Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:18.997Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:19.186Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:19.333Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:20.801Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:20.882Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:21.091Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:21.216Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:21.378Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:21.419Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:25.017Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:25.098Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:25.151Z",
+    "message": "Editing VQL: WHERE stu_class = \"Fr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:25.211Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:25.301Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:26.962Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:27.032Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:27.224Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:27.296Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:28.400Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:28.449Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:29.131Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:29.216Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:29.992Z",
+    "message": "Editing VQL: WHERE stu_class = \"Fr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:30.042Z",
+    "message": "Editing VQL fail: Invalid column or value in WHERE clause: \"‘Fr’\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:30.395Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:30.582Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:34.814Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:34.939Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:42.937Z",
+    "message": "VQL Edited: VISUALIZE bar   \nSELECT dept_name, COUNT(stu_num)   \nFROM student   \nWHERE stu_class = Fr\"   \nGROUP BY dept_name   \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:43.502Z",
+    "message": "VQL Edited: VISUALIZE bar   \nSELECT dept_name, COUNT(stu_num)   \nFROM student   \nWHERE stu_class = ‘Fr\"   \nGROUP BY dept_name   \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:44.568Z",
+    "message": "VQL Edited: VISUALIZE bar   \nSELECT dept_name, COUNT(stu_num)   \nFROM student   \nWHERE stu_class = ‘Fr   \nGROUP BY dept_name   \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:44.736Z",
+    "message": "VQL Edited: VISUALIZE bar   \nSELECT dept_name, COUNT(stu_num)   \nFROM student   \nWHERE stu_class = ‘Fr’   \nGROUP BY dept_name   \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:46.931Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:47.097Z",
+    "message": "Executing VQL: VISUALIZE bar     \nSELECT dept_name, COUNT(stu_num)     \nFROM student     \nWHERE stu_class = ‘Fr’     \nGROUP BY dept_name     \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:47.266Z",
+    "message": "API Received VQL: VISUALIZE bar     \nSELECT dept_name, COUNT(stu_num)     \nFROM student     \nWHERE stu_class = ‘Fr’     \nGROUP BY dept_name     \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:47.397Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:52.869Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = 'Fr'\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the stu_class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = 'Fr'\",\"explanation\":\"Select records where the stu_class is 'Fr' for all students.\"},{\"condition\":\"\",\"explanation\":\"Select records where all students with the stu_class 'Fr' are extended to the results.\"}],\"clause\":\"WHERE stu_class = 'Fr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of students.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by count of students in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type).\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:53.017Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the stu_class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = 'Fr'\",\"explanation\":\"Select records where the stu_class is 'Fr' for all students.\"},{\"condition\":\"\",\"explanation\":\"Select records where all students with the stu_class 'Fr' are extended to the results.\"}],\"clause\":\"WHERE stu_class = 'Fr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of students.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by count of students in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type).\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:53.165Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:53.406Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:53.633Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:53.717Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:55.181Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:55.292Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:55.411Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:55.598Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:55.687Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:55.759Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:55.861Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:55.954Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:59.073Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = Fr'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:42:59.717Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr'\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:01.637Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:02.294Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT dept_name, COUNT(stu_num)\nFROM student\nWHERE stu_class = \"Fr\"\nGROUP BY dept_name\nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:04.602Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:04.741Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:04.857Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT dept_name, COUNT(stu_num)  \nFROM student  \nWHERE stu_class = \"Fr\"  \nGROUP BY dept_name  \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:04.939Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:10.197Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = \\\"Fr\\\"\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only records where the student's class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the student's class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name column and count the number of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:10.378Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only records where the student's class is 'Fr'.\",\"conditions\":[{\"condition\":\"stu_class = \\\"Fr\\\"\",\"explanation\":\"Select records where the student's class is 'Fr'.\"}],\"clause\":\"WHERE stu_class = \\\"Fr\\\"\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name column and count the number of student numbers.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:10.495Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:10.718Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:10.942Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:11.022Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:12.636Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:12.707Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:12.939Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:13.061Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:13.150Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:43:13.234Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:27.245Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:27.475Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:27.667Z",
+    "message": "Editing VQL: WHERE stu_class = \"Fr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:27.788Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:27.895Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.126Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.242Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.335Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.439Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.548Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.619Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.686Z",
+    "message": "Editing VQL: WHERE stu_class = \"Fr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.750Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = \"Fr\"\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.818Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:29.902Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:30.256Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:30.360Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:30.446Z",
+    "message": "Editing VQL: WHERE stu_class = \"Fr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:30.526Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:30.611Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:33.509Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:33.587Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:34.366Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:34.485Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:36.070Z",
+    "message": "Editing VQL: WHERE stu_class = \"Fr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:36.332Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = \"Sr\"\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:36.486Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:36.590Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:36.679Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:36.848Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:40.181Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:40.371Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:40.466Z",
+    "message": "Editing VQL: WHERE stu_class = \"Sr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:40.643Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:40.858Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:41.982Z",
+    "message": "Editing VQL: WHERE stu_class = \"Sr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:42.334Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = \"Sr\"\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:42.553Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:42.692Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:52.183Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:52.296Z",
+    "message": "Editing VQL: WHERE stu_class = \"Sr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:52.408Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:52.545Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:52.736Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:53.993Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:54.101Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:54.325Z",
+    "message": "Editing VQL: WHERE stu_class = \"Sr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:54.550Z",
+    "message": "Editing VQL fail: Invalid column or value in WHERE clause: \"stu_class1\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:54.769Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:54.879Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:55.520Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:55.657Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:56.326Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:56.489Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:56.599Z",
+    "message": "Editing VQL: WHERE stu_class1 = \"Sr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:56.727Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:56.842Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:58.363Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:58.482Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:58.821Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:45:58.953Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:00.037Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:00.197Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:00.452Z",
+    "message": "Editing VQL: WHERE stu_class1 = \"Sr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:00.661Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = \"Sr\"\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:00.765Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:00.865Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:02.809Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:02.951Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:03.075Z",
+    "message": "Editing VQL: WHERE stu_class = \"Sr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:03.188Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:03.307Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:03.507Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = \"Sr\"\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:03.796Z",
+    "message": "Editing VQL: WHERE stu_class = \"Sr\""
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:03.906Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:46:04.043Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:49.005Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:49.235Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:49.491Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:50.593Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:50.737Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:50.962Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:52.728Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:52.879Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:53.059Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:53.177Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:53.297Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:53.427Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:53.936Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:47:54.099Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:01.765Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_x = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:02.051Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_xl = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:02.311Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_xla = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:02.426Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_xlas = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:02.563Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_xlass = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:03.846Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_xlass =  GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:04.764Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_xlass = ' GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:06.445Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_xlass = 'F GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:07.212Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_xlass = 'Fr GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:08.348Z",
+    "message": "VQL Edited: VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_xlass = 'Fr' GROUP BY dept_name ORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:12.272Z",
+    "message": "VQL Edited: VISUALIZE bar \nSELECT dept_name, COUNT(stu_num) \nFROM student \nWHERE stu_lass = 'Fr' \nGROUP BY dept_name \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:12.677Z",
+    "message": "VQL Edited: VISUALIZE bar \nSELECT dept_name, COUNT(stu_num) \nFROM student \nWHERE stu_class = 'Fr' \nGROUP BY dept_name \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:14.278Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:14.397Z",
+    "message": "Executing VQL: VISUALIZE bar   \nSELECT dept_name, COUNT(stu_num)   \nFROM student   \nWHERE stu_class = 'Fr'   \nGROUP BY dept_name   \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:14.532Z",
+    "message": "API Received VQL: VISUALIZE bar   \nSELECT dept_name, COUNT(stu_num)   \nFROM student   \nWHERE stu_class = 'Fr'   \nGROUP BY dept_name   \nORDER BY COUNT(stu_num) ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:14.741Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:19.396Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT dept_name, COUNT(stu_num)\\nFROM student\\nWHERE stu_class = 'Fr'\\nGROUP BY dept_name\\nORDER BY COUNT(stu_num) ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only students in the Fr class.\",\"conditions\":[{\"condition\":\"stu_class = 'Fr'\",\"explanation\":\"Select records where the student's class is equal to Fr.\"}],\"clause\":\"WHERE stu_class = 'Fr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student numbers in that department.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:19.567Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"WHERE\",\"description\":\"Filter data to include only students in the Fr class.\",\"conditions\":[{\"condition\":\"stu_class = 'Fr'\",\"explanation\":\"Select records where the student's class is equal to Fr.\"}],\"clause\":\"WHERE stu_class = 'Fr'\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by department name.\",\"clause\":\"GROUP BY dept_name\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the department name and the count of student numbers in that department.\",\"clause\":\"SELECT dept_name, COUNT(stu_num)\"},{\"step\":5,\"operation\":\"ORDER BY\",\"description\":\"Order the results by the count of student numbers in ascending order.\",\"clause\":\"ORDER BY COUNT(stu_num) ASC\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:19.881Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:20.019Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:21.623Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:21.740Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:21.893Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:22.003Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:22.085Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:22.163Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:24.117Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:24.304Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:24.446Z",
+    "message": "Editing VQL: WHERE stu_class = 'Fr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:24.564Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:24.689Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:25.850Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:25.947Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:26.258Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:26.341Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:26.780Z",
+    "message": "Editing VQL: WHERE stu_class = 'Fr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:26.908Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = 'Sr'\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:27.059Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:27.218Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:27.295Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:27.376Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:29.079Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:29.201Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:29.287Z",
+    "message": "Editing VQL: WHERE stu_class = 'Sr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:29.365Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:29.449Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:37.206Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:37.414Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:37.549Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:37.636Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:37.708Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:37.827Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:38.060Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:38.132Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:39.162Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:39.253Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:39.976Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:40.066Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:40.219Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:40.309Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:40.396Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:40.476Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:45.546Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:45.636Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:47.134Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:47.233Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:47.514Z",
+    "message": "Editing VQL: WHERE stu_class = 'Sr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:47.674Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_transfer = 0\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:47.762Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:47.831Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:47.896Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:48.030Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:51.336Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:51.511Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:51.640Z",
+    "message": "Editing VQL: WHERE stu_transfer = 0"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:51.842Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:52.101Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:55.174Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:55.312Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:55.437Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:55.570Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:55.694Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:55.823Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:55.966Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:56.082Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:56.266Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:56.553Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:56.687Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:56.829Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:57.474Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:57.609Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:58.963Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:59.089Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:59.418Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:59.550Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:59.711Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:48:59.944Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:00.528Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:00.660Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:01.400Z",
+    "message": "Editing VQL: WHERE stu_transfer = 0"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:01.568Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = 'Sr'\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:01.695Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:01.804Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:01.915Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:02.038Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:08.897Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:09.060Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:09.276Z",
+    "message": "Editing VQL: WHERE stu_class = 'Sr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:09.531Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:09.638Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:14.648Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:14.780Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:15.077Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:15.206Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:15.771Z",
+    "message": "Editing VQL: WHERE stu_class = 'Sr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:15.901Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = 'Fr'\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:16.011Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:16.103Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:16.201Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:16.293Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:17.366Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:17.500Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:17.657Z",
+    "message": "Editing VQL: WHERE stu_class = 'Fr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:17.903Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:17.996Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:19.112Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:19.253Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:19.474Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:19.596Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:20.189Z",
+    "message": "Editing VQL: WHERE stu_class = 'Fr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:20.368Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = 'Sr'\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:20.478Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:20.589Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:20.703Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:20.839Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:21.805Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:21.941Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:22.053Z",
+    "message": "Editing VQL: WHERE stu_class = 'Sr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:22.160Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:22.260Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:26.421Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:26.546Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:26.674Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:26.841Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:27.295Z",
+    "message": "Editing VQL: WHERE stu_class = 'Sr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:27.446Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = 'So'\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:27.587Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:27.768Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:27.895Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:49:27.964Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:49.512Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:49.801Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:49.972Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:50.054Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:50.128Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:50.238Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:52.150Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:52.281Z",
+    "message": "explanation current vql: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:52.382Z",
+    "message": "Editing VQL: WHERE stu_class = 'Fr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:52.480Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:52.572Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:53.737Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:53.828Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:54.279Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:54.360Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:54.950Z",
+    "message": "Editing VQL: WHERE stu_class = 'Fr'"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:55.172Z",
+    "message": "Editing VQL pass: WHERE clause is valid and set as combined condition: \"stu_class = 'Sr'\"."
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:55.334Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:55.403Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:55.477Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:55.573Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:50:58.916Z",
+    "message": "Navigated to page 0: Tutorial"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:00.219Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:00.397Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:00.516Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:01.345Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:01.526Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:01.841Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:02.086Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:02.184Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:02.303Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:03.343Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:03.442Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:03.630Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:03.790Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:03.893Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:03.988Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:04.093Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:04.458Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:04.576Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:04.693Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:04.817Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:04.920Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:05.021Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:05.127Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:05.231Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:05.326Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:10.864Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:11.166Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:11.413Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:11.502Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:11.608Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:12.321Z",
+    "message": "Clicked 'Next' button, moving from page 3 to 4"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:12.418Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:12.547Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:12.646Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:12.735Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:12.831Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:12.915Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:13.100Z",
+    "message": "Clicked 'Next' button, moving from page 4 to 5"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:13.205Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:13.320Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:13.426Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:13.584Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:13.851Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:13.958Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:14.046Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:14.254Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:14.513Z",
+    "message": "Clicked 'Next' button, moving from page 5 to 6"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:14.614Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:14.728Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:14.869Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:15.026Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:15.124Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:15.219Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:15.316Z",
+    "message": "Clicked 'Next' button, moving from page 6 to 7"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:15.413Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:15.521Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:15.706Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T10:51:15.980Z",
+    "message": "explanation current operation: VISUALIZE"
   }
 ]
