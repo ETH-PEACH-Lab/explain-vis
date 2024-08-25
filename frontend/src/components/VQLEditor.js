@@ -92,13 +92,13 @@ import { logEvent } from '../utils/logger';
       if (explanationResponse.ok) {
         const explanationResult = await explanationResponse.json();
         console.log('result:', explanationResult);
-        const { explanation } = explanationResult;
+        const explanation = explanationResult.explanation;
         if (!explanation || !Array.isArray(explanation)) {
           throw new Error('Invalid explanation received'); // 如果 explanation 不是数组，则抛出错误
         }
         console.log('explanation:', explanation);
         logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
-        const updatedGeneratedVQL = { VQL: VQL, explanation };
+        const updatedGeneratedVQL = { VQL: explanationResult.VQL, explanation };
         onExecute(updatedGeneratedVQL);
       } else {
         const { error } = await explanationResponse.json();

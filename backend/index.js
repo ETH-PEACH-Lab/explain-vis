@@ -614,6 +614,7 @@ app.post('/api/explain-vql', async (req, res) => {
   const VQL_exp = 'VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter'
 
   const explanation_exp={
+    "VQL": VQL_exp,
     "explanation": [
       {
         "step": 1,
@@ -686,6 +687,7 @@ app.post('/api/explain-vql', async (req, res) => {
 
   Expected JSON Format:
   {
+    "VQL": "VQL",
     "explanation": [
       {
         "step": "execution order",

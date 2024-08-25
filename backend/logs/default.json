@@ -38430,5 +38430,1321 @@
   {
     "serverTimestamp": "2024-08-25T06:37:39.556Z",
     "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:05.400Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:05.449Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:05.579Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:05.784Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:05.925Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:05.974Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:07.774Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:07.838Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:34.538Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:34.657Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:34.837Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:35.044Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:36.088Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:36.158Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:36.244Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:36.551Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:36.836Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:36.881Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:48.127Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:38:48.199Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:01.061Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   j\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:01.240Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   jp\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:01.423Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   jpi\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:01.488Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   jpio\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:01.868Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   jpi\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:02.005Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   jp\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:02.399Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   j\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:03.245Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   jo\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:03.443Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   joi\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:03.650Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   join\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:03.878Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   join \nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:11.182Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   join employee\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:12.111Z",
+    "message": "VQL Edited: VISUALIZE scatter   \nSELECT manager_id, AVG(salary)   \nFROM employee   join employee.\nGROUP BY manager_id   \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:47.558Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee   \nJOIN employee. employee_id\nGROUP BY manager_id    \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:49.405Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee   \nJOIN employee.employee_id\nGROUP BY manager_id    \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:50.774Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee   \nJOIN employee.employee_id \nGROUP BY manager_id    \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:50.965Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee   \nJOIN employee.employee_id =\nGROUP BY manager_id    \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:39:51.447Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee   \nJOIN employee.employee_id = \nGROUP BY manager_id    \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:00.746Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  d\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:00.884Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  de\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:01.051Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  dep\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:01.247Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  depa\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:01.529Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  depar\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:01.613Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  depart\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:02.099Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  departm\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:02.233Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  departme\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:02.354Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  departmen\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:02.600Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:04.176Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:06.437Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.d\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:06.506Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.de\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:06.585Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.dep\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:06.868Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.depa\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:07.084Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.depar\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:07.166Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.depart\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:07.868Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.departm\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:08.167Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.departme\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:08.358Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.departmen\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:08.605Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.department\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:09.308Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.department_\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:09.674Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.department_i\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:09.867Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee    \nJOIN employee.employee_id =  department.department_id\nGROUP BY manager_id     \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:16.125Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:16.212Z",
+    "message": "Executing VQL: VISUALIZE scatter       \nSELECT manager_id, AVG(salary)       \nFROM employee      \nJOIN employee.employee_id =  department.department_id  \nGROUP BY manager_id       \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:16.314Z",
+    "message": "API Received VQL: VISUALIZE scatter       \nSELECT manager_id, AVG(salary)       \nFROM employee      \nJOIN employee.employee_id =  department.department_id  \nGROUP BY manager_id       \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:16.382Z",
+    "message": "API Input VQL Validation Failed: Invalid usage of table.column detected outside of JOIN ... ON clause. Detected: employee.employee_id, department.department_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:16.460Z",
+    "message": "Final error after retries: Invalid usage of table.column detected outside of JOIN ... ON clause. Detected: employee.employee_id, department.department_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:16.553Z",
+    "message": "Error during VQL execution: Invalid usage of table.column detected outside of JOIN ... ON clause. Detected: employee.employee_id, department.department_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:33.164Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN demployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:33.229Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN deemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:33.478Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN depemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:33.672Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN depaemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:33.943Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN deparemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:34.018Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN departemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:34.496Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN departmemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:34.664Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN departmeemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:34.784Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN departmenemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:35.026Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN departmentemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:35.138Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN department employee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:36.167Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN department oemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:36.403Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN department onemployee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:36.554Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee     \nJOIN department on employee.employee_id =  department.department_id \nGROUP BY manager_id      \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:39.209Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:39.275Z",
+    "message": "Executing VQL: VISUALIZE scatter        \nSELECT manager_id, AVG(salary)        \nFROM employee       \nJOIN department ON employee.employee_id =  department.department_id   \nGROUP BY manager_id        \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:39.551Z",
+    "message": "API Received VQL: VISUALIZE scatter        \nSELECT manager_id, AVG(salary)        \nFROM employee       \nJOIN department ON employee.employee_id =  department.department_id   \nGROUP BY manager_id        \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:39.672Z",
+    "message": "API Input VQL Validation Failed: Validation failed: Invalid table name in ON condition: department is not in the schema."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:39.735Z",
+    "message": "Final error after retries: Validation failed: Invalid table name in ON condition: department is not in the schema."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:39.789Z",
+    "message": "Error during VQL execution: Validation failed: Invalid table name in ON condition: department is not in the schema."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:52.110Z",
+    "message": "VQL Edited: VISUALIZE scatter       \nSELECT manager_id, AVG(salary)       \nFROM employee      \nJOIN departments ON employee.employee_id =  department.department_id  \nGROUP BY manager_id       \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:55.578Z",
+    "message": "VQL Edited: VISUALIZE scatter       \nSELECT manager_id, AVG(salary)       \nFROM employee      \nJOIN departments ON employee.employee_id =  departments.department_id  \nGROUP BY manager_id       \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:58.108Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:58.194Z",
+    "message": "Executing VQL: VISUALIZE scatter         \nSELECT manager_id, AVG(salary)         \nFROM employee        \nJOIN departments ON employee.employee_id =  departments.department_id    \nGROUP BY manager_id         \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:58.293Z",
+    "message": "API Received VQL: VISUALIZE scatter         \nSELECT manager_id, AVG(salary)         \nFROM employee        \nJOIN departments ON employee.employee_id =  departments.department_id    \nGROUP BY manager_id         \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:40:58.365Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:41:03.278Z",
+    "message": "API Generated Explanation: {\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table employee on employee_id with the table departments on department_id.\",\"clause\":\"JOIN departments ON employee.employee_id = departments.department_id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"There are no specific filters applied to the data.\",\"conditions\":null,\"clause\":\"\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by manager_id.\",\"clause\":\"GROUP BY manager_id\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by manager_id in ascending order.\",\"clause\":\"ORDER BY manager_id ASC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"There is no specific binning applied to the data.\",\"clause\":\"\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot.\",\"clause\":\"VISUALIZE scatter\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:41:03.392Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table employee on employee_id with the table departments on department_id.\",\"clause\":\"JOIN departments ON employee.employee_id = departments.department_id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"There are no specific filters applied to the data.\",\"conditions\":null,\"clause\":\"\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by manager_id.\",\"clause\":\"GROUP BY manager_id\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by manager_id in ascending order.\",\"clause\":\"ORDER BY manager_id ASC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"There is no specific binning applied to the data.\",\"clause\":\"\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot.\",\"clause\":\"VISUALIZE scatter\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:41:03.571Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:41:03.700Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:41:03.921Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:41:03.990Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:31.859Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:31.939Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:32.093Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:32.602Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:32.786Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:33.188Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:34.818Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:34.905Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:35.132Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:35.449Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:35.534Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:35.621Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:36.482Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:36.570Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:37.871Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:37.963Z",
+    "message": "Executing VQL: VISUALIZE scatter \nSELECT manager_id, AVG(salary) \nFROM employee \nGROUP BY manager_id \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:38.118Z",
+    "message": "API Received VQL: VISUALIZE scatter \nSELECT manager_id, AVG(salary) \nFROM employee \nGROUP BY manager_id \nORDER BY manager_id ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:38.203Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:41.745Z",
+    "message": "API Generated Explanation: {\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by manager_id.\",\"clause\":\"GROUP BY manager_id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":4,\"operation\":\"ORDER BY\",\"description\":\"Order the results by manager_id in ascending order.\",\"clause\":\"ORDER BY manager_id ASC\"},{\"step\":5,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot. (If no visualize type is specified, default to scatter plot.)\",\"clause\":\"VISUALIZE scatter\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:41.831Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by manager_id.\",\"clause\":\"GROUP BY manager_id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":4,\"operation\":\"ORDER BY\",\"description\":\"Order the results by manager_id in ascending order.\",\"clause\":\"ORDER BY manager_id ASC\"},{\"step\":5,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot. (If no visualize type is specified, default to scatter plot.)\",\"clause\":\"VISUALIZE scatter\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:41.900Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:42:42.013Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:04.224Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT manager_id, AVG(salary)  \nFROM employee  \n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:04.725Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT manager_id, AVG(salary)  \nFROM employee  "
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:06.676Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:06.801Z",
+    "message": "Executing VQL: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:06.961Z",
+    "message": "API Received VQL: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:07.110Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:09.842Z",
+    "message": "API Generated Explanation: {\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of the salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":3,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot.\",\"clause\":\"VISUALIZE scatter\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:09.982Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of the salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":3,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot.\",\"clause\":\"VISUALIZE scatter\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:10.101Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:10.259Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:15.959Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee "
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:16.837Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee j"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:17.805Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee jo"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:18.092Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee joi"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:18.585Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:18.768Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join "
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:25.957Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join employee"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:27.524Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join employe"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:27.688Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join employ"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:27.847Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join emplo"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:28.014Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join empl"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:28.151Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join emp"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:28.256Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join em"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:28.442Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join e"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:28.603Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join "
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:34.632Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:36.146Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager_id "
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:36.454Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager_id o"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:36.673Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager_id on"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:36.832Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager_id on "
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:37.267Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager_id on manager_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:38.280Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager_id on manager_id."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:48.913Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager_id."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:50.380Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager_idmanager_id."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:51.480Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager_imanager_id."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:51.616Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager_manager_id."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:51.760Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on managermanager_id."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:52.700Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager.manager_id."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:55.369Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager.manager_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:56.195Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager.manager_id "
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:56.704Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager.manager_id ="
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:43:56.838Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager.manager_id = "
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:02.294Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager.manager_id = employee"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:03.556Z",
+    "message": "VQL Edited: VISUALIZE scatter    \nSELECT manager_id, AVG(salary)    \nFROM employee join manager on manager.manager_id = employee."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:11.056Z",
+    "message": "VQL Edited: VISUALIZE scatter     \nSELECT manager_id, AVG(salary)     \nFROM employee \nJOIN manager ON manager.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:14.265Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:14.383Z",
+    "message": "Executing VQL: VISUALIZE scatter       \nSELECT manager_id, AVG(salary)       \nFROM employee   \nJOIN manager ON manager.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:14.734Z",
+    "message": "API Received VQL: VISUALIZE scatter       \nSELECT manager_id, AVG(salary)       \nFROM employee   \nJOIN manager ON manager.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:14.804Z",
+    "message": "API Input VQL Validation Failed: Validation failed: Invalid table name in ON condition: manager is not in the schema."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:14.859Z",
+    "message": "Final error after retries: Validation failed: Invalid table name in ON condition: manager is not in the schema."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:14.904Z",
+    "message": "Error during VQL execution: Validation failed: Invalid table name in ON condition: manager is not in the schema."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:18.251Z",
+    "message": "API Received VQL: VISUALIZE scatter       \nSELECT manager_id, AVG(salary)       \nFROM employee   \nJOIN manager ON manager.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:18.355Z",
+    "message": "API Input VQL Validation Failed: Validation failed: Invalid table name in ON condition: manager is not in the schema."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:18.422Z",
+    "message": "Final error after retries: Validation failed: Invalid table name in ON condition: manager is not in the schema."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:18.461Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:18.526Z",
+    "message": "Executing VQL: VISUALIZE scatter       \nSELECT manager_id, AVG(salary)       \nFROM employee   \nJOIN manager ON manager.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:18.724Z",
+    "message": "Error during VQL execution: Validation failed: Invalid table name in ON condition: manager is not in the schema."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:31.008Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON d.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:31.066Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON de.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:32.802Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON dep.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:33.257Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON depa.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:33.390Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON depar.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:33.504Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON depart.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:34.050Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON departm.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:34.157Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON departme.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:34.268Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON departmen.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:34.513Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON department.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:34.630Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN manager ON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:38.496Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN dON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:38.586Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN deON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:38.756Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN depON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:38.996Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN depaON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:39.247Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN deparON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:39.340Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN departON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:39.942Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN departmON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:40.125Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN departmeON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:40.204Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN departmenON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:40.442Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN departmentON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:40.581Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN departmentsON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:41.822Z",
+    "message": "VQL Edited: VISUALIZE scatter      \nSELECT manager_id, AVG(salary)      \nFROM employee  \nJOIN departments ON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:43.860Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:43.963Z",
+    "message": "Executing VQL: VISUALIZE scatter        \nSELECT manager_id, AVG(salary)        \nFROM employee    \nJOIN departments ON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:44.078Z",
+    "message": "API Received VQL: VISUALIZE scatter        \nSELECT manager_id, AVG(salary)        \nFROM employee    \nJOIN departments ON departments.manager_id = employee.employee_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:44.155Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:48.340Z",
+    "message": "API Generated Explanation: {\"explanation\":[{\"step\":\"1\",\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":\"2\",\"operation\":\"JOIN\",\"description\":\"Join the table departments on manager_id with employee table on employee_id.\",\"clause\":\"JOIN departments ON departments.manager_id = employee.employee_id\"},{\"step\":\"3\",\"operation\":\"GROUP BY\",\"description\":\"Group data by manager_id.\",\"clause\":\"GROUP BY manager_id\"},{\"step\":\"4\",\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":\"5\",\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot. (Default visualization)\",\"clause\":\"VISUALIZE scatter\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:48.497Z",
+    "message": "Generated Explanation: [{\"step\":\"1\",\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":\"2\",\"operation\":\"JOIN\",\"description\":\"Join the table departments on manager_id with employee table on employee_id.\",\"clause\":\"JOIN departments ON departments.manager_id = employee.employee_id\"},{\"step\":\"3\",\"operation\":\"GROUP BY\",\"description\":\"Group data by manager_id.\",\"clause\":\"GROUP BY manager_id\"},{\"step\":\"4\",\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"},{\"step\":\"5\",\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot. (Default visualization)\",\"clause\":\"VISUALIZE scatter\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:48.615Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:48.717Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:58.375Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:58.458Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:58.650Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:58.726Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:58.849Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:44:58.971Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:01.577Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:01.643Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:01.758Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:01.948Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:16.020Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:16.109Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:16.260Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:16.414Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:16.673Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:16.729Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:20.119Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:20.184Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:20.298Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:20.384Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:20.919Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:20.982Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:21.098Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:21.182Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:21.325Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:21.572Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:24.464Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:24.538Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:24.690Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:24.761Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:36.404Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:36.478Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:36.633Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:36.718Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:37.058Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:37.266Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:37.867Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:37.940Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:38.057Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:38.164Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:40.570Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:40.704Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:40.857Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:40.918Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:41.011Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:45:41.258Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:01.378Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:01.463Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:01.578Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:01.662Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:04.963Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:05.029Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:05.196Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:05.360Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:05.448Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:05.593Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:06.847Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:06.930Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:07.056Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:46:07.149Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:01.866Z",
+    "message": "Navigated to page 0: Tutorial"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:03.599Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:03.701Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:03.816Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:05.333Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:05.688Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:05.973Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:06.258Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:06.331Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:06.439Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:07.138Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:07.204Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:10.921Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:11.102Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:12.839Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:12.964Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:13.090Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:13.170Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:16.369Z",
+    "message": "API Generated Explanation: {\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart by default.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:55:16.516Z",
+    "message": "Error during VQL execution: Invalid explanation received"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:32.320Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:32.390Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:32.503Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:32.577Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:36.375Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"BIN BY\",\"description\":\"Bin the date by default type (bar chart).\",\"clause\":\"BIN BY default type\"},{\"step\":5,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type).\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:36.423Z",
+    "message": "Error during VQL execution: Invalid explanation received"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:45.438Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:45.539Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:45.651Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:45.756Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:49.156Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and average price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart (default type).\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:56:49.281Z",
+    "message": "Error during VQL execution: Invalid explanation received"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:57:52.733Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:57:52.921Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:57:53.244Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:57:53.456Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:57:56.567Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:57:56.701Z",
+    "message": "Error during VQL execution: Invalid explanation received"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:37.833Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:37.985Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:38.091Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:38.190Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:38.354Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:38.700Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:39.018Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:39.119Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:39.215Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:42.413Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:42.589Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:47.602Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:47.778Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:49.438Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:49.523Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:49.616Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:49.692Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:53.258Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart, using the default type.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:53.317Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart, using the default type.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:53.410Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:58:53.503Z",
+    "message": "explanation current operation: FROM"
   }
 ]
