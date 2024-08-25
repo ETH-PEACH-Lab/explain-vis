@@ -47054,5 +47054,1761 @@
   {
     "serverTimestamp": "2024-08-25T10:51:15.980Z",
     "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:07:45.612Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:07:46.489Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:07:46.971Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:07:52.971Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:07:53.994Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:07:54.638Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:07:54.861Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:07:54.962Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:07:55.060Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:08:02.202Z",
+    "message": "table feature: Changed column from price to name"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:08:02.707Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:08:02.957Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:08:06.447Z",
+    "message": "table feature: Changed column from price to stock"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:08:06.649Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:08:06.846Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:08:22.657Z",
+    "message": "table feature: Changed column from price to price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:08:22.921Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:08:23.487Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:44.717Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:45.694Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:46.767Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:47.208Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:47.337Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:47.517Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:47.820Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:51.282Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:51.551Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:51.813Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:52.192Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:52.481Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:52.766Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:53.072Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:53.243Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:53.407Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:53.806Z",
+    "message": "binby feature: Changed range to 150,2113"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:54.708Z",
+    "message": "binby feature: Changed range to 150,1988"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:55.029Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:55.288Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:55.599Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:55.835Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:56.138Z",
+    "message": "binby feature: Changed range to 150,2013"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:56.369Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:56.609Z",
+    "message": "binby feature: Changed range to 150,2013"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:56.808Z",
+    "message": "binby feature: Changed range to 150,1988"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:57.200Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:57.576Z",
+    "message": "binby feature: Changed range to 150,1813"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:58.379Z",
+    "message": "binby feature: Changed range to 150,1813"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:58.539Z",
+    "message": "binby feature: Changed range to 150,1737"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:58.663Z",
+    "message": "binby feature: Changed range to 150,1713"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:58.772Z",
+    "message": "binby feature: Changed range to 150,1700"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:59.005Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:09:59.339Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:00.180Z",
+    "message": "binby feature: Changed range to 150,1737"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:00.663Z",
+    "message": "binby feature: Changed range to 150,1713"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:00.926Z",
+    "message": "binby feature: Changed range to 150,1700"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:01.069Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:01.270Z",
+    "message": "binby feature: Changed range to 150,1400"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:01.590Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:01.731Z",
+    "message": "binby feature: Changed range to 150,1400"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:01.899Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:02.037Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:02.205Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:02.483Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:02.726Z",
+    "message": "binby feature: Changed range to 638,1400"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:02.932Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:03.057Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:03.184Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:03.385Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:03.841Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:04.474Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:04.742Z",
+    "message": "binby feature: Changed range to 113,1400"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:05.064Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:05.240Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:05.665Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:05.807Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:05.967Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:06.132Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:09.690Z",
+    "message": "binby feature: Changed range to 875,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:10.371Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:10.967Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:11.145Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:11.240Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:11.361Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:11.522Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:11.818Z",
+    "message": "binby feature: Changed range to 875,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:12.267Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:12.535Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:12.723Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:12.908Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:13.862Z",
+    "message": "binby feature: Changed range to 875,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:14.075Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:14.390Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:14.568Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:14.724Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:15.312Z",
+    "message": "binby feature: Changed range to 875,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:15.498Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:15.661Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:15.832Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:16.022Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:16.283Z",
+    "message": "binby feature: Changed range to 875,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:17.511Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:18.952Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:19.233Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:19.560Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:20.105Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:20.418Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:20.750Z",
+    "message": "binby feature: Changed range to 788,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:20.970Z",
+    "message": "binby feature: Changed range to 1225,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:21.093Z",
+    "message": "binby feature: Changed range to 1300,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:21.220Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:21.450Z",
+    "message": "binby feature: Changed range to 1225,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:21.704Z",
+    "message": "binby feature: Changed range to 1300,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:21.826Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:21.944Z",
+    "message": "binby feature: Changed range to 1663,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:22.165Z",
+    "message": "binby feature: Changed range to 1688,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:22.440Z",
+    "message": "binby feature: Changed range to 1725,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:22.558Z",
+    "message": "binby feature: Changed range to 1750,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:22.667Z",
+    "message": "binby feature: Changed range to 1763,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:22.794Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:22.915Z",
+    "message": "binby feature: Changed range to 1663,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:23.019Z",
+    "message": "binby feature: Changed range to 1688,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:23.135Z",
+    "message": "binby feature: Changed range to 1725,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:23.239Z",
+    "message": "binby feature: Changed range to 1750,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:23.364Z",
+    "message": "binby feature: Changed range to 1763,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:23.483Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:23.674Z",
+    "message": "binby feature: Changed range to 1788,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:23.940Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:24.049Z",
+    "message": "binby feature: Changed range to 1788,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:24.171Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:24.293Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:24.410Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:24.532Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:24.632Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:26.433Z",
+    "message": "binby feature: Changed range to 1788,3000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:27.035Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:27.401Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:27.739Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:28.153Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:32.225Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:32.414Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:32.929Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:33.258Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:33.535Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:40.442Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:40.593Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:41.048Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:41.251Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:10:41.632Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:24.722Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:24.881Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:25.222Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:25.529Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:26.149Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:26.876Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:26.974Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:27.083Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:27.181Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:27.394Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:28.113Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:28.569Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:28.848Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:28.968Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:29.067Z",
+    "message": "Clicked 'Next' button, moving from page 3 to 4"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:29.153Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:29.553Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:30.604Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:30.775Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:30.890Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:31.074Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:31.283Z",
+    "message": "Clicked 'Next' button, moving from page 4 to 5"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:31.701Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:32.068Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:32.317Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:32.552Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:32.889Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:33.674Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:34.077Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:34.212Z",
+    "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:35.092Z",
+    "message": "Clicked 'Next' button, moving from page 5 to 6"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:35.336Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:35.640Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:35.828Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:36.410Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:36.635Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:36.882Z",
+    "message": "explanation current operation: BIN BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:37.152Z",
+    "message": "Clicked 'Next' button, moving from page 6 to 7"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:37.907Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:39.031Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:39.276Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:39.484Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:39.646Z",
+    "message": "Clicked 'Next' button, moving from page 7 to 8"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:39.765Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:39.930Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:40.401Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:40.729Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:40.938Z",
+    "message": "Clicked 'Next' button, moving from page 3 to 4"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:41.093Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:42.071Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:43.710Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:43.857Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:44.217Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:45.116Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:46.892Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:50.692Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:51.569Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:51.936Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:52.127Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:53.371Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:54.314Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:55.531Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:55.800Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:55.978Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:56.122Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:56.298Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:56.496Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:56.643Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:56.779Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:56.896Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:57.039Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:57.673Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:57.935Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:58.039Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:58.142Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:11:58.242Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:36.257Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:37.172Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:39.151Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:40.185Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:40.580Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:40.977Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:42.393Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:43.121Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:43.506Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:12:43.853Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:10.772Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:11.559Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:13.190Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:14.134Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:14.572Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:14.950Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:16.308Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:16.957Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:17.322Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:18.043Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:23.732Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:24.157Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:24.781Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:25.329Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:26.196Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:26.849Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:27.375Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:28.149Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:29.972Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:30.486Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:31.111Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:31.787Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:32.912Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:33.365Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:33.841Z",
+    "message": "Clicked 'Next' button, moving from page 3 to 4"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:34.231Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:34.595Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:35.007Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:35.784Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:37.202Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:37.741Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:38.242Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:38.744Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:39.321Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:40.050Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:41.010Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:41.602Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:42.050Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:42.487Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:44.186Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:45.312Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:45.681Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:46.170Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:46.500Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:46.922Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:47.512Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:48.230Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:48.695Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:49.458Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:50.189Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:51.050Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:51.860Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:52.986Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:53.410Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:14:53.996Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:04.802Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:05.191Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:06.281Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:07.541Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:08.300Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:08.887Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:09.375Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:09.881Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:10.438Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:11.045Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:11.440Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:12.183Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:13.746Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:14.615Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:14.947Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:15.400Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:15.741Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:16.192Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:16.621Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:17.070Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:17.448Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:17.802Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:18.248Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:18.971Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:30.026Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:30.345Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:31.030Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:31.480Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:31.914Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:32.224Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:45.930Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:46.696Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:47.430Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:47.864Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:48.201Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:48.622Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:16:59.797Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:00.645Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:01.046Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:01.732Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:02.329Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:03.185Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:03.727Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:04.234Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:04.594Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:05.349Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:06.034Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:06.774Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:08.236Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:09.253Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:09.902Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:10.371Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:11.801Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:12.946Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:13.709Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:14.386Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:15.072Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:15.753Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:16.340Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:16.865Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:17.610Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:17.966Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:18.567Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:19.036Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:20.369Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:21.409Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:21.941Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:22.425Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:23.107Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:23.501Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:24.071Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:24.481Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:24.890Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:25.201Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:25.701Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:26.316Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:27.350Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:28.650Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:29.338Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:29.851Z",
+    "message": "Clicked 'Next' button, moving from page 3 to 4"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:30.434Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:30.889Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:31.212Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:31.599Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:32.077Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:32.447Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:32.760Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:33.192Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:34.131Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:35.345Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:36.126Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:36.650Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:36.965Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:37.327Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:37.852Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:38.540Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:38.915Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:39.377Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:39.848Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:40.320Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:40.804Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:41.922Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:42.438Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:42.749Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:43.074Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:43.351Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:43.676Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:44.093Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:44.462Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:44.919Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:45.297Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:45.685Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:46.370Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:47.552Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:47.920Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:48.278Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:48.563Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:48.943Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:49.244Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:49.689Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:50.122Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:50.536Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:50.828Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:51.410Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:17:52.165Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:11.764Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:12.331Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:13.103Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:13.925Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:14.450Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:14.915Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:15.279Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:16.274Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:16.801Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:17.168Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:18.093Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:18.520Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:18.820Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:19.143Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:19.641Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:20.532Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:20.800Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:21.251Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:21.789Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:22.062Z",
+    "message": "explanation current operation: WHERE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:22.389Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:22.752Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:23.069Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:23.352Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T11:20:23.641Z",
+    "message": "explanation current operation: GROUP BY"
   }
 ]

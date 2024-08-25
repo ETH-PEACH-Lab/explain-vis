@@ -2988,7 +2988,7 @@ return (
       const options = {
             scales: {
               x: {
-                // type: xAxisType_select,
+                type: xAxisType_select,
                 position: 'bottom',
                 // ...(xAxisType_select === 'time' && {
                 //   time: {
