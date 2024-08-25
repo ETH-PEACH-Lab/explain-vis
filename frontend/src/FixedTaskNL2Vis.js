@@ -16,7 +16,7 @@ import VQLEditor from './components/VQLEditor.js'
 import Button from '@mui/material/Button';
 
 
-function FixedTaskNL2Vis({data, userId }) {
+function FixedTaskNL2Vis({data, userId , pageKey}) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
   const [generatedVQL, setGeneratedVQL] = useState({
     VQL: 'visualize scatter select manager_id, avg(salary) from employee group by manager_id order by manager_id asc',
@@ -39,16 +39,19 @@ function FixedTaskNL2Vis({data, userId }) {
   const [isRunning, setIsRunning] = useState(false); // Timer running state
   const [hasEnded, setHasEnded] = useState(false); // Track if the timer has ended
 
+  const timeKey = `${pageKey}_elapsedTime`; // Unique key for elapsed time in localStorage
+  const runningKey = `${pageKey}_isRunning`; // Unique key for running state in localStorage
+
   // Load the timer state from localStorage on component mount
   useEffect(() => {
-    const savedTime = parseFloat(localStorage.getItem('elapsedTime'));
-    const savedIsRunning = localStorage.getItem('isRunning') === 'true';
+    const savedTime = parseFloat(localStorage.getItem(timeKey));
+    const savedIsRunning = localStorage.getItem(runningKey) === 'true';
 
     if (!isNaN(savedTime)) {
       setElapsedTime(savedTime);
     }
     setIsRunning(savedIsRunning);
-  }, []);
+  }, [timeKey, runningKey]);
 
   useEffect(() => {
     let timer;
@@ -57,7 +60,7 @@ function FixedTaskNL2Vis({data, userId }) {
       timer = setInterval(() => {
         setElapsedTime(prevTime => {
           const newTime = prevTime + 0.01;
-          localStorage.setItem('elapsedTime', newTime.toFixed(2)); // Save the updated time
+          localStorage.setItem(timeKey, newTime.toFixed(2)); // Save the updated time
           return newTime;
         });
       }, 10); // Update every 10 milliseconds for 2 decimal places
@@ -66,26 +69,26 @@ function FixedTaskNL2Vis({data, userId }) {
     return () => {
       clearInterval(timer);
     };
-  }, [isRunning]);
+  }, [isRunning, timeKey]);
 
   const handleStartTimer = () => {
     setIsRunning(true);
     setHasEnded(false); // Reset the end state
-    localStorage.setItem('isRunning', 'true'); // Save running state
+    localStorage.setItem(runningKey, 'true'); // Save running state
   };
 
   const handleEndTimer = () => {
     setIsRunning(false);
     setHasEnded(true); // Set the timer as ended
-    localStorage.setItem('isRunning', 'false'); // Save running state
+    localStorage.setItem(runningKey, 'false'); // Save running state
   };
 
   const handleRestartTimer = () => {
     setElapsedTime(0);
     setIsRunning(true);
     setHasEnded(false); // Reset the end state
-    localStorage.setItem('elapsedTime', '0'); // Reset time
-    localStorage.setItem('isRunning', 'true'); // Start running again
+    localStorage.setItem(timeKey, '0'); // Reset time
+    localStorage.setItem(runningKey, 'true'); // Start running again
   };
 
   // Calculate minutes and seconds from elapsedTime

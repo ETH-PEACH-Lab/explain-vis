@@ -43654,5 +43654,641 @@
   {
     "serverTimestamp": "2024-08-25T08:24:27.885Z",
     "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:44.144Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:44.494Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:44.800Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:47.461Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:47.590Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:50.020Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:50.140Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:50.286Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:51.614Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:51.737Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:27:51.909Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:32:10.164Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:33:58.041Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:33:58.194Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:33:58.562Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:33:59.726Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:33:59.812Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:00.072Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:00.311Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:00.434Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:00.651Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:01.578Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:01.680Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:01.819Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:03.051Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:03.181Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:03.310Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:09.031Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:09.141Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:09.266Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:10.936Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:11.022Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:11.363Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:13.974Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:14.128Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:14.235Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:15.320Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:15.442Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:15.557Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:16.807Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:16.925Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:17.035Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:25.548Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:25.668Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:25.803Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:27.014Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:27.075Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:27.162Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:27.998Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:28.128Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:34:28.264Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:38.114Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:38.299Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:38.580Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:39.750Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:39.868Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:40.007Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:41.079Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:41.140Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:41.268Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:48.572Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:48.773Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:48.875Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:52.098Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:52.199Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:52.280Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:54.984Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:55.102Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:55.560Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:56.777Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:56.952Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:57.133Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:57.710Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:57.791Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:57.879Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:58.662Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:58.751Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:36:58.843Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:37:07.813Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:37:07.933Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:37:08.044Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:11.759Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:11.953Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:12.154Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:13.119Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:13.278Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:13.431Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:14.545Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:14.599Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:14.699Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:16.419Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:16.551Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:16.689Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:19.860Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:19.936Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:20.060Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:21.580Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:21.734Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:21.989Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:23.232Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:23.337Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:23.414Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:24.451Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:24.607Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:24.734Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:27.880Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:27.945Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:28.083Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:29.428Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:29.556Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:29.685Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:32.028Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:32.179Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:32.287Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:33.513Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:33.600Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:33.716Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:34.639Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:34.728Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:34.855Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:38.103Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:38.179Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:38.294Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:39.229Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:39.315Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:39.484Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:40.069Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:40.142Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:40.274Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:40.974Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:41.124Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:41.247Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:52.179Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:52.439Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:52.558Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:55.608Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:55.724Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:55.863Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:57.090Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:57.258Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:57.425Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:58.610Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:58.682Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:58.800Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:59.797Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:41:59.952Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:00.230Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:05.863Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:06.045Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:06.174Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:07.217Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:07.373Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:07.640Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:08.077Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:08.159Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:08.310Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:09.226Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:09.385Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T08:42:09.547Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
   }
 ]

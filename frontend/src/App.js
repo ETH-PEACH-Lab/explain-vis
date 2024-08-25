@@ -343,13 +343,13 @@ function App() {
 
   // Define the vis and expl groups
   const visGroup = [
-    { name: `${scenarioOrder[0].scenario} - Fixed Task`, component: FixedTaskNL2Vis, scenario: scenarioOrder[0] },
-    { name: `${scenarioOrder[0].scenario} - Open Task`, component: OpenEndNL2Vis, scenario: scenarioOrder[0] },
+    { name: `${scenarioOrder[0].scenario} - Fixed Task`, component: FixedTaskNL2Vis, scenario: scenarioOrder[0] , pageKey: 'vis_fixed'},
+    { name: `${scenarioOrder[0].scenario} - Open Task`, component: OpenEndNL2Vis, scenario: scenarioOrder[0] , pageKey: 'vis_open'},
   ];
 
   const explGroup = [
-    { name: `${scenarioOrder[1].scenario} - Fixed Task`, component: FixedTaskNL2VisExplain, scenario: scenarioOrder[1] },
-    { name: `${scenarioOrder[1].scenario} - Open Task`, component: OpenEndNL2VisExplain, scenario: scenarioOrder[1] },
+    { name: `${scenarioOrder[1].scenario} - Fixed Task`, component: FixedTaskNL2VisExplain, scenario: scenarioOrder[1] , pageKey: 'expl_fixed'},
+    { name: `${scenarioOrder[1].scenario} - Open Task`, component: OpenEndNL2VisExplain, scenario: scenarioOrder[1] , pageKey: 'expl_open'},
   ];
 
   // Shuffle the group order (vis/expl)
@@ -368,7 +368,17 @@ const renderTask = () => {
     return <TutorialPage userId={userId} />;
   } else if (selectedPage <= taskOrder.length) {
     const TaskComponent = taskOrder[selectedPage - 1].component;
-    return <TaskComponent data={taskOrder[selectedPage - 1].scenario} userId={userId} />;  // Pass userId as a prop
+    const scenario = taskOrder[selectedPage - 1].scenario;
+      const pageKey = taskOrder[selectedPage - 1].pageKey;
+
+      return (
+        <TaskComponent 
+          data={scenario} 
+          userId={userId} 
+          pageKey={pageKey}  // Pass the unique pageKey as a prop
+        />
+      );
+    // return <TaskComponent data={taskOrder[selectedPage - 1].scenario} userId={userId} />;  // Pass userId as a prop
   }
 };
 

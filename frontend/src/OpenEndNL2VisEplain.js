@@ -11,8 +11,9 @@ import './components/styles/styles.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import VQLEditor from './components/VQLEditor.js'
 import { logEvent } from './utils/logger'; 
+import Button from '@mui/material/Button';
 
-function OpenEndNL2VisExplain({data, userId }) {
+function OpenEndNL2VisExplain({data, userId, pageKey  }) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
   const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', vegaLiteSpec: null, explanation: [] });
   const [tableData, setTableData] = useState(data.data);
@@ -21,6 +22,65 @@ function OpenEndNL2VisExplain({data, userId }) {
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
   const [showExplanation, setShowExplanation] = useState(false); // New state to control explanation visibility
+  const [elapsedTime, setElapsedTime] = useState(0); // Timer state in seconds
+  const [isRunning, setIsRunning] = useState(false); // Timer running state
+  const [hasEnded, setHasEnded] = useState(false); // Track if the timer has ended
+
+  const timeKey = `${pageKey}_elapsedTime`; // Unique key for elapsed time in localStorage
+  const runningKey = `${pageKey}_isRunning`; // Unique key for running state in localStorage
+
+  // Load the timer state from localStorage on component mount
+  useEffect(() => {
+    const savedTime = parseFloat(localStorage.getItem(timeKey));
+    const savedIsRunning = localStorage.getItem(runningKey) === 'true';
+
+    if (!isNaN(savedTime)) {
+      setElapsedTime(savedTime);
+    }
+    setIsRunning(savedIsRunning);
+  }, [timeKey, runningKey]);
+
+  useEffect(() => {
+    let timer;
+
+    if (isRunning) {
+      timer = setInterval(() => {
+        setElapsedTime(prevTime => {
+          const newTime = prevTime + 0.01;
+          localStorage.setItem(timeKey, newTime.toFixed(2)); // Save the updated time
+          return newTime;
+        });
+      }, 10); // Update every 10 milliseconds for 2 decimal places
+    }
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [isRunning, timeKey]);
+
+  const handleStartTimer = () => {
+    setIsRunning(true);
+    setHasEnded(false); // Reset the end state
+    localStorage.setItem(runningKey, 'true'); // Save running state
+  };
+
+  const handleEndTimer = () => {
+    setIsRunning(false);
+    setHasEnded(true); // Set the timer as ended
+    localStorage.setItem(runningKey, 'false'); // Save running state
+  };
+
+  const handleRestartTimer = () => {
+    setElapsedTime(0);
+    setIsRunning(true);
+    setHasEnded(false); // Reset the end state
+    localStorage.setItem(timeKey, '0'); // Reset time
+    localStorage.setItem(runningKey, 'true'); // Start running again
+  };
+
+  // Calculate minutes and seconds from elapsedTime
+  const minutes = Math.floor(elapsedTime / 60);
+  const seconds = (elapsedTime % 60).toFixed(2);
 
   useEffect(() => {
     const taskTitle = `NL2ViZ - Open-ended Task 2 with Explanation, ${data.scenario} Scenario`;
@@ -83,6 +143,123 @@ function OpenEndNL2VisExplain({data, userId }) {
         <Typography variant="h6" className="title">
         {`NL2ViZ - ${data.scenario} Scenario, Open-ended Task`}
         </Typography>
+        <div className='timer'>
+        <Typography variant="h6" className="timer">
+        {minutes}:{seconds < 10 ? `0${seconds}` : seconds} minutes
+      </Typography>
+      <div>
+        {isRunning ? (
+          <>
+            <Button 
+              variant="outlined" 
+              onClick={handleEndTimer}
+              sx={{ 
+                borderRadius: '12px', 
+                padding: '5px 15px', 
+                fontWeight: 'normal', 
+                fontSize: '14px',
+                textTransform: 'none',
+                color: '#666666', // Light gray text
+                borderColor: 'white', // White border
+                backgroundColor: '#f9f9f9', // Very light gray background
+                '&:hover': {
+                  backgroundColor: '#e0e0e0', // Slightly darker gray on hover
+                  borderColor: '#bbbbbb', // Slightly darker border on hover
+                },
+                marginRight: '10px',
+              }}
+            >
+              End
+            </Button>  
+            <Button 
+              variant="outlined" 
+              onClick={handleRestartTimer}
+              sx={{ 
+                borderRadius: '12px', 
+                padding: '5px 15px', 
+                fontWeight: 'normal', 
+                fontSize: '14px',
+                textTransform: 'none',
+                color: '#666666', // Light gray text
+                borderColor: 'white', // White border
+                backgroundColor: '#f9f9f9', // Very light gray background
+                '&:hover': {
+                  backgroundColor: '#e0e0e0', // Slightly darker gray on hover
+                  borderColor: '#bbbbbb', // Slightly darker border on hover
+                },
+              }}
+            >
+              Restart
+            </Button>        
+          </>
+        ) : hasEnded ? (
+          <>
+            <Button 
+              variant="outlined" 
+              onClick={handleStartTimer}
+              sx={{ 
+                borderRadius: '12px', 
+                padding: '5px 15px', 
+                fontWeight: 'normal', 
+                fontSize: '14px',
+                textTransform: 'none',
+                color: '#666666', // Light gray text
+                borderColor: 'white', // White border
+                backgroundColor: '#f9f9f9', // Very light gray background
+                '&:hover': {
+                  backgroundColor: '#e0e0e0', // Slightly darker gray on hover
+                  borderColor: '#bbbbbb', // Slightly darker border on hover
+                },
+                marginRight: '10px',
+              }}
+            >
+              Start
+            </Button>  
+            <Button 
+              variant="outlined" 
+              onClick={handleRestartTimer}
+              sx={{ 
+                borderRadius: '12px', 
+                padding: '5px 15px', 
+                fontWeight: 'normal', 
+                fontSize: '14px',
+                textTransform: 'none',
+                color: '#666666', // Light gray text
+                borderColor: 'white', // White border
+                backgroundColor: '#f9f9f9', // Very light gray background
+                '&:hover': {
+                  backgroundColor: '#e0e0e0', // Slightly darker gray on hover
+                  borderColor: '#bbbbbb', // Slightly darker border on hover
+                },
+              }}
+            >
+              Restart
+            </Button>  
+          </>
+        ) : (
+          <Button 
+            variant="outlined" 
+            onClick={handleStartTimer}
+            sx={{ 
+              borderRadius: '12px', 
+              padding: '5px 15px', 
+              fontWeight: 'normal', 
+              fontSize: '14px',
+              textTransform: 'none',
+              color: '#666666', // Light gray text
+              borderColor: 'white', // White border
+              backgroundColor: '#f9f9f9', // Very light gray background
+              '&:hover': {
+                backgroundColor: '#e0e0e0', // Slightly darker gray on hover
+                borderColor: '#bbbbbb', // Slightly darker border on hover
+              },
+            }}
+          >
+            Start
+          </Button>  
+        )}
+      </div>
+      </div>
         <div className="vql-switch">
           <Switch color="default" checked={showExplanation} onChange={(e) => setShowExplanation(e.target.checked)} />
           <Typography variant="body1" component="span">Show Explanation</Typography>
