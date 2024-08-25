@@ -84,7 +84,60 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     });
   };
 
-  const renderGroupedChart = (data, groupByColumn, selectedColumns) => {
+  const renderGroupedChart = (data, groupByColumn, selectedColumns, chart) => {
+    const defaultoptions = {
+      scales: {
+          x: {
+              position: 'bottom',
+              title: {
+                  display: true,
+                  text: selectedColumns[0] || 'X-Axis',
+              },
+              ticks: {
+                  display: true,
+              },
+              grid: {
+                  display: true,
+              }
+          },
+          y: {
+              title: {
+                  display: true,
+                  text: selectedColumns[1] || 'Y-Axis',
+              },
+              ticks: {
+                  display: true,
+              },
+              grid: {
+                  display: true,
+              }
+          }
+      }
+  }
+  
+  const defaultdata = {
+      labels: [''], // Adding a single empty label to force the display
+      datasets: [{
+        backgroundColor: '#f0eea3',
+        label: `Empty Chart`,
+          data: [] // Adding a single data point to force the display
+      }]
+  };
+  
+    console.log('error here',chart)
+    if(chart==='default'){
+      // return <Typography variant="body2" color="error"></Typography>;
+      // setError(`An error occurred while generating the final visualization. Please try again.`);
+      //   setIsModalOpen(true)
+      return (
+        <Chart
+            type={'scatter'}
+            data={defaultdata}
+            options={defaultoptions}
+        />
+    );
+  }
+
     if (!data || data.length === 0 || !selectedColumns || selectedColumns.length < 2) {
       // 如果数据为空或列选择无效，返回一个显示“Empty Chart”的空图表
       return (
@@ -353,7 +406,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   const defaultdata = {
       labels: [''], // Adding a single empty label to force the display
       datasets: [{
-        backgroundColor: color,
+        backgroundColor: '#f0eea3',
         label: `Empty Chart`,
           data: [] // Adding a single data point to force the display
       }]
@@ -859,7 +912,26 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       setError(`An error occurred while generating the final visualization. Please try again.`);
         setIsModalOpen(true)
     }
+    let chartType_all = 'default'; // Default chart type
 
+    steps.forEach(step => {
+      if (step.operation === 'VISUALIZE') {
+        const clauseParts = step.clause.split(' ');
+        console.log('error here', clauseParts);
+        if (clauseParts.length >= 2) {
+          chartType_all = clauseParts[1].toLowerCase();
+        }
+    
+        // Validate the chart type
+        const validChartTypes = ['scatter', 'bar', 'line', 'pie'];
+        if (!validChartTypes.includes(chartType_all)) {
+          chartType_all = 'default';
+        }
+      }
+
+    });
+    
+    console.log('Final chart type all:', chartType_all);
     const {
       currentTable_from,
       currentColumns_from,
@@ -1065,7 +1137,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
 
         return (
           <div className="chart">
-          {generateChart(currentTable_from,'scatter',selectedColumns, defaultcolor)}
+          {generateChart(currentTable_from,chartType_all,selectedColumns, defaultcolor)}
           </div>
         );
       }
@@ -1098,8 +1170,48 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         const firstValue_select = table_data[0][columns[0]];
         const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
 
-        const { data, options } = generateScatterData(currentTable_join,selectedColumns)
-
+        let { data, options } = generateScatterData(currentTable_join,selectedColumns)
+        console.log('Final chart type all:', chartType_all);
+        if (chartType_all==="default"){
+          options = {
+            scales: {
+                x: {
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: selectedColumns[0] || 'X-Axis',
+                    },
+                    ticks: {
+                        display: true,
+                    },
+                    grid: {
+                        display: true,
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: selectedColumns[1] || 'Y-Axis',
+                    },
+                    ticks: {
+                        display: true,
+                    },
+                    grid: {
+                        display: true,
+                    }
+                }
+            }
+        }
+        
+        data = {
+            labels: [''], // Adding a single empty label to force the display
+            datasets: [{
+              backgroundColor: '#f0eea3',
+                label: `Empty Chart`,
+                data: [] // Adding a single data point to force the display
+            }]
+        };
+        }
         return (
           <Scatter
           data={data}
@@ -1108,7 +1220,48 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         );
       }
       case 'WHERE': {
-        const { data, options } = generateScatterData(currentTable,selectedColumns)
+        let { data, options } = generateScatterData(currentTable,selectedColumns)
+        console.log('Final chart type all:', chartType_all);
+        if (chartType_all==="default"){
+          options = {
+            scales: {
+                x: {
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: selectedColumns[0] || 'X-Axis',
+                    },
+                    ticks: {
+                        display: true,
+                    },
+                    grid: {
+                        display: true,
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: selectedColumns[1] || 'Y-Axis',
+                    },
+                    ticks: {
+                        display: true,
+                    },
+                    grid: {
+                        display: true,
+                    }
+                }
+            }
+        }
+        
+        data = {
+            labels: [''], // Adding a single empty label to force the display
+            datasets: [{
+              backgroundColor: '#f0eea3',
+                label: `Empty Chart`,
+                data: [] // Adding a single data point to force the display
+            }]
+        };
+        }
         return (
           <Scatter
           data={data}
@@ -1119,54 +1272,96 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
       case 'GROUP BY': {
         let groupByColumn = step.clause.split(' ')[2];
         return (
-                renderGroupedChart(currentTable, groupByColumn, selectedColumns) 
+                renderGroupedChart(currentTable, groupByColumn, selectedColumns, chartType_all) 
         );
       }
       case 'SELECT': {  
         return (
-          generateChart(currentTable,'scatter',selectedColumns_final, defaultcolor)
+          generateChart(currentTable,chartType_all,selectedColumns_final, defaultcolor)
         );
       }
       case 'ORDER BY': {
+        let data = {
+          datasets: [
+            {
+              label: `Scatter Chart`,
+              data: currentTable_order,
+              backgroundColor: '#f0eea3',
+            },
+          ],
+        }
+        let options = {
+          scales: {
+            x: {
+              type: 'category', 
+              position: 'bottom',
+              title: {
+                display: true,
+                text: selectedColumns_final[0],
+              },
+
+            },
+            y: {
+              title: {
+                display: true,
+                text: selectedColumns_final[1],
+
+              },
+            
+            },
+          },
+        }
+        console.log('Final chart type all:', chartType_all);
+        if (chartType_all==="default"){
+          options = {
+            scales: {
+                x: {
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: selectedColumns[0] || 'X-Axis',
+                    },
+                    ticks: {
+                        display: true,
+                    },
+                    grid: {
+                        display: true,
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: selectedColumns[1] || 'Y-Axis',
+                    },
+                    ticks: {
+                        display: true,
+                    },
+                    grid: {
+                        display: true,
+                    }
+                }
+            }
+        }
         
+        data = {
+            labels: [''], // Adding a single empty label to force the display
+            datasets: [{
+              backgroundColor: '#f0eea3',
+                label: `Empty Chart`,
+                data: [] // Adding a single data point to force the display
+            }]
+        };
+        }
         return (
                 <Scatter
-                  data={{
-                    datasets: [
-                      {
-                        label: `Scatter Chart`,
-                        data: currentTable_order,
-                        backgroundColor: '#f0eea3',
-                      },
-                    ],
-                  }}
-                  options={{
-                    scales: {
-                      x: {
-                        type: 'category', 
-                        position: 'bottom',
-                        title: {
-                          display: true,
-                          text: selectedColumns_final[0],
-                        },
-  
-                      },
-                      y: {
-                        title: {
-                          display: true,
-                          text: selectedColumns_final[1],
-  
-                        },
-                      
-                      },
-                    },
-                  }}
+                  data={data}
+                  options={options}
                 />
         );
       }
       case 'BIN BY': {
         return (
-          generateChart(currentTable, 'scatter', [`binBy_${binBy}`,selectedColumns_final[1]],defaultcolor)
+          generateChart(currentTable, chartType_all, [`binBy_${binBy}`,selectedColumns_final[1]],defaultcolor)
 
               
         );

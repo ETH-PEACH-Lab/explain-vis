@@ -40726,5 +40726,2133 @@
   {
     "serverTimestamp": "2024-08-25T07:08:55.089Z",
     "message": "explanation current operation: ORDER BY"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:30.576Z",
+    "message": "VQL Edited: SELECT manager_id, AVG(salary) \nFROM employee \nJOIN departments ON employee.employee_id = departments.manager_id \n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:30.677Z",
+    "message": "VQL Edited: SELECT manager_id, AVG(salary) \nFROM employee \nJOIN departments ON employee.employee_id = departments.manager_id "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:32.209Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:32.308Z",
+    "message": "Executing VQL: SELECT manager_id, AVG(salary)   \nFROM employee   \nJOIN departments ON employee.employee_id = departments.manager_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:32.526Z",
+    "message": "API Received VQL: SELECT manager_id, AVG(salary)   \nFROM employee   \nJOIN departments ON employee.employee_id = departments.manager_id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:32.702Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:35.872Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT manager_id, AVG(salary) FROM employee JOIN departments ON employee.employee_id = departments.manager_id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table employee on employee_id with the table departments on manager_id.\",\"clause\":\"JOIN departments ON employee.employee_id = departments.manager_id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:35.943Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table employee on employee_id with the table departments on manager_id.\",\"clause\":\"JOIN departments ON employee.employee_id = departments.manager_id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the manager_id and the average of salary columns.\",\"clause\":\"SELECT manager_id, AVG(salary)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:36.038Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:36.136Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:36.255Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:26:36.560Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:32.202Z",
+    "message": "Navigated to page 0: Tutorial"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:33.926Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:34.055Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:34.178Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:34.942Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:35.033Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:35.215Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:35.476Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:35.590Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:36.130Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:36.452Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:36.598Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:38.874Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:39.047Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:40.803Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:40.920Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:41.044Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:41.115Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:44.800Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:44.925Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:45.033Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:45.112Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:50.448Z",
+    "message": "VQL Edited: \nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:50.912Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:52.410Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:52.516Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:52.642Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:52.717Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:56.090Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:56.220Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:56.329Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:28:56.433Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:08.333Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:08.422Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:08.528Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:09.562Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:09.662Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:10.173Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:10.324Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:10.442Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:10.594Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:11.474Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:11.597Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:16.397Z",
+    "message": "VQL Edited: \nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:16.798Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:19.222Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:19.422Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:20.974Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:21.061Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:21.195Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:21.315Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:34.209Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price) \\n FROM price \\n JOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:34.325Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:34.442Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:34.595Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:47.290Z",
+    "message": "VQL Edited: SELECT date, AVG(price) \n FROM price \n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:47.710Z",
+    "message": "VQL Edited: SELECT date, AVG(price) \n FROM price "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:49.712Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:49.817Z",
+    "message": "Executing VQL: SELECT date, AVG(price)    \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:49.929Z",
+    "message": "API Received VQL: SELECT date, AVG(price)    \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:49.991Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:52.608Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price) \\nFROM price\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:52.723Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:52.831Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:29:52.933Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:32:40.159Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:32:40.237Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:32:40.361Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:32:40.460Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:32:46.741Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price)\\nFROM price\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:32:46.867Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:32:47.213Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:32:47.324Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:27.653Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:27.818Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:27.987Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:29.339Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:29.461Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:29.818Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:30.289Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:30.422Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:30.556Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:31.042Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:31.144Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:36.100Z",
+    "message": "VQL Edited: \nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:36.535Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:38.751Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:40.668Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:40.774Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:41.217Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:41.296Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:43.941Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price) FROM price JOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:44.016Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:44.336Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:44.489Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:59.555Z",
+    "message": "VQL Edited: \nFROM price \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:33:59.947Z",
+    "message": "VQL Edited: FROM price \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:34:01.576Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:34:01.701Z",
+    "message": "Executing VQL: FROM price   \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:34:01.875Z",
+    "message": "API Received VQL: FROM price   \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:34:02.131Z",
+    "message": "API Input VQL Validation Failed: Unable to parse SELECT or FROM clauses. Both must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:34:02.192Z",
+    "message": "Final error after retries: Unable to parse SELECT or FROM clauses. Both must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:34:02.242Z",
+    "message": "Error during VQL execution: Unable to parse SELECT or FROM clauses. Both must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:54.260Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:54.358Z",
+    "message": "Executing VQL: FROM price    \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:54.524Z",
+    "message": "API Received VQL: FROM price    \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:54.662Z",
+    "message": "API Input VQL Validation Failed: Unable to parse SELECT or FROM clauses. Both must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:54.857Z",
+    "message": "Final error after retries: Unable to parse SELECT or FROM clauses. Both must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:54.972Z",
+    "message": "Error during VQL execution: Unable to parse SELECT or FROM clauses. Both must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:57.265Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:57.471Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:57.691Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:58.041Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:58.744Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:58.826Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:39:58.913Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:36.519Z",
+    "message": "VQL Edited: \nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:37.011Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:41.046Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:41.172Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000  \nGROUP BY date  \nORDER BY AVG(price) DESC  \nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:41.327Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000  \nGROUP BY date  \nORDER BY AVG(price) DESC  \nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:41.473Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:55.143Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY AVG(price) DESC\\nBIN BY quarter\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:55.297Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:55.616Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:55.854Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:40:58.391Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY AVG(price) DESC\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:00.658Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:00.777Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000  \nGROUP BY date  \nORDER BY AVG(price) DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:00.907Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000  \nGROUP BY date  \nORDER BY AVG(price) DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:00.983Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:03.677Z",
+    "message": "VQL Edited: SELECT date, AVG(price) \nFROM price \nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000 \nGROUP BY date \n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:04.255Z",
+    "message": "VQL Edited: SELECT date, AVG(price) \nFROM price \nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000 \nGROUP BY date "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:07.126Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY AVG(price) DESC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:07.192Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:07.402Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:07.841Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:32.797Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:32.942Z",
+    "message": "Executing VQL: SELECT date, AVG(price) \nFROM price \nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000 \nGROUP BY date \nORDER BY AVG(price) DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:33.079Z",
+    "message": "API Received VQL: SELECT date, AVG(price) \nFROM price \nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000 \nGROUP BY date \nORDER BY AVG(price) DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:33.226Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:39.298Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\\nORDER BY AVG(price) DESC\\n\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:39.364Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:39.493Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:41:39.587Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:43.408Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\n\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:43.570Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:45.102Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:45.292Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000  \nGROUP BY date"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:45.527Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000  \nGROUP BY date"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:45.588Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:51.266Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:51.398Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:51.551Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:51.678Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:56.038Z",
+    "message": "VQL Edited: \nSELECT date, AVG(price) \nFROM price \nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000 \nGROUP BY date"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:56.186Z",
+    "message": "VQL Edited: SELECT date, AVG(price) \nFROM price \nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000 \nGROUP BY date"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:57.897Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:57.967Z",
+    "message": "Executing VQL: SELECT date, AVG(price)   \nFROM price   \nJOIN name ON price.id = name.id   \nWHERE (price > 150 AND price < 2000) OR year > 2000   \nGROUP BY date"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:58.148Z",
+    "message": "API Received VQL: SELECT date, AVG(price)   \nFROM price   \nJOIN name ON price.id = name.id   \nWHERE (price > 150 AND price < 2000) OR year > 2000   \nGROUP BY date"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:42:58.219Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:04.445Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\\nGROUP BY date\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:04.579Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:04.696Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:04.794Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:07.582Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:07.929Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:09.635Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:09.714Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:09.806Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:09.868Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:13.944Z",
+    "message": "API Generated Explanation: {\"VQL\":\"JSON SELECT date, AVG(price)JOIN name ON price.id = name.id WHERE (price > 150 AND price < 2000) OR year > 2000\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:14.056Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:14.167Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:14.265Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:20.067Z",
+    "message": "VQL Edited: SELECT date, AVG(price)JOIN name ON price.id = name.id WHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:30.540Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nJOIN name ON price.id = name.id \n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:31.787Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nJOIN name ON price.id = name.id "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:33.399Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:33.496Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:33.742Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:33.839Z",
+    "message": "API Input VQL Validation Failed: Unable to parse FROM clause. It must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:33.899Z",
+    "message": "Final error after retries: Unable to parse FROM clause. It must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:43:33.940Z",
+    "message": "Error during VQL execution: Unable to parse FROM clause. It must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:40.357Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:40.477Z",
+    "message": "Executing VQL: JSON \nSELECT date, AVG(price)\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:40.797Z",
+    "message": "API Received VQL: JSON \nSELECT date, AVG(price)\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:40.961Z",
+    "message": "API Input VQL Validation Failed: Unable to parse FROM clause. It must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:41.063Z",
+    "message": "Final error after retries: Unable to parse FROM clause. It must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:41.126Z",
+    "message": "Error during VQL execution: Unable to parse FROM clause. It must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:46.728Z",
+    "message": "VQL Edited: SELECT date, AVG(price)JOIN name ON price.id = name.id WHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:57.076Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:57.164Z",
+    "message": "Executing VQL: SELECT date, AVG(price) \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:57.284Z",
+    "message": "API Received VQL: SELECT date, AVG(price) \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:57.353Z",
+    "message": "API Input VQL Validation Failed: Unable to parse FROM clause. It must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:57.420Z",
+    "message": "Final error after retries: Unable to parse FROM clause. It must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:44:57.495Z",
+    "message": "Error during VQL execution: Unable to parse FROM clause. It must be present."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:09.748Z",
+    "message": "VQL Edited: SELECT date, AVG(price) \nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:10.109Z",
+    "message": "VQL Edited: SELECT date, AVG(price) f\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:10.297Z",
+    "message": "VQL Edited: SELECT date, AVG(price) f'r\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:10.401Z",
+    "message": "VQL Edited: SELECT date, AVG(price) f'ro\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:10.630Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:11.300Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from \nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:15.101Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from p\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:15.292Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from pr\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:15.824Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from pri\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:15.977Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from pric\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:16.090Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from price\nJOIN name ON price.id = name.id \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:18.270Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:18.375Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id   \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:18.504Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id   \nWHERE (price > 150 AND price < 2000) OR year > 2000"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:18.634Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:23.117Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\\nWHERE (price > 150 AND price < 2000) OR year > 2000\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:23.269Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:23.366Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:23.463Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:26.578Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:26.787Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:28.343Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:28.421Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:28.538Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:28.618Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:31.695Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price)\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:31.899Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:31.995Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:32.202Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:40.223Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:40.322Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:40.428Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:40.540Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:40.948Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:41.240Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:41.316Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:43.368Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:43.458Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:43.569Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:43.706Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:43.833Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:43.936Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:44.070Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:45.944Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:46.017Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:46.081Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:46.169Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:46.233Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:47.230Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:47.307Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:47.393Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:47.496Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:47.662Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:48.970Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:49.066Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:49.148Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:49.272Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:49.367Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:50.149Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:50.211Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:50.267Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:50.362Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:50.514Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:50.783Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:45:50.845Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:21.557Z",
+    "message": "VQL Edited: SELECT date, AVG(price) "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:21.617Z",
+    "message": "VQL Edited: SELECT date, AVG(price) f"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:21.685Z",
+    "message": "VQL Edited: SELECT date, AVG(price) fr"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:21.739Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:21.820Z",
+    "message": "VQL Edited: SELECT date, AVG(price) fro"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:22.105Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:22.783Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from v"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:23.223Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:24.231Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from p"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:24.428Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from pr"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:24.605Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from pri"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:24.851Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from pric"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:24.986Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from pricr"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:25.843Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from pric"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:26.035Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:26.164Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from price "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:27.032Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from price j"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:27.122Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from price jo"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:27.218Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from price joi"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:27.443Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from price join"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:27.612Z",
+    "message": "VQL Edited: SELECT date, AVG(price) from price join "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:29.762Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:29.850Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:29.945Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:30.048Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:30.125Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:31.172Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:31.249Z",
+    "message": "explanation current vql: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:31.451Z",
+    "message": "Editing VQL: JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:31.654Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:31.714Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:33.644Z",
+    "message": "Editing VQL: JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:33.748Z",
+    "message": "Editing VQL pass: JOIN is valid between price.id and name.id."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:33.895Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:33.981Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:35.911Z",
+    "message": "VQL Edited: SELECT date, AVG(price) \nFROM price \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:37.501Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:37.601Z",
+    "message": "Executing VQL: SELECT date, AVG(price)   \nFROM price   \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:37.734Z",
+    "message": "API Received VQL: SELECT date, AVG(price)   \nFROM price   \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:37.807Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:40.851Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE default\\nSELECT date, AVG(price)\\nFROM price\\nJOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results using the default visualization type.\",\"clause\":\"VISUALIZE default\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:40.998Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results using the default visualization type.\",\"clause\":\"VISUALIZE default\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:41.102Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:41.188Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:41.404Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:41.461Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:57.327Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:57.455Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:57.732Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:58.012Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:58.078Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:58.250Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:58.318Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:58.380Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:58.492Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:58.756Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:58.991Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:59.056Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:59.564Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:59.718Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:59.794Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:59.876Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:47:59.974Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:49:45.441Z",
+    "message": "VQL Edited: \nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:49:45.943Z",
+    "message": "VQL Edited: SELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:33.871Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:33.951Z",
+    "message": "Executing VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:34.065Z",
+    "message": "API Received VQL: SELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:34.133Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:40.036Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price) FROM price JOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:40.196Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:40.309Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:40.406Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:40.561Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:40.662Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:44.257Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:44.348Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:44.431Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:44.687Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:44.784Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:45.627Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:45.718Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:45.796Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:45.919Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:46.093Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:46.331Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:46.395Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:48.614Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:48.711Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:48.800Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:48.989Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:49.393Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:49.881Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:49.981Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:50.066Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:50.180Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:50.296Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:50.822Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:50.889Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:50.967Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:51.173Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:51.257Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:51.655Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:51.723Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:51.785Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:51.879Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:51.967Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:52.060Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:50:52.129Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:52:58.024Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:52:58.101Z",
+    "message": "Executing VQL: SELECT date, AVG(price) \nFROM price \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:52:58.245Z",
+    "message": "API Received VQL: SELECT date, AVG(price) \nFROM price \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:52:58.336Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:00.999Z",
+    "message": "API Generated Explanation: {\"VQL\":\"SELECT date, AVG(price) FROM price JOIN name ON price.id = name.id\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:01.072Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:01.204Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:01.323Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:01.555Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:01.645Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:01.731Z",
+    "message": "VQL Edited: vSELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:01.795Z",
+    "message": "VQL Edited: viSELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:01.873Z",
+    "message": "VQL Edited: visSELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:01.959Z",
+    "message": "VQL Edited: visuSELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:02.194Z",
+    "message": "VQL Edited: visuaSELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:02.384Z",
+    "message": "VQL Edited: visualSELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:02.650Z",
+    "message": "VQL Edited: visualiSELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:02.884Z",
+    "message": "VQL Edited: visualizSELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:03.229Z",
+    "message": "VQL Edited: visualizeSELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:03.543Z",
+    "message": "VQL Edited: visualize SELECT date, AVG(price) FROM price JOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:07.827Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:07.921Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:08.012Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:08.116Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:08.348Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:08.435Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:08.514Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:09.755Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:09.857Z",
+    "message": "Executing VQL: VISUALIZE  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:09.991Z",
+    "message": "API Received VQL: VISUALIZE  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:10.067Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:12.760Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE \\nSELECT date, AVG(price) \\nFROM price \\nJOIN name ON price.id = name.id \",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"\",\"description\":\"Default type for visualization.\",\"clause\":\"\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:12.901Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"\",\"description\":\"Default type for visualization.\",\"clause\":\"\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:13.113Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:13.473Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:13.575Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:13.665Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:29.196Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:29.300Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:29.546Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:29.774Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:29.842Z",
+    "message": "explanation current operation: JOIN"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:30.020Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:30.168Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:30.337Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:30.524Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:30.598Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:30.683Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:30.747Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:31.042Z",
+    "message": "Clicked 'Next' button, moving from page 2 to 3"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:31.107Z",
+    "message": "explanation current operation: "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:31.200Z",
+    "message": "explanation current operation: "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:31.277Z",
+    "message": "explanation current operation: "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:31.334Z",
+    "message": "explanation current operation: "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:33.612Z",
+    "message": "Clicked 'Next' button, moving from page 3 to 4"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:33.796Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:34.170Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:34.239Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:34.307Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:34.360Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:53:34.427Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:09.739Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:09.815Z",
+    "message": "Executing VQL: VISUALIZE  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:09.939Z",
+    "message": "API Received VQL: VISUALIZE  \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:10.017Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:15.966Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results using the default type.\",\"clause\":\"\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:16.110Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results using the default type.\",\"clause\":\"\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:16.229Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:16.328Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:16.446Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:54:16.570Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:26.491Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:26.670Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:26.774Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:26.846Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:27.068Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:30.329Z",
+    "message": "VQL Edited: VISUALIZE \nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:33.879Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:34.002Z",
+    "message": "Executing VQL: VISUALIZE   \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000  \nGROUP BY date  \nORDER BY AVG(price) DESC  \nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:34.136Z",
+    "message": "API Received VQL: VISUALIZE   \nSELECT date, AVG(price)  \nFROM price  \nJOIN name ON price.id = name.id  \nWHERE (price > 150 AND price < 2000) OR year > 2000  \nGROUP BY date  \nORDER BY AVG(price) DESC  \nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:34.204Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:40.081Z",
+    "message": "VQL Edited: VISUALIZE  \nSELECT date, AVG(price) \nFROM price \n"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:40.619Z",
+    "message": "VQL Edited: VISUALIZE  \nSELECT date, AVG(price) \nFROM price "
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:40.836Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE \\nSELECT date, AVG(price) \\nFROM price \\nJOIN name ON price.id = name.id \\nWHERE (price > 150 AND price < 2000) OR year > 2000 \\nGROUP BY date \\nORDER BY AVG(price) DESC \\nBIN BY quarter\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a default type bar chart.\",\"clause\":\"VISUALIZE \"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:40.930Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a default type bar chart.\",\"clause\":\"VISUALIZE \"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:41.301Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:41.362Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:44.543Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:44.793Z",
+    "message": "Executing VQL: VISUALIZE    \nSELECT date, AVG(price)   \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:44.954Z",
+    "message": "API Received VQL: VISUALIZE    \nSELECT date, AVG(price)   \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:45.021Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:54.082Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE\\nSELECT date, AVG(price)\\nFROM price\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":3,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results with the default type.\",\"clause\":\"VISUALIZE\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:54.155Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":3,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results with the default type.\",\"clause\":\"VISUALIZE\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:54.522Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:55:55.498Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:00.231Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:00.352Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:00.563Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:00.843Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:00.917Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:00.989Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:01.069Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:01.495Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:01.589Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:01.788Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:01.886Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:01.956Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:04.082Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:04.175Z",
+    "message": "Executing VQL: VISUALIZE \nSELECT date, AVG(price) \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:04.313Z",
+    "message": "API Received VQL: VISUALIZE \nSELECT date, AVG(price) \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:04.391Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:07.417Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE\\nSELECT date, AVG(price)\\nFROM price\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":3,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as default type.\",\"clause\":\"VISUALIZE\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:07.493Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":3,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as default type.\",\"clause\":\"VISUALIZE\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:07.608Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:07.844Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:08.273Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:57:08.330Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:32.054Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:32.297Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:32.625Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:33.152Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:33.301Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:33.541Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:33.904Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:34.175Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:34.262Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:34.464Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:34.596Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:38.084Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT date, AVG(price)\nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:40.035Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:40.129Z",
+    "message": "Executing VQL: VISUALIZE  \nSELECT date, AVG(price)  \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:40.270Z",
+    "message": "API Received VQL: VISUALIZE  \nSELECT date, AVG(price)  \nFROM price"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:40.362Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:43.317Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE\\nSELECT date, AVG(price)\\nFROM price\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":3,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results using the default type.\",\"clause\":\"VISUALIZE\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:43.402Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":3,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results using the default type.\",\"clause\":\"VISUALIZE\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:43.726Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:44.000Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:49.489Z",
+    "message": "Clicked 'Next' button, moving from page 0 to 1"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:49.595Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:49.695Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:49.824Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:49.987Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:50.253Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:50.321Z",
+    "message": "Clicked 'Next' button, moving from page 1 to 2"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:50.401Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:50.496Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:50.629Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:50.777Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-25T07:58:50.906Z",
+    "message": "explanation current operation: VISUALIZE"
   }
 ]

@@ -106,7 +106,7 @@ import { logEvent } from '../utils/logger';
       }
     } catch (err) {
       console.error('Error during VQL execution:', err);
-      setError(`An error occurred while executing the VQL. Please refine your VQL. Try simple query, ${err.message}`);
+      setError(`An error occurred while executing the VQL. Please refine your VQL. Try strict query, ${err.message}`);
       logEvent(userId, `Error during VQL execution: ${err.message}`);
       setIsModalOpen(true); // Show error modal
     } finally {
