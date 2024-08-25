@@ -37634,5 +37634,801 @@
   {
     "serverTimestamp": "2024-08-24T20:09:29.125Z",
     "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:04.683Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:04.762Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:04.939Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:05.050Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:05.882Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:06.387Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:06.474Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:06.593Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:06.845Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:07.094Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:07.456Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:07.988Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:08.071Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:08.135Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:08.194Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:08.273Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:08.350Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:08.613Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:08.767Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:08.837Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:08.899Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:09.004Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:09.083Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:09.296Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:09.481Z",
+    "message": "Navigated to page 0: Tutorial"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:09.625Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:09.923Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:10.213Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:10.276Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:10.346Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:10.452Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:10.804Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:10.914Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:11.009Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:11.096Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:11.348Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:11.786Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:11.847Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:11.903Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:11.947Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:11.994Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:12.084Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:12.189Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:12.310Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:12.774Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:13.024Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:13.074Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:13.125Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:13.187Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:22.591Z",
+    "message": "Navigated to page 0: Tutorial"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:23.822Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:23.890Z",
+    "message": "Generated VQL: VISUALIZE bar\nSELECT date, AVG(price)\nFROM price\nJOIN name ON price.id = name.id\nWHERE (price > 150 AND price < 2000) OR year > 2000\nGROUP BY date\nORDER BY avg(price) DESC\nBIN BY quarter"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:23.995Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table price.\",\"clause\":\"FROM price\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table price on id with the table name on id.\",\"clause\":\"JOIN name ON price.id = name.id\"},{\"step\":3,\"operation\":\"WHERE\",\"description\":\"Filter data to include only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000.\",\"conditions\":[{\"condition\":\"(price > 150 AND price < 2000)\",\"explanation\":\"Select records where the price is between 150 and 2000.\"},{\"condition\":\"OR year > 2000\",\"explanation\":\"Select records where the year is greater than 2000, and extend to the results.\"}],\"clause\":\"WHERE (price > 150 AND price < 2000) OR year > 2000\"},{\"step\":4,\"operation\":\"GROUP BY\",\"description\":\"Group data by date.\",\"clause\":\"GROUP BY date\"},{\"step\":5,\"operation\":\"SELECT\",\"description\":\"Select the date and the average of price columns.\",\"clause\":\"SELECT date, AVG(price)\"},{\"step\":6,\"operation\":\"ORDER BY\",\"description\":\"Order the results by AVG(price) in descending order.\",\"clause\":\"ORDER BY AVG(price) DESC\"},{\"step\":7,\"operation\":\"BIN BY\",\"description\":\"Bin the date by quarter.\",\"clause\":\"BIN BY quarter\"},{\"step\":8,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:25.155Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:25.236Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:25.573Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:25.672Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:25.793Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:15:25.878Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:33:13.307Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:33:13.429Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:33:13.511Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:33:13.601Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:33:13.695Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-24T20:33:13.811Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:36.132Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:36.220Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:36.350Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:36.661Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:36.912Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:36.972Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:37.028Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:37.076Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:37.232Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:38.386Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:38.451Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:38.534Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:42.203Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:42.288Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:42.368Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:42.471Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:42.632Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:42.814Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:42.923Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:42.967Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:43.011Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:48.584Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:48.686Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:48.811Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:49.399Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:49.457Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:49.540Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:49.723Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:49.896Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:49.941Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:49.985Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:50.066Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:50.251Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:50.376Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:50.429Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:50.478Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:50.830Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:50.882Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:50.930Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:51.017Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:51.122Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:51.189Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:51.239Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:51.292Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:51.336Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:56.282Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:56.363Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:57.432Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:30:57.510Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:31:54.506Z",
+    "message": "Navigated to page 0: Tutorial"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:46.016Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:46.137Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:46.370Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:46.548Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:46.637Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:46.724Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:46.846Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:46.941Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:47.028Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:47.094Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:47.170Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:47.227Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:52.444Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:52.570Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:52.718Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:52.994Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:53.069Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:53.122Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:53.176Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:53.226Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:53.301Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:57.914Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:57.990Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:59.778Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:33:59.869Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:01.016Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:01.091Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:01.175Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:05.206Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:05.281Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:05.389Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:05.478Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:05.535Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:05.610Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:06.467Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:06.533Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:10.913Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:34:10.991Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:01.756Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:01.908Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:01.993Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:02.104Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:02.366Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:02.619Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:02.687Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:02.752Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:02.857Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:07.115Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:07.227Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:07.298Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:07.392Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:07.476Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:07.581Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:07.717Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:07.906Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:07.951Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:11.967Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:12.045Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:12.116Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:12.221Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:12.396Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:12.589Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:12.625Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:12.665Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:12.704Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:13.613Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:13.744Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:13.884Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:14.460Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:14.547Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:14.618Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:15.354Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:15.426Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:15.511Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:16.336Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:16.412Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:16.483Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:16.582Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:16.678Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:16.754Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:16.818Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:16.882Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:35:16.981Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-25T06:37:39.556Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
   }
 ]

@@ -187,7 +187,8 @@ function FixedTaskNL2Vis({data, userId }) {
               </div>
             </div>
           </div>
-          <hr />
+          {showExplanation&&
+          <><hr />
           <div className="second-row">
             {generatedVQL.explanation && generatedVQL.explanation.length > 0 && (
               <StepByStepExplanation
@@ -200,7 +201,8 @@ function FixedTaskNL2Vis({data, userId }) {
                 userId={userId}
               />
             )}
-          </div>
+          </div></>
+}
         </div>
       ))}
     </div>
