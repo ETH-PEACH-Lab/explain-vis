@@ -568,7 +568,57 @@ function extractJSON(text) {
   return null;
 }
 
-async function callOpenAIWithRetry(prompt, retries = 5) {
+function extractOperationsFromVQL(VQL) {
+  // Define the list of valid operations
+  const validOperations = ['SELECT', 'FROM', 'JOIN', 'WHERE', 'GROUP BY', 'ORDER BY', 'BIN BY', 'VISUALIZE'];
+
+  // Extract operations by checking each line of the VQL
+  const operationsInVQL = new Set();
+  VQL.split('\n').forEach(line => {
+    for (let operation of validOperations) {
+      if (line.trim().toUpperCase().startsWith(operation)) {
+        operationsInVQL.add(operation);
+        break;
+      }
+    }
+  });
+
+  return operationsInVQL;
+}
+
+function validateExplanation(explanation, operationsInVQL) {
+  if (!explanation || typeof explanation !== 'object' || !Array.isArray(explanation.explanation)) {
+    return 'The explanation format is incorrect or missing the explanation array.';
+  }
+
+  for (let step of explanation.explanation) {
+    if (!step.operation || !step.clause || !step.description) {
+      return `Missing required fields in explanation step: ${JSON.stringify(step)}`;
+    }
+
+    // Check if the operation exists in the VQL
+    if (!operationsInVQL.has(step.operation.toUpperCase())) {
+      return `The operation "${step.operation}" found in the explanation does not exist in the original VQL.`;
+    }
+
+    // Check if WHERE clause includes conditions
+    if (step.operation === 'WHERE' && (!step.conditions || !Array.isArray(step.conditions) || step.conditions.length === 0)) {
+      return 'WHERE clause does not include valid conditions.';
+    }
+
+    // Ensure FROM and JOIN are separate clauses
+    if (step.operation === 'FROM' && explanation.explanation.some(s => s.operation === 'JOIN' && s.clause.includes(step.clause))) {
+      return 'FROM and JOIN should be separate clauses.';
+    }
+  }
+
+  // Return null if all validations pass
+  return null;
+}
+
+async function callOpenAIWithRetry(prompt, VQL, retries = 5, delay = 1000) {
+  const operationsInVQL = extractOperationsFromVQL(VQL);
+
   try {
     const response = await axios.post(
       `${openaiApiEndpoint}`,
@@ -590,20 +640,27 @@ async function callOpenAIWithRetry(prompt, retries = 5) {
     );
 
     const responseText = response.data.choices[0].text.trim();
-    const explanation = extractJSON(responseText);
+    let explanation = extractJSON(responseText);
 
-    if (explanation) {
+    // Validate the extracted explanation
+    const validationError = validateExplanation(explanation, operationsInVQL);
+    if (explanation && !validationError) {
       return explanation;
     } else {
-      throw new Error('No valid JSON found in the response');
+      throw new Error(`Validation failed: ${validationError}`);
     }
   } catch (error) {
     console.error('Error during processing:', error.message);
     if (retries > 0) {
       console.log(`Retrying... (${retries} attempts left)`);
-      return callOpenAIWithRetry(prompt, retries - 1);
+      
+      // Modify prompt to include validation error feedback
+      const updatedPrompt = `${prompt}\n\nNote: Previous response failed validation due to the following reason:\n${error.message}. Please correct this in the new response.`;
+
+      await new Promise(resolve => setTimeout(resolve, delay)); // Delay before retrying
+      return callOpenAIWithRetry(updatedPrompt, VQL, retries - 1, delay);
     } else {
-      throw new Error('Failed to get valid JSON from OpenAI after multiple attempts. Please revise your query.');
+      throw new Error('Failed to generate valid JSON from OpenAI after multiple attempts. Please revise your query.');
     }
   }
 }
@@ -728,7 +785,7 @@ app.post('/api/explain-vql', async (req, res) => {
           console.log('Validation Passed: VQL is valid.',VQL);
           appendLogToFile(userId, `API Input VQL is valid.`);
           
-          const explanation = await callOpenAIWithRetry(prompt);
+          const explanation = await callOpenAIWithRetry(prompt,VQL);
           console.timeEnd('POST /api/explain-vql Duration');
           console.log("Parsed JSON Explanation:", explanation);
           appendLogToFile(userId, `API Generated Explanation: ${JSON.stringify(explanation)}`);
