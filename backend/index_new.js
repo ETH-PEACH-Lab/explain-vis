@@ -219,8 +219,8 @@ const composePrompt = async (data, question, exampleEncoderQuestions, exampleDec
   You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:
 
 Form Clause: Make sure that the FROM clause contains only one table.
-JOIN Clause: Use only the "JOIN table ON table.column = table.column" format without specifying INNER, LEFT, RIGHT, or other types of joins.
-You can only use one join, no join three table, no DISTINCT string
+JOIN Clause: Use only the "JOIN table ON table.column = fromtable.othercolumn" format without specifying INNER, LEFT, RIGHT, or other types of joins.
+You can only use one join
 Do not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).
 Other Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.
 SELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).
@@ -284,7 +284,7 @@ function validateVQL(vql_init, tableSchema) {
     const [leftSide, rightSide] = onCondition.split('=').map(part => part.trim());
 
     if (!/^\w+\.\w+$/.test(leftSide) || !/^\w+\.\w+$/.test(rightSide)) {
-      joinErrors.push(`Invalid ON condition: ${onCondition} must be in "table.column = table.column" format, only use a join.`);
+      joinErrors.push(`Invalid ON condition: ${onCondition} must be in "table.column = table.column" format.`);
       continue;
     }
 

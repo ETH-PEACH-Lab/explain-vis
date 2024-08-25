@@ -2404,6 +2404,7 @@ return (
                   display: true,
                   text: selectedColumns[0],
                 },
+                labels: Array.from(new Set(currentTable_now.map(row => row[selectedColumns[0]])))
               },
                 y: {
                   type: yAxisType_select,
@@ -3032,6 +3033,8 @@ return (
                   display: true,
                   text: selectedColumns[0],
                 },
+                labels: Array.from(new Set(currentTable_new.map(row => row[selectedColumns[0]])))
+
               },
               y: {
                 type: yAxisType_select,
@@ -3039,6 +3042,7 @@ return (
                       display: true,
                       text: selectedColumns[1],
                   },
+                  labels: Array.from(new Set(currentTable_new.map(row => row[selectedColumns[1]])))
               },
             },
         };

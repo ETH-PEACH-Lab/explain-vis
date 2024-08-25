@@ -174,7 +174,33 @@ function App() {
         ]
       },
       tableNames: ["departments", "employee", "jobs"]
-    },    
+    }, 
+    "ddl": `
+CREATE TABLE departments (
+    department_id   INTEGER PRIMARY KEY,
+    department_name VARCHAR(30),
+    manager_id      INTEGER,
+    location_id     INTEGER
+);
+
+CREATE TABLE employee (
+    employee_id   INTEGER PRIMARY KEY,
+    department_id INTEGER,
+    first_name    VARCHAR(20),
+    job_id        VARCHAR(10),
+    salary        INTEGER,
+    hire_date     DATE,
+    FOREIGN KEY (department_id) REFERENCES departments(department_id),
+    FOREIGN KEY (job_id) REFERENCES jobs(job_id)
+);
+
+CREATE TABLE jobs (
+    job_id      VARCHAR(10) PRIMARY KEY,
+    job_title   VARCHAR(30),
+    min_salary  INTEGER,
+    max_salary  INTEGER
+);
+`,   
     placeholderText: "Please display the relationship between departments and the salaries of their respective managers.",
   };
   const dataScenario2 = { 
@@ -333,6 +359,29 @@ function App() {
             "department"
         ]
     },
+    "ddl": `
+CREATE TABLE student (
+    stu_num       INTEGER PRIMARY KEY,
+    stu_fname     VARCHAR(50),
+    stu_class     VARCHAR(2),
+    stu_gpa       DECIMAL(3, 2),
+    stu_transfer  INTEGER,
+    dept_code     VARCHAR(10),
+    FOREIGN KEY (dept_code) REFERENCES department(dept_code)
+);
+
+CREATE TABLE enroll (
+    class_code    VARCHAR(10),
+    stu_num       INTEGER,
+    enroll_grade  CHAR(1),
+    FOREIGN KEY (stu_num) REFERENCES student(stu_num)
+);
+
+CREATE TABLE department (
+    dept_code     VARCHAR(10) PRIMARY KEY,
+    dept_name     VARCHAR(50)
+);
+`,
     placeholderText: "Please show me the non-transferred students in each department.",
  };
 

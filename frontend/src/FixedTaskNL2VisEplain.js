@@ -346,7 +346,7 @@ const FailedScatterChart = () => {
             <div className="left-column">
               <NaturalLanguageQuery 
                 onGenerate={handleGenerate} 
-                tableData={tableData} 
+                tableData={data} 
                 placeholderText={data.placeholderText} 
                 userId={userId}
               />
@@ -376,7 +376,7 @@ const FailedScatterChart = () => {
                       <VQLEditor
                         initialVQL={generatedVQL.VQL}
                         onExecute={handleExecuteVQL}
-                        tableData={tableData}
+                        tableData={data}
                         userId={userId}
                       />
                     )}

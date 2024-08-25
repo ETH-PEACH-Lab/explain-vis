@@ -344,7 +344,7 @@ function FixedTaskNL2Vis({data, userId , pageKey}) {
             <div className="left-column">
               <NaturalLanguageQuery 
                 onGenerate={handleGenerate} 
-                tableData={tableData} 
+                tableData={data} 
                 placeholderText={data.placeholderText} 
                 userId={userId}
               />
@@ -374,7 +374,7 @@ function FixedTaskNL2Vis({data, userId , pageKey}) {
                       <VQLEditor
                         initialVQL={generatedVQL.VQL}
                         onExecute={handleExecuteVQL}
-                        tableData={tableData}
+                        tableData={data}
                         userId={userId}
                       />
                     )}

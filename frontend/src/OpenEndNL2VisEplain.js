@@ -290,7 +290,7 @@ function OpenEndNL2VisExplain({data, userId, pageKey  }) {
             <div className="left-column">
               <NaturalLanguageQuery 
                 onGenerate={handleGenerate} 
-                tableData={tableData} 
+                tableData={data} 
                 placeholderText={'...'} 
                 userId={userId}
               />
@@ -318,7 +318,7 @@ function OpenEndNL2VisExplain({data, userId, pageKey  }) {
                       <VQLEditor
                         initialVQL={generatedVQL.VQL}
                         onExecute={handleExecuteVQL}
-                        tableData={tableData}
+                        tableData={data}
                         userId={userId}
                       />
                     )}

@@ -126,7 +126,7 @@ function transformVQL(vql) {
     let aliases = {};
     transformedVQL = transformedVQL.replace(aliasRegex, (match, table, alias) => {
         aliases[alias] = table;
-        return table;  // Replace the alias with the table name
+        return table;
     });
 
     // Step 3: Replace COUNT(*) with COUNT(first_column)
@@ -138,39 +138,24 @@ function transformVQL(vql) {
         transformedVQL = transformedVQL.replace(/COUNT\(\*\)/gi, `COUNT(${firstColumn})`);
     }
 
-    // Step 4: Handle JOIN clause - Replace alias.column with table.column and ensure it's correctly applied
-    const joinRegex = /join\s+(\w+)\s+on\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/gi;
-    transformedVQL = transformedVQL.replace(joinRegex, (match, table2, alias1, column1, alias2, column2) => {
-        const table1 = aliases[alias1] || alias1;
-        const table2Full = aliases[alias2] || alias2;
-        return `JOIN ${table2} ON ${table1}.${column1} = ${table2Full}.${column2}`;
-    });
-
-    // Step 5: Remove table prefixes in SELECT, GROUP BY, and ORDER BY clauses
-    transformedVQL = transformedVQL.replace(/\b(\w+)\.(\w+)\b/gi, (match, table, column) => {
-        // Check if this is part of the JOIN clause and should be kept
-        const joinClauseCheck = new RegExp(`join\\s+${table}\\b`, 'i').test(transformedVQL) || new RegExp(`on\\s+${table}\\b`, 'i').test(transformedVQL);
-        if (joinClauseCheck) {
-            return match;  // Keep table.column in JOIN clause
-        } else {
-            return column;  // Remove table prefix from other clauses
-        }
+    // Step 4: Handle JOIN clause
+    transformedVQL = transformedVQL.replace(/(\w+)\.(\w+)/gi, (match, alias, column) => {
+        return aliases[alias] ? `${aliases[alias]}.${column}` : column;
     });
 
     return transformedVQL;
 }
 
+// Test Cases
+const vql1 = `visualize pie select rank , count(*) from faculty as t1 join student as t2 on t1.facid = t2.advisor group by t1.rank`;
+const vql2 = `visualize bar select country , count(*) from singer group by country order by count(*) desc`;
+const vql3 = `visualize bar select dept_name , avg(salary) from instructor group by dept_name`;
+const vql4 = `visualize bar select dept_name , avg(salary) from instructor group by dept_name order by avg(salary) asc`;
 
-
-// Test Case
-const vql = `visualize bar select document_name , count(*) from paragraphs as t1 join documents as t2 on t1.document_id = t2.document_id group by t1.document_id order by count(*) asc`;
-console.log(transformVQL(vql));
-
-
-// Test Case
-const vql1 = `visualize bar select party.party , count(party.party) from election join party on election.party = party.party_id group by party.party order by party.party asc`;
-console.log(transformVQL(vql1));
-
+console.log(transformVQL(vql1));  
+console.log(transformVQL(vql2));  
+console.log(transformVQL(vql3));  
+console.log(transformVQL(vql4));  
 
 
 
@@ -193,7 +178,7 @@ const searchExampleByQuestion = async (question, exampleEncoderQuestions, exampl
     let query = exampleEncoderQuestions[i].trim();
     let [g, db] = exampleDecoderAnswers[i].trim().split('\t');
     g = transformVQL(g)
-    // console.log('hhhhhhhhhhhhhhhhhhhhhhhhh',g)
+    console.log('hhhhhhhhhhhhhhhhhhhhhhhhh',g)
     let tableNames = [...new Set([...g.matchAll(/ FROM\s+([^\s,(]+)/gi), ...g.matchAll(/ JOIN\s+([^\s,]+)/gi)].map(m => m[1].replace(/[()]/g, '')))];
     let dbStr = await Promise.all(tableNames.filter(t => !tables.includes(t)).map(async t => {
       tables.push(t);
@@ -201,7 +186,7 @@ const searchExampleByQuestion = async (question, exampleEncoderQuestions, exampl
       // console.log('db', dbeg);
       return dbeg;
     }));
-    exampleData += `${dbStr.join('\n')} \nQuestion: ${query}, \nVQL: ${g} \n`;
+    exampleData += `${dbStr.join('')} \nQuestion: ${query}, \nVQL: ${g} \n`;
     // console.log('expdata', exampleData);
   }
 
@@ -210,7 +195,7 @@ const searchExampleByQuestion = async (question, exampleEncoderQuestions, exampl
 
 
 const composePrompt = async (data, question, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id) => {
-  let dbPrompt = data.ddl;
+  let dbPrompt = data;
   let preText = 'Please generate VQL based on DDL table and question.';
 
   let exampleData = await searchExampleByQuestion(question, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
@@ -219,9 +204,8 @@ const composePrompt = async (data, question, exampleEncoderQuestions, exampleDec
   You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:
 
 Form Clause: Make sure that the FROM clause contains only one table.
-JOIN Clause: Use only the "JOIN table ON table.column = table.column" format without specifying INNER, LEFT, RIGHT, or other types of joins.
-You can only use one join, no join three table, no DISTINCT string
-Do not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).
+JOIN Clause: Use only the JOIN ... ON format without specifying INNER, LEFT, RIGHT, or other types of joins.
+When performing joins, use the table.column format. Do not rename or alias the table names (i.e., do not use the AS keyword).
 Other Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.
 SELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).
 In a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.
@@ -229,7 +213,7 @@ The BIN BY options are: year, month, week, day, weekday, quarter.
 GROUP BY and ORDER BY Clauses use only columns.
 No Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.
 No * Symbol: We avoid using * in VQL.
-
+No inner ou
 Format: Generate the VQL in a single line, starting with the keyword visualize.
 
 please generate VQL to answer this question based on json table. 
@@ -284,7 +268,7 @@ function validateVQL(vql_init, tableSchema) {
     const [leftSide, rightSide] = onCondition.split('=').map(part => part.trim());
 
     if (!/^\w+\.\w+$/.test(leftSide) || !/^\w+\.\w+$/.test(rightSide)) {
-      joinErrors.push(`Invalid ON condition: ${onCondition} must be in "table.column = table.column" format, only use a join.`);
+      joinErrors.push(`Invalid ON condition: ${onCondition} must be in "table.column = table.column" format.`);
       continue;
     }
 
@@ -312,7 +296,7 @@ function validateVQL(vql_init, tableSchema) {
   const matchNonJoin = vqlWithoutJoins.match(nonJoinRegex);
 
   if (matchNonJoin) {
-    return 'Do not use table.column outside of JOIN ... ON clause. Detected: ' + matchNonJoin.join(', ');
+    return 'Invalid usage of table.column detected outside of JOIN ... ON clause. Detected: ' + matchNonJoin.join(', ');
   }
 
 
@@ -453,10 +437,10 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
   try {
     if (retries < 5) {
       // 仅将当前VQL和错误信息附加到提示中
-      prompt += `\nError VQL: ${lastVQL}\nIssues: ${lastError}`;
+      prompt += `\nFailed VQL: ${lastVQL}\nIssues: ${lastError}`;
     }
     // 添加生成VQL的最终指示
-    prompt += "\nPlease generate correct VQL in one line and begin with visualize";
+    prompt += "\nPlease generate VQL in one line and begin with visualize";
     console.log('\nprompts',prompt)
     console.log('\nretries',retries)
     appendLogToFile(userId, `Prompt sent to OpenAI: ${prompt}`);
@@ -575,8 +559,7 @@ app.post('/log', (req, res) => {
 
 app.post('/api/generate-vegalite', async (req, res) => {
   console.time('GET * VQL Request Duration');
-  let { query, data, userId } = req.body;
-  
+  const { query, data, userId } = req.body;
   // console.log('Received POST request');
   // console.log('Query:', query);
   // console.log('Data:', data);
@@ -585,7 +568,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
   const exampleEncoderQuestions = fs.readFileSync('./utils/data/train/train_encode.txt', 'utf-8').split('\n');
   const exampleDecoderAnswers = fs.readFileSync('./utils/data/train/train_decode_db.txt', 'utf-8').split('\n');
   const limitTable = 0;
-  const nshot = 3;
+  const nshot = 5;
 
   try {
     const prompt = await composePrompt(data, query, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
@@ -593,7 +576,7 @@ app.post('/api/generate-vegalite', async (req, res) => {
     console.log('Generated Prompt:', prompt);
     appendLogToFile(userId, `API Generated Prompt: ${prompt}`)
 
-    const generatedText = await callOpenAIWithRetryforVQL(prompt,data.data,5,'','',userId);
+    const generatedText = await callOpenAIWithRetryforVQL(prompt,data,5,'','',userId);
 
     console.timeEnd('GET * VQL Request Duration');
     console.log('Generated VQL:', generatedText);
@@ -761,7 +744,6 @@ function formatVQL(vql) {
 app.post('/api/explain-vql', async (req, res) => {
   console.time('POST /api/explain-vql Duration');
   let { VQL, tableData, userId } = req.body;
-  tableData = tableData.data
   VQL = formatVQL(VQL)
   // console.log('111',`${tableData}`)
   appendLogToFile(userId, `API Received VQL: ${VQL}`);

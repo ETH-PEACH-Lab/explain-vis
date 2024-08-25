@@ -573,6 +573,7 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
               x: {
                 type: xAxisType_select,
                 // type: 'category',
+                
                 position: 'bottom',
                 // ...(xAxisType_select === 'time' && {
                 //   time: {
@@ -582,7 +583,9 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
                 title: {
                   display: true,
                   text: selectedColumns[0],
+
                 },
+                labels: Array.from(new Set(currentTable_now.map(row => row[selectedColumns[0]])))
               },
                 y: {
                   type: yAxisType_select,
