@@ -488,7 +488,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
         options = {
             scales: {
               x: {
-                type: 'category',
+                type: xAxisType_select,
                 position: 'bottom',
                 // ...(xAxisType_select === 'time' && {
                 //   time: {

@@ -2368,7 +2368,7 @@ return (
         options = {
             scales: {
               x: {
-                type: 'category',
+                type: xAxisType_select,
                 position: 'bottom',
                 title: {
                   display: true,
