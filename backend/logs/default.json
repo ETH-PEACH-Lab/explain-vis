@@ -106606,5 +106606,1245 @@
   {
     "serverTimestamp": "2024-08-26T09:31:33.856Z",
     "message": "Query text changed to: Show me the relationship of "
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:31:56.073Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:31:56.574Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:31:57.041Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:31:57.553Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:31:58.136Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:31:58.434Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:31:58.675Z",
+    "message": "Navigated to page 4: College - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:31:59.039Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:31:59.332Z",
+    "message": "Task started: NL2ViZ - Open-ended Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:01.661Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:02.348Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:02.655Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:03.177Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:03.799Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:04.138Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:04.499Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:04.794Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:05.166Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:05.464Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:05.753Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:06.076Z",
+    "message": "VQL Edited: VISUALIZE scatter SELECT manager_id, salary FROM employee JOIN departments ON employee.employee_id = departments.manager_id  GROUP BY manager_id ORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:51.873Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT manager_id, salary  \nFROM employee  \n\nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:52.320Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT manager_id, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:57.830Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT d, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:58.081Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT de, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:58.360Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT dep, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:58.744Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT depa, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:59.026Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT depar, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:59.321Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT depart, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:59.675Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT departm, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:34:59.949Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT departmen, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:00.230Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT departme, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:00.468Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT department, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:07.071Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT department_, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:07.964Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT department_i, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:08.376Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT department_id, salary  \nFROM employee  \nGROUP BY manager_id  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:12.358Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT department_id, salary  \nFROM employee  \n\nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:12.876Z",
+    "message": "VQL Edited: VISUALIZE scatter  \nSELECT department_id, salary  \nFROM employee  \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:14.630Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:15.085Z",
+    "message": "Executing VQL: VISUALIZE scatter    \nSELECT department_id, salary    \nFROM employee    \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:15.517Z",
+    "message": "API Received VQL: VISUALIZE scatter     \nSELECT department_id, salary     \nFROM employee     \nORDER BY salary DESC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:15.794Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:19.798Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE scatter\\nSELECT department_id, salary\\nFROM employee\\nORDER BY salary DESC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"ORDER BY\",\"description\":\"Order the results by salary in descending order.\",\"clause\":\"ORDER BY salary DESC\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the department_id and salary columns.\",\"clause\":\"SELECT department_id, salary\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot (default type).\",\"clause\":\"VISUALIZE scatter\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:20.019Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table employee.\",\"clause\":\"FROM employee\"},{\"step\":2,\"operation\":\"ORDER BY\",\"description\":\"Order the results by salary in descending order.\",\"clause\":\"ORDER BY salary DESC\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the department_id and salary columns.\",\"clause\":\"SELECT department_id, salary\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a scatter plot (default type).\",\"clause\":\"VISUALIZE scatter\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:20.392Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:20.946Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:50.705Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:51.256Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:51.789Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:52.554Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:52.977Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:53.432Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:53.780Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:54.119Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:54.463Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:54.724Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:55.036Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:56.377Z",
+    "message": "VQL Edited: VISUALIZE bar \nSELECT class_code, COUNT(stu_num) \nFROM enroll \nGROUP BY class_code\n"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:57.598Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:57.914Z",
+    "message": "Executing VQL: VISUALIZE bar   \nSELECT class_code, COUNT(stu_num)   \nFROM enroll   \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:58.550Z",
+    "message": "API Received VQL: VISUALIZE bar    \nSELECT class_code, COUNT(stu_num)    \nFROM enroll    \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:35:58.996Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:36:20.173Z",
+    "message": "API Generated Explanation: {\"VQL\":\" VISUALIZE bar SELECT class_code, COUNT(stu_num) FROM enroll GROUP BY class_code\",\"explanation\":[{\"step\":\"1\",\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":\"2\",\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":\"3\",\"operation\":\"SELECT\",\"description\":\"Select the class_code and count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":\"4\",\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with default type.\",\"clause\":\"VISUALIZE\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:36:20.463Z",
+    "message": "Generated Explanation: [{\"step\":\"1\",\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":\"2\",\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":\"3\",\"operation\":\"SELECT\",\"description\":\"Select the class_code and count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":\"4\",\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with default type.\",\"clause\":\"VISUALIZE\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:36:21.074Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:36:21.338Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:36:21.737Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:36:21.982Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:39:51.143Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:39:52.041Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:39:52.381Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:39:53.032Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:39:53.503Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:39:53.957Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:40:57.665Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:40:58.504Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:40:58.899Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:40:59.664Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:41:00.457Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:41:00.941Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:01.403Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:02.084Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:02.740Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:03.129Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:04.053Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:04.467Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:04.807Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:05.156Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:05.476Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:05.888Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:10.537Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:10.893Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:11.229Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:11.655Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:21.690Z",
+    "message": "binby feature: Changed chartType from default to Bar"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:22.027Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:22.554Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:24.068Z",
+    "message": "binby feature: Changed chartType from bar to Bar"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:24.442Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:42:24.765Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:15.886Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:16.797Z",
+    "message": "Executing VQL: VISUALIZE bar \nSELECT class_code, COUNT(stu_num) \nFROM enroll \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:17.558Z",
+    "message": "API Received VQL: VISUALIZE bar  \nSELECT class_code, COUNT(stu_num)  \nFROM enroll  \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:18.107Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:22.561Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT class_code, COUNT(stu_num)\\nFROM enroll\\nGROUP BY class_code\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code and count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart. Default type is bar if not specified.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:22.767Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code and count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart. Default type is bar if not specified.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:23.390Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:23.787Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:24.107Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:45:24.400Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:00.141Z",
+    "message": "Query text changed to: Please show me the enrolled students in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:01.416Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:01.947Z",
+    "message": "Natural Language Query Input: Please show me the enrolled students in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:02.629Z",
+    "message": "ask api/generate-vegalite"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:03.267Z",
+    "message": "API Received query: Please show me the enrolled students in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:04.915Z",
+    "message": "API Generated Prompt: Please generate VQL based on DDL table and question. This is an example: \ncreate table department\n\t(dept_name\t\tvarchar(20),\n\t building\t\tvarchar(15),\n\t budget\t\t        numeric(12,2) check (budget > 0),\n\t primary key (dept_name)\n\t)\ncreate table student\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t tot_cred\t\tnumeric(3,0) check (tot_cred >= 0),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t)\ncreate table instructor\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t salary\t\t\tnumeric(8,2) check (salary > 29000),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t) \nQuestion: how many students are in each department ? show me a bar chart ., \nVQL: visualize bar select dept_name , count(distinct id) from department JOIN student ON department.dept_name = student.dept_name JOIN instructor ON department.dept_name = instructor.dept_name \n \nQuestion: how many male students are there in each city ? show a bar chart , sort by the y in asc please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student where sex = 'M' group by city_code order by COUNT(city_code) asc \n \nQuestion: how many students live in each city ? show a bar chart , show in desc by the x axis please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student group by city_code order by city_code desc \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the \"JOIN table ON table.column = table.column\" format without specifying INNER, LEFT, RIGHT, or other types of joins.\nYou can only use one join, no join three table, no DISTINCT string\nthe table on the left of JOIN ON acts like a left join, focusing on its records first, while the table on the right provides matching data, similar to a right join.\nDo not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\n\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n\"\\nCREATE TABLE student (\\n    stu_num       INTEGER PRIMARY KEY,\\n    stu_fname     VARCHAR(50),\\n    stu_class     VARCHAR(2),\\n    stu_gpa       DECIMAL(3, 2),\\n    stu_transfer  INTEGER,\\n    dept_code     VARCHAR(10),\\n    FOREIGN KEY (dept_code) REFERENCES department(dept_code)\\n);\\n\\nCREATE TABLE enroll (\\n    class_code    VARCHAR(10),\\n    stu_num       INTEGER,\\n    enroll_grade  CHAR(1),\\n    FOREIGN KEY (stu_num) REFERENCES student(stu_num)\\n);\\n\\nCREATE TABLE department (\\n    dept_code     VARCHAR(10) PRIMARY KEY,\\n    dept_name     VARCHAR(50)\\n);\\n\"\nQuestion: Please show me the enrolled students in each class.\nVQL:"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:05.253Z",
+    "message": "Prompt sent to OpenAI: Please generate VQL based on DDL table and question. This is an example: \ncreate table department\n\t(dept_name\t\tvarchar(20),\n\t building\t\tvarchar(15),\n\t budget\t\t        numeric(12,2) check (budget > 0),\n\t primary key (dept_name)\n\t)\ncreate table student\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t tot_cred\t\tnumeric(3,0) check (tot_cred >= 0),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t)\ncreate table instructor\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t salary\t\t\tnumeric(8,2) check (salary > 29000),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t) \nQuestion: how many students are in each department ? show me a bar chart ., \nVQL: visualize bar select dept_name , count(distinct id) from department JOIN student ON department.dept_name = student.dept_name JOIN instructor ON department.dept_name = instructor.dept_name \n \nQuestion: how many male students are there in each city ? show a bar chart , sort by the y in asc please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student where sex = 'M' group by city_code order by COUNT(city_code) asc \n \nQuestion: how many students live in each city ? show a bar chart , show in desc by the x axis please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student group by city_code order by city_code desc \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the \"JOIN table ON table.column = table.column\" format without specifying INNER, LEFT, RIGHT, or other types of joins.\nYou can only use one join, no join three table, no DISTINCT string\nthe table on the left of JOIN ON acts like a left join, focusing on its records first, while the table on the right provides matching data, similar to a right join.\nDo not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\n\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n\"\\nCREATE TABLE student (\\n    stu_num       INTEGER PRIMARY KEY,\\n    stu_fname     VARCHAR(50),\\n    stu_class     VARCHAR(2),\\n    stu_gpa       DECIMAL(3, 2),\\n    stu_transfer  INTEGER,\\n    dept_code     VARCHAR(10),\\n    FOREIGN KEY (dept_code) REFERENCES department(dept_code)\\n);\\n\\nCREATE TABLE enroll (\\n    class_code    VARCHAR(10),\\n    stu_num       INTEGER,\\n    enroll_grade  CHAR(1),\\n    FOREIGN KEY (stu_num) REFERENCES student(stu_num)\\n);\\n\\nCREATE TABLE department (\\n    dept_code     VARCHAR(10) PRIMARY KEY,\\n    dept_name     VARCHAR(50)\\n);\\n\"\nQuestion: Please show me the enrolled students in each class.\nVQL:\nPlease generate correct VQL in one line and begin with visualize"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:06.852Z",
+    "message": "Attempt 1 Generated VQL: visualize select class_code, count(stu_num) from enroll group by class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:07.243Z",
+    "message": "Validation Passed: VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:07.620Z",
+    "message": "API Generated VQL: visualize select class_code, count(stu_num) from enroll group by class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:07.926Z",
+    "message": "Generated VQL: visualize select class_code, count(stu_num) from enroll group by class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:08.449Z",
+    "message": "API Received VQL: VISUALIZE \nSELECT class_code, COUNT(stu_num) \nFROM enroll \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:08.803Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:12.569Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE\\nSELECT class_code, COUNT(stu_num)\\nFROM enroll\\nGROUP BY class_code\",\"explanation\":[{\"step\":1,\"operation\":\"SELECT\",\"description\":\"Select the class_code and the count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":2,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by the class_code column.\",\"clause\":\"GROUP BY class_code\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a default type chart (not specified in VQL).\",\"clause\":\"VISUALIZE\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:13.042Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"SELECT\",\"description\":\"Select the class_code and the count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":2,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by the class_code column.\",\"clause\":\"GROUP BY class_code\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a default type chart (not specified in VQL).\",\"clause\":\"VISUALIZE\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:13.486Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:14.100Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:14.416Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:14.705Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:15.045Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:15.400Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:15.848Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:46:16.908Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:43.598Z",
+    "message": "Navigated to page 1: Hiring - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:44.792Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:45.302Z",
+    "message": "Task started: NL2ViZ - Fixed Task 1 w/o Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:46.022Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:46.257Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:46.682Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:47.390Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:47.845Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:48.222Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:49.171Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:49.631Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:49.949Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:50.370Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:50.752Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:51.285Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:51.579Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:51.880Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:53.386Z",
+    "message": "VQL Edited: 'VISUALIZE\\n' +\n    'SELECT class_code, COUNT(stu_num)\\n' +\n    'FROM enroll\\n' +\n    'GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:56.354Z",
+    "message": "VQL Edited: VISUALIZE\\n' +\n    'SELECT class_code, COUNT(stu_num)\\n' +\n    'FROM enroll\\n' +\n    'GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:53:58.128Z",
+    "message": "VQL Edited: VISUALIZE\n    'SELECT class_code, COUNT(stu_num)\\n' +\n    'FROM enroll\\n' +\n    'GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:00.258Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)\\n' +\n    'FROM enroll\\n' +\n    'GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:03.590Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)FROM enroll\\n' +\n    'GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:05.487Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)\nFROM enroll\\n' +\n    'GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:07.444Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)\nFROM enroll\n    'GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:09.186Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)\nFROM enroll\n    GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:09.674Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)\nFROM enroll\n   GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:10.022Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)\nFROM enroll\n  GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:10.376Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)\nFROM enroll\n GROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:10.824Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)\nFROM enroll\nGROUP BY class_code',"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:12.952Z",
+    "message": "VQL Edited: VISUALIZE\nSELECT class_code, COUNT(stu_num)\nFROM enroll\nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:13.818Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:14.297Z",
+    "message": "Executing VQL: VISUALIZE  \nSELECT class_code, COUNT(stu_num)  \nFROM enroll  \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:14.717Z",
+    "message": "API Received VQL: VISUALIZE   \nSELECT class_code, COUNT(stu_num)   \nFROM enroll   \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:15.013Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:18.411Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE\\nSELECT class_code, COUNT(stu_num)\\nFROM enroll\\nGROUP BY class_code\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code and the count of students.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results with default type.\",\"clause\":\"VISUALIZE\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:18.632Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code and the count of students.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results with default type.\",\"clause\":\"VISUALIZE\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:19.085Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:19.425Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:19.700Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:19.980Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:33.227Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:33.572Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:33.876Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:34.494Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:34.850Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:35.128Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:35.414Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:35.915Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:36.203Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:36.546Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:36.813Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:37.058Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:37.315Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:37.554Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:44.087Z",
+    "message": "VQL Edited: VISUALIZE \nSELECT class_code, COUNT(stu_num)\nFROM enroll\nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:44.377Z",
+    "message": "VQL Edited: VISUALIZE b\nSELECT class_code, COUNT(stu_num)\nFROM enroll\nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:44.658Z",
+    "message": "VQL Edited: VISUALIZE ba\nSELECT class_code, COUNT(stu_num)\nFROM enroll\nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:45.075Z",
+    "message": "VQL Edited: VISUALIZE bar\nSELECT class_code, COUNT(stu_num)\nFROM enroll\nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:47.760Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:48.146Z",
+    "message": "Executing VQL: VISUALIZE bar  \nSELECT class_code, COUNT(stu_num)  \nFROM enroll  \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:48.645Z",
+    "message": "API Received VQL: VISUALIZE bar   \nSELECT class_code, COUNT(stu_num)   \nFROM enroll   \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:49.014Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:53.072Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE bar\\nSELECT class_code, COUNT(stu_num)\\nFROM enroll\\nGROUP BY class_code\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code column and count the number of distinct stu_num in each group.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with the default type.\",\"clause\":\"VISUALIZE bar\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:53.289Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code column and count the number of distinct stu_num in each group.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a bar chart with the default type.\",\"clause\":\"VISUALIZE bar\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:53.863Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:54.168Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:54.522Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:54.805Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:56.522Z",
+    "message": "Query text changed to: Please show me estudents in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:56.867Z",
+    "message": "Query text changed to: Please show me enstudents in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:57.100Z",
+    "message": "Query text changed to: Please show me enrstudents in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:57.920Z",
+    "message": "Query text changed to: Please show me enrostudents in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:58.223Z",
+    "message": "Query text changed to: Please show me enrolstudents in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:58.486Z",
+    "message": "Query text changed to: Please show me enrollstudents in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:58.756Z",
+    "message": "Query text changed to: Please show me enrollestudents in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:59.012Z",
+    "message": "Query text changed to: Please show me enrolledstudents in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:54:59.236Z",
+    "message": "Query text changed to: Please show me enrolled students in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:00.476Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:01.074Z",
+    "message": "Natural Language Query Input: Please show me enrolled students in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:01.689Z",
+    "message": "ask api/generate-vegalite"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:02.089Z",
+    "message": "API Received query: Please show me enrolled students in each class."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:03.341Z",
+    "message": "API Generated Prompt: Please generate VQL based on DDL table and question. This is an example: \ncreate table department\n\t(dept_name\t\tvarchar(20),\n\t building\t\tvarchar(15),\n\t budget\t\t        numeric(12,2) check (budget > 0),\n\t primary key (dept_name)\n\t)\ncreate table student\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t tot_cred\t\tnumeric(3,0) check (tot_cred >= 0),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t)\ncreate table instructor\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t salary\t\t\tnumeric(8,2) check (salary > 29000),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t) \nQuestion: how many students are in each department ? show me a bar chart ., \nVQL: visualize bar select dept_name , count(distinct id) from department JOIN student ON department.dept_name = student.dept_name JOIN instructor ON department.dept_name = instructor.dept_name \n \nQuestion: how many male students are there in each city ? show a bar chart , sort by the y in asc please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student where sex = 'M' group by city_code order by COUNT(city_code) asc \n \nQuestion: how many students live in each city ? show a bar chart , show in desc by the x axis please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student group by city_code order by city_code desc \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the \"JOIN table ON table.column = table.column\" format without specifying INNER, LEFT, RIGHT, or other types of joins.\nYou can only use one join, no join three table, no DISTINCT string\nthe table on the left of JOIN ON acts like a left join, focusing on its records first, while the table on the right provides matching data, similar to a right join.\nDo not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\n\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n\"\\nCREATE TABLE student (\\n    stu_num       INTEGER PRIMARY KEY,\\n    stu_fname     VARCHAR(50),\\n    stu_class     VARCHAR(2),\\n    stu_gpa       DECIMAL(3, 2),\\n    stu_transfer  INTEGER,\\n    dept_code     VARCHAR(10),\\n    FOREIGN KEY (dept_code) REFERENCES department(dept_code)\\n);\\n\\nCREATE TABLE enroll (\\n    class_code    VARCHAR(10),\\n    stu_num       INTEGER,\\n    enroll_grade  CHAR(1),\\n    FOREIGN KEY (stu_num) REFERENCES student(stu_num)\\n);\\n\\nCREATE TABLE department (\\n    dept_code     VARCHAR(10) PRIMARY KEY,\\n    dept_name     VARCHAR(50)\\n);\\n\"\nQuestion: Please show me enrolled students in each class.\nVQL:"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:03.648Z",
+    "message": "Prompt sent to OpenAI: Please generate VQL based on DDL table and question. This is an example: \ncreate table department\n\t(dept_name\t\tvarchar(20),\n\t building\t\tvarchar(15),\n\t budget\t\t        numeric(12,2) check (budget > 0),\n\t primary key (dept_name)\n\t)\ncreate table student\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t tot_cred\t\tnumeric(3,0) check (tot_cred >= 0),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t)\ncreate table instructor\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t salary\t\t\tnumeric(8,2) check (salary > 29000),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t) \nQuestion: how many students are in each department ? show me a bar chart ., \nVQL: visualize bar select dept_name , count(distinct id) from department JOIN student ON department.dept_name = student.dept_name JOIN instructor ON department.dept_name = instructor.dept_name \n \nQuestion: how many male students are there in each city ? show a bar chart , sort by the y in asc please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student where sex = 'M' group by city_code order by COUNT(city_code) asc \n \nQuestion: how many students live in each city ? show a bar chart , show in desc by the x axis please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student group by city_code order by city_code desc \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the \"JOIN table ON table.column = table.column\" format without specifying INNER, LEFT, RIGHT, or other types of joins.\nYou can only use one join, no join three table, no DISTINCT string\nthe table on the left of JOIN ON acts like a left join, focusing on its records first, while the table on the right provides matching data, similar to a right join.\nDo not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\n\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n\"\\nCREATE TABLE student (\\n    stu_num       INTEGER PRIMARY KEY,\\n    stu_fname     VARCHAR(50),\\n    stu_class     VARCHAR(2),\\n    stu_gpa       DECIMAL(3, 2),\\n    stu_transfer  INTEGER,\\n    dept_code     VARCHAR(10),\\n    FOREIGN KEY (dept_code) REFERENCES department(dept_code)\\n);\\n\\nCREATE TABLE enroll (\\n    class_code    VARCHAR(10),\\n    stu_num       INTEGER,\\n    enroll_grade  CHAR(1),\\n    FOREIGN KEY (stu_num) REFERENCES student(stu_num)\\n);\\n\\nCREATE TABLE department (\\n    dept_code     VARCHAR(10) PRIMARY KEY,\\n    dept_name     VARCHAR(50)\\n);\\n\"\nQuestion: Please show me enrolled students in each class.\nVQL:\nPlease generate correct VQL in one line and begin with visualize"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:05.198Z",
+    "message": "Retrying with additional instruction: VQL must start with \"visualize\". (5 attempts left)"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:05.611Z",
+    "message": "Prompt sent to OpenAI: Please generate VQL based on DDL table and question. This is an example: \ncreate table department\n\t(dept_name\t\tvarchar(20),\n\t building\t\tvarchar(15),\n\t budget\t\t        numeric(12,2) check (budget > 0),\n\t primary key (dept_name)\n\t)\ncreate table student\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t tot_cred\t\tnumeric(3,0) check (tot_cred >= 0),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t)\ncreate table instructor\n\t(id\t\t\tvarchar(5),\n\t name\t\t\tvarchar(20) not null,\n\t dept_name\t\tvarchar(20),\n\t salary\t\t\tnumeric(8,2) check (salary > 29000),\n\t primary key (id),\n\t foreign key (dept_name) references department (dept_name)\n\t\ton delete set null\n\t) \nQuestion: how many students are in each department ? show me a bar chart ., \nVQL: visualize bar select dept_name , count(distinct id) from department JOIN student ON department.dept_name = student.dept_name JOIN instructor ON department.dept_name = instructor.dept_name \n \nQuestion: how many male students are there in each city ? show a bar chart , sort by the y in asc please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student where sex = 'M' group by city_code order by COUNT(city_code) asc \n \nQuestion: how many students live in each city ? show a bar chart , show in desc by the x axis please ., \nVQL: visualize bar select city_code , COUNT(city_code) from student group by city_code order by city_code desc \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the \"JOIN table ON table.column = table.column\" format without specifying INNER, LEFT, RIGHT, or other types of joins.\nYou can only use one join, no join three table, no DISTINCT string\nthe table on the left of JOIN ON acts like a left join, focusing on its records first, while the table on the right provides matching data, similar to a right join.\nDo not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\n\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n\"\\nCREATE TABLE student (\\n    stu_num       INTEGER PRIMARY KEY,\\n    stu_fname     VARCHAR(50),\\n    stu_class     VARCHAR(2),\\n    stu_gpa       DECIMAL(3, 2),\\n    stu_transfer  INTEGER,\\n    dept_code     VARCHAR(10),\\n    FOREIGN KEY (dept_code) REFERENCES department(dept_code)\\n);\\n\\nCREATE TABLE enroll (\\n    class_code    VARCHAR(10),\\n    stu_num       INTEGER,\\n    enroll_grade  CHAR(1),\\n    FOREIGN KEY (stu_num) REFERENCES student(stu_num)\\n);\\n\\nCREATE TABLE department (\\n    dept_code     VARCHAR(10) PRIMARY KEY,\\n    dept_name     VARCHAR(50)\\n);\\n\"\nQuestion: Please show me enrolled students in each class.\nVQL:\nPlease generate correct VQL in one line and begin with visualize\nError VQL: ..\nVisualize select class_code , COUNT(stu_num) from enroll group by class_code order by class_code asc\nIssues: VQL must start with \"visualize\".\nPlease generate correct VQL in one line and begin with visualize"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:07.291Z",
+    "message": "Attempt 2 Generated VQL: visualize select class_code, count(stu_num) from enroll group by class_code order by class_code asc"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:07.646Z",
+    "message": "Validation Passed: VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:07.987Z",
+    "message": "API Generated VQL: visualize select class_code, count(stu_num) from enroll group by class_code order by class_code asc"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:08.267Z",
+    "message": "Generated VQL: visualize select class_code, count(stu_num) from enroll group by class_code order by class_code asc"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:08.998Z",
+    "message": "API Received VQL: VISUALIZE \nSELECT class_code, COUNT(stu_num) \nFROM enroll \nGROUP BY class_code \nORDER BY class_code ASC"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:09.384Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:19.250Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE\\nSELECT class_code, COUNT(stu_num) FROM enroll GROUP BY class_code ORDER BY class_code ASC\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code and the count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"ORDER BY\",\"description\":\"Order the results by class_code in ascending order.\",\"clause\":\"ORDER BY class_code ASC\"},{\"step\":5,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a default type chart.\",\"clause\":\"VISUALIZE\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:19.466Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code and the count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"ORDER BY\",\"description\":\"Order the results by class_code in ascending order.\",\"clause\":\"ORDER BY class_code ASC\"},{\"step\":5,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a default type chart.\",\"clause\":\"VISUALIZE\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:19.996Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:55:20.254Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:22.554Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:23.598Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:23.967Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:24.452Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:24.828Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:25.197Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:25.895Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:26.425Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:26.700Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:27.118Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:27.440Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:27.694Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:27.932Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T09:59:28.335Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:00:57.105Z",
+    "message": "VQL Edited: VISUALIZE \nSELECT class_code, COUNT(stu_num) \nFROM enroll \nGROUP BY class_code\n"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:00:58.590Z",
+    "message": "Execute button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:00:58.905Z",
+    "message": "Executing VQL: VISUALIZE   \nSELECT class_code, COUNT(stu_num)   \nFROM enroll   \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:00:59.534Z",
+    "message": "API Received VQL: VISUALIZE    \nSELECT class_code, COUNT(stu_num)    \nFROM enroll    \nGROUP BY class_code"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:00:59.894Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:03.930Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE\\nSELECT class_code, COUNT(stu_num)\\nFROM enroll\\nGROUP BY class_code\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code and the count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a default type.\",\"clause\":\"VISUALIZE\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:04.204Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table enroll.\",\"clause\":\"FROM enroll\"},{\"step\":2,\"operation\":\"GROUP BY\",\"description\":\"Group data by class_code.\",\"clause\":\"GROUP BY class_code\"},{\"step\":3,\"operation\":\"SELECT\",\"description\":\"Select the class_code and the count of stu_num columns.\",\"clause\":\"SELECT class_code, COUNT(stu_num)\"},{\"step\":4,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a default type.\",\"clause\":\"VISUALIZE\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:04.964Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:05.288Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:05.613Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:05.916Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:18.134Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:18.470Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:18.763Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:19.289Z",
+    "message": "explanation current operation: GROUP BY"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:22.648Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:23.218Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:23.558Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:24.124Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:24.404Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:24.738Z",
+    "message": "explanation current operation: SELECT"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:25.598Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:25.957Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:26.239Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:26.522Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:43.201Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:01:43.588Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:03:05.826Z",
+    "message": "Navigated to page 2: Hiring - Open Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:03:06.581Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:03:06.900Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, Hiring Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:03:07.305Z",
+    "message": "Navigated to page 3: College - Fixed Task"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:03:07.545Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:03:07.782Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:03:40.458Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:03:41.054Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:04:07.977Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:04:08.807Z",
+    "message": "Task started: NL2ViZ - Fixed Task 2 with Explanation, College Scenario"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:04:09.778Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:04:10.236Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:04:10.602Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:04:11.002Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:04:11.367Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:04:11.627Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:05:45.073Z",
+    "message": "Query text changed to:  [\n    {\n      step: 1,\n      operation: 'FROM',\n      description: 'Specify the source table enroll.',\n      clause: 'FROM enroll'\n    },\n    {\n      step: 2,\n      operation: 'GROUP BY',\n      description: 'Group data by class_code.',\n      clause: 'GROUP BY class_code'\n    },\n    {\n      step: 3,\n      operation: 'SELECT',\n      description: 'Select the class_code and the count of stu_num columns.',\n      clause: 'SELECT class_code, COUNT(stu_num)'\n    },\n    {\n      step: 4,\n      operation: 'VISUALIZE',\n      description: 'Visualize the results as a default type.',\n      clause: 'VISUALIZE'\n    }\n  ]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:05:47.138Z",
+    "message": "Query text changed to: "
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:05:58.529Z",
+    "message": "Query text changed to: Please show me the number of enrolled students from different stu_class  in a pie chart"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:05:59.319Z",
+    "message": "Generate button clicked"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:05:59.650Z",
+    "message": "Natural Language Query Input: Please show me the number of enrolled students from different stu_class  in a pie chart"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:00.110Z",
+    "message": "ask api/generate-vegalite"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:00.587Z",
+    "message": "API Received query: Please show me the number of enrolled students from different stu_class  in a pie chart"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:02.229Z",
+    "message": "API Generated Prompt: Please generate VQL based on DDL table and question. This is an example: \ncreate table \"member\" (\n\"member_id\" int,\n\"name\" text,\n\"country\" text,\n\"college_id\" int,\nprimary key (\"member_id\"),\nforeign key (\"college_id\") references `college`(\"college_id\")\n) \nQuestion: show the different countries and the number of members from each by a pie chart ., \nVQL: visualize pie select country , COUNT(country) from member group by country \ncreate table \"publication\" (\n\"publication_id\" int,\n\"book_id\" int,\n\"publisher\" text,\n\"publication_date\" text,\n\"price\" real,\nprimary key (\"publication_id\"),\nforeign key (\"book_id\") references \"book\"(\"book_id\")\n) \nQuestion: show different publishers together with the number of publications they have in a pie chart ., \nVQL: visualize pie select publisher , COUNT(publisher) from publication group by publisher \ncreate table accounts (\naccount_id integer not null,\nstatement_id integer not null,\naccount_details varchar(255),\nprimary key (account_id),\nforeign key (statement_id) references statements (statement_id)\n)\ncreate table statements (\nstatement_id integer not null,\nstatement_details varchar(255),\nprimary key (statement_id),\nforeign key (statement_id) references documents (document_id)\n) \nQuestion: show the number of accounts for different statement details in a pie chart ., \nVQL: visualize pie select statement_details , count(statement_details) from accounts JOIN statements ON accounts.statement_id = statements.statement_id group by statement_details \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the \"JOIN table ON table.column = table.column\" format without specifying INNER, LEFT, RIGHT, or other types of joins.\nYou can only use one join, no join three table, no DISTINCT string\nthe table on the left of JOIN ON acts like a left join, focusing on its records first, while the table on the right provides matching data, similar to a right join.\nDo not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\n\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n\"\\nCREATE TABLE student (\\n    stu_num       INTEGER PRIMARY KEY,\\n    stu_fname     VARCHAR(50),\\n    stu_class     VARCHAR(2),\\n    stu_gpa       DECIMAL(3, 2),\\n    stu_transfer  INTEGER,\\n    dept_code     VARCHAR(10),\\n    FOREIGN KEY (dept_code) REFERENCES department(dept_code)\\n);\\n\\nCREATE TABLE enroll (\\n    class_code    VARCHAR(10),\\n    stu_num       INTEGER,\\n    enroll_grade  CHAR(1),\\n    FOREIGN KEY (stu_num) REFERENCES student(stu_num)\\n);\\n\\nCREATE TABLE department (\\n    dept_code     VARCHAR(10) PRIMARY KEY,\\n    dept_name     VARCHAR(50)\\n);\\n\"\nQuestion: Please show me the number of enrolled students from different stu_class  in a pie chart\nVQL:"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:02.586Z",
+    "message": "Prompt sent to OpenAI: Please generate VQL based on DDL table and question. This is an example: \ncreate table \"member\" (\n\"member_id\" int,\n\"name\" text,\n\"country\" text,\n\"college_id\" int,\nprimary key (\"member_id\"),\nforeign key (\"college_id\") references `college`(\"college_id\")\n) \nQuestion: show the different countries and the number of members from each by a pie chart ., \nVQL: visualize pie select country , COUNT(country) from member group by country \ncreate table \"publication\" (\n\"publication_id\" int,\n\"book_id\" int,\n\"publisher\" text,\n\"publication_date\" text,\n\"price\" real,\nprimary key (\"publication_id\"),\nforeign key (\"book_id\") references \"book\"(\"book_id\")\n) \nQuestion: show different publishers together with the number of publications they have in a pie chart ., \nVQL: visualize pie select publisher , COUNT(publisher) from publication group by publisher \ncreate table accounts (\naccount_id integer not null,\nstatement_id integer not null,\naccount_details varchar(255),\nprimary key (account_id),\nforeign key (statement_id) references statements (statement_id)\n)\ncreate table statements (\nstatement_id integer not null,\nstatement_details varchar(255),\nprimary key (statement_id),\nforeign key (statement_id) references documents (document_id)\n) \nQuestion: show the number of accounts for different statement details in a pie chart ., \nVQL: visualize pie select statement_details , count(statement_details) from accounts JOIN statements ON accounts.statement_id = statements.statement_id group by statement_details \n Now, \n  You are an expert in generating Visual Query Language (VQL) queries based on given data structures and questions. Please follow these guidelines:\n\nForm Clause: Make sure that the FROM clause contains only one table.\nJOIN Clause: Use only the \"JOIN table ON table.column = table.column\" format without specifying INNER, LEFT, RIGHT, or other types of joins.\nYou can only use one join, no join three table, no DISTINCT string\nthe table on the left of JOIN ON acts like a left join, focusing on its records first, while the table on the right provides matching data, similar to a right join.\nDo not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).\nOther Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.\nSELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).\nIn a SELECT statement, the first value corresponds to the x-axis, and the second value corresponds to the y-axis.\nThe BIN BY options are: year, month, week, day, weekday, quarter.\nGROUP BY and ORDER BY Clauses use only columns.\nNo Nested Queries: The VQL should be simple and straightforward without any nested SQL queries or subqueries.\nNo * Symbol: We avoid using * in VQL.\n\nFormat: Generate the VQL in a single line, starting with the keyword visualize.\n\nplease generate VQL to answer this question based on json table. \n\n\"\\nCREATE TABLE student (\\n    stu_num       INTEGER PRIMARY KEY,\\n    stu_fname     VARCHAR(50),\\n    stu_class     VARCHAR(2),\\n    stu_gpa       DECIMAL(3, 2),\\n    stu_transfer  INTEGER,\\n    dept_code     VARCHAR(10),\\n    FOREIGN KEY (dept_code) REFERENCES department(dept_code)\\n);\\n\\nCREATE TABLE enroll (\\n    class_code    VARCHAR(10),\\n    stu_num       INTEGER,\\n    enroll_grade  CHAR(1),\\n    FOREIGN KEY (stu_num) REFERENCES student(stu_num)\\n);\\n\\nCREATE TABLE department (\\n    dept_code     VARCHAR(10) PRIMARY KEY,\\n    dept_name     VARCHAR(50)\\n);\\n\"\nQuestion: Please show me the number of enrolled students from different stu_class  in a pie chart\nVQL:\nPlease generate correct VQL in one line and begin with visualize"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:04.171Z",
+    "message": "Attempt 1 Generated VQL: visualize pie select stu_class, COUNT(stu_class) from student JOIN enroll ON student.stu_num = enroll.stu_num GROUP BY stu_class"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:04.567Z",
+    "message": "Validation Passed: VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:04.972Z",
+    "message": "API Generated VQL: visualize pie select stu_class, count(stu_class) from student join enroll on student.stu_num = enroll.stu_num group by stu_class"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:05.259Z",
+    "message": "Generated VQL: visualize pie select stu_class, count(stu_class) from student join enroll on student.stu_num = enroll.stu_num group by stu_class"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:05.740Z",
+    "message": "API Received VQL: VISUALIZE pie \nSELECT stu_class, COUNT(stu_class) \nFROM student \nJOIN enroll ON student.stu_num = enroll.stu_num \nGROUP BY stu_class"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:06.031Z",
+    "message": "API Input VQL is valid."
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:10.535Z",
+    "message": "API Generated Explanation: {\"VQL\":\"VISUALIZE pie SELECT stu_class, COUNT(stu_class) FROM student JOIN enroll ON student.stu_num = enroll.stu_num GROUP BY stu_class\",\"explanation\":[{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table enroll on stu_num with the table student on stu_num.\",\"clause\":\"JOIN enroll ON student.stu_num = enroll.stu_num\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by stu_class.\",\"clause\":\"GROUP BY stu_class\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the stu_class and the count of stu_class.\",\"clause\":\"SELECT stu_class, COUNT(stu_class)\"},{\"step\":5,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a pie chart.\",\"clause\":\"VISUALIZE pie\"}]}"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:10.843Z",
+    "message": "Generated Explanation: [{\"step\":1,\"operation\":\"FROM\",\"description\":\"Specify the source table student.\",\"clause\":\"FROM student\"},{\"step\":2,\"operation\":\"JOIN\",\"description\":\"Join the table enroll on stu_num with the table student on stu_num.\",\"clause\":\"JOIN enroll ON student.stu_num = enroll.stu_num\"},{\"step\":3,\"operation\":\"GROUP BY\",\"description\":\"Group data by stu_class.\",\"clause\":\"GROUP BY stu_class\"},{\"step\":4,\"operation\":\"SELECT\",\"description\":\"Select the stu_class and the count of stu_class.\",\"clause\":\"SELECT stu_class, COUNT(stu_class)\"},{\"step\":5,\"operation\":\"VISUALIZE\",\"description\":\"Visualize the results as a pie chart.\",\"clause\":\"VISUALIZE pie\"}]"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:11.464Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:11.754Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:12.027Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:12.292Z",
+    "message": "explanation current operation: FROM"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:19.320Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:19.767Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:20.264Z",
+    "message": "explanation current operation: VISUALIZE"
+  },
+  {
+    "serverTimestamp": "2024-08-26T10:06:20.537Z",
+    "message": "explanation current operation: VISUALIZE"
   }
 ]

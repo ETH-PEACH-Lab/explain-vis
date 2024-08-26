@@ -66,7 +66,7 @@ CREATE TABLE stock (
 function TutorialPage({userId}) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
   const [generatedVQL, setGeneratedVQL] = useState({ VQL: '', explanation: [] });
-  const [tableData, setTableData] = useState(defaultData);
+  const [tableData, setTableData] = useState(defaultData.data);
   const [showVQL, setShowVQL] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false); // Loading state

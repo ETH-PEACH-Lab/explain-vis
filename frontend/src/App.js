@@ -382,7 +382,7 @@ CREATE TABLE department (
     dept_name     VARCHAR(50)
 );
 `,
-    placeholderText: "Please show me students in each class.",
+    placeholderText: "Please show me enrolled students in each class.",
  };
 
  useEffect(() => {

@@ -17,40 +17,34 @@ import Button from '@mui/material/Button';
 function FixedTaskNL2VisExplain({data, userId, pageKey }) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
   const [generatedVQL, setGeneratedVQL] = useState({
-    VQL: 'VISUALIZE SELECT stu_class , COUNT(stu_num) FROM student JOIN enroll ON student.stu_num = enroll.stu_num GROUP BY stu_class', 
+    VQL: 'VISUALIZE SELECT class_code, COUNT(stu_num) FROM enroll GROUP BY class_code ', 
     vegaLiteSpec: null,
-    explanation:  [
-    {
-      step: 1,
-      operation: 'FROM',
-      description: 'Specify the source table student.',
-      clause: 'FROM student'
-    },
-    {
-      step: 2,
-      operation: 'JOIN',
-      description: 'Join the table enroll on stu_num with the table student on stu_num.',
-      clause: 'JOIN enroll ON student.stu_num = enroll.stu_num'
-    },
-    {
-      step: 3,
-      operation: 'GROUP BY',
-      description: 'Group data by stu_class.',
-      clause: 'GROUP BY stu_class'
-    },
-    {
-      step: 4,
-      operation: 'SELECT',
-      description: 'Select the stu_class column and count the number of stu_num in that class.',
-      clause: 'SELECT stu_class, COUNT(stu_num)'
-    },
-    {
-      step: 5,
-      operation: 'VISUALIZE',
-      description: 'Visualize the result data with the default type of chart.',
-      clause: 'VISUALIZE'
-    }
-  ]
+    explanation:   [
+      {
+        step: 1,
+        operation: 'FROM',
+        description: 'Specify the source table enroll.',
+        clause: 'FROM enroll'
+      },
+      {
+        step: 2,
+        operation: 'GROUP BY',
+        description: 'Group data by class_code.',
+        clause: 'GROUP BY class_code'
+      },
+      {
+        step: 3,
+        operation: 'SELECT',
+        description: 'Select the class_code and the count of stu_num columns.',
+        clause: 'SELECT class_code, COUNT(stu_num)'
+      },
+      {
+        step: 4,
+        operation: 'VISUALIZE',
+        description: 'Visualize the results as a default type.',
+        clause: 'VISUALIZE'
+      }
+    ]
   });
     const [tableData, setTableData] = useState(data.data);
   const [showVQL, setShowVQL] = useState(false);

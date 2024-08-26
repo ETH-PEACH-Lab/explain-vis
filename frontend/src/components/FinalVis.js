@@ -249,15 +249,19 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   
       const isDate = value => {
         if (Object.prototype.toString.call(value) === '[object Date]') {
-          // Check if it's a valid Date object
-          return !isNaN(value.getTime());
+            // 检查是否是有效的 Date 对象
+            return !isNaN(value.getTime());
         } else if (typeof value === 'string') {
-          // Attempt to parse the string as a date
-          const parsedDate = new Date(value);
-          return !isNaN(parsedDate.getTime());
+            // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+            const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+            if (datePattern.test(value)) {
+                const parsedDate = new Date(value);
+                return !isNaN(parsedDate.getTime());
+            }
         }
-        return false; // Not a Date object or a valid date string
-      };
+        return false; // 既不是 Date 对象，也不是有效的日期字符串
+    };
+    
   
     const isNumeric = value => {
       return !isNaN(parseFloat(value)) && isFinite(value);
@@ -363,15 +367,19 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
   };
   const isDate = value => {
     if (Object.prototype.toString.call(value) === '[object Date]') {
-      // Check if it's a valid Date object
-      return !isNaN(value.getTime());
+        // 检查是否是有效的 Date 对象
+        return !isNaN(value.getTime());
     } else if (typeof value === 'string') {
-      // Attempt to parse the string as a date
-      const parsedDate = new Date(value);
-      return !isNaN(parsedDate.getTime());
+        // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        if (datePattern.test(value)) {
+            const parsedDate = new Date(value);
+            return !isNaN(parsedDate.getTime());
+        }
     }
-    return false; // Not a Date object or a valid date string
-  };
+    return false; // 既不是 Date 对象，也不是有效的日期字符串
+};
+
   
   let selectedColumns = [];
 
@@ -442,15 +450,19 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     }
     const isDate = value => {
       if (Object.prototype.toString.call(value) === '[object Date]') {
-        // Check if it's a valid Date object
-        return !isNaN(value.getTime());
+          // 检查是否是有效的 Date 对象
+          return !isNaN(value.getTime());
       } else if (typeof value === 'string') {
-        // Attempt to parse the string as a date
-        const parsedDate = new Date(value);
-        return !isNaN(parsedDate.getTime());
+          // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+          const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+          if (datePattern.test(value)) {
+              const parsedDate = new Date(value);
+              return !isNaN(parsedDate.getTime());
+          }
       }
-      return false; // Not a Date object or a valid date string
-    };
+      return false; // 既不是 Date 对象，也不是有效的日期字符串
+  };
+  
     
     
 
@@ -1056,15 +1068,20 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
       
       const isDate = value => {
         if (Object.prototype.toString.call(value) === '[object Date]') {
-          // Check if it's a valid Date object
-          return !isNaN(value.getTime());
+            // 检查是否是有效的 Date 对象
+            return !isNaN(value.getTime());
         } else if (typeof value === 'string') {
-          // Attempt to parse the string as a date
-          const parsedDate = new Date(value);
-          return !isNaN(parsedDate.getTime());
+            // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+            const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+            if (datePattern.test(value)) {
+                const parsedDate = new Date(value);
+                return !isNaN(parsedDate.getTime());
+            }
         }
-        return false; // Not a Date object or a valid date string
-      };
+        return false; // 既不是 Date 对象，也不是有效的日期字符串
+    };
+    
+    
   
       const isNumeric = value => {
           return !isNaN(parseFloat(value)) && isFinite(value);
@@ -1088,7 +1105,7 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
           }
           // <Typography variant="body2" color="error">Selected Column does not exist in the table.</Typography>;
       }
-      const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
+      const xAxisType_select = isDate(firstValue_select) ? 'time' :  'category';
       console.log('xAxistype', xAxisType_select);
 
       let firstValue_select1;
@@ -1169,15 +1186,19 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
 
     const isDate = value => {
       if (Object.prototype.toString.call(value) === '[object Date]') {
-        // Check if it's a valid Date object
-        return !isNaN(value.getTime());
+          // 检查是否是有效的 Date 对象
+          return !isNaN(value.getTime());
       } else if (typeof value === 'string') {
-        // Attempt to parse the string as a date
-        const parsedDate = new Date(value);
-        return !isNaN(parsedDate.getTime());
+          // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+          const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+          if (datePattern.test(value)) {
+              const parsedDate = new Date(value);
+              return !isNaN(parsedDate.getTime());
+          }
       }
-      return false; // Not a Date object or a valid date string
-    };
+      return false; // 既不是 Date 对象，也不是有效的日期字符串
+  };
+  
 
     const defaultcolor = 'rgba(75, 192, 192, 0.6)';
     const chartcolor = '#f0eea3';
@@ -1185,15 +1206,19 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
       case 'FROM': {
         const isDate = value => {
           if (Object.prototype.toString.call(value) === '[object Date]') {
-            // Check if it's a valid Date object
-            return !isNaN(value.getTime());
+              // 检查是否是有效的 Date 对象
+              return !isNaN(value.getTime());
           } else if (typeof value === 'string') {
-            // Attempt to parse the string as a date
-            const parsedDate = new Date(value);
-            return !isNaN(parsedDate.getTime());
+              // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+              const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+              if (datePattern.test(value)) {
+                  const parsedDate = new Date(value);
+                  return !isNaN(parsedDate.getTime());
+              }
           }
-          return false; // Not a Date object or a valid date string
-        };
+          return false; // 既不是 Date 对象，也不是有效的日期字符串
+      };
+      
         
         const isNumeric = value => {
           return !isNaN(parseFloat(value)) && isFinite(value);
@@ -1228,15 +1253,19 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
         });
         const isDate = value => {
           if (Object.prototype.toString.call(value) === '[object Date]') {
-            // Check if it's a valid Date object
-            return !isNaN(value.getTime());
+              // 检查是否是有效的 Date 对象
+              return !isNaN(value.getTime());
           } else if (typeof value === 'string') {
-            // Attempt to parse the string as a date
-            const parsedDate = new Date(value);
-            return !isNaN(parsedDate.getTime());
+              // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+              const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+              if (datePattern.test(value)) {
+                  const parsedDate = new Date(value);
+                  return !isNaN(parsedDate.getTime());
+              }
           }
-          return false; // Not a Date object or a valid date string
-        };
+          return false; // 既不是 Date 对象，也不是有效的日期字符串
+      };
+      
         
         const isNumeric = value => {
           return !isNaN(parseFloat(value)) && isFinite(value);

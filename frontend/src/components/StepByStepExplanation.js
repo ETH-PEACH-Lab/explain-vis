@@ -2047,15 +2047,19 @@ return (
   
       const isDate = value => {
         if (Object.prototype.toString.call(value) === '[object Date]') {
-          // Check if it's a valid Date object
-          return !isNaN(value.getTime());
+            // 检查是否是有效的 Date 对象
+            return !isNaN(value.getTime());
         } else if (typeof value === 'string') {
-          // Attempt to parse the string as a date
-          const parsedDate = new Date(value);
-          return !isNaN(parsedDate.getTime());
+            // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+            const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+            if (datePattern.test(value)) {
+                const parsedDate = new Date(value);
+                return !isNaN(parsedDate.getTime());
+            }
         }
-        return false; // Not a Date object or a valid date string
-      };
+        return false; // 既不是 Date 对象，也不是有效的日期字符串
+    };
+    
   
     const isNumeric = value => {
       return !isNaN(parseFloat(value)) && isFinite(value);
@@ -2280,15 +2284,19 @@ return (
   
   const isDate = value => {
     if (Object.prototype.toString.call(value) === '[object Date]') {
-      // Check if it's a valid Date object
-      return !isNaN(value.getTime());
+        // 检查是否是有效的 Date 对象
+        return !isNaN(value.getTime());
     } else if (typeof value === 'string') {
-      // Attempt to parse the string as a date
-      const parsedDate = new Date(value);
-      return !isNaN(parsedDate.getTime());
+        // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+        if (datePattern.test(value)) {
+            const parsedDate = new Date(value);
+            return !isNaN(parsedDate.getTime());
+        }
     }
-    return false; // Not a Date object or a valid date string
-  };
+    return false; // 既不是 Date 对象，也不是有效的日期字符串
+};
+
 
     const isNumeric = value => {
         return !isNaN(parseFloat(value)) && isFinite(value);
@@ -2944,15 +2952,19 @@ return (
       
       const isDate = value => {
         if (Object.prototype.toString.call(value) === '[object Date]') {
-          // Check if it's a valid Date object
-          return !isNaN(value.getTime());
+            // 检查是否是有效的 Date 对象
+            return !isNaN(value.getTime());
         } else if (typeof value === 'string') {
-          // Attempt to parse the string as a date
-          const parsedDate = new Date(value);
-          return !isNaN(parsedDate.getTime());
+            // 检查字符串是否符合日期格式（例如 YYYY-MM-DD）
+            const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+            if (datePattern.test(value)) {
+                const parsedDate = new Date(value);
+                return !isNaN(parsedDate.getTime());
+            }
         }
-        return false; // Not a Date object or a valid date string
-      };
+        return false; // 既不是 Date 对象，也不是有效的日期字符串
+    };
+    
   
       const isNumeric = value => {
           return !isNaN(parseFloat(value)) && isFinite(value);
