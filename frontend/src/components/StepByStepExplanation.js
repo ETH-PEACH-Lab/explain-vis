@@ -2327,7 +2327,7 @@ return (
   );
   }
   // const firstValue_select = currentTable_now[0][selectedColumns[0]];
-  const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
+  const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
   console.log('xAxistype step', xAxisType_select);
 
   // const firstValue_select1 = currentTable_now[0][selectedColumns[1]];

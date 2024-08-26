@@ -496,7 +496,7 @@ const FinalVis = ({ VQL, explanation, tableData, showVQL }) => {
     // return <Typography variant="body2" color="error"></Typography>;
   }
   const firstValue_select = currentTable_now[0][selectedColumns[0]];
-  const xAxisType_select = isDate(firstValue_select) ? 'time' : isNumeric(firstValue_select) ? 'linear' : 'category';
+  const xAxisType_select = isDate(firstValue_select) ? 'time' : 'category';
   console.log('xAxistype final', xAxisType_select);
 
 
