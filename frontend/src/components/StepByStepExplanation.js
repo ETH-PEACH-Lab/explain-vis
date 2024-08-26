@@ -2359,11 +2359,16 @@ return (
     console.log('Dataset data:', datasetData);
 
     if (labels.length === datasetData.length) {
+      const backgroundColor = labels.map((_, index) => 
+        `hsla(${index * 360 / labels.length}, 100%, 75%, 0.5)`
+    );
         data = {
             labels: labels,  // Ensure labels are added only for Pie chart
             datasets: [{
                 data: datasetData,
-                backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
+                // backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
+                backgroundColor: backgroundColor,
+                
             }],
         };
 

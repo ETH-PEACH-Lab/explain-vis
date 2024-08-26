@@ -243,7 +243,14 @@ function validateVQL(vql_init, tableSchema) {
   const validTypes = ['pie', 'scatter', 'line', 'bar'];
   const visualizeRegex = /^visualize\s+(pie|scatter|line|bar)/i;
 
-  
+  // Check for forbidden keywords
+  const forbiddenKeywords = ['INNER', 'LEFT', 'RIGHT', 'DISTINCT'];
+  for (let keyword of forbiddenKeywords) {
+    const regex = new RegExp(`\\b${keyword}\\b`, 'i');
+    if (regex.test(vql)) {
+      return `Do not use "${keyword}".`;
+    }
+  }
 
   // Check for nested queries
   const hasNestedQueries = /\(\s*SELECT\b/i.test(vql);
@@ -649,13 +656,23 @@ function extractOperationsFromVQL(VQL) {
 }
 
 function validateExplanation(explanation, operationsInVQL) {
+  const keywords = [
+    'VISUALIZE', 'SELECT', 'FROM', 'JOIN', 'WHERE', 'GROUP BY', 'ORDER BY', 'BIN BY'
+  ];
+
   if (!explanation || typeof explanation !== 'object' || !Array.isArray(explanation.explanation)) {
     return 'The explanation format is incorrect or missing the explanation array.';
   }
 
   for (let step of explanation.explanation) {
-    if (!step.operation || !step.clause || !step.description) {
-      return `Missing required fields in explanation step: ${JSON.stringify(step)}`;
+    if (!step.operation) {
+      return `Missing operation field in explanation step: ${JSON.stringify(step)}`;
+    }
+    if (!step.clause) {
+      return `Missing clause field in explanation step: ${JSON.stringify(step)}`;
+    }
+    if (!step.description) {
+      return `Missing description field in explanation step: ${JSON.stringify(step)}`;
     }
 
     // Check if the operation exists in the VQL
@@ -663,13 +680,18 @@ function validateExplanation(explanation, operationsInVQL) {
       return `The operation "${step.operation}" found in the explanation does not exist in the original VQL.`;
     }
 
+    // Ensure the operation is within allowed keywords
+    if (!keywords.includes(step.operation.toUpperCase())) {
+      return `The operation "${step.operation}" is not recognized as a valid operation.`;
+    }
+
     // Check if WHERE clause includes conditions
-    if (step.operation === 'WHERE' && (!step.conditions || !Array.isArray(step.conditions) || step.conditions.length === 0)) {
+    if (step.operation.toUpperCase() === 'WHERE' && (!step.conditions || !Array.isArray(step.conditions) || step.conditions.length === 0)) {
       return 'WHERE clause does not include valid conditions.';
     }
 
     // Ensure FROM and JOIN are separate clauses
-    if (step.operation === 'FROM' && explanation.explanation.some(s => s.operation === 'JOIN' && s.clause.includes(step.clause))) {
+    if (step.operation.toUpperCase() === 'FROM' && explanation.explanation.some(s => s.operation.toUpperCase() === 'JOIN' && s.clause.includes(step.clause))) {
       return 'FROM and JOIN should be separate clauses.';
     }
   }
@@ -677,6 +699,7 @@ function validateExplanation(explanation, operationsInVQL) {
   // Return null if all validations pass
   return null;
 }
+
 
 async function callOpenAIWithRetry(prompt, VQL, retries = 10, delay = 1000) {
   const operationsInVQL = extractOperationsFromVQL(VQL);

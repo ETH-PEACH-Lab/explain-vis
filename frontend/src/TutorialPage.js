@@ -18,6 +18,8 @@ import { logEvent } from './utils/logger';
 
 
 const defaultData = {
+scenario:"fruit",
+data: {
   tables: {
     price: [
       { date: '1998-01-01', month: 1, year: 1998, price: 100, id: 'r1' },
@@ -38,7 +40,27 @@ const defaultData = {
       { id: 'r4', quantity: 25 },
     ]
   },
-  tableNames: ['price', 'name', 'stock']
+  tableNames: ['price', 'name', 'stock'],
+},
+  'ddl':`
+CREATE TABLE price (
+    id VARCHAR(10) PRIMARY KEY,
+    date DATE,
+    month INT,
+    year INT,
+    price DECIMAL(10, 2)
+);
+
+CREATE TABLE name (
+    id VARCHAR(10) PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE stock (
+    id VARCHAR(10) PRIMARY KEY,
+    quantity INT
+);
+  `
 };
 
 function TutorialPage({userId}) {
@@ -122,7 +144,7 @@ function TutorialPage({userId}) {
             <div className="left-column">
               <NaturalLanguageQuery 
                 onGenerate={handleGenerate} 
-                tableData={tableData} 
+                tableData={defaultData} 
                 placeholderText={placeholderText} 
                 userId={userId}
               />
@@ -150,7 +172,7 @@ function TutorialPage({userId}) {
                       <VQLEditor
                         initialVQL={generatedVQL.VQL}
                         onExecute={handleExecuteVQL}
-                        tableData={tableData}
+                        tableData={defaultData}
                         userId={userId}
                       />
                     )}

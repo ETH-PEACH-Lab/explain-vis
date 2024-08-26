@@ -533,11 +533,14 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
         console.log('Dataset data:', datasetData);
 
         if (labels.length === datasetData.length) {
+            const backgroundColor = labels.map((_, index) => 
+              `hsla(${index * 360 / labels.length}, 100%, 75%, 0.5)`
+          );
             data = {
                 labels: labels,  // Ensure labels are added only for Pie chart
                 datasets: [{
                     data: datasetData,
-                    backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
+                    backgroundColor: backgroundColor,
                 }],
             };
 
@@ -717,11 +720,20 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
         }).join(' || ');
 
         const cleanedCondition = combinedCondition
-          .replace(/\bAND\b/g, '&&')
-          .replace(/\bOR\b/g, '||')
-          .replace(/([a-zA-Z_][a-zA-Z0-9_]*)/g, 'row["$1"]')
-          .replace(/=\s*(\d+)/g, '=== $1');
-
+        .replace(/\bAND\b/g, '&&')
+        .replace(/\bOR\b/g, '||')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'“”‘’]?)(\d+)\2/g, 'row["$1"] === $3')  // Handle numeric equality without quotes
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"] === "$3"')  // Handle string equality with quotes
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*includes\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].includes("$3")')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*startsWith\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].startsWith("$3")')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*endsWith\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"].endsWith("$3")')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>\s*(\d+)/g, 'row["$1"] > $2')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<\s*(\d+)/g, 'row["$1"] < $2')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*>=\s*(\d+)/g, 'row["$1"] >= $2')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*<=\s*(\d+)/g, 'row["$1"] <= $2')
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'“”‘’]?)(\d+)\2/g, 'row["$1"] !== $3')  // Handle numeric inequality without quotes
+        .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*!=\s*(['"'“”‘’])(.*?)\2/g, 'row["$1"] !== "$3"'); // Handle string inequality with quotes
+  
         const finalFilteredData = currentTable.filter(row => {
           try {
             const conditionFunction = new Function('row', `return ${cleanedCondition};`);
