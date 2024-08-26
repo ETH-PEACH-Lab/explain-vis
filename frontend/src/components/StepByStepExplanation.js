@@ -471,7 +471,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
         }
 
     } else {
-        setError('The SELECT clause must be followed by two valid values.');
+        setError('You need to choose two items—one for the X-axis and one for the Y-axis.');
         // logEvent(userId, `Editing VQL fail: The SELECT clause must be followed by two valid values.`);
         setIsModalOpen(true);
     }

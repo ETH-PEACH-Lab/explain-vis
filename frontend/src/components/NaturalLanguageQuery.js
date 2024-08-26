@@ -17,8 +17,9 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
 
   const handleGenerate = async () => {
     setIsLoading(true); // Start loading
-    console.log('Start handleGenerate');
-    logEvent(userId, 'Generate button clicked');
+
+    console.log('Generate button clicked');
+    // logEvent(userId, 'Generate button clicked');
 
     const demoText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
   
@@ -87,15 +88,15 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
               "clause": "VISUALIZE bar"
             }]
         
-        logEvent(userId, `Generated VQL: ${VQL}`);
-        logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
+            console.log(`Generated VQL: ${VQL}`);
+            console.log(`Generated Explanation: ${JSON.stringify(explanation)}`);
 
         onGenerate({ VQL, explanation });
       } else {
         
-        console.log('userid',userId)
-        logEvent(userId, `Natural Language Query Input: ${query}`);
-        logEvent(userId, `ask api/generate-vegalite`);
+        // console.log('userid',userId)
+        console.log(`Natural Language Query Input: ${query}`);
+        console.log(`ask api/generate-vegalite`);
         const data = tableData;
         const baseUrl = process.env.REACT_APP_API_URL;
         const apiUrl = `${baseUrl}/api/generate-vegalite`;
@@ -112,13 +113,15 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
 
         if (response.ok) {
           const result = await response.json();
-          let { VQL} = result;
-        
+          let { VQL, logs } = result;
+          console.log('Generated VQL:', VQL);
+          console.log('Logs:', logs);
+    
           // VQL = formatVQL(VQL)
-          logEvent(userId, `Generated VQL: ${VQL}`);
+          // logEvent(userId, `Generated VQL: ${VQL}`);
           const explanationApiUrl = `${baseUrl}/api/explain-vql`;
           console.log('API URL:', explanationApiUrl);
-          console.log('VQL',VQL)
+          console.log('Input VQL',VQL)
           
           const explanationResponse = await fetch(explanationApiUrl, {
             method: 'POST',
@@ -131,17 +134,22 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
                   
           if (explanationResponse.ok) {
             const explanationResult = await explanationResponse.json();
-            console.log('result',explanationResult)
-            const { explanation } = explanationResult;
-            console.log('explanation:', explanation);
-            logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
+
+            const { explanation, logs: explanationLogs } = explanationResult;
+            console.log('explanation:', JSON.stringify(explanation));
+            console.log('Explanation Logs from backend:',JSON.stringify(explanationLogs));
+            // logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
             onGenerate({ VQL, explanation });
           } else {
-            const { error } = await explanationResponse.json();
+            const { error, logs: explanationLogs } = await explanationResponse.json();
+            console.error('Error fetching explanation:', error);
+            console.log('Explanation Logs from backend:',JSON.stringify(explanationLogs));
             throw new Error(error || 'Error fetching explanation');
           }
         } else {
-          const { error } = await response.json();
+          const { error, logs } = await response.json();
+          console.error('Error generating VQL spec:', error);
+          console.error('Error log in generating VQL spec:', JSON.stringify(error));
           throw new Error(error || 'Error generating VQL spec');
         }
       }

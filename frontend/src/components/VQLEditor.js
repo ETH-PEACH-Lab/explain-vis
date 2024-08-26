@@ -79,7 +79,7 @@ import { logEvent } from '../utils/logger';
       console.log('API URL:', explanationApiUrl);
       const VQL = formatVQL(vql)
       console.log('edited VQL:', VQL);
-      logEvent(userId, `Executing VQL: ${VQL}`);
+      // logEvent(userId, `Executing VQL: ${VQL}`);
       
       const explanationResponse = await fetch(explanationApiUrl, {
         method: 'POST',
@@ -91,14 +91,19 @@ import { logEvent } from '../utils/logger';
 
       if (explanationResponse.ok) {
         const explanationResult = await explanationResponse.json();
-        console.log('result:', explanationResult);
-        const explanation = explanationResult.explanation;
+      
+        console.log('Result:', JSON.stringify(explanationResult, null, 2)); // 全部 JSON 格式化输出
+        const { explanation_VQL, logs: explanationLogs } = explanationResult;
+        console.log('Explanation:', JSON.stringify(explanation, null, 2));
+        console.log('Explanation log:', JSON.stringify(explanationLogs, null, 2));
+
+        const explanation = explanation_VQL.explanation;
         if (!explanation || !Array.isArray(explanation)) {
           throw new Error('Invalid explanation received'); // 如果 explanation 不是数组，则抛出错误
         }
-        console.log('explanation:', explanation);
-        logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
-        const updatedGeneratedVQL = { VQL: explanationResult.VQL, explanation };
+        // console.log('explanation:', explanation);
+        // logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
+        const updatedGeneratedVQL = { VQL: explanation_VQL.VQL, explanation };
         onExecute(updatedGeneratedVQL);
       } else {
         const { error } = await explanationResponse.json();
@@ -107,7 +112,7 @@ import { logEvent } from '../utils/logger';
     } catch (err) {
       console.error('Error during VQL execution:', err);
       setError(`An error occurred while executing the VQL. Please refine your VQL. Try strict query, ${err.message}`);
-      logEvent(userId, `Error during VQL execution: ${err.message}`);
+      // logEvent(userId, `Error during VQL execution: ${err.message}`);
       setIsModalOpen(true); // Show error modal
     } finally {
       setIsLoading(false);
