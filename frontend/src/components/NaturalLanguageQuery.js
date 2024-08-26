@@ -7,7 +7,7 @@ import './styles/naturalLanguageQuery.css';
 import Alert from '@mui/material/Alert';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import { logEvent } from '../utils/logger'; 
+// import { logEvent } from '../utils/logger'; 
 
 function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }) {
   const [query, setQuery] = useState(placeholderText);
@@ -115,7 +115,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
           const result = await response.json();
           let { VQL, logs } = result;
           console.log('Generated VQL:', VQL);
-          console.log('Logs:', logs);
+          console.log('Logs:', JSON.stringify(logs));
     
           // VQL = formatVQL(VQL)
           // logEvent(userId, `Generated VQL: ${VQL}`);
@@ -194,7 +194,8 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
         style={{ border: 'none' }}
         onChange={(e) => {
           setQuery(e.target.value);
-          logEvent(userId, `Query text changed to: ${e.target.value}`);
+          // logEvent(userId, `Query text changed to: ${e.target.value}`);
+          console.log(`Query text changed to: ${e.target.value}`)
         }}
       />
 

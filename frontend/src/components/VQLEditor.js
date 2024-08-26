@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import { logEvent } from '../utils/logger'; 
+// import { logEvent } from '../utils/logger'; 
 
   function VQLEditor({ initialVQL, onExecute, tableData, userId }) {
     const [vql, setVql] = useState(initialVQL);
@@ -66,11 +66,11 @@ import { logEvent } from '../utils/logger';
   const handleVqlChange = (e) => {
     const newVql = e.target.value;
     setEditedText(newVql);
-    logEvent(userId, `VQL Edited: ${newVql}`);
+    console.log(`VQL Edited: ${newVql}`);
   };
 
   const handleExecuteVQL = async () => {
-    logEvent(userId, 'Execute button clicked');
+    console.log('Execute button clicked');
     setIsLoading(true);
     setError(null);
     try {
