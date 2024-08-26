@@ -659,6 +659,11 @@ function validateExplanation(explanation, operationsInVQL) {
     'VISUALIZE', 'SELECT', 'FROM', 'JOIN', 'WHERE', 'GROUP BY', 'ORDER BY', 'BIN BY'
   ];
 
+  // Check if VQL is present and not empty
+  if (!explanation.VQL || typeof explanation.VQL !== 'string' || explanation.VQL.trim() === '') {
+    return 'The VQL is missing or empty.';
+  }
+
   if (!explanation || typeof explanation !== 'object' || !Array.isArray(explanation.explanation)) {
     return 'The explanation format is incorrect or missing the explanation array.';
   }
