@@ -3632,13 +3632,13 @@ return (
             textAlign: 'center'
           }}
         >
-          <Typography variant="h6" color="error">Error</Typography>
+          <Typography variant="h6" color="error"></Typography>
           <Typography variant="body2" color="textSecondary">{error}</Typography>
           <Button
-            variant="contained"
-            color="primary"
-            onClick={() => setIsModalOpen(false)}
-            style={{ marginTop: '20px' }}
+           variant="contained"
+           color="primary"
+           onClick={() => setIsModalOpen(false)}
+           style={{ marginTop: '20px' }}
           >
             OK
           </Button>

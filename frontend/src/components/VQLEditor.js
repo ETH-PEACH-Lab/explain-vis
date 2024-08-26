@@ -204,7 +204,7 @@ import Box from '@mui/material/Box';
             textAlign: 'center'
           }}
         >
-          <Typography variant="h6" color="error">Error</Typography>
+          <Typography variant="h6" color="error"></Typography>
           <Typography variant="body2" color="textSecondary">{error}</Typography>
           <Button
             variant="contained"

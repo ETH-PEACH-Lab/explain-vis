@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -14,11 +14,50 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  const [latestLog, setLatestLog] = useState(null); // State to hold latest log
+
+  const fetchProgress = async () => {
+    const baseUrl = process.env.REACT_APP_API_URL;
+    const progressUrl = `${baseUrl}/api/progress`;
+    try {
+      const response = await fetch(progressUrl);
+      const text = await response.text();  // 获取响应的原始文本
+      console.log('Response Text:', text);  // 输出响应文本
+      const data = JSON.parse(text);  // 解析文本为JSON
+      setLatestLog(data.latestLog);
+      if (data.latestLog) {
+        console.log(`Current Attempt: ${data.latestLog.attempt}`);
+      }
+    } catch (error) {
+      console.error('Error fetching progress logs:', error.message);
+    }
+  };
+  
+
+  useEffect(() => {
+    if (isLoading) {
+      const intervalId = setInterval(() => {
+        fetchProgress().then((newLog) => {
+          if (newLog && newLog.attempt !== latestLog.attempt) {
+            setLatestLog(newLog); // 仅当有新数据时才更新状态
+          }
+        });
+      }, 500); // 使用合理的间隔
+  
+      return () => clearInterval(intervalId); // 清理定时器
+    }
+  }, [isLoading, latestLog]); // 确保依赖项完整
+  
+  // useEffect(() => {
+  //   if (isLoading && latestLog) {
+  //     console.log(`Rendering: Attempt ${latestLog.attempt}`);
+  //   }
+  // }, [latestLog, isLoading]);
   
 
   const handleGenerate = async () => {
     setIsLoading(true); // Start loading
-
+    setLatestLog(null); // 重置旧状态
     console.log('Generate button clicked');
     // logEvent(userId, 'Generate button clicked');
 
@@ -114,6 +153,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
 
         if (response.ok) {
           const result = await response.json();
+          setLatestLog(result.logs[result.logs.length - 1]); // 更新最新日志
           let { VQL, logs } = result;
           console.log('Generated VQL:', VQL);
           console.log('Logs:', JSON.stringify(logs));
@@ -171,6 +211,13 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
     <div className="nl">
       <div className="nl-query-header">
         <Typography variant="h6" className="nl-query-title">Natural Language Query</Typography>
+        {isLoading && latestLog && (
+  <div className="progress-logs" style={{ marginLeft: '100px' }}>
+    <Typography variant="body2" style={{ color: 'gray' }}>
+      {latestLog.attempt ? `Attempt ${latestLog.attempt} in progress!` : 'Starting new attempt...'}
+    </Typography>
+  </div>
+)}
         <Button
           variant="contained"
           className="import-btn"
@@ -178,7 +225,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
             backgroundColor: '#a78cc8',
             color: 'white',
             fontWeight: 'bold',
-            marginLeft: '100px',
+            // marginLeft: '100px',
             borderRadius: '20px'
           }}
           onClick={handleGenerate}
@@ -204,6 +251,8 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
         }}
       />
 
+     
+
       {/* Modal for error handling */}
       <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Box
@@ -219,7 +268,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
             textAlign: 'center'
           }}
         >
-          <Typography variant="h6" color="error">Error</Typography>
+          <Typography variant="h6" color="error"></Typography>
           <Typography variant="body2" color="textSecondary">{error}</Typography>
           <Button
             variant="contained"

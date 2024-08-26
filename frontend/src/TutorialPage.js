@@ -81,7 +81,7 @@ function TutorialPage({userId}) {
   const handlePageChange = (page) => {
     if (page >= 0 && page < generatedVQL.explanation.length) {
       setCurrentPage(page);
-      logEvent(userId, `Clicked 'Next' button, moving from page ${currentPage} to ${currentPage + 1}`);
+      console.log(`Clicked 'Next' button, moving from page ${currentPage} to ${currentPage + 1}`);
     }
   };
 

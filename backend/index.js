@@ -31,10 +31,6 @@ app.get('/api', (req, res)=>{
   res.send('Hello, API')
 })
 
-// Handles any requests that don't match the ones above
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-});
 
 
 const preprocess = (text) => {
@@ -468,7 +464,7 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
     // 添加生成VQL的最终指示
     prompt += "\nPlease generate correct VQL in one line and begin with visualize";
     console.log('\nprompts',prompt)
-    console.log('\nretries',retries)
+    console.log('\nretries',attemptNumber)
     // appendLogToFile(userId, `Prompt sent to OpenAI: ${prompt}`);
 
     const response = await axios.post(
@@ -499,16 +495,16 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
     if (!validationError) {
       console.log('Validation Passed: VQL is valid.');
       // appendLogToFile(userId, `Validation Passed: VQL is valid.`);
-      logs.push({ attempt: 5 - retries + 1, prompt, VQL: generatedText, status: 'valid' }); // 记录成功生成的 VQL 和 prompt
+      logs.push({ attempt: attemptNumber, prompt, VQL: generatedText, status: 'valid' }); // 记录成功生成的 VQL 和 prompt
       return generatedText.toLowerCase();
     } else {
       // appendLogToFile(userId, `Attempt ${5 - retries + 1}: Validation Failed: ${validationError}`);
-      logs.push({ attempt: 5 - retries + 1, prompt, VQL: generatedText, error: validationError }); // 记录生成的 VQL 和验证错误
+      logs.push({ attempt: attemptNumber, prompt, VQL: generatedText, error: validationError }); // 记录生成的 VQL 和验证错误
       throw new Error(validationError);
     }
   } catch (error) {
     console.error('Error during OpenAI API call:', error.message);
-    logs.push({ attempt: 5 - retries + 1, prompt, error: error.message }); // 记录错误信息和 prompt
+    logs.push({ attempt: attemptNumber, prompt, error: error.message }); // 记录错误信息和 prompt
     if (retries > 0) {
       // 仅附加当前生成的 VQL 和最新的错误信息
       const newVQL = generatedText ? generatedText : lastVQL;
@@ -517,9 +513,9 @@ async function callOpenAIWithRetryforVQL(prompt, tableSchema, retries = 5, lastE
       // appendLogToFile(userId, `Retrying with additional instruction: ${newError} (${retries} attempts left)`);
       return callOpenAIWithRetryforVQL(prompt, tableSchema, retries - 1, newError, newVQL, userId,logs);
     } else {
-      logs.push({ attempt: 5 - retries + 1, prompt, error: 'Failed to generate valid VQL after multiple attempts' });
+      // logs.push({ attempt: 5 - retries + 1, prompt, error: 'Failed to generate valid VQL after multiple attempts' });
       // appendLogToFile(userId, 'Failed to generate valid VQL from OpenAI after multiple attempts');
-      throw new Error(`Failed to generate valid VQL from OpenAI after 5 attempts.`);
+      throw new Error(`Unable to render the chart with OpenAI after 5 attempts. Please try again later or adjust your request.`);
     }
   }
 }
@@ -587,11 +583,12 @@ app.post('/log', (req, res) => {
   res.send('Log saved');
 });
 
-
+const userLogs = {};
 app.post('/api/generate-vegalite', async (req, res) => {
   console.time('GET * VQL Request Duration');
   let { query, data, userId } = req.body;
   
+  userLogs[0] = [];  
   const db_id = './utils/data/database'; 
   const exampleEncoderQuestions = fs.readFileSync('./utils/data/train/train_encode.txt', 'utf-8').split('\n');
   const exampleDecoderAnswers = fs.readFileSync('./utils/data/train/train_decode_db.txt', 'utf-8').split('\n');
@@ -605,20 +602,34 @@ app.post('/api/generate-vegalite', async (req, res) => {
 
     console.log('Generated Prompt:', prompt);
     
+    
     const generatedText = await callOpenAIWithRetryforVQL(prompt,data.data,5,'','',userId,logs);
+
+    userLogs[0] = logs;
 
     console.timeEnd('GET * VQL Request Duration');
     console.log('Generated VQL:', generatedText);
     res.json({ VQL: generatedText, logs  });
   } catch (error) {
     console.error('Error:', error.message);
+    userLogs[0] = logs;
     if (error.response) {
       console.error('Status:', error.response.status);
       console.error('Headers:', error.response.headers);
       console.error('Data:', error.response.data);
     }
     res.status(500).json({ error: error.message, logs });
+  }finally {
+    // 处理完成后清理用户日志
+    delete userLogs;
   }
+});
+
+app.get('/api/progress', (req, res) => {
+  // const userId = req.params.userId;
+  const logs = userLogs[0] || [];
+  const latestLog = logs.length > 0 ? logs[logs.length - 1] : null; // 只返回最新的log
+  res.json({ latestLog });
 });
 
 function extractJSON(text) {
@@ -659,14 +670,16 @@ function validateExplanation(explanation, operationsInVQL) {
     'VISUALIZE', 'SELECT', 'FROM', 'JOIN', 'WHERE', 'GROUP BY', 'ORDER BY', 'BIN BY'
   ];
 
+  
+  if (!explanation || typeof explanation !== 'object' || !Array.isArray(explanation.explanation)) {
+    return 'The explanation format is incorrect or missing the explanation array.';
+  }
+
   // Check if VQL is present and not empty
   if (!explanation.VQL || typeof explanation.VQL !== 'string' || explanation.VQL.trim() === '') {
     return 'The VQL is missing or empty.';
   }
 
-  if (!explanation || typeof explanation !== 'object' || !Array.isArray(explanation.explanation)) {
-    return 'The explanation format is incorrect or missing the explanation array.';
-  }
 
   for (let step of explanation.explanation) {
     if (!step.operation) {
@@ -738,10 +751,18 @@ async function callOpenAIWithRetry(prompt, VQL, explanationLogs, retries = 10, d
     const responseText = response.data.choices[0].text.trim();
     let explanation = extractJSON(responseText);
 
-    explanationLogs.push({ attempt: 10 - retries + 1, responseText, explanation });
+    // explanationLogs.push({ attempt: 10 - retries + 1, responseText, explanation });
 
     // Validate the extracted explanation
     const validationError = validateExplanation(explanation, operationsInVQL);
+
+    explanationLogs.push({
+      attempt: 10 - retries + 1,
+      responseText,
+      explanation,
+      status: validationError ? `Validation failed: ${validationError}` : "Valid"
+    });
+
     if (explanation && !validationError) {
       return explanation;
     } else {
@@ -749,7 +770,12 @@ async function callOpenAIWithRetry(prompt, VQL, explanationLogs, retries = 10, d
     }
   } catch (error) {
     console.error('Error during processing:', error.message);
-    explanationLogs.push({ attempt: 10 - retries + 1, error: error.message }); // 记录当前尝试的错误信息
+    // explanationLogs.push({ attempt: 10 - retries + 1, error: error.message }); // 记录当前尝试的错误信息
+    explanationLogs.push({
+      attempt: 10 - retries + 1,
+      error: error.message,
+      explanation: null  // 如果捕获到错误，此时可能无法提取有效的 explanation
+    });
 
     if (retries > 0) {
       console.log(`Retrying... (${retries} attempts left)`);
@@ -943,7 +969,10 @@ app.post('/api/explain-vql', async (req, res) => {
     res.status(500).json({ error: error.message, logs: explanationLogs });
   }
 });
-
+// Handles any requests that don't match the ones above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

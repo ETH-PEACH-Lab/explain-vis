@@ -1513,7 +1513,7 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
             textAlign: 'center'
           }}
         >
-          <Typography variant="h6" color="error">Error</Typography>
+          <Typography variant="h6" color="error"></Typography>
           <Typography variant="body2" color="textSecondary">{error}</Typography>
           <Button
             variant="contained"
