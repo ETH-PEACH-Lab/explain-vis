@@ -2335,51 +2335,52 @@ return (
   console.log('yAxistype step', yAxisType_select);
 
   
-    if (chart.toLowerCase() === 'pie') {
-        // Pie chart specific logic
-        const aggregatedData = currentTable_now.reduce((acc, row) => {
-            const xValue = row[selectedColumns[0]];
-            const yValue = row[selectedColumns[1]];
+  if (chart.toLowerCase() === 'pie') {
+    // Pie chart specific logic
+    const uniqueDataMap = new Map();
 
-            const existing = acc.find(item => item.x === xValue);
+    // First, filter out duplicates and aggregate yValues for the same xValue
+    currentTable_now.forEach(row => {
+        const xValue = row[selectedColumns[0]];
+        const yValue = row[selectedColumns[1]];
 
-            if (existing) {
-                existing.y += yValue;
-            } else {
-                acc.push({ x: xValue, y: yValue });
-            }
-
-            return acc;
-        }, []);
-
-        const labels = aggregatedData.map(item => String(item.x));
-        const datasetData = aggregatedData.map(item => item.y);
-
-        console.log('Labels:', labels);
-        console.log('Dataset data:', datasetData);
-
-        if (labels.length === datasetData.length) {
-            data = {
-                labels: labels,  // Ensure labels are added only for Pie chart
-                datasets: [{
-                    data: datasetData,
-                    backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
-                }],
-            };
-
-            options = {
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'right',
-                    },
-                },
-            };
+        if (uniqueDataMap.has(xValue)) {
+            // uniqueDataMap.set(xValue, uniqueDataMap.get(xValue) + yValue);
         } else {
-            console.error('Labels and data arrays do not match in length!');
+            uniqueDataMap.set(xValue, yValue);
         }
-        return <Pie data={data} options={options} />;
-    } 
+    });
+
+    // Convert the Map to arrays for labels and dataset data
+    const labels = Array.from(uniqueDataMap.keys()).map(x => String(x));
+    const datasetData = Array.from(uniqueDataMap.values());
+
+    console.log('Labels:', labels);
+    console.log('Dataset data:', datasetData);
+
+    if (labels.length === datasetData.length) {
+        data = {
+            labels: labels,  // Ensure labels are added only for Pie chart
+            datasets: [{
+                data: datasetData,
+                backgroundColor: ['#f0eea3', '#a3d2f0', '#f0a3a3', '#a3f0a3', '#f0e0a3'],
+            }],
+        };
+
+        options = {
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'right',
+                },
+            },
+        };
+    } else {
+        console.error('Labels and data arrays do not match in length!');
+    }
+    return <Pie data={data} options={options} />;
+}
+
     else {
         // Other chart types logic
         

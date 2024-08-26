@@ -518,7 +518,7 @@ console.log('isNumeric(firstValue_select1):', isNumeric(firstValue_select1));
             const existing = acc.find(item => item.x === xValue);
 
             if (existing) {
-                existing.y += yValue;
+                // existing.y += yValue;
             } else {
                 acc.push({ x: xValue, y: yValue });
             }

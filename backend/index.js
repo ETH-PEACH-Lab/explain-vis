@@ -221,6 +221,7 @@ const composePrompt = async (data, question, exampleEncoderQuestions, exampleDec
 Form Clause: Make sure that the FROM clause contains only one table.
 JOIN Clause: Use only the "JOIN table ON table.column = table.column" format without specifying INNER, LEFT, RIGHT, or other types of joins.
 You can only use one join, no join three table, no DISTINCT string
+the table on the left of JOIN ON acts like a left join, focusing on its records first, while the table on the right provides matching data, similar to a right join.
 Do not rename or alias the table names (i.e., do not use the AS keyword, do not use table t).
 Other Operations: For all other operations (e.g., SELECT, FROM, GROUP BY, ORDER BY, BIN BY), use only the column names without the table prefix.
 SELECT Statement includes only column names or optional aggregate functions (e.g., avg, sum, count,max,min).
@@ -677,7 +678,7 @@ function validateExplanation(explanation, operationsInVQL) {
   return null;
 }
 
-async function callOpenAIWithRetry(prompt, VQL, retries = 5, delay = 1000) {
+async function callOpenAIWithRetry(prompt, VQL, retries = 10, delay = 1000) {
   const operationsInVQL = extractOperationsFromVQL(VQL);
 
   try {
@@ -858,7 +859,7 @@ app.post('/api/explain-vql', async (req, res) => {
   Please generate explanation based on the keyword and in logical order.
   valid clauses using the valid operations: SELECT, FROM, JOIN, WHERE, GROUP BY, ORDER BY, BIN BY, VISUALIZE.
   Each clause typically begins with a specific operation name. Note From operation should seperate from JOIN operation
-  Operations that aren't involved in whole VQL, don't need to be included in json.
+  Operations that aren't involved in whole VQL, don't need to be included in explanation, don not use operation ''.
   When describing statement, include the specific column names involved.
   Only need to return the json and no other words additinally. 
   Please not change the whole VQL, add up all clause should be the same with VQL.
@@ -876,6 +877,7 @@ app.post('/api/explain-vql', async (req, res) => {
 
   try {
         const validationError = validateVQL(VQL, tableData);
+        let explanationLogs = [];
         if (!validationError) {
           console.log('Validation Passed: VQL is valid.',VQL);
           appendLogToFile(userId, `API Input VQL is valid.`);

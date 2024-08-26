@@ -382,7 +382,7 @@ CREATE TABLE department (
     dept_name     VARCHAR(50)
 );
 `,
-    placeholderText: "Please show me the non-transferred students in each department.",
+    placeholderText: "Please show me students in each class.",
  };
 
  useEffect(() => {

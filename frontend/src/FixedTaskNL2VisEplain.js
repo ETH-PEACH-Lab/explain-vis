@@ -17,16 +17,40 @@ import Button from '@mui/material/Button';
 function FixedTaskNL2VisExplain({data, userId, pageKey }) {
   const [interfaces, setInterfaces] = useState([{ id: 1 }]);
   const [generatedVQL, setGeneratedVQL] = useState({
-    VQL: 'VISUALIZE bar SELECT dept_name, COUNT(stu_num) FROM student WHERE stu_transfer = 0 GROUP BY dept_name ORDER BY COUNT(stu_num) ASC',
+    VQL: 'VISUALIZE SELECT stu_class , COUNT(stu_num) FROM student JOIN enroll ON student.stu_num = enroll.stu_num GROUP BY stu_class', 
     vegaLiteSpec: null,
-    explanation: [
-      { step: 1, operation: 'FROM', description: 'Specify the source table student.', clause: 'FROM student' },
-      { step: 2, operation: 'WHERE', description: 'Filter data to include only the items where stu_transfer column equals 0.', conditions: [{ condition: 'stu_transfer = 0', explanation: 'Select records where stu_transfer equals 0.' }], clause: 'WHERE stu_transfer = 0' },
-      { step: 3, operation: 'GROUP BY', description: 'Group data by dept_name.', clause: 'GROUP BY dept_name' },
-      { step: 4, operation: 'SELECT', description: 'Select the dept_name and the count of stu_num.', clause: 'SELECT dept_name, COUNT(stu_num)' },
-      { step: 5, operation: 'ORDER BY', description: 'Order the results by the count of stu_num in ascending order.', clause: 'ORDER BY COUNT(stu_num) ASC' },
-      { step: 6, operation: 'VISUALIZE', description: 'Visualize the results as a bar chart.', clause: 'VISUALIZE bar' }
-    ]
+    explanation:  [
+    {
+      step: 1,
+      operation: 'FROM',
+      description: 'Specify the source table student.',
+      clause: 'FROM student'
+    },
+    {
+      step: 2,
+      operation: 'JOIN',
+      description: 'Join the table enroll on stu_num with the table student on stu_num.',
+      clause: 'JOIN enroll ON student.stu_num = enroll.stu_num'
+    },
+    {
+      step: 3,
+      operation: 'GROUP BY',
+      description: 'Group data by stu_class.',
+      clause: 'GROUP BY stu_class'
+    },
+    {
+      step: 4,
+      operation: 'SELECT',
+      description: 'Select the stu_class column and count the number of stu_num in that class.',
+      clause: 'SELECT stu_class, COUNT(stu_num)'
+    },
+    {
+      step: 5,
+      operation: 'VISUALIZE',
+      description: 'Visualize the result data with the default type of chart.',
+      clause: 'VISUALIZE'
+    }
+  ]
   });
     const [tableData, setTableData] = useState(data.data);
   const [showVQL, setShowVQL] = useState(false);
@@ -181,7 +205,7 @@ const FailedScatterChart = () => {
             position: 'bottom',
             title: {
               display: true,
-              text: 'dept_name',
+              text: 'stu_class',
             },
             ticks: {
               display: true,
