@@ -162,14 +162,14 @@ function transformVQL(vql) {
 
 
 
-// Test Case
-const vql = `visualize bar select document_name , count(*) from paragraphs as t1 join documents as t2 on t1.document_id = t2.document_id group by t1.document_id order by count(*) asc`;
-console.log(transformVQL(vql));
+// // Test Case
+// const vql = `visualize bar select document_name , count(*) from paragraphs as t1 join documents as t2 on t1.document_id = t2.document_id group by t1.document_id order by count(*) asc`;
+// console.log(transformVQL(vql));
 
 
-// Test Case
-const vql1 = `visualize bar select party.party , count(party.party) from election join party on election.party = party.party_id group by party.party order by party.party asc`;
-console.log(transformVQL(vql1));
+// // Test Case
+// const vql1 = `visualize bar select party.party , count(party.party) from election join party on election.party = party.party_id group by party.party order by party.party asc`;
+// console.log(transformVQL(vql1));
 
 
 

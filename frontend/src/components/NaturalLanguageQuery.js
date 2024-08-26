@@ -14,6 +14,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [error, setError] = useState(null); // Error state
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+  
 
   const handleGenerate = async () => {
     setIsLoading(true); // Start loading
@@ -135,11 +136,15 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
           if (explanationResponse.ok) {
             const explanationResult = await explanationResponse.json();
 
-            const { explanation, logs: explanationLogs } = explanationResult;
+            let { explanation, logs: explanationLogs } = explanationResult;
             console.log('explanation:', JSON.stringify(explanation));
             console.log('Explanation Logs from backend:',JSON.stringify(explanationLogs));
             // logEvent(userId, `Generated Explanation: ${JSON.stringify(explanation)}`);
-            onGenerate({ VQL, explanation });
+
+            VQL = explanation.VQL
+            explanation = explanation.explanation
+
+            onGenerate({ VQL, explanation});
           } else {
             const { error, logs: explanationLogs } = await explanationResponse.json();
             console.error('Error fetching explanation:', error);

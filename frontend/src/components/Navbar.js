@@ -32,14 +32,14 @@ function Navbar({ taskOrder, onSelectPage, setUserId }) {  // Accept taskOrder i
     setLogFileName(fileName);
 
     // Log that the session has started
-    logEvent(newUserId, 'Session started');
+    console.log('Session started');
 
     setStartDialogOpen(true);
   };
 
   // Function to handle ending the session
   const handleEndSession = () => {
-    logEvent(userId, 'Session ended');  // Log session end
+    console.log('Session ended');  // Log session end
     setEndDialogOpen(true);
   };
 
@@ -47,7 +47,7 @@ function Navbar({ taskOrder, onSelectPage, setUserId }) {  // Accept taskOrder i
   const handleSelect = (page, pageName) => {
     setSelectedLabel(page);
     onSelectPage(page);
-    logEvent(userId, `Navigated to page ${page}: ${pageName}`);  // Log page navigation with name
+    console.log(`Navigated to page ${page}: ${pageName}`);  // Log page navigation with name
   };
 
   const handleCloseStartDialog = () => {

@@ -49,7 +49,7 @@ function App() {
     if (page >= 0 && page < generatedVQL.explanation.length) {
       setCurrentPage(page);
     }
-    console.log('page', page);
+    console.log('expl page', page);
   }
 
   const handleGenerate = (generated) => {

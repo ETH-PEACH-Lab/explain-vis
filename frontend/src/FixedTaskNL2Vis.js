@@ -113,7 +113,7 @@ function FixedTaskNL2Vis({data, userId , pageKey}) {
 
   useEffect(() => {
     const taskTitle = `NL2ViZ - Fixed Task 1 w/o Explanation, ${data.scenario} Scenario`;
-    logEvent(userId, `Task started: ${taskTitle}`);
+    console.log(`Task started: ${taskTitle}`);
   }, [data.scenario, userId]);
 
   const handleAddInterface = () => {

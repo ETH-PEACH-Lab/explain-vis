@@ -93,8 +93,8 @@ import Box from '@mui/material/Box';
         const explanationResult = await explanationResponse.json();
       
         console.log('Result:', JSON.stringify(explanationResult, null, 2)); // 全部 JSON 格式化输出
-        const { explanation_VQL, logs: explanationLogs } = explanationResult;
-        console.log('Explanation:', JSON.stringify(explanation, null, 2));
+        const { explanation: explanation_VQL, logs: explanationLogs } = explanationResult;
+        console.log('Explanation:', JSON.stringify(explanation_VQL, null, 2));
         console.log('Explanation log:', JSON.stringify(explanationLogs, null, 2));
 
         const explanation = explanation_VQL.explanation;

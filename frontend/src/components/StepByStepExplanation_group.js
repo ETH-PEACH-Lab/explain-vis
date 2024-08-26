@@ -24,13 +24,13 @@ const parseCondition = (condition) => {
 
   const combinedMatch = condition.match(/>\s*(\d+)\s*AND\s*<\s*(\d+)/i);
   if (combinedMatch) {
-    console.log("Matched combined condition:", combinedMatch);
+    // console.log("Matched combined condition:", combinedMatch);
     range[0] = parseInt(combinedMatch[1], 10);
     range[1] = parseInt(combinedMatch[2], 10);
   } else {
     const match = condition.match(/(\d+)\s*-\s*(\d+)/);
     if (match) {
-      console.log("Matched range:", match);
+      // console.log("Matched range:", match);
       range[0] = parseInt(match[1], 10);
       range[1] = parseInt(match[2], 10);
     } else {
@@ -38,17 +38,17 @@ const parseCondition = (condition) => {
       const upperMatch = condition.match(/<\s*(\d+)/);
 
       if (lowerMatch) {
-        console.log("Matched lower condition:", lowerMatch);
+        // console.log("Matched lower condition:", lowerMatch);
         range[0] = parseInt(lowerMatch[1], 10);
       }
       if (upperMatch) {
-        console.log("Matched upper condition:", upperMatch);
+        // console.log("Matched upper condition:", upperMatch);
         range[1] = parseInt(upperMatch[1], 10);
       }
     }
   }
 
-  console.log("Parsed range:", range);
+  // console.log("Parsed range:", range);
   return range;
 };
 

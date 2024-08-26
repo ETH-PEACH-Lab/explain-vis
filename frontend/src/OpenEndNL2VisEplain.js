@@ -100,7 +100,7 @@ function OpenEndNL2VisExplain({data, userId, pageKey  }) {
 
   useEffect(() => {
     const taskTitle = `NL2ViZ - Open-ended Task 2 with Explanation, ${data.scenario} Scenario`;
-    logEvent(userId, `Task started: ${taskTitle}`);
+    console.log(`Task started: ${taskTitle}`);
   }, [data.scenario, userId]);
 
   const handleAddInterface = () => {

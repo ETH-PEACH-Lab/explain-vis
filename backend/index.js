@@ -592,40 +592,30 @@ app.post('/api/generate-vegalite', async (req, res) => {
   console.time('GET * VQL Request Duration');
   let { query, data, userId } = req.body;
   
-  // console.log('Received POST request');
-  // console.log('Query:', query);
-  // console.log('Data:', data);
-  // appendLogToFile(userId, `API Received query: ${query}`)
-  const db_id = './utils/data/database'; // Set the db_id based on your directory structure
+  const db_id = './utils/data/database'; 
   const exampleEncoderQuestions = fs.readFileSync('./utils/data/train/train_encode.txt', 'utf-8').split('\n');
   const exampleDecoderAnswers = fs.readFileSync('./utils/data/train/train_decode_db.txt', 'utf-8').split('\n');
   const limitTable = 0;
   const nshot = 3;
   let logs = []; 
+  
 
   try {
     const prompt = await composePrompt(data, query, exampleEncoderQuestions, exampleDecoderAnswers, limitTable, nshot, db_id);
 
     console.log('Generated Prompt:', prompt);
-    // appendLogToFile(userId, `API Generated Prompt: ${prompt}`)
-
     
     const generatedText = await callOpenAIWithRetryforVQL(prompt,data.data,5,'','',userId,logs);
 
     console.timeEnd('GET * VQL Request Duration');
     console.log('Generated VQL:', generatedText);
-    // appendLogToFile(userId, `API Generated VQL: ${generatedText}`);
     res.json({ VQL: generatedText, logs  });
   } catch (error) {
     console.error('Error:', error.message);
-    // appendLogToFile(userId, `Error: ${error.message}`);
     if (error.response) {
       console.error('Status:', error.response.status);
       console.error('Headers:', error.response.headers);
       console.error('Data:', error.response.data);
-      // appendLogToFile(userId, `API Error Status: ${error.response.status}`);
-      // appendLogToFile(userId, `API Error Headers: ${JSON.stringify(error.response.headers)}`);
-      // appendLogToFile(userId, `API Error Data: ${JSON.stringify(error.response.data)}`);
     }
     res.status(500).json({ error: error.message, logs });
   }
@@ -703,7 +693,14 @@ function validateExplanation(explanation, operationsInVQL) {
     if (step.operation.toUpperCase() === 'FROM' && explanation.explanation.some(s => s.operation.toUpperCase() === 'JOIN' && s.clause.includes(step.clause))) {
       return 'FROM and JOIN should be separate clauses.';
     }
+
+    // Check if the clause contains more than one operation
+    let operationCount = keywords.filter(keyword => step.clause.toUpperCase().includes(keyword)).length;
+    if (operationCount > 1) {
+      return `Clause "${step.clause}" should not contain more than one operation.`;
+    }
   }
+
 
   // Return null if all validations pass
   return null;
