@@ -667,7 +667,7 @@ function extractOperationsFromVQL(VQL) {
 
 function validateExplanation(explanation, operationsInVQL) {
   const keywords = [
-    'VISUALIZE', 'SELECT', 'FROM', 'JOIN', 'WHERE', 'GROUP BY', 'ORDER BY', 'BIN BY'
+    'FROM', 'JOIN', 'WHERE', 'GROUP BY', 'SELECT', 'ORDER BY', 'BIN BY','VISUALIZE'
   ];
 
   
@@ -680,7 +680,7 @@ function validateExplanation(explanation, operationsInVQL) {
     return 'The VQL is missing or empty.';
   }
 
-
+  const explainedOperations = [];
   for (let step of explanation.explanation) {
     if (!step.operation) {
       return `Missing operation field in explanation step: ${JSON.stringify(step)}`;
@@ -691,6 +691,8 @@ function validateExplanation(explanation, operationsInVQL) {
     if (!step.description) {
       return `Missing description field in explanation step: ${JSON.stringify(step)}`;
     }
+
+    explainedOperations.push(step.operation.toUpperCase());
 
     // Check if the operation exists in the VQL
     if (!operationsInVQL.has(step.operation.toUpperCase())) {
@@ -719,6 +721,27 @@ function validateExplanation(explanation, operationsInVQL) {
     }
   }
 
+  // Check if all operations in the VQL are explained
+  for (let operation of operationsInVQL) {
+    if (!explainedOperations.includes(operation)) {
+      return `The operation "${operation}" is present in the VQL but not explained in the explanation. Please add an explanation for this operation.`;
+    }
+  }
+  
+  // Ensure that VISUALIZE is the last operation
+  if (explainedOperations[explainedOperations.length - 1] !== 'VISUALIZE') {
+    return 'The VISUALIZE operation must be the last one in the explanation.';
+  }
+
+  // Ensure operations are in the correct order even if some are missing
+  let lastIndex = -1;
+  for (let operation of explainedOperations) {
+    const currentIndex = keywords.indexOf(operation);
+    if (currentIndex < lastIndex) {
+      return `The operation "${operation}" is out of order. Operations must follow the logical sequence: ${keywords.join(', ')}.`;
+    }
+    lastIndex = currentIndex;
+  }
 
   // Return null if all validations pass
   return null;
@@ -750,7 +773,7 @@ async function callOpenAIWithRetry(prompt, VQL, explanationLogs, retries = 10, d
 
     const responseText = response.data.choices[0].text.trim();
     let explanation = extractJSON(responseText);
-
+    console.log(explanation)
     // explanationLogs.push({ attempt: 10 - retries + 1, responseText, explanation });
 
     // Validate the extracted explanation
@@ -813,6 +836,9 @@ function formatVQL(vql) {
   const regex = new RegExp(`\\b(${allTerms.join('|')})\\b`, 'gi');
 
   let VQL = vql.replace(/\n/g, ' ');
+  if (!/VISUALIZE/i.test(VQL)) {
+    VQL = `VISUALIZE ${VQL}`;
+  }
   // Replace the matched keywords, operators, and functions with uppercase, and insert the escaped newline for keywords
   return VQL.replace(regex, (match) => {
       if (keywords.includes(match.toUpperCase())) {
@@ -908,7 +934,7 @@ app.post('/api/explain-vql', async (req, res) => {
 
   Expected JSON Format:
   {
-    "VQL": "VQL", // keep the same with whole VQL
+    "VQL": "${extractOperationsFromVQL(VQL)}", // keep the same with whole VQL
     "explanation": [
       {
         "step": "execution order",
@@ -920,8 +946,8 @@ app.post('/api/explain-vql', async (req, res) => {
     ]
   }
 
-  Make sure that the returned JSON is correctly formatted and that each field is properly filled in. 
-  Please generate explanation based on the keyword and in logical order.
+  Make sure that the returned JSON is correctly formatted and that each field is properly filled in.
+  Please generate explanation based on the keyword and in logical order. The VISUALIZE operation must be the last. 
   valid clauses using the valid operations: SELECT, FROM, JOIN, WHERE, GROUP BY, ORDER BY, BIN BY, VISUALIZE.
   Each clause typically begins with a specific operation name. Note From operation should seperate from JOIN operation
   Operations that aren't involved in whole VQL, don't need to be included in explanation, don not use operation ''.
@@ -929,8 +955,10 @@ app.post('/api/explain-vql', async (req, res) => {
   Only need to return the json and no other words additinally. 
   Please not change the whole VQL, add up all clause should be the same with VQL.
   When the VQL is broken just break it dowm based on its operation, don't change the pattern and value in VQL.
-  If the visualize type missed, must keep the same in visualize operation clause 'visualize' or just empty '' and only in description mention 'default type'.
+  If the visualize type missed in VQL, must keep the same in visualize operation clause 'visualize' or just '' and mention in its description 'Chart type is missing; using the default for display.'.
+  keep the same add-up clause with VQL.
   
+
   Your Task:
   Now please provide a detailed explanation in the same JSON format for the following specific VQL. begin with: JSON
 

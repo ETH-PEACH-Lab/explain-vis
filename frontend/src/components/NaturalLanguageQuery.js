@@ -62,7 +62,7 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
     // logEvent(userId, 'Generate button clicked');
 
     const demoText = "Show me a bar chart of the average prices grouped by quarter, including only the items where the price is greater than 150 and less than 2000, or the year is greater than 2000. The results should be ordered by price in descending order.";
-  
+    const demoText2 = "Show me the quantity of each fruit"
     try {
       if (query === demoText) {
         // 使用测试数据
@@ -132,7 +132,44 @@ function NaturalLanguageQuery({ onGenerate, tableData, placeholderText, userId }
             console.log(`Generated Explanation: ${JSON.stringify(explanation)}`);
 
         onGenerate({ VQL, explanation });
-      } else {
+      } else if (query === demoText2) {
+        // 使用测试数据
+        const VQL = 'VISUALIZE bar\nSELECT name, SUM(quantity)\nFROM stock\nGROUP BY name'
+
+        const explanation= [
+          {
+            step: 1,
+            operation: 'FROM',
+            description: 'Specify the source table stock.',
+            clause: 'FROM stock'
+          },
+          {
+            step: 2,
+            operation: 'GROUP BY',
+            description: 'Group data by name.',
+            clause: 'GROUP BY name'
+          },
+          {
+            step: 3,
+            operation: 'SELECT',
+            description: 'Select the name and the sum of quantity columns.',      
+            clause: 'SELECT name, SUM(quantity)'
+          },
+          {
+            step: 4,
+            operation: 'VISUALIZE',
+            description: 'Visualize the results as a bar chart.',
+            clause: 'VISUALIZE bar'
+          }
+        ]
+      
+        
+            console.log(`Generated VQL: ${VQL}`);
+            console.log(`Generated Explanation: ${JSON.stringify(explanation)}`);
+
+        onGenerate({ VQL, explanation });
+      }
+      else{
         
         // console.log('userid',userId)
         console.log(`Natural Language Query Input: ${query}`);

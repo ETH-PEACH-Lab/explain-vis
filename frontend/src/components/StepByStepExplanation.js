@@ -396,6 +396,8 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
   if (explanation[currentPage].operation === 'SELECT') {
     
     const columns = explanation[currentPage].clause.toLowerCase().replace('select ', '').split(',').map(col => col.trim());
+    const currentData = calculateCurrentData();
+    const totalColumns_now = Object.keys(currentData.currentTable[0])
     let othercolumns = []
     if (columns.length == 2)  {
         const [firstColumn, secondColumn] = columns;
@@ -407,7 +409,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
                 const aggFunction = aggFunctionMatch[1];
                 const aggColumn = aggFunctionMatch[2];
 
-                if (validAggFunctions.includes(aggFunction) && totalColumns.includes(aggColumn)) {
+                if (validAggFunctions.includes(aggFunction) && totalColumns_now.includes(aggColumn)) {
                     setAggFunction(aggFunction.toUpperCase());
                     setAggColumn(aggColumn);
                     // console.log(`Editing VQL pass: agg-"${aggFunction.toUpperCase()}", column-"${aggColumn}".`);
@@ -423,12 +425,12 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
                 setIsModalOpen(true);
                 return;
             }
-        } else if (totalColumns.includes(firstColumn)) {
+        } else if (totalColumns_now.includes(firstColumn)) {
             othercolumns.push(firstColumn)
             setSelectedColumnsOthers(othercolumns)
             // console.log(`Editing VQL pass: other-"${othercolumns}".`);
         } else {
-            setError(`The column of "${firstColumn}" does not exist in the table.`);
+            setError(`The column of "${firstColumn}" does not exist in the table. Can not get the X-Axis data.`);
             // console.log(`Editing VQL fail: The column of "${firstColumn}" does not exist in the table.`);
             setIsModalOpen(true);
             return;
@@ -464,7 +466,7 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
             setAggFunction(null)}
             // console.log(`Editing VQL pass: no agg.`);
         } else {
-            setError(`The column of "${secondColumn}" does not exist in the table.`);
+            setError(`The column of "${secondColumn}" does not exist in the table. Can not get the X-Axis data.`);
             // console.log(`Editing VQL fail: Editing VQL fail: The column of "${secondColumn}" does not exist in the table.`);
             setIsModalOpen(true);
             return;
@@ -756,11 +758,33 @@ const StepByStepExplanation = ({ VQL, explanation, tableData, showVQL, currentPa
         return { mergedData: [], columns:[], error: 'No matching rows found for join operation' };
     }
 
-    const mergedWithDateHandling = merged.map(row => ({
-        ...row,
-        date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
-    }));
+    // const mergedWithDateHandling = merged.map(row => ({
+    //     ...row,
+    //     date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
+    // }));
+    const isDate = value => {
+      if (Object.prototype.toString.call(value) === '[object Date]') {
+          // Check if it's a valid Date object
+          return !isNaN(value.getTime());
+      } else if (typeof value === 'string') {
+          // Check if the string follows a date format (e.g., YYYY-MM-DD)
+          const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+          if (datePattern.test(value)) {
+              const parsedDate = new Date(value);
+              return !isNaN(parsedDate.getTime());
+          }
+          }
+          return false; // Not a Date object or a valid date string
+      };
+      
 
+      const mergedWithDateHandling = merged.map(row => {
+        const dateValue = isDate(row.date) ? new Date(row.date).toISOString().split('T')[0] : undefined;
+        return {
+            ...row,
+            ...(dateValue !== undefined && { date: dateValue }) // 只有当 dateValue 存在时才添加 date 属性
+        };
+    });
     const mergedColumns = [...new Set([...columns1, ...columns2])];
 
     return { mergedData: mergedWithDateHandling, columns: mergedColumns, error: null };
@@ -2493,6 +2517,7 @@ return (
           break;
         }
         case 'JOIN': {
+          console.log('select col date', currentTable)
           const joinClauseParts = step.clause.match(/JOIN\s+(\w+)\s+ON\s+(\w+)\.(\w+)\s*=\s*(\w+)\.(\w+)/i);
           if (joinClauseParts) {
             tableName1 = joinClauseParts[2];
@@ -2524,11 +2549,42 @@ return (
                 return { mergedData: [], columns:[], error: 'No matching rows found for join operation' };
             }
         
-            const mergedWithDateHandling = merged.map(row => ({
+            // const mergedWithDateHandling = merged.map(row => ({
+            //     ...row,
+            //     date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
+            // }));
+            const isDate = value => {
+              if (Object.prototype.toString.call(value) === '[object Date]') {
+                  // Check if it's a valid Date object
+                  return !isNaN(value.getTime());
+              } else if (typeof value === 'string') {
+                  // Check if the string follows a date format (e.g., YYYY-MM-DD)
+                  const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+                  if (datePattern.test(value)) {
+                      const parsedDate = new Date(value);
+                      return !isNaN(parsedDate.getTime());
+                  }
+              }
+              return false; // Not a Date object or a valid date string
+          };
+          
+          // const mergedWithDateHandling = merged.map(row => {
+          //     const dateValue = isDate(row.date) ? new Date(row.date).toISOString().split('T')[0] : row.date;
+          //     return {
+          //         ...row,
+          //         date: dateValue
+          //     };
+          // });
+          const mergedWithDateHandling = merged.map(row => {
+            const dateValue = isDate(row.date) ? new Date(row.date).toISOString().split('T')[0] : undefined;
+            return {
                 ...row,
-                date: row.date && !isNaN(new Date(row.date).getTime()) ? new Date(row.date).toISOString().split('T')[0] : row.date
-            }));
-        
+                ...(dateValue !== undefined && { date: dateValue }) // 只有当 dateValue 存在时才添加 date 属性
+            };
+        });
+          
+          console.log('merge result handel', mergedWithDateHandling)
+          
             const mergedColumns = [...new Set([...columns1, ...columns2])];
 
               currentColumns_join = mergedColumns;
@@ -2537,6 +2593,7 @@ return (
               currentColumns = currentColumns_join
             }
           }
+          console.log('select col date', currentTable)
           break;
         }
         case 'WHERE': {
